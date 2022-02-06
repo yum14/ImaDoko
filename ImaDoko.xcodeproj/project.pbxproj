@@ -1,0 +1,708 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		AA26A69D27AF9424003D1F17 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69C27AF9424003D1F17 /* Tests_iOS.swift */; };
+		AA26A69F27AF9424003D1F17 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69E27AF9424003D1F17 /* Tests_iOSLaunchTests.swift */; };
+		AA26A6A927AF9424003D1F17 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A6A827AF9424003D1F17 /* Tests_macOS.swift */; };
+		AA26A6AB27AF9424003D1F17 /* Tests_macOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A6AA27AF9424003D1F17 /* Tests_macOSLaunchTests.swift */; };
+		AA26A6AC27AF9424003D1F17 /* ImaDokoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A68427AF9423003D1F17 /* ImaDokoApp.swift */; };
+		AA26A6AD27AF9424003D1F17 /* ImaDokoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A68427AF9423003D1F17 /* ImaDokoApp.swift */; };
+		AA26A6AE27AF9424003D1F17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A68527AF9423003D1F17 /* ContentView.swift */; };
+		AA26A6AF27AF9424003D1F17 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A68527AF9423003D1F17 /* ContentView.swift */; };
+		AA26A6B027AF9424003D1F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA26A68627AF9424003D1F17 /* Assets.xcassets */; };
+		AA26A6B127AF9424003D1F17 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA26A68627AF9424003D1F17 /* Assets.xcassets */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		AA26A69927AF9424003D1F17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA26A67F27AF9423003D1F17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA26A68A27AF9424003D1F17;
+			remoteInfo = "ImaDoko (iOS)";
+		};
+		AA26A6A527AF9424003D1F17 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AA26A67F27AF9423003D1F17 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AA26A69027AF9424003D1F17;
+			remoteInfo = "ImaDoko (macOS)";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		AA26A68427AF9423003D1F17 /* ImaDokoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImaDokoApp.swift; sourceTree = "<group>"; };
+		AA26A68527AF9423003D1F17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		AA26A68627AF9424003D1F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		AA26A68B27AF9424003D1F17 /* ImaDoko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImaDoko.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA26A69127AF9424003D1F17 /* ImaDoko.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImaDoko.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA26A69327AF9424003D1F17 /* macOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = macOS.entitlements; sourceTree = "<group>"; };
+		AA26A69827AF9424003D1F17 /* Tests iOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests iOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA26A69C27AF9424003D1F17 /* Tests_iOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOS.swift; sourceTree = "<group>"; };
+		AA26A69E27AF9424003D1F17 /* Tests_iOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_iOSLaunchTests.swift; sourceTree = "<group>"; };
+		AA26A6A427AF9424003D1F17 /* Tests macOS.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tests macOS.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		AA26A6A827AF9424003D1F17 /* Tests_macOS.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOS.swift; sourceTree = "<group>"; };
+		AA26A6AA27AF9424003D1F17 /* Tests_macOSLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tests_macOSLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		AA26A68827AF9424003D1F17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA26A68E27AF9424003D1F17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA26A69527AF9424003D1F17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA26A6A127AF9424003D1F17 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		AA26A67E27AF9423003D1F17 = {
+			isa = PBXGroup;
+			children = (
+				AA26A68327AF9423003D1F17 /* Shared */,
+				AA26A69227AF9424003D1F17 /* macOS */,
+				AA26A69B27AF9424003D1F17 /* Tests iOS */,
+				AA26A6A727AF9424003D1F17 /* Tests macOS */,
+				AA26A68C27AF9424003D1F17 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		AA26A68327AF9423003D1F17 /* Shared */ = {
+			isa = PBXGroup;
+			children = (
+				AA26A68427AF9423003D1F17 /* ImaDokoApp.swift */,
+				AA26A68527AF9423003D1F17 /* ContentView.swift */,
+				AA26A68627AF9424003D1F17 /* Assets.xcassets */,
+			);
+			path = Shared;
+			sourceTree = "<group>";
+		};
+		AA26A68C27AF9424003D1F17 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				AA26A68B27AF9424003D1F17 /* ImaDoko.app */,
+				AA26A69127AF9424003D1F17 /* ImaDoko.app */,
+				AA26A69827AF9424003D1F17 /* Tests iOS.xctest */,
+				AA26A6A427AF9424003D1F17 /* Tests macOS.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		AA26A69227AF9424003D1F17 /* macOS */ = {
+			isa = PBXGroup;
+			children = (
+				AA26A69327AF9424003D1F17 /* macOS.entitlements */,
+			);
+			path = macOS;
+			sourceTree = "<group>";
+		};
+		AA26A69B27AF9424003D1F17 /* Tests iOS */ = {
+			isa = PBXGroup;
+			children = (
+				AA26A69C27AF9424003D1F17 /* Tests_iOS.swift */,
+				AA26A69E27AF9424003D1F17 /* Tests_iOSLaunchTests.swift */,
+			);
+			path = "Tests iOS";
+			sourceTree = "<group>";
+		};
+		AA26A6A727AF9424003D1F17 /* Tests macOS */ = {
+			isa = PBXGroup;
+			children = (
+				AA26A6A827AF9424003D1F17 /* Tests_macOS.swift */,
+				AA26A6AA27AF9424003D1F17 /* Tests_macOSLaunchTests.swift */,
+			);
+			path = "Tests macOS";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		AA26A68A27AF9424003D1F17 /* ImaDoko (iOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA26A6B427AF9424003D1F17 /* Build configuration list for PBXNativeTarget "ImaDoko (iOS)" */;
+			buildPhases = (
+				AA26A68727AF9424003D1F17 /* Sources */,
+				AA26A68827AF9424003D1F17 /* Frameworks */,
+				AA26A68927AF9424003D1F17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ImaDoko (iOS)";
+			productName = "ImaDoko (iOS)";
+			productReference = AA26A68B27AF9424003D1F17 /* ImaDoko.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA26A69027AF9424003D1F17 /* ImaDoko (macOS) */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA26A6B727AF9424003D1F17 /* Build configuration list for PBXNativeTarget "ImaDoko (macOS)" */;
+			buildPhases = (
+				AA26A68D27AF9424003D1F17 /* Sources */,
+				AA26A68E27AF9424003D1F17 /* Frameworks */,
+				AA26A68F27AF9424003D1F17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "ImaDoko (macOS)";
+			productName = "ImaDoko (macOS)";
+			productReference = AA26A69127AF9424003D1F17 /* ImaDoko.app */;
+			productType = "com.apple.product-type.application";
+		};
+		AA26A69727AF9424003D1F17 /* Tests iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA26A6BA27AF9424003D1F17 /* Build configuration list for PBXNativeTarget "Tests iOS" */;
+			buildPhases = (
+				AA26A69427AF9424003D1F17 /* Sources */,
+				AA26A69527AF9424003D1F17 /* Frameworks */,
+				AA26A69627AF9424003D1F17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA26A69A27AF9424003D1F17 /* PBXTargetDependency */,
+			);
+			name = "Tests iOS";
+			productName = "Tests iOS";
+			productReference = AA26A69827AF9424003D1F17 /* Tests iOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+		AA26A6A327AF9424003D1F17 /* Tests macOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = AA26A6BD27AF9424003D1F17 /* Build configuration list for PBXNativeTarget "Tests macOS" */;
+			buildPhases = (
+				AA26A6A027AF9424003D1F17 /* Sources */,
+				AA26A6A127AF9424003D1F17 /* Frameworks */,
+				AA26A6A227AF9424003D1F17 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				AA26A6A627AF9424003D1F17 /* PBXTargetDependency */,
+			);
+			name = "Tests macOS";
+			productName = "Tests macOS";
+			productReference = AA26A6A427AF9424003D1F17 /* Tests macOS.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		AA26A67F27AF9423003D1F17 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				TargetAttributes = {
+					AA26A68A27AF9424003D1F17 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					AA26A69027AF9424003D1F17 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+					AA26A69727AF9424003D1F17 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = AA26A68A27AF9424003D1F17;
+					};
+					AA26A6A327AF9424003D1F17 = {
+						CreatedOnToolsVersion = 13.2.1;
+						TestTargetID = AA26A69027AF9424003D1F17;
+					};
+				};
+			};
+			buildConfigurationList = AA26A68227AF9423003D1F17 /* Build configuration list for PBXProject "ImaDoko" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = AA26A67E27AF9423003D1F17;
+			productRefGroup = AA26A68C27AF9424003D1F17 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				AA26A68A27AF9424003D1F17 /* ImaDoko (iOS) */,
+				AA26A69027AF9424003D1F17 /* ImaDoko (macOS) */,
+				AA26A69727AF9424003D1F17 /* Tests iOS */,
+				AA26A6A327AF9424003D1F17 /* Tests macOS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		AA26A68927AF9424003D1F17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA26A6B027AF9424003D1F17 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA26A68F27AF9424003D1F17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA26A6B127AF9424003D1F17 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA26A69627AF9424003D1F17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA26A6A227AF9424003D1F17 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		AA26A68727AF9424003D1F17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA26A6AE27AF9424003D1F17 /* ContentView.swift in Sources */,
+				AA26A6AC27AF9424003D1F17 /* ImaDokoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA26A68D27AF9424003D1F17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA26A6AF27AF9424003D1F17 /* ContentView.swift in Sources */,
+				AA26A6AD27AF9424003D1F17 /* ImaDokoApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA26A69427AF9424003D1F17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA26A69F27AF9424003D1F17 /* Tests_iOSLaunchTests.swift in Sources */,
+				AA26A69D27AF9424003D1F17 /* Tests_iOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		AA26A6A027AF9424003D1F17 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AA26A6AB27AF9424003D1F17 /* Tests_macOSLaunchTests.swift in Sources */,
+				AA26A6A927AF9424003D1F17 /* Tests_macOS.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		AA26A69A27AF9424003D1F17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA26A68A27AF9424003D1F17 /* ImaDoko (iOS) */;
+			targetProxy = AA26A69927AF9424003D1F17 /* PBXContainerItemProxy */;
+		};
+		AA26A6A627AF9424003D1F17 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AA26A69027AF9424003D1F17 /* ImaDoko (macOS) */;
+			targetProxy = AA26A6A527AF9424003D1F17 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		AA26A6B227AF9424003D1F17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		AA26A6B327AF9424003D1F17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		AA26A6B527AF9424003D1F17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TB8F2PW523;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = icu.yum14.ImaDoko;
+				PRODUCT_NAME = ImaDoko;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		AA26A6B627AF9424003D1F17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TB8F2PW523;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = icu.yum14.ImaDoko;
+				PRODUCT_NAME = ImaDoko;
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA26A6B827AF9424003D1F17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TB8F2PW523;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = icu.yum14.ImaDoko;
+				PRODUCT_NAME = ImaDoko;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		AA26A6B927AF9424003D1F17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = macOS/macOS.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TB8F2PW523;
+				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = icu.yum14.ImaDoko;
+				PRODUCT_NAME = ImaDoko;
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+		AA26A6BB27AF9424003D1F17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TB8F2PW523;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "icu.yum14.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ImaDoko (iOS)";
+			};
+			name = Debug;
+		};
+		AA26A6BC27AF9424003D1F17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TB8F2PW523;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "icu.yum14.Tests-iOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "ImaDoko (iOS)";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		AA26A6BE27AF9424003D1F17 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TB8F2PW523;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "icu.yum14.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "ImaDoko (macOS)";
+			};
+			name = Debug;
+		};
+		AA26A6BF27AF9424003D1F17 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TB8F2PW523;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "icu.yum14.Tests-macOS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_TARGET_NAME = "ImaDoko (macOS)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		AA26A68227AF9423003D1F17 /* Build configuration list for PBXProject "ImaDoko" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA26A6B227AF9424003D1F17 /* Debug */,
+				AA26A6B327AF9424003D1F17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA26A6B427AF9424003D1F17 /* Build configuration list for PBXNativeTarget "ImaDoko (iOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA26A6B527AF9424003D1F17 /* Debug */,
+				AA26A6B627AF9424003D1F17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA26A6B727AF9424003D1F17 /* Build configuration list for PBXNativeTarget "ImaDoko (macOS)" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA26A6B827AF9424003D1F17 /* Debug */,
+				AA26A6B927AF9424003D1F17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA26A6BA27AF9424003D1F17 /* Build configuration list for PBXNativeTarget "Tests iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA26A6BB27AF9424003D1F17 /* Debug */,
+				AA26A6BC27AF9424003D1F17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		AA26A6BD27AF9424003D1F17 /* Build configuration list for PBXNativeTarget "Tests macOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				AA26A6BE27AF9424003D1F17 /* Debug */,
+				AA26A6BF27AF9424003D1F17 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = AA26A67F27AF9423003D1F17 /* Project object */;
+}
