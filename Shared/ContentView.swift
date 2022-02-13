@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct ContentView: View {
+    @StateObject var presenter = RootPresenter(router: RootRouter())
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        RootView(presenter: presenter)
     }
 }
 

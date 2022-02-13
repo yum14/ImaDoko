@@ -1,0 +1,13 @@
+/* 
+  Localizable.strings
+  ImaDoko
+
+  Created by yum on 2022/02/06.
+  
+*/
+
+"AccountName" = "Name";
+"FriendListHeader" = "Friends";
+"AddFriendButton" = "Add Friend";
+"ShowMyQRCodeButton" = "Show My QR-Code";
+"UnreadMessageHeader" = "Unreplied Messages";
