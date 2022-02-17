@@ -1,0 +1,34 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "DynamicOverlay",
+        "repositoryURL": "https://github.com/fabernovel/DynamicOverlay.git",
+        "state": {
+          "branch": null,
+          "revision": "ac9587b383cd84ea3821a273a616911ee0dc0db8",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "OverlayContainer",
+        "repositoryURL": "https://github.com/applidium/OverlayContainer.git",
+        "state": {
+          "branch": null,
+          "revision": "f1c8fc38bb1ad9a810397f1d06f7026a35e0760c",
+          "version": "3.5.2"
+        }
+      },
+      {
+        "package": "StatefulTabView",
+        "repositoryURL": "https://github.com/NicholasBellucci/StatefulTabView",
+        "state": {
+          "branch": null,
+          "revision": "6f24c8f29dfd20ff51402c185441fa24676a8aa0",
+          "version": "0.1.8"
+        }
+      }
+    ]
+  },
+  "version": 1
+}

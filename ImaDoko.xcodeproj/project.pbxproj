@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AA16D44227BA7ACB00804D0D /* FriendScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44127BA7ACB00804D0D /* FriendScrollView.swift */; };
+		AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */; };
 		AA26A69D27AF9424003D1F17 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69C27AF9424003D1F17 /* Tests_iOS.swift */; };
 		AA26A69F27AF9424003D1F17 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69E27AF9424003D1F17 /* Tests_iOSLaunchTests.swift */; };
 		AA26A6A927AF9424003D1F17 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A6A827AF9424003D1F17 /* Tests_macOS.swift */; };
@@ -32,6 +34,9 @@
 		AA83DC4627AFC6E7008F2226 /* MessageRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83DC4527AFC6E7008F2226 /* MessageRouter.swift */; };
 		AA83DC4927B018AC008F2226 /* UnrepliedMessageItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83DC4827B018AC008F2226 /* UnrepliedMessageItem.swift */; };
 		AA83DC4C27B019ED008F2226 /* DateUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83DC4B27B019ED008F2226 /* DateUtility.swift */; };
+		AA9E99AB27B8E674004B8272 /* DynamicOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = AA9E99AA27B8E674004B8272 /* DynamicOverlay */; };
+		AA9E99AE27B8FD12004B8272 /* StatefulTabView in Frameworks */ = {isa = PBXBuildFile; productRef = AA9E99AD27B8FD12004B8272 /* StatefulTabView */; };
+		AA9E99B227B915D7004B8272 /* MapOverlaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9E99B127B915D7004B8272 /* MapOverlaySheet.swift */; };
 		AAADEFDA27B78AE500D81A52 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFD927B78AE500D81A52 /* Message.swift */; };
 		AAADEFDC27B7907000D81A52 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDB27B7907000D81A52 /* User.swift */; };
 		AAADEFDE27B7920B00D81A52 /* FriendListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */; };
@@ -39,6 +44,7 @@
 		AAADEFE227B7BB5E00D81A52 /* AvatorMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFE127B7BB5E00D81A52 /* AvatorMapAnnotation.swift */; };
 		AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98827B7F75D007CD36D /* Triangle.swift */; };
 		AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98A27B80727007CD36D /* LocationButton.swift */; };
+		AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +65,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AA16D44127BA7ACB00804D0D /* FriendScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendScrollView.swift; sourceTree = "<group>"; };
+		AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatorCircleImage.swift; sourceTree = "<group>"; };
 		AA26A68427AF9423003D1F17 /* ImaDokoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImaDokoApp.swift; sourceTree = "<group>"; };
 		AA26A68527AF9423003D1F17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA26A68627AF9424003D1F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -87,6 +95,7 @@
 		AA83DC4527AFC6E7008F2226 /* MessageRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageRouter.swift; sourceTree = "<group>"; };
 		AA83DC4827B018AC008F2226 /* UnrepliedMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrepliedMessageItem.swift; sourceTree = "<group>"; };
 		AA83DC4B27B019ED008F2226 /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
+		AA9E99B127B915D7004B8272 /* MapOverlaySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOverlaySheet.swift; sourceTree = "<group>"; };
 		AAADEFD927B78AE500D81A52 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AAADEFDB27B7907000D81A52 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListItem.swift; sourceTree = "<group>"; };
@@ -94,6 +103,7 @@
 		AAADEFE127B7BB5E00D81A52 /* AvatorMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatorMapAnnotation.swift; sourceTree = "<group>"; };
 		AAE3F98827B7F75D007CD36D /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		AAE3F98A27B80727007CD36D /* LocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
+		AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCircleImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,6 +111,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA9E99AB27B8E674004B8272 /* DynamicOverlay in Frameworks */,
+				AA9E99AE27B8FD12004B8272 /* StatefulTabView in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -250,6 +262,10 @@
 				AAADEFE127B7BB5E00D81A52 /* AvatorMapAnnotation.swift */,
 				AAE3F98827B7F75D007CD36D /* Triangle.swift */,
 				AAE3F98A27B80727007CD36D /* LocationButton.swift */,
+				AA9E99B127B915D7004B8272 /* MapOverlaySheet.swift */,
+				AA16D44127BA7ACB00804D0D /* FriendScrollView.swift */,
+				AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */,
+				AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -288,6 +304,10 @@
 			dependencies = (
 			);
 			name = "ImaDoko (iOS)";
+			packageProductDependencies = (
+				AA9E99AA27B8E674004B8272 /* DynamicOverlay */,
+				AA9E99AD27B8FD12004B8272 /* StatefulTabView */,
+			);
 			productName = "ImaDoko (iOS)";
 			productReference = AA26A68B27AF9424003D1F17 /* ImaDoko.app */;
 			productType = "com.apple.product-type.application";
@@ -381,6 +401,10 @@
 				ja,
 			);
 			mainGroup = AA26A67E27AF9423003D1F17;
+			packageReferences = (
+				AA9E99A927B8E674004B8272 /* XCRemoteSwiftPackageReference "DynamicOverlay" */,
+				AA9E99AC27B8FD12004B8272 /* XCRemoteSwiftPackageReference "StatefulTabView" */,
+			);
 			productRefGroup = AA26A68C27AF9424003D1F17 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -441,15 +465,19 @@
 				AAADEFE227B7BB5E00D81A52 /* AvatorMapAnnotation.swift in Sources */,
 				AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */,
 				AA83DC2F27AF9D01008F2226 /* HomeView.swift in Sources */,
+				AA9E99B227B915D7004B8272 /* MapOverlaySheet.swift in Sources */,
 				AA83DC3727AF9F28008F2226 /* MapPresenter.swift in Sources */,
 				AA83DC2A27AF9BC2008F2226 /* RootRouter.swift in Sources */,
+				AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */,
 				AA26A6AE27AF9424003D1F17 /* ContentView.swift in Sources */,
 				AA83DC4627AFC6E7008F2226 /* MessageRouter.swift in Sources */,
 				AA83DC4927B018AC008F2226 /* UnrepliedMessageItem.swift in Sources */,
 				AA83DC2527AF980A008F2226 /* MapView.swift in Sources */,
 				AAADEFDA27B78AE500D81A52 /* Message.swift in Sources */,
 				AA83DC3127AF9D15008F2226 /* HomeRouter.swift in Sources */,
+				AA16D44227BA7ACB00804D0D /* FriendScrollView.swift in Sources */,
 				AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */,
+				AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */,
 				AA83DC3327AF9F12008F2226 /* HomePresenter.swift in Sources */,
 				AA26A6AC27AF9424003D1F17 /* ImaDokoApp.swift in Sources */,
 				AAADEFDC27B7907000D81A52 /* User.swift in Sources */,
@@ -869,6 +897,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		AA9E99A927B8E674004B8272 /* XCRemoteSwiftPackageReference "DynamicOverlay" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/fabernovel/DynamicOverlay.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		AA9E99AC27B8FD12004B8272 /* XCRemoteSwiftPackageReference "StatefulTabView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/NicholasBellucci/StatefulTabView";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.8;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		AA9E99AA27B8E674004B8272 /* DynamicOverlay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA9E99A927B8E674004B8272 /* XCRemoteSwiftPackageReference "DynamicOverlay" */;
+			productName = DynamicOverlay;
+		};
+		AA9E99AD27B8FD12004B8272 /* StatefulTabView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA9E99AC27B8FD12004B8272 /* XCRemoteSwiftPackageReference "StatefulTabView" */;
+			productName = StatefulTabView;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = AA26A67F27AF9423003D1F17 /* Project object */;
 }

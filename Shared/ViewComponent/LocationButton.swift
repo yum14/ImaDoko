@@ -10,9 +10,11 @@ import SwiftUI
 struct LocationButton: View {
     var font: Font = .title2
     var padding: CGFloat = 12
+    var onTap: (() -> Void)?
+    
     var body: some View {
         Button {
-            
+            self.onTap?()
         } label: {
             Image(systemName: "location")
                 .foregroundColor(Color("IconColor"))

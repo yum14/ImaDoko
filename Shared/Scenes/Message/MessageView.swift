@@ -12,15 +12,16 @@ struct MessageView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Picker(selection: self.$presenter.messageTypeSelection) {
-                Text("UnreadMessageHeader").tag(0)
-            } label: {
-                Text("label")
-            }
-            .pickerStyle(.segmented)
-            .background(Color(uiColor: .systemBackground))
-            
-            Form {
+//        Form {
+//            Section {
+                Picker(selection: self.$presenter.messageTypeSelection) {
+                    Text("UnreadMessageHeader").tag(0)
+                } label: {
+                    Text("")
+                }
+                .pickerStyle(.segmented)
+                .padding()
+                
                 if self.presenter.messageTypeSelection == 0 {
                     if self.presenter.unreadMessages.count > 0 {
                         List {
@@ -31,9 +32,9 @@ struct MessageView: View {
                         }
                     }
                 }
-            }
+//            }
+//        }
         }
-        .background(Color(uiColor: .systemBackground))
     }
 }
 

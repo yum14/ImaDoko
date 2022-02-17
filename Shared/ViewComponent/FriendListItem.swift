@@ -13,19 +13,7 @@ struct FriendListItem: View {
     
     var body: some View {
         HStack {
-            Group {
-                if let avatorImage = avatorImage, let uiImage = UIImage(data: avatorImage) {
-                    Image(uiImage: uiImage)
-                        .resizable()
-                } else {
-                    Image(systemName: "person.crop.circle.fill")
-                        .resizable()
-                        .foregroundColor(.gray)
-                        .background(Color(uiColor: .systemBackground))
-                }
-            }
-            .frame(width: 36, height: 36)
-            .clipShape(Circle())
+            AvatorCircleImage(image: nil, radius: 36)
             
             Text(self.name)
                 .frame(height: 36)

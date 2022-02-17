@@ -12,20 +12,14 @@ struct HomeView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            
             VStack {
-                Image(systemName: "person.crop.circle.fill")
-                    .resizable()
-                    .foregroundColor(.gray)
-                    .background(Color(uiColor: .systemBackground))
-                    .frame(width: 120, height: 120)
-                    .clipShape(Circle())
+                AvatorCircleImage(image: nil, radius: 120)
                 
                 TextField("AccountName", text: self.$presenter.accountName)
                     .multilineTextAlignment(.center)
             }
+            .padding(.vertical, 12)
             .background(Color(uiColor: .systemBackground))
-            .padding(.bottom, 24)
             
             Form {
                 Section {
@@ -37,10 +31,10 @@ struct HomeView: View {
                 } header: {
                     Text("FriendListHeader")
                 }
-                
+
                 Section {
                     Button {
-                        
+
                     } label: {
                         HStack {
                             Spacer()
@@ -48,9 +42,9 @@ struct HomeView: View {
                             Spacer()
                         }
                     }
-                    
+
                     Button {
-                        
+
                     } label: {
                         HStack {
                             Spacer()
@@ -72,10 +66,12 @@ struct HomeView_Previews: PreviewProvider {
         presenter.friends = [User(name: "友だち１"),
                              User(name: "友だち２")]
         
-        return ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-            HomeView(presenter: presenter)
-                .environment(\.locale, .init(identifier: "ja_JP"))
-                .environment(\.colorScheme, scheme)
+        return ForEach(["ja_JP", "en_US"], id: \.self) { id in
+            ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
+                HomeView(presenter: presenter)
+                    .environment(\.locale, .init(identifier: id))
+                    .environment(\.colorScheme, scheme)
+            }
         }
     }
 }

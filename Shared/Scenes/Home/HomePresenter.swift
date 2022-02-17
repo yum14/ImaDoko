@@ -9,7 +9,9 @@ import Foundation
 
 final class HomePresenter: ObservableObject {
     @Published var accountName = ""
-    @Published var friends: [User] = []
+    @Published var friends: [User] = [User(name: "友だち１"),
+                                      User(name: "友だち２"),
+                                      User(name: "友だち３")]
     
     private let router: HomeWireframe
     

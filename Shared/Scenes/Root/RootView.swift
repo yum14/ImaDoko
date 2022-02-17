@@ -6,31 +6,46 @@
 //
 
 import SwiftUI
+import StatefulTabView
 
 struct RootView: View {
     @ObservedObject var presenter: RootPresenter
     @State var tabSelection: Int = 2
     
     var body: some View {
-        TabView(selection: self.$tabSelection) {
-            self.presenter.makeAboutHomeView()
-                .tabItem {
-                    Image(systemName: "house")
+        
+        StatefulTabView(selectedIndex: self.$tabSelection) {
+            Tab(title: NSLocalizedString("HomeViewTitle", comment: ""), systemImageName: "house") {
+                NavigationView {
+                    self.presenter.makeAboutHomeView()
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle(Text("HomeViewTitle"))
+                        .navigationBarHidden(true)
                 }
-                .tag(0)
+            }
             
-            self.presenter.makeAboutMessageView()
-                .tabItem {
-                    Image(systemName: "message.fill")
+            Tab(title: NSLocalizedString("MessageViewTitle", comment: ""), systemImageName: "message.fill") {
+                NavigationView {
+                    self.presenter.makeAboutMessageView()
+                        .navigationBarTitleDisplayMode(.inline)
+                        .navigationTitle(Text("MessageViewTitle"))
+                        .navigationBarHidden(true)
                 }
-                .tag(1)
-            
-            self.presenter.makeAboutMapView()
-                .tabItem {
-                    Image(systemName: "mappin.and.ellipse")
+            }
+            Tab(title: NSLocalizedString("MapViewTitle", comment: ""), systemImageName: "mappin.and.ellipse") {
+                NavigationView {
+                    self.presenter.makeAboutMapView()
+                        .navigationBarTitleDisplayMode(.inline)
+//                        .navigationTitle(Text("MapViewTitle"))
+                        .navigationBarHidden(true)
                 }
-                .tag(2)
+            }
         }
+        .barTintColor(UIColor(Color("MainColor")))
+        .unselectedItemTintColor(UIColor(Color.secondary))
+        .barBackgroundColor(UIColor.systemBackground)
+        .barAppearanceConfiguration(.transparent)
+        .navigationBarTitleDisplayMode(.inline)
     }
 }
 
@@ -39,9 +54,11 @@ struct RootView_Previews: PreviewProvider {
         let router = RootRouter()
         let presenter = RootPresenter(router: router)
         
-        ForEach(0...2, id: \.self) { selection in
-            RootView(presenter: presenter, tabSelection: selection)
-                .environment(\.locale, .init(identifier: "ja_JP"))
+        ForEach(["ja_JP", "en_US"], id: \.self) { id in
+            ForEach(0...2, id: \.self) { selection in
+                RootView(presenter: presenter, tabSelection: selection)
+                    .environment(\.locale, .init(identifier: id))
+            }
         }
     }
 }
