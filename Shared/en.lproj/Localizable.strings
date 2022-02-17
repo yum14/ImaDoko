@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  ImaDoko
+
+  Created by yum on 2022/02/06.
+  
+*/
+
+"HomeViewTitle" = "Home";
+"MessageViewTitle" = "Received Message";
+"MapViewTitle" = "Map";
+"AccountName" = "Name";
+"FriendListHeader" = "Friends";
+"AddFriendButton" = "Add friends";
+"ShowMyQRCodeButton" = "Show My QR-Code";
+"UnreadMessageHeader" = "Unreplied Messages";
+"MapOverlaySheetButton" = "Send a message to my friends";
+"SelectDestinationHeader" = "Select a destination";
+"ImaKokoButton" = "I'm here!";
+"ImaDokoButton" = "Where are you?";

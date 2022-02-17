@@ -1,0 +1,20 @@
+/* 
+  Localizable.strings
+  ImaDoko
+
+  Created by yum on 2022/02/06.
+  
+*/
+
+"HomeViewTitle" = "ホーム";
+"MessageViewTitle" = "受信メッセージ";
+"MapViewTitle" = "マップ";
+"AccountName" = "アカウント名";
+"FriendListHeader" = "友だち";
+"AddFriendButton" = "友だちを追加する";
+"ShowMyQRCodeButton" = "QRコードを表示する";
+"UnreadMessageHeader" = "未返信のメッセージ";
+"MapOverlaySheetButton" = "友だちへメッセージを送る";
+"SelectDestinationHeader" = "送信先を選択";
+"ImaKokoButton" = "イマココ！";
+"ImaDokoButton" = "イマドコ？";
