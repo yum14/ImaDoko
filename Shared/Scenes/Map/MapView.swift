@@ -53,7 +53,7 @@ struct MapView: View {
             case .max:
                 return .fractional(0.35)
             case .min:
-                return .fractional(0.08)
+                return .fractional(0.1)
             }
         }
         .onTranslation { translation in

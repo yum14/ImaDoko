@@ -83,7 +83,7 @@ struct MapOverlaySheet: View {
                     Text("MapOverlaySheetButton")
                         .foregroundColor(.white)
                         .fontWeight(.bold)
-                        .frame(width: 320, height: 32)
+                        .frame(width: 320, height: 40)
                         .background(Color("MainColor"))
                         .cornerRadius(16)
                 }
