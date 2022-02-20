@@ -20,11 +20,11 @@ struct MapView: View {
         center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
     
-    var friends: [User] = [User(name: "友だち１１１"),
-                           User(name: "友だち２"),
-                           User(name: "友だち３"),
-                           User(name: "友だち４"),
-                           User(name: "友だち５")]
+    var friends: [Profile] = [Profile(name: "友だち１１１"),
+                              Profile(name: "友だち２"),
+                              Profile(name: "友だち３"),
+                              Profile(name: "友だち４"),
+                              Profile(name: "友だち５")]
     
     //    var myOverlayContent: some View {
     //        VStack {
@@ -91,7 +91,7 @@ struct MapView: View {
                         .cornerRadius(8)
                         .shadow(radius: 5, x: 0, y: 5)
                         .padding(.horizontal)
-                        .padding(.bottom, 80)
+                        .padding(.bottom, 90)
                 }
             }
         }

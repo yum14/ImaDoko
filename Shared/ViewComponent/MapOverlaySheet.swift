@@ -9,7 +9,7 @@ import SwiftUI
 
 struct MapOverlaySheet: View {
     
-    var friends: [User] = []
+    var friends: [Profile] = []
     @Binding var editable: Bool
     var onSendMessageButtonTap: (() -> Void)?
     let bounds = UIScreen.main.bounds
@@ -99,12 +99,12 @@ struct MapOverlaySheet: View {
 
 struct MapOverlaySheet_Previews: PreviewProvider {
     static var previews: some View {
-        let friends = [User(name: "友だち１"),
-                       User(name: "友だち２"),
-                       User(name: "友だち３"),
-                       User(name: "友だち４"),
-                       User(name: "友だち５"),
-                       User(name: "友だち６")]
+        let friends = [Profile(name: "友だち１"),
+                       Profile(name: "友だち２"),
+                       Profile(name: "友だち３"),
+                       Profile(name: "友だち４"),
+                       Profile(name: "友だち５"),
+                       Profile(name: "友だち６")]
         
         ForEach([true, false], id: \.self) { editable in
             ForEach(["ja_JP", "en_US"], id: \.self) { id in

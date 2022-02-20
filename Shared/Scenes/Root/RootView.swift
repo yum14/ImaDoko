@@ -10,42 +10,47 @@ import StatefulTabView
 
 struct RootView: View {
     @ObservedObject var presenter: RootPresenter
+    @EnvironmentObject var authStateObserver: AuthStateObserver
     @State var tabSelection: Int = 2
     
     var body: some View {
         
-        StatefulTabView(selectedIndex: self.$tabSelection) {
-            Tab(title: NSLocalizedString("HomeViewTitle", comment: ""), systemImageName: "house") {
-                NavigationView {
-                    self.presenter.makeAboutHomeView()
-                        .navigationBarTitleDisplayMode(.inline)
-                        .navigationTitle(Text("HomeViewTitle"))
-                        .navigationBarHidden(true)
+        if !self.authStateObserver.isSignedIn {
+            LoginView()
+        } else {
+            StatefulTabView(selectedIndex: self.$tabSelection) {
+                Tab(title: NSLocalizedString("HomeViewTitle", comment: ""), systemImageName: "house") {
+                    NavigationView {
+                        self.presenter.makeAboutHomeView()
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationTitle(Text("HomeViewTitle"))
+                            .navigationBarHidden(true)
+                    }
+                }
+                
+                Tab(title: NSLocalizedString("MessageViewTitle", comment: ""), systemImageName: "message.fill") {
+                    NavigationView {
+                        self.presenter.makeAboutMessageView()
+                            .navigationBarTitleDisplayMode(.inline)
+                            .navigationTitle(Text("MessageViewTitle"))
+                            .navigationBarHidden(true)
+                    }
+                }
+                Tab(title: NSLocalizedString("MapViewTitle", comment: ""), systemImageName: "mappin.and.ellipse") {
+                    NavigationView {
+                        self.presenter.makeAboutMapView()
+                            .navigationBarTitleDisplayMode(.inline)
+                        //                        .navigationTitle(Text("MapViewTitle"))
+                            .navigationBarHidden(true)
+                    }
                 }
             }
-            
-            Tab(title: NSLocalizedString("MessageViewTitle", comment: ""), systemImageName: "message.fill") {
-                NavigationView {
-                    self.presenter.makeAboutMessageView()
-                        .navigationBarTitleDisplayMode(.inline)
-                        .navigationTitle(Text("MessageViewTitle"))
-                        .navigationBarHidden(true)
-                }
-            }
-            Tab(title: NSLocalizedString("MapViewTitle", comment: ""), systemImageName: "mappin.and.ellipse") {
-                NavigationView {
-                    self.presenter.makeAboutMapView()
-                        .navigationBarTitleDisplayMode(.inline)
-//                        .navigationTitle(Text("MapViewTitle"))
-                        .navigationBarHidden(true)
-                }
-            }
+            .barTintColor(UIColor(Color("MainColor")))
+            .unselectedItemTintColor(UIColor(Color.secondary))
+            .barBackgroundColor(UIColor.systemBackground)
+            .barAppearanceConfiguration(.transparent)
+            .navigationBarTitleDisplayMode(.inline)
         }
-        .barTintColor(UIColor(Color("MainColor")))
-        .unselectedItemTintColor(UIColor(Color.secondary))
-        .barBackgroundColor(UIColor.systemBackground)
-        .barAppearanceConfiguration(.transparent)
-        .navigationBarTitleDisplayMode(.inline)
     }
 }
 

@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct FriendScrollView: View {
-    var friends: [User] = []
+    var friends: [Profile] = []
     @Binding var selectedList: [String]
     var radius: CGFloat = 68
     
@@ -66,12 +66,12 @@ struct SelectedFriend {
 
 struct FriendScrollView_Previews: PreviewProvider {
     static var previews: some View {
-        let friends = [User(name: "友だち１aaaaa"),
-                       User(name: "友だち２あ"),
-                       User(name: "友だち３"),
-                       User(name: "友だち４"),
-                       User(name: "友だち５"),
-                       User(name: "友だち６")]
+        let friends = [Profile(name: "友だち１aaaaa"),
+                       Profile(name: "友だち２あ"),
+                       Profile(name: "友だち３"),
+                       Profile(name: "友だち４"),
+                       Profile(name: "友だち５"),
+                       Profile(name: "友だち６")]
         
         ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
             FriendScrollView(friends: friends, selectedList: .constant([]))

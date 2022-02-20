@@ -12,7 +12,7 @@ import UserNotifications
 
 @main
 struct ImaDokoApp: App {
-    @UIApplicationDelegateAdaptor(AppDelegate.self) var delegate
+    @UIApplicationDelegateAdaptor(AuthStateObserver.self) var authState
     
     var body: some Scene {
         WindowGroup {
@@ -21,9 +21,7 @@ struct ImaDokoApp: App {
     }
 }
 
-class AppDelegate: NSObject, UIApplicationDelegate {
-    var notificationToken: String?
-    
+extension AuthStateObserver: UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
        
         FirebaseApp.configure()
@@ -47,7 +45,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         application.registerForRemoteNotifications()
 
         // Firebaseリスナーの設定
-//        self.addListener()
+        self.addListener()
         
         return true
     }
@@ -58,7 +56,7 @@ class AppDelegate: NSObject, UIApplicationDelegate {
     }
 }
 
-extension AppDelegate: UNUserNotificationCenterDelegate {
+extension AuthStateObserver: UNUserNotificationCenterDelegate {
     func userNotificationCenter(_ center: UNUserNotificationCenter,
                                 willPresent notification: UNNotification,
                                 withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
@@ -85,7 +83,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 }
 
-extension AppDelegate: MessagingDelegate {
+extension AuthStateObserver: MessagingDelegate {
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String?) {
         self.notificationToken = fcmToken
     }

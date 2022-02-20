@@ -9,6 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var presenter: HomePresenter
+    @EnvironmentObject var authStateObserver: AuthStateObserver
     
     var body: some View {
         VStack(spacing: 0) {
@@ -53,6 +54,19 @@ struct HomeView: View {
                         }
                     }
                 }
+                
+                Section {
+                    Button(role: .destructive) {
+                        self.presenter.onSignOutButtonTapped(auth: self.authStateObserver)
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("SignOutButton")
+                            Spacer()
+                        }
+                    }
+
+                }
             }
         }
     }
@@ -63,8 +77,8 @@ struct HomeView_Previews: PreviewProvider {
         let router = HomeRouter()
         let presenter = HomePresenter(router: router)
         presenter.accountName = "マイアカウント"
-        presenter.friends = [User(name: "友だち１"),
-                             User(name: "友だち２")]
+        presenter.friends = [Profile(name: "友だち１"),
+                             Profile(name: "友だち２")]
         
         return ForEach(["ja_JP", "en_US"], id: \.self) { id in
             ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in

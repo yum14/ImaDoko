@@ -11,6 +11,15 @@
         }
       },
       {
+        "package": "AppAuth",
+        "repositoryURL": "https://github.com/openid/AppAuth-iOS.git",
+        "state": {
+          "branch": null,
+          "revision": "01131d68346c8ae552961c768d583c715fbe1410",
+          "version": "1.4.0"
+        }
+      },
+      {
         "package": "BoringSSL-GRPC",
         "repositoryURL": "https://github.com/firebase/boringssl-SwiftPM.git",
         "state": {
@@ -32,9 +41,9 @@
         "package": "Firebase",
         "repositoryURL": "https://github.com/firebase/firebase-ios-sdk",
         "state": {
-          "branch": null,
-          "revision": "78f7087fd5d48eb7c36e299f330b6dddccd647b2",
-          "version": "8.12.1"
+          "branch": "master",
+          "revision": "47c046e97d9fb02210c85fb24a11ef5d739dc622",
+          "version": null
         }
       },
       {
@@ -53,6 +62,15 @@
           "branch": null,
           "revision": "15ccdfd25ac55b9239b82809531ff26605e7556e",
           "version": "9.1.2"
+        }
+      },
+      {
+        "package": "GoogleSignIn",
+        "repositoryURL": "https://github.com/google/GoogleSignIn-iOS",
+        "state": {
+          "branch": null,
+          "revision": "60ca2bfd218ccb194a746a79b41d9d50eb7e3af0",
+          "version": "6.1.0"
         }
       },
       {
@@ -80,6 +98,15 @@
           "branch": null,
           "revision": "bc6a19702ac76ac4e488b68148710eb815f9bc56",
           "version": "1.7.0"
+        }
+      },
+      {
+        "package": "GTMAppAuth",
+        "repositoryURL": "https://github.com/google/GTMAppAuth.git",
+        "state": {
+          "branch": null,
+          "revision": "40f4103fb52109032c05599a0c39ad43edbdf80a",
+          "version": "1.2.2"
         }
       },
       {
