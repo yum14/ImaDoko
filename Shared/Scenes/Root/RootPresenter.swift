@@ -18,6 +18,10 @@ final class RootPresenter: ObservableObject {
 }
 
 extension RootPresenter {
+    func makeAboutLoginView() -> some View {
+        return router.makeLoginView()
+    }
+    
     func makeAboutMapView() -> some View {
         return router.makeMapView()
     }

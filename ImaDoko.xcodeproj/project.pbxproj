@@ -29,6 +29,8 @@
 		AA658F9F27C1F5B0001D4E17 /* FirebaseFirestoreCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AA658F9E27C1F5B0001D4E17 /* FirebaseFirestoreCombine-Community */; };
 		AA658FA127C1F5B0001D4E17 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = AA658FA027C1F5B0001D4E17 /* FirebaseMessaging */; };
 		AA658FA427C1F5EF001D4E17 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = AA658FA327C1F5EF001D4E17 /* GoogleSignIn */; };
+		AA658FA627C281E2001D4E17 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658FA527C281E2001D4E17 /* AppleSignInButton.swift */; };
+		AA658FA827C286CE001D4E17 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658FA727C286CE001D4E17 /* LoginRouter.swift */; };
 		AA83DC2527AF980A008F2226 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83DC2427AF980A008F2226 /* MapView.swift */; };
 		AA83DC2827AF9B67008F2226 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83DC2727AF9B67008F2226 /* RootView.swift */; };
 		AA83DC2A27AF9BC2008F2226 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83DC2927AF9BC2008F2226 /* RootRouter.swift */; };
@@ -96,6 +98,8 @@
 		AA658F9327C13D69001D4E17 /* AuthStateObserver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthStateObserver.swift; sourceTree = "<group>"; };
 		AA658F9527C13EAB001D4E17 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		AA658F9727C1F1FC001D4E17 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
+		AA658FA527C281E2001D4E17 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
+		AA658FA727C286CE001D4E17 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
 		AA83DC2427AF980A008F2226 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		AA83DC2727AF9B67008F2226 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		AA83DC2927AF9BC2008F2226 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
@@ -236,6 +240,7 @@
 			children = (
 				AA658F8F27C13CEB001D4E17 /* LoginView.swift */,
 				AA658F9127C13CF6001D4E17 /* LoginPresenter.swift */,
+				AA658FA727C286CE001D4E17 /* LoginRouter.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 				AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */,
 				AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */,
 				AA658F9727C1F1FC001D4E17 /* GoogleSignInButton.swift */,
+				AA658FA527C281E2001D4E17 /* AppleSignInButton.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -512,7 +518,9 @@
 				AA83DC4427AFC6DF008F2226 /* MessagePresenter.swift in Sources */,
 				AA658F9627C13EAB001D4E17 /* User.swift in Sources */,
 				AA83DC2827AF9B67008F2226 /* RootView.swift in Sources */,
+				AA658FA827C286CE001D4E17 /* LoginRouter.swift in Sources */,
 				AAADEFE027B7B28700D81A52 /* PinItem.swift in Sources */,
+				AA658FA627C281E2001D4E17 /* AppleSignInButton.swift in Sources */,
 				AAADEFE227B7BB5E00D81A52 /* AvatorMapAnnotation.swift in Sources */,
 				AA658F9427C13D69001D4E17 /* AuthStateObserver.swift in Sources */,
 				AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */,

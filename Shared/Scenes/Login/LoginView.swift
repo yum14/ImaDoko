@@ -9,6 +9,7 @@ import SwiftUI
 import FirebaseAuth
 
 struct LoginView: View {
+    @ObservedObject var presenter: LoginPresenter
     @EnvironmentObject var authStateObserver: AuthStateObserver
     
     var body: some View {
@@ -17,21 +18,13 @@ struct LoginView: View {
                 .edgesIgnoringSafeArea(.all)
           
             VStack {
-                GoogleSignInButton() { authCredential, error in
-                    if let error = error {
-                        print(error.localizedDescription)
-                    }
-                    
-                    guard let authCredential = authCredential else {
-                        print("login failed.")
-                        return
-                    }
-                    
-                    self.authStateObserver.signIn(credential: authCredential) { FIRAuthDataResult, error in
-                        if let error = error {
-                            print(error.localizedDescription)
-                        }
-                    }
+                GoogleSignInButton { authCredential in
+                    self.presenter.thirdAuthSignedIn(auth: self.authStateObserver,
+                                                     authCredential: authCredential)
+                }
+                AppleSignInButton { authCredential in
+                    self.presenter.thirdAuthSignedIn(auth: self.authStateObserver,
+                                                     authCredential: authCredential)
                 }
             }
         }
@@ -40,9 +33,11 @@ struct LoginView: View {
 
 struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
+        let presenter = LoginPresenter()
+        
         ForEach(["ja_JP", "en_US"], id: \.self) { id in
             ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-                LoginView()
+                LoginView(presenter: presenter)
                     .environment(\.locale, .init(identifier: id))
                     .environment(\.colorScheme, scheme)
             }

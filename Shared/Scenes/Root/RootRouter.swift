@@ -9,6 +9,7 @@ import Foundation
 import SwiftUI
 
 protocol RootWireframe {
+    func makeLoginView() -> AnyView
     func makeMapView() -> AnyView
     func makeHomeView() -> AnyView
     func makeMessageView() -> AnyView
@@ -24,6 +25,10 @@ final class RootRouter {
 }
 
 extension RootRouter: RootWireframe {
+    func makeLoginView() -> AnyView {
+        return LoginRouter.assembleModules()
+    }
+    
     func makeMapView() -> AnyView {
         return MapRouter.assembleModules()
     }

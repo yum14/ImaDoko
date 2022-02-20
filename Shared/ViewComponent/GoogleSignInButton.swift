@@ -10,7 +10,7 @@ import Firebase
 import GoogleSignIn
 
 struct GoogleSignInButton: View {
-    var signedIn: ((AuthCredential?,Error?) -> Void)?
+    var signedIn: ((AuthCredential?) -> Void)?
     
     var body: some View {
         Button {
@@ -23,18 +23,18 @@ struct GoogleSignInButton: View {
             GIDSignIn.sharedInstance.signIn(with: config, presenting: self.getRootViewController()) { user, error in
                 if let error = error {
                     print(error.localizedDescription)
-                    self.signedIn?(nil, error)
+                    self.signedIn?(nil)
                     return
                 }
                 guard let authentication = user?.authentication, let idToken = authentication.idToken else {
                     print("authentication error.")
-                    self.signedIn?(nil, nil)
+                    self.signedIn?(nil)
                     return
                 }
                 
                 let credential = GoogleAuthProvider.credential(withIDToken: idToken, accessToken: authentication.accessToken)
                 
-                self.signedIn?(credential, nil)
+                self.signedIn?(credential)
             }
         } label: {
             HStack(spacing: 8) {
@@ -43,7 +43,7 @@ struct GoogleSignInButton: View {
                     .aspectRatio(contentMode: .fit)
                     .frame(width: 28, height: 28)
                 Text("SignInWithGoogle")
-                    .foregroundColor(.primary)
+                    .foregroundColor(.black)
                     .fontWeight(.medium)
             }
             .padding(.vertical, 7)

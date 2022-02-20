@@ -16,7 +16,7 @@ struct RootView: View {
     var body: some View {
         
         if !self.authStateObserver.isSignedIn {
-            LoginView()
+            self.presenter.makeAboutLoginView()
         } else {
             StatefulTabView(selectedIndex: self.$tabSelection) {
                 Tab(title: NSLocalizedString("HomeViewTitle", comment: ""), systemImageName: "house") {
