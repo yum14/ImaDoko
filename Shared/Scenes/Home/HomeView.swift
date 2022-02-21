@@ -73,6 +73,8 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
+    static let auth = AuthStateObserver()
+    
     static var previews: some View {
         let router = HomeRouter()
         let presenter = HomePresenter(router: router)
@@ -85,6 +87,7 @@ struct HomeView_Previews: PreviewProvider {
                 HomeView(presenter: presenter)
                     .environment(\.locale, .init(identifier: id))
                     .environment(\.colorScheme, scheme)
+                    .environmentObject(auth)
             }
         }
     }

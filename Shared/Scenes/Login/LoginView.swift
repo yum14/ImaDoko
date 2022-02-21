@@ -32,6 +32,8 @@ struct LoginView: View {
 }
 
 struct LoginView_Previews: PreviewProvider {
+    static let auth = AuthStateObserver()
+    
     static var previews: some View {
         let presenter = LoginPresenter()
         
@@ -40,6 +42,7 @@ struct LoginView_Previews: PreviewProvider {
                 LoginView(presenter: presenter)
                     .environment(\.locale, .init(identifier: id))
                     .environment(\.colorScheme, scheme)
+                    .environmentObject(auth)
             }
         }
     }

@@ -55,6 +55,8 @@ struct RootView: View {
 }
 
 struct RootView_Previews: PreviewProvider {
+    static let auth = AuthStateObserver()
+    
     static var previews: some View {
         let router = RootRouter()
         let presenter = RootPresenter(router: router)
@@ -63,6 +65,7 @@ struct RootView_Previews: PreviewProvider {
             ForEach(0...2, id: \.self) { selection in
                 RootView(presenter: presenter, tabSelection: selection)
                     .environment(\.locale, .init(identifier: id))
+                    .environmentObject(auth)
             }
         }
     }
