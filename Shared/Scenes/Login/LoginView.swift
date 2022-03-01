@@ -10,7 +10,7 @@ import FirebaseAuth
 
 struct LoginView: View {
     @ObservedObject var presenter: LoginPresenter
-    @EnvironmentObject var authStateObserver: AuthStateObserver
+    @EnvironmentObject var authentication: Authentication
     
     var body: some View {
         ZStack {
@@ -19,30 +19,50 @@ struct LoginView: View {
           
             VStack {
                 GoogleSignInButton { authCredential in
-                    self.presenter.thirdAuthSignedIn(auth: self.authStateObserver,
-                                                     authCredential: authCredential)
+                    self.presenter.signedIn(auth: self.authentication,
+                                            authCredential: authCredential)
                 }
                 AppleSignInButton { authCredential in
-                    self.presenter.thirdAuthSignedIn(auth: self.authStateObserver,
-                                                     authCredential: authCredential)
+                    self.presenter.signedIn(auth: self.authentication,
+                                            authCredential: authCredential)
                 }
+            }
+            .alert("CreateNewUserAlertTitle",
+                   isPresented: self.$presenter.showCreateNewAccountAlert) {
+                Button("CreateButton") { 
+                    self.presenter.createAccount(auth: self.authentication)
+                }
+                Button(NSLocalizedString("CencelButton", comment: ""), role: .cancel) {
+                    self.presenter.cancelAccountCreation(auth: self.authentication)
+                }
+            } message: {
+                Text("CreateNewUserAlertMessage")
+            }
+            .alert("SignInFailedAlertTitle",
+                   isPresented: self.$presenter.showSignInFailedAlert) {
+                Button("OKButton") {
+                    self.presenter.agreeAccountCreationFailed(auth: self.authentication)
+                }
+            } message: {
+                Text("SignInFailedAlertMessage")
             }
         }
     }
 }
 
 struct LoginView_Previews: PreviewProvider {
-    static let auth = AuthStateObserver()
+    static let authentication = Authentication()
     
     static var previews: some View {
-        let presenter = LoginPresenter()
+        let router = LoginRouter()
+        let presenter = LoginPresenter(router: router)
         
         ForEach(["ja_JP", "en_US"], id: \.self) { id in
             ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
                 LoginView(presenter: presenter)
                     .environment(\.locale, .init(identifier: id))
                     .environment(\.colorScheme, scheme)
-                    .environmentObject(auth)
+                    .environmentObject(authentication)
             }
         }
     }

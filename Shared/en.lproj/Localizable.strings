@@ -20,3 +20,12 @@
 "ImaKokoButton" = "I'm here!";
 "ImaDokoButton" = "Where are you?";
 "SignInWithGoogle" = "Sign in with Google";
+"NewDefaultUserName" = "New User";
+"SignInFailedAlertTitle" = "Sign-in failed.";
+"SignInFailedAlertTitle" = "Sign-in";
+"SignInFailedAlertMessage" = "Sign-in failed.";
+"CreateNewUserAlertTitle" = "No Account";
+"CreateNewUserAlertMessage" = "Do you want to create new account?";
+"CreateButton" = "Create";
+"CencelButton" = "Cancel";
+"OKButton" = "OK";

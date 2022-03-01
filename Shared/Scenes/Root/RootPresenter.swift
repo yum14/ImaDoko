@@ -10,14 +10,24 @@ import SwiftUI
 
 final class RootPresenter: ObservableObject {
     
+    private let interactor: RootUsecase
     private let router: RootWireframe
     
-    init(router: RootWireframe) {
+    init(interactor: RootUsecase, router: RootWireframe) {
+        self.interactor = interactor
         self.router = router
     }
 }
 
 extension RootPresenter {
+    func setNotificationToken(id: String, notificationToken: String) {
+        self.interactor.setNotificationToken(data: NotificationToken(id: id, notificationToken: notificationToken)) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func makeAboutLoginView() -> some View {
         return router.makeLoginView()
     }

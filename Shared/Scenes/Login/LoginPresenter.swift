@@ -6,23 +6,50 @@
 //
 
 import Foundation
+import Firebase
 import FirebaseAuth
 
 final class LoginPresenter: ObservableObject {
-
+    @Published var showCreateNewAccountAlert = false
+    @Published var showSignInFailedAlert = false
+    
+    private let router: LoginWireframe
+    private let profileStore: ProfileStore
+    private var profile: Profile?
+    
+    init(router: LoginWireframe) {
+        self.router = router
+        self.profileStore = ProfileStore()
+    }
 }
 
 extension LoginPresenter {
-    func thirdAuthSignedIn(auth: FirebaseAuthenticatable, authCredential: AuthCredential?) {
+    func signedIn(auth: Authenticatable, authCredential: AuthCredential?) {
         guard let authCredential = authCredential else {
-            print("login failed.")
             return
         }
         
-        auth.signIn(credential: authCredential) { FIRAuthDataResult, error in
-            if let error = error {
-                print(error.localizedDescription)
+        auth.signIn(credential: authCredential) { signInStatus in   
+            switch signInStatus {
+            case .success:
+                break
+            case .newUser:
+                self.showCreateNewAccountAlert = true
+            case .failure:
+                self.showSignInFailedAlert = true
             }
         }
+    }
+    
+    func createAccount(auth: Authentication) {
+        auth.createUser()
+    }
+    
+    func cancelAccountCreation(auth: Authentication) {
+        auth.signOut()
+    }
+    
+    func agreeAccountCreationFailed(auth: Authentication) {
+        auth.signOut()
     }
 }

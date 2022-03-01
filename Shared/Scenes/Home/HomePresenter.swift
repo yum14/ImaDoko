@@ -22,7 +22,7 @@ final class HomePresenter: ObservableObject {
 
 extension HomePresenter {
     
-    func onSignOutButtonTapped(auth: FirebaseAuthenticatable) {
+    func onSignOutButtonTapped(auth: Authenticatable) {
         auth.signOut()
     }
     

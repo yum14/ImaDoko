@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var presenter: HomePresenter
-    @EnvironmentObject var authStateObserver: AuthStateObserver
+    @EnvironmentObject var authentication: Authentication
     
     var body: some View {
         VStack(spacing: 0) {
@@ -57,7 +57,7 @@ struct HomeView: View {
                 
                 Section {
                     Button(role: .destructive) {
-                        self.presenter.onSignOutButtonTapped(auth: self.authStateObserver)
+                        self.presenter.onSignOutButtonTapped(auth: self.authentication)
                     } label: {
                         HStack {
                             Spacer()
@@ -73,7 +73,7 @@ struct HomeView: View {
 }
 
 struct HomeView_Previews: PreviewProvider {
-    static let auth = AuthStateObserver()
+    static let auth = Authentication()
     
     static var previews: some View {
         let router = HomeRouter()

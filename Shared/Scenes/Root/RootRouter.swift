@@ -17,8 +17,9 @@ protocol RootWireframe {
 
 final class RootRouter {
     static func assembleModules() -> AnyView {
+        let interactor = RootInteractor()
         let router = RootRouter()
-        let presenter = RootPresenter(router: router)
+        let presenter = RootPresenter(interactor: interactor, router: router)
         let view = RootView(presenter: presenter)
         return AnyView(view)
     }
