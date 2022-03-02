@@ -67,6 +67,7 @@
 		AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98A27B80727007CD36D /* LocationButton.swift */; };
 		AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */; };
 		AAF8649427CD120F00AFA0E6 /* RootInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649327CD120F00AFA0E6 /* RootInteractor.swift */; };
+		AAF8649627CE5C2900AFA0E6 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649527CE5C2900AFA0E6 /* HomeInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -140,6 +141,7 @@
 		AAE3F98A27B80727007CD36D /* LocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
 		AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCircleImage.swift; sourceTree = "<group>"; };
 		AAF8649327CD120F00AFA0E6 /* RootInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootInteractor.swift; sourceTree = "<group>"; };
+		AAF8649527CE5C2900AFA0E6 /* HomeInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -298,8 +300,8 @@
 			children = (
 				AA83DC2727AF9B67008F2226 /* RootView.swift */,
 				AA83DC3427AF9F1D008F2226 /* RootPresenter.swift */,
-				AA83DC2927AF9BC2008F2226 /* RootRouter.swift */,
 				AAF8649327CD120F00AFA0E6 /* RootInteractor.swift */,
+				AA83DC2927AF9BC2008F2226 /* RootRouter.swift */,
 			);
 			path = Root;
 			sourceTree = "<group>";
@@ -309,6 +311,7 @@
 			children = (
 				AA83DC2E27AF9D01008F2226 /* HomeView.swift */,
 				AA83DC3227AF9F12008F2226 /* HomePresenter.swift */,
+				AAF8649527CE5C2900AFA0E6 /* HomeInteractor.swift */,
 				AA83DC3027AF9D15008F2226 /* HomeRouter.swift */,
 			);
 			path = Home;
@@ -577,6 +580,7 @@
 				AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */,
 				AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */,
 				AA658F9027C13CEB001D4E17 /* LoginView.swift in Sources */,
+				AAF8649627CE5C2900AFA0E6 /* HomeInteractor.swift in Sources */,
 				AA83DC3327AF9F12008F2226 /* HomePresenter.swift in Sources */,
 				AA26A6AC27AF9424003D1F17 /* ImaDokoApp.swift in Sources */,
 				AAADEFDC27B7907000D81A52 /* Profile.swift in Sources */,

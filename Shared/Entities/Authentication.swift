@@ -38,7 +38,7 @@ final class Authentication: UIResponder, ObservableObject {
             }
         }
     }
-    private var profile: Profile? {
+    var profile: Profile? {
         didSet {
             // 不要な通知を防ぐため、変更がある場合のみ設定する
             let newValue = (self.firebaseLoginUser != nil && self.profile != nil)

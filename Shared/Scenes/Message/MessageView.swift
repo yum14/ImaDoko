@@ -41,7 +41,7 @@ struct MessageView: View {
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
         let router = MessageRouter()
-        let presenter = MessagePresenter(router: router)
+        let presenter = MessagePresenter(router: router, uid: "")
         presenter.unreadMessages = [Message(from: "アカウント1"),
                                     Message(from: "アカウント2")]
         

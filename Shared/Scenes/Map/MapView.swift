@@ -110,7 +110,7 @@ struct MapView: View {
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         let router = MapRouter()
-        let presenter = MapPresenter(router: router)
+        let presenter = MapPresenter(router: router, uid: "")
         presenter.pinItems = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
         
         return ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in

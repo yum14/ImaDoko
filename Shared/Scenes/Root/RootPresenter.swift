@@ -32,15 +32,15 @@ extension RootPresenter {
         return router.makeLoginView()
     }
     
-    func makeAboutMapView() -> some View {
-        return router.makeMapView()
+    func makeAboutMapView(uid: String) -> some View {
+        return router.makeMapView(uid: uid)
     }
     
-    func makeAboutHomeView() -> some View {
-        return router.makeHomeView()
+    func makeAboutHomeView(uid: String) -> some View {
+        return router.makeHomeView(uid: uid)
     }
     
-    func makeAboutMessageView() -> some View {
-        return router.makeMessageView()
+    func makeAboutMessageView(uid: String) -> some View {
+        return router.makeMessageView(uid: uid)
     }
 }

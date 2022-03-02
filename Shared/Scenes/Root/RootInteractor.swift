@@ -12,8 +12,11 @@ protocol RootUsecase {
 }
 
 final class RootInteractor {
-    private let tokenStore = NotificationTokenStore()
+    private let tokenStore: NotificationTokenStore
     
+    init() {
+        self.tokenStore = NotificationTokenStore()
+    }
 }
 
 extension RootInteractor: RootUsecase {

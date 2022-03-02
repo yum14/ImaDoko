@@ -20,9 +20,11 @@ final class MapPresenter: ObservableObject {
     @Published var editable = false
     
     private let router: MapWireframe
+    private let uid: String
     
-    init(router: MapWireframe) {
+    init(router: MapWireframe, uid: String) {
         self.router = router
+        self.uid = uid
     }
     
 }

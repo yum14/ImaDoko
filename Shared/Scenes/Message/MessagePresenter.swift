@@ -14,8 +14,10 @@ final class MessagePresenter: ObservableObject {
                                                 Message(from: "友だち２", createdAt: .now + 20)]
     
     private let router: MessageWireframe
+    private let uid: String
     
-    init(router: MessageWireframe) {
+    init(router: MessageWireframe, uid: String) {
         self.router = router
+        self.uid = uid
     }
 }

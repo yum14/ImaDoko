@@ -12,9 +12,9 @@ protocol MapWireframe {
 }
 
 final class MapRouter {
-    static func assembleModules() -> AnyView {
+    static func assembleModules(uid: String) -> AnyView {
         let router = MapRouter()
-        let presenter = MapPresenter(router: router)
+        let presenter = MapPresenter(router: router, uid: uid)
         let view = MapView(presenter: presenter)
         return AnyView(view)
     }

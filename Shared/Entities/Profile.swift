@@ -12,17 +12,20 @@ struct Profile: Identifiable, Hashable {
     var id: String
     var name: String
     var avatorImage: Data?
+    var friends: [String]
     var createdAt: Timestamp?
     var updatedAt: Timestamp?
     
     init(id: String = UUID().uuidString,
          name: String,
          avatorImage: Data? = nil,
+         friends: [String] = [],
          createdAt: Timestamp? = nil,
          updatedAt: Timestamp? = nil) {
         
         self.id = id
         self.name = name
+        self.friends = friends
         self.avatorImage = avatorImage
         self.createdAt = createdAt
         self.updatedAt = updatedAt
@@ -32,6 +35,7 @@ struct Profile: Identifiable, Hashable {
         var dic: [String: Any] = [:]
         dic["id"] = self.id
         dic["name"] = self.name
+        dic["friends"] = self.friends
         self.avatorImage != nil ? dic["avator_image"] = self.avatorImage : nil
         dic["created_at"] = self.createdAt
         self.updatedAt != nil ? dic["updated_at"] = self.updatedAt : nil

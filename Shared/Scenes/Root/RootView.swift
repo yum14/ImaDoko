@@ -20,45 +20,46 @@ struct RootView: View {
             if !self.auth.isSignedIn {
                 self.presenter.makeAboutLoginView()
             } else {
-                StatefulTabView(selectedIndex: self.$tabSelection) {
-                    Tab(title: NSLocalizedString("HomeViewTitle", comment: ""), systemImageName: "house") {
-                        NavigationView {
-                            self.presenter.makeAboutHomeView()
-                                .navigationBarTitleDisplayMode(.inline)
-                                .navigationTitle(Text("HomeViewTitle"))
-                                .navigationBarHidden(true)
+                if let loginUser = self.auth.firebaseLoginUser {
+                    StatefulTabView(selectedIndex: self.$tabSelection) {
+                        Tab(title: NSLocalizedString("HomeViewTitle", comment: ""), systemImageName: "house") {
+                            NavigationView {
+                                self.presenter.makeAboutHomeView(uid: loginUser.uid)
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .navigationTitle(Text("HomeViewTitle"))
+                                    .navigationBarHidden(true)
+                            }
+                        }
+                        
+                        Tab(title: NSLocalizedString("MessageViewTitle", comment: ""), systemImageName: "message.fill") {
+                            NavigationView {
+                                self.presenter.makeAboutMessageView(uid: loginUser.uid)
+                                    .navigationBarTitleDisplayMode(.inline)
+                                    .navigationTitle(Text("MessageViewTitle"))
+                                    .navigationBarHidden(true)
+                            }
+                        }
+                        Tab(title: NSLocalizedString("MapViewTitle", comment: ""), systemImageName: "mappin.and.ellipse") {
+                            NavigationView {
+                                self.presenter.makeAboutMapView(uid: loginUser.uid)
+                                    .navigationBarTitleDisplayMode(.inline)
+                                //                        .navigationTitle(Text("MapViewTitle"))
+                                    .navigationBarHidden(true)
+                            }
                         }
                     }
+                    .barTintColor(UIColor(Color("MainColor")))
+                    .unselectedItemTintColor(UIColor(Color.secondary))
+                    .barBackgroundColor(UIColor.systemBackground)
+                    .barAppearanceConfiguration(.transparent)
+                    .navigationBarTitleDisplayMode(.inline)
                     
-                    Tab(title: NSLocalizedString("MessageViewTitle", comment: ""), systemImageName: "message.fill") {
-                        NavigationView {
-                            self.presenter.makeAboutMessageView()
-                                .navigationBarTitleDisplayMode(.inline)
-                                .navigationTitle(Text("MessageViewTitle"))
-                                .navigationBarHidden(true)
+                    .onAppear {
+                        guard let firebaseLoginUser = self.auth.firebaseLoginUser, let notificationToken = self.appDelegate.notificationToken else {
+                            return
                         }
+                        self.presenter.setNotificationToken(id: firebaseLoginUser.uid, notificationToken: notificationToken)
                     }
-                    Tab(title: NSLocalizedString("MapViewTitle", comment: ""), systemImageName: "mappin.and.ellipse") {
-                        NavigationView {
-                            self.presenter.makeAboutMapView()
-                                .navigationBarTitleDisplayMode(.inline)
-                            //                        .navigationTitle(Text("MapViewTitle"))
-                                .navigationBarHidden(true)
-                        }
-                    }
-                }
-                .barTintColor(UIColor(Color("MainColor")))
-                .unselectedItemTintColor(UIColor(Color.secondary))
-                .barBackgroundColor(UIColor.systemBackground)
-                .barAppearanceConfiguration(.transparent)
-                .navigationBarTitleDisplayMode(.inline)
-                
-                .onAppear {
-                    guard let firebaseLoginUser = self.auth.firebaseLoginUser, let notificationToken = self.appDelegate.notificationToken else {
-                        return
-                    }
-                    
-                    self.presenter.setNotificationToken(id: firebaseLoginUser.uid, notificationToken: notificationToken)
                 }
             }
         }

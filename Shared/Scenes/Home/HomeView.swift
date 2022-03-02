@@ -9,7 +9,7 @@ import SwiftUI
 
 struct HomeView: View {
     @ObservedObject var presenter: HomePresenter
-    @EnvironmentObject var authentication: Authentication
+    @EnvironmentObject var auth: Authentication
     
     var body: some View {
         VStack(spacing: 0) {
@@ -18,6 +18,9 @@ struct HomeView: View {
                 
                 TextField("AccountName", text: self.$presenter.accountName)
                     .multilineTextAlignment(.center)
+                    .onSubmit {
+                        self.presenter.onNameTextSubmit()
+                    }
             }
             .padding(.vertical, 12)
             .background(Color(uiColor: .systemBackground))
@@ -57,7 +60,7 @@ struct HomeView: View {
                 
                 Section {
                     Button(role: .destructive) {
-                        self.presenter.onSignOutButtonTapped(auth: self.authentication)
+                        self.presenter.onSignOutButtonTapped(auth: self.auth)
                     } label: {
                         HStack {
                             Spacer()
@@ -69,6 +72,12 @@ struct HomeView: View {
                 }
             }
         }
+        .onAppear {
+            self.presenter.addProfileListener()
+        }
+        .onDisappear {
+            self.presenter.removeProfileListener()
+        }
     }
 }
 
@@ -76,8 +85,9 @@ struct HomeView_Previews: PreviewProvider {
     static let auth = Authentication()
     
     static var previews: some View {
+        let interactor = HomeInteractor()
         let router = HomeRouter()
-        let presenter = HomePresenter(router: router)
+        let presenter = HomePresenter(interactor: interactor, router: router, uid: "")
         presenter.accountName = "マイアカウント"
         presenter.friends = [Profile(name: "友だち１"),
                              Profile(name: "友だち２")]
