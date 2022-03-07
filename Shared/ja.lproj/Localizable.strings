@@ -28,3 +28,5 @@
 "CreateButton" = "作成する";
 "CencelButton" = "キャンセル";
 "OKButton" = "OK";
+"QRCodeLoading" = "Loading...";
+"QRCodeDescription" = "友だちがこのQRコードをスキャンすると、あなたを友だちに追加できます。";

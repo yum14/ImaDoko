@@ -48,7 +48,7 @@ struct HomeView: View {
                     }
 
                     Button {
-
+                        self.presenter.onMyQrCodeButtonTap()
                     } label: {
                         HStack {
                             Spacer()
@@ -70,6 +70,11 @@ struct HomeView: View {
                     }
 
                 }
+            }
+        }
+        .sheet(isPresented: self.$presenter.showQrCodeSheet) {
+            NavigationView {
+                self.presenter.makeAboutMyQrCodeView()
             }
         }
         .onAppear {

@@ -9,7 +9,7 @@ import Foundation
 import SwiftUI
 
 protocol HomeWireframe {
-    
+    func makeMyQrCodeView(uid: String) -> AnyView
 }
 
 final class HomeRouter {
@@ -23,5 +23,7 @@ final class HomeRouter {
 }
 
 extension HomeRouter: HomeWireframe {
-    
+    func makeMyQrCodeView(uid: String) -> AnyView {
+        return MyQrCodeRouter.assembleModules(uid: uid)
+    }
 }

@@ -6,12 +6,14 @@
 //
 
 import Foundation
+import SwiftUI
 
 final class HomePresenter: ObservableObject {
     @Published var accountName = ""
     @Published var friends: [Profile] = [Profile(name: "友だち１"),
                                          Profile(name: "友だち２"),
                                          Profile(name: "友だち３")]
+    @Published var showQrCodeSheet = false
     
     private var profile: Profile? {
         didSet {
@@ -57,6 +59,10 @@ extension HomePresenter {
         }
     }
     
+    func onMyQrCodeButtonTap() {
+        self.showQrCodeSheet = true
+    }
+    
     func addProfileListener() {
         self.interactor.addProfileListener(id: self.uid) { result in
             switch result {
@@ -70,5 +76,9 @@ extension HomePresenter {
     
     func removeProfileListener() {
         self.interactor.removeProfileListener()
+    }
+    
+    func makeAboutMyQrCodeView() -> some View {
+        return router.makeMyQrCodeView(uid: self.profile!.id)
     }
 }

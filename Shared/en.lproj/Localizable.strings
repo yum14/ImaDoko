@@ -29,3 +29,5 @@
 "CreateButton" = "Create";
 "CencelButton" = "Cancel";
 "OKButton" = "OK";
+"QRCodeLoading" = "Loading...";
+"QRCodeDescription" = "Your friends can scan this QR code to add you to your friends.";
