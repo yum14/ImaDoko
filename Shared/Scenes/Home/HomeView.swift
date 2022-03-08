@@ -38,7 +38,7 @@ struct HomeView: View {
 
                 Section {
                     Button {
-
+                        self.presenter.onAddFriendButtonTap()
                     } label: {
                         HStack {
                             Spacer()
@@ -72,11 +72,17 @@ struct HomeView: View {
                 }
             }
         }
-        .sheet(isPresented: self.$presenter.showQrCodeSheet) {
+        .sheet(isPresented: self.$presenter.showingQrCodeSheet) {
             NavigationView {
                 self.presenter.makeAboutMyQrCodeView()
             }
         }
+        .fullScreenCover(isPresented: self.$presenter.showingQrCodeScannerSheet) {
+            NavigationView {
+                self.presenter.makeAboutTeamQrCodeScannerView()
+            }
+        }
+        
         .onAppear {
             self.presenter.addProfileListener()
         }

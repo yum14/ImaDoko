@@ -46,7 +46,7 @@ class QrCodeManager {
         return image
     }
     
-    func checkMyAppQrCode(code: String) -> String? {
+    func getMyAppQrCode(code: String) -> String? {
         if code.isEmpty {
             return nil
         }

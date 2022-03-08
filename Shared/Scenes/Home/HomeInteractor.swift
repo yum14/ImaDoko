@@ -11,6 +11,7 @@ protocol HomeUsecase {
     func updateNameOfProfile(id: String, name: String, completion: ((Error?) -> Void)?)
     func addProfileListener(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
     func removeProfileListener()
+    func updateFriendsOfProfile(id: String, friends: [String], completion: ((Error?) -> Void)?)
 }
 
 final class HomeInteractor {
@@ -33,6 +34,8 @@ extension HomeInteractor: HomeUsecase {
     func removeProfileListener() {
         self.profileStore.removeListener()
     }
+    
+    func updateFriendsOfProfile(id: String, friends: [String], completion: ((Error?) -> Void)?) {
+        self.profileStore.updateFriends(id: id, friends: friends, completion: completion)
+    }
 }
-
-

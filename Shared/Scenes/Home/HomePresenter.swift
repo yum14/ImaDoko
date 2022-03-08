@@ -13,7 +13,8 @@ final class HomePresenter: ObservableObject {
     @Published var friends: [Profile] = [Profile(name: "友だち１"),
                                          Profile(name: "友だち２"),
                                          Profile(name: "友だち３")]
-    @Published var showQrCodeSheet = false
+    @Published var showingQrCodeSheet = false
+    @Published var showingQrCodeScannerSheet = false
     
     private var profile: Profile? {
         didSet {
@@ -60,7 +61,11 @@ extension HomePresenter {
     }
     
     func onMyQrCodeButtonTap() {
-        self.showQrCodeSheet = true
+        self.showingQrCodeSheet = true
+    }
+    
+    func onAddFriendButtonTap() {
+        self.showingQrCodeScannerSheet = true
     }
     
     func addProfileListener() {
@@ -80,5 +85,38 @@ extension HomePresenter {
     
     func makeAboutMyQrCodeView() -> some View {
         return router.makeMyQrCodeView(uid: self.profile!.id)
+    }
+    
+    func makeAboutTeamQrCodeScannerView() -> some View {
+        return router.makeMyQrCodeScannerView(
+            onFound: { code in
+                self.showingQrCodeScannerSheet = false
+                
+                let qrCodeManager = QrCodeManager()
+                guard let uid = qrCodeManager.getMyAppQrCode(code: code) else {
+                    return
+                }
+                
+                guard let profile = self.profile else {
+                    return
+                }
+                
+                if profile.friends.contains(uid) {
+                    // TODO: すでに追加済である旨のバナー表示
+                    return
+                }
+                
+                var newFriends = profile.friends
+                newFriends.append(uid)
+                
+                self.interactor.updateFriendsOfProfile(id: profile.id, friends: newFriends) { error in
+                    if let error = error {
+                        print(error.localizedDescription)
+                        
+                        // TODO: 追加に失敗した旨のバナー表示
+                    }
+                }
+            },
+            onDismiss: { self.showingQrCodeScannerSheet = false })
     }
 }

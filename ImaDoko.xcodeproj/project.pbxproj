@@ -72,6 +72,11 @@
 		AAF8649D27D6475600AFA0E6 /* MyQrCodeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649C27D6475600AFA0E6 /* MyQrCodeView.swift */; };
 		AAF8649F27D6477700AFA0E6 /* MyQrCodePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649E27D6477700AFA0E6 /* MyQrCodePresenter.swift */; };
 		AAF864A127D6478400AFA0E6 /* MyQrCodeRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A027D6478400AFA0E6 /* MyQrCodeRouter.swift */; };
+		AAF864A627D78F3200AFA0E6 /* QrCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A527D78F3200AFA0E6 /* QrCodeScannerView.swift */; };
+		AAF864A827D78F7900AFA0E6 /* MyQrCodeScannerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A727D78F7900AFA0E6 /* MyQrCodeScannerView.swift */; };
+		AAF864AA27D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A927D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift */; };
+		AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864AB27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift */; };
+		AAF864AE27D790B700AFA0E6 /* ViewDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864AD27D790B700AFA0E6 /* ViewDismissButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,6 +155,11 @@
 		AAF8649C27D6475600AFA0E6 /* MyQrCodeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodeView.swift; sourceTree = "<group>"; };
 		AAF8649E27D6477700AFA0E6 /* MyQrCodePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodePresenter.swift; sourceTree = "<group>"; };
 		AAF864A027D6478400AFA0E6 /* MyQrCodeRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodeRouter.swift; sourceTree = "<group>"; };
+		AAF864A527D78F3200AFA0E6 /* QrCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QrCodeScannerView.swift; sourceTree = "<group>"; };
+		AAF864A727D78F7900AFA0E6 /* MyQrCodeScannerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodeScannerView.swift; sourceTree = "<group>"; };
+		AAF864A927D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodeScannerPresenter.swift; sourceTree = "<group>"; };
+		AAF864AB27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodeScannerRouter.swift; sourceTree = "<group>"; };
+		AAF864AD27D790B700AFA0E6 /* ViewDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDismissButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +300,7 @@
 				AA83DC4027AFC674008F2226 /* Message */,
 				AA83DC2D27AF9CF3008F2226 /* Home */,
 				AAF8649B27D6471800AFA0E6 /* MyQrCode */,
+				AAF864A227D78E0100AFA0E6 /* MyQrCodeScanner */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -350,6 +361,7 @@
 				AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */,
 				AA658F9727C1F1FC001D4E17 /* GoogleSignInButton.swift */,
 				AA658FA527C281E2001D4E17 /* AppleSignInButton.swift */,
+				AAF864AD27D790B700AFA0E6 /* ViewDismissButton.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -384,6 +396,17 @@
 				AAF864A027D6478400AFA0E6 /* MyQrCodeRouter.swift */,
 			);
 			path = MyQrCode;
+			sourceTree = "<group>";
+		};
+		AAF864A227D78E0100AFA0E6 /* MyQrCodeScanner */ = {
+			isa = PBXGroup;
+			children = (
+				AAF864A727D78F7900AFA0E6 /* MyQrCodeScannerView.swift */,
+				AAF864A527D78F3200AFA0E6 /* QrCodeScannerView.swift */,
+				AAF864A927D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift */,
+				AAF864AB27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift */,
+			);
+			path = MyQrCodeScanner;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -580,6 +603,7 @@
 				AAF8649F27D6477700AFA0E6 /* MyQrCodePresenter.swift in Sources */,
 				AA658FA627C281E2001D4E17 /* AppleSignInButton.swift in Sources */,
 				AA35879427CA4DDD00F51AEA /* ProfileStore.swift in Sources */,
+				AAF864A827D78F7900AFA0E6 /* MyQrCodeScannerView.swift in Sources */,
 				AAADEFE227B7BB5E00D81A52 /* AvatorMapAnnotation.swift in Sources */,
 				AA658F9427C13D69001D4E17 /* Authentication.swift in Sources */,
 				AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */,
@@ -590,16 +614,20 @@
 				AA83DC2A27AF9BC2008F2226 /* RootRouter.swift in Sources */,
 				AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */,
 				AA26A6AE27AF9424003D1F17 /* ContentView.swift in Sources */,
+				AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */,
 				AA83DC4627AFC6E7008F2226 /* MessageRouter.swift in Sources */,
 				AA83DC4927B018AC008F2226 /* UnrepliedMessageItem.swift in Sources */,
 				AA83DC2527AF980A008F2226 /* MapView.swift in Sources */,
 				AAF864A127D6478400AFA0E6 /* MyQrCodeRouter.swift in Sources */,
 				AAADEFDA27B78AE500D81A52 /* Message.swift in Sources */,
 				AA658F9827C1F1FC001D4E17 /* GoogleSignInButton.swift in Sources */,
+				AAF864A627D78F3200AFA0E6 /* QrCodeScannerView.swift in Sources */,
+				AAF864AA27D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift in Sources */,
 				AA658F9227C13CF6001D4E17 /* LoginPresenter.swift in Sources */,
 				AA83DC3127AF9D15008F2226 /* HomeRouter.swift in Sources */,
 				AA16D44227BA7ACB00804D0D /* FriendScrollView.swift in Sources */,
 				AA35879227CA49F800F51AEA /* NotificationToken.swift in Sources */,
+				AAF864AE27D790B700AFA0E6 /* ViewDismissButton.swift in Sources */,
 				AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */,
 				AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */,
 				AA658F9027C13CEB001D4E17 /* LoginView.swift in Sources */,

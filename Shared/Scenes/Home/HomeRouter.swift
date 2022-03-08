@@ -10,6 +10,7 @@ import SwiftUI
 
 protocol HomeWireframe {
     func makeMyQrCodeView(uid: String) -> AnyView
+    func makeMyQrCodeScannerView(onFound: ((String) -> Void)?, onDismiss: (() -> Void)?) -> AnyView
 }
 
 final class HomeRouter {
@@ -25,5 +26,9 @@ final class HomeRouter {
 extension HomeRouter: HomeWireframe {
     func makeMyQrCodeView(uid: String) -> AnyView {
         return MyQrCodeRouter.assembleModules(uid: uid)
+    }
+    
+    func makeMyQrCodeScannerView(onFound: ((String) -> Void)?, onDismiss: (() -> Void)?) -> AnyView {
+        return MyQrCodeScannerRouter.assembleModules(onFound: onFound, onDismiss: onDismiss)
     }
 }

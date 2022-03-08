@@ -103,4 +103,12 @@ final class ProfileStore {
         
         db!.collection(self.collectionName).document(id).updateData(["name": name], completion: completion)
     }
+    
+    func updateFriends(id: String, friends: [String], completion: ((Error?) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        db!.collection(self.collectionName).document(id).updateData(["friends": friends], completion: completion)
+    }
 }
