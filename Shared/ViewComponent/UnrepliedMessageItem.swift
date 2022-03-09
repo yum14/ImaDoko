@@ -10,12 +10,12 @@ import SwiftUI
 struct UnrepliedMessageItem: View {
     var from: String
     var createdAt: Date
-    var avatorImage: Data?
+    var avatarImage: Data?
     
     var body: some View {
         HStack {
             Group {
-                if let avatorImage = avatorImage, let uiImage = UIImage(data: avatorImage) {
+                if let avatarImage = avatarImage, let uiImage = UIImage(data: avatarImage) {
                     Image(uiImage: uiImage)
                         .resizable()
                 } else {

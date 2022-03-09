@@ -75,7 +75,7 @@ struct MapView: View {
                     annotationItems: self.presenter.pinItems
                 ) { item in
                     MapAnnotation(coordinate: item.coordinate) {
-                        AvatorMapAnnotation()
+                        AvatarMapAnnotation()
                             .offset(x: 0, y: -32)
                     }
                 }

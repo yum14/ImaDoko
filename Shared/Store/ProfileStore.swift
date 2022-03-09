@@ -79,7 +79,7 @@ final class ProfileStore {
         
         let profile = Profile(id: dic["id"] as! String,
                               name: dic["name"] as! String,
-                              avatorImage: dic["avator_image"] as? Data ?? nil,
+                              avatarImage: dic["avatar_image"] as? Data ?? nil,
                               friends: dic["friends"] as! [String],
                               createdAt: dic["created_at"] as? Timestamp ?? nil,
                               updatedAt: dic["updated_at"] as? Timestamp ?? nil)
@@ -110,5 +110,13 @@ final class ProfileStore {
         }
         
         db!.collection(self.collectionName).document(id).updateData(["friends": friends], completion: completion)
+    }
+    
+    func updateAvatarImage(id: String, imageData: Data, completion: ((Error?) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        db!.collection(self.collectionName).document(id).updateData(["avatar_image": imageData], completion: completion)
     }
 }

@@ -13,16 +13,37 @@ final class HomePresenter: ObservableObject {
     @Published var friends: [Profile] = [Profile(name: "友だち１"),
                                          Profile(name: "友だち２"),
                                          Profile(name: "友だち３")]
+    @Published var avatarImage: UIImage? {
+        didSet {
+            if let avatarImage = self.avatarImage {
+                onAvatarImageChanged(image: avatarImage)
+            }
+        }
+    }
     @Published var showingQrCodeSheet = false
     @Published var showingQrCodeScannerSheet = false
     
+    private var avatarInitialLoading = false
     private var profile: Profile? {
         didSet {
             guard let profile = self.profile else {
                 return
             }
             
-            self.accountName = profile.name
+            if self.accountName != profile.name {
+                self.accountName = profile.name
+            }
+            
+            if self.IsDifferentAvatarLastValue(newImageData: profile.avatarImage) {
+                if let avatarImage = profile.avatarImage {
+                    self.avatarImage = UIImage(data: avatarImage)
+                } else {
+                    self.avatarImage = nil
+                }
+            }
+            
+
+            
 //            self.friends = profile.friends
 //            
 //            profileを取った後にfriendsのProfileを取得するが、画像データがある以上何度も取りに行きたくない。
@@ -60,6 +81,23 @@ extension HomePresenter {
         }
     }
     
+    func onAvatarImageChanged(image: UIImage) {
+        if self.avatarInitialLoading {
+            self.avatarInitialLoading.toggle()
+            return
+        }
+        
+        guard let imageData = image.jpegData(compressionQuality: 0.1) else {
+            return
+        }
+        
+        self.interactor.updateAvatarImage(id: self.uid, imageData: imageData) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+    }
+    
     func onMyQrCodeButtonTap() {
         self.showingQrCodeSheet = true
     }
@@ -68,7 +106,9 @@ extension HomePresenter {
         self.showingQrCodeScannerSheet = true
     }
     
-    func addProfileListener() {
+    func onAppear() {
+        self.avatarInitialLoading = true
+        
         self.interactor.addProfileListener(id: self.uid) { result in
             switch result {
             case .success(let profile):
@@ -79,7 +119,7 @@ extension HomePresenter {
         }
     }
     
-    func removeProfileListener() {
+    func onDisappear() {
         self.interactor.removeProfileListener()
     }
     
@@ -118,5 +158,25 @@ extension HomePresenter {
                 }
             },
             onDismiss: { self.showingQrCodeScannerSheet = false })
+    }
+    
+    
+    private func IsDifferentAvatarLastValue(newImageData: Data?) -> Bool {
+        if let newImageData = newImageData {
+            // 比較のために一度Data型とする
+            let oldImageData = self.avatarImage?.jpegData(compressionQuality: 0.1)
+            
+            if oldImageData == nil {
+                return true
+            } else {
+                return newImageData != oldImageData
+            }
+        } else {
+            return self.avatarImage != nil
+        }
+    }
+    
+    private func IsDifferentAvatarLastValue(newImage: UIImage?) -> Bool {
+        return self.IsDifferentAvatarLastValue(newImageData: newImage?.jpegData(compressionQuality: 0.1))
     }
 }

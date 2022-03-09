@@ -1,5 +1,5 @@
 //
-//  AvatorMapAnnotation.swift
+//  AvatarMapAnnotation.swift
 //  ImaDoko (iOS)
 //
 //  Created by yum on 2022/02/12.
@@ -8,7 +8,7 @@
 import SwiftUI
 import MapKit
 
-struct AvatorMapAnnotation: View {
+struct AvatarMapAnnotation: View {
     var image: UIImage?
     
     var body: some View {
@@ -49,10 +49,10 @@ struct AvatorMapAnnotation: View {
     }
 }
 
-struct AvatorMapAnnotation_Previews: PreviewProvider {
+struct AvatarMapAnnotation_Previews: PreviewProvider {
     static var previews: some View {
         ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-            AvatorMapAnnotation()
+            AvatarMapAnnotation()
                 .environment(\.colorScheme, scheme)
         }
     }

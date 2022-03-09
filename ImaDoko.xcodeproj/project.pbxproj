@@ -60,7 +60,7 @@
 		AAADEFDC27B7907000D81A52 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDB27B7907000D81A52 /* Profile.swift */; };
 		AAADEFDE27B7920B00D81A52 /* FriendListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */; };
 		AAADEFE027B7B28700D81A52 /* PinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDF27B7B28700D81A52 /* PinItem.swift */; };
-		AAADEFE227B7BB5E00D81A52 /* AvatorMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFE127B7BB5E00D81A52 /* AvatorMapAnnotation.swift */; };
+		AAADEFE227B7BB5E00D81A52 /* AvatarMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFE127B7BB5E00D81A52 /* AvatarMapAnnotation.swift */; };
 		AACE5ED727BE8CE800295A47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */; };
 		AACE5ED827BE8CE800295A47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */; };
 		AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98827B7F75D007CD36D /* Triangle.swift */; };
@@ -77,6 +77,8 @@
 		AAF864AA27D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864A927D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift */; };
 		AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864AB27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift */; };
 		AAF864AE27D790B700AFA0E6 /* ViewDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864AD27D790B700AFA0E6 /* ViewDismissButton.swift */; };
+		AAF864B027D7A40A00AFA0E6 /* AvatarImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864AF27D7A40A00AFA0E6 /* AvatarImagePicker.swift */; };
+		AAF864B227D7A43800AFA0E6 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B127D7A43800AFA0E6 /* ImagePickerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -142,7 +144,7 @@
 		AAADEFDB27B7907000D81A52 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListItem.swift; sourceTree = "<group>"; };
 		AAADEFDF27B7B28700D81A52 /* PinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinItem.swift; sourceTree = "<group>"; };
-		AAADEFE127B7BB5E00D81A52 /* AvatorMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatorMapAnnotation.swift; sourceTree = "<group>"; };
+		AAADEFE127B7BB5E00D81A52 /* AvatarMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarMapAnnotation.swift; sourceTree = "<group>"; };
 		AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AACE5EE227BEA7A600295A47 /* ImaDoko--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ImaDoko--iOS--Info.plist"; sourceTree = "<group>"; };
 		AACE5EE327BEA7B800295A47 /* ImaDoko (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ImaDoko (iOS).entitlements"; sourceTree = "<group>"; };
@@ -160,6 +162,8 @@
 		AAF864A927D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodeScannerPresenter.swift; sourceTree = "<group>"; };
 		AAF864AB27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyQrCodeScannerRouter.swift; sourceTree = "<group>"; };
 		AAF864AD27D790B700AFA0E6 /* ViewDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDismissButton.swift; sourceTree = "<group>"; };
+		AAF864AF27D7A40A00AFA0E6 /* AvatarImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImagePicker.swift; sourceTree = "<group>"; };
+		AAF864B127D7A43800AFA0E6 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -352,7 +356,7 @@
 			children = (
 				AA83DC4827B018AC008F2226 /* UnrepliedMessageItem.swift */,
 				AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */,
-				AAADEFE127B7BB5E00D81A52 /* AvatorMapAnnotation.swift */,
+				AAADEFE127B7BB5E00D81A52 /* AvatarMapAnnotation.swift */,
 				AAE3F98827B7F75D007CD36D /* Triangle.swift */,
 				AAE3F98A27B80727007CD36D /* LocationButton.swift */,
 				AA9E99B127B915D7004B8272 /* MapOverlaySheet.swift */,
@@ -362,6 +366,8 @@
 				AA658F9727C1F1FC001D4E17 /* GoogleSignInButton.swift */,
 				AA658FA527C281E2001D4E17 /* AppleSignInButton.swift */,
 				AAF864AD27D790B700AFA0E6 /* ViewDismissButton.swift */,
+				AAF864AF27D7A40A00AFA0E6 /* AvatarImagePicker.swift */,
+				AAF864B127D7A43800AFA0E6 /* ImagePickerController.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -597,6 +603,7 @@
 				AAF8649427CD120F00AFA0E6 /* RootInteractor.swift in Sources */,
 				AA83DC4427AFC6DF008F2226 /* MessagePresenter.swift in Sources */,
 				AA83DC2827AF9B67008F2226 /* RootView.swift in Sources */,
+				AAF864B227D7A43800AFA0E6 /* ImagePickerController.swift in Sources */,
 				AAF8649A27D6465F00AFA0E6 /* QrCodeManager.swift in Sources */,
 				AA658FA827C286CE001D4E17 /* LoginRouter.swift in Sources */,
 				AAADEFE027B7B28700D81A52 /* PinItem.swift in Sources */,
@@ -604,7 +611,7 @@
 				AA658FA627C281E2001D4E17 /* AppleSignInButton.swift in Sources */,
 				AA35879427CA4DDD00F51AEA /* ProfileStore.swift in Sources */,
 				AAF864A827D78F7900AFA0E6 /* MyQrCodeScannerView.swift in Sources */,
-				AAADEFE227B7BB5E00D81A52 /* AvatorMapAnnotation.swift in Sources */,
+				AAADEFE227B7BB5E00D81A52 /* AvatarMapAnnotation.swift in Sources */,
 				AA658F9427C13D69001D4E17 /* Authentication.swift in Sources */,
 				AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */,
 				AA83DC2F27AF9D01008F2226 /* HomeView.swift in Sources */,
@@ -616,6 +623,7 @@
 				AA26A6AE27AF9424003D1F17 /* ContentView.swift in Sources */,
 				AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */,
 				AA83DC4627AFC6E7008F2226 /* MessageRouter.swift in Sources */,
+				AAF864B027D7A40A00AFA0E6 /* AvatarImagePicker.swift in Sources */,
 				AA83DC4927B018AC008F2226 /* UnrepliedMessageItem.swift in Sources */,
 				AA83DC2527AF980A008F2226 /* MapView.swift in Sources */,
 				AAF864A127D6478400AFA0E6 /* MyQrCodeRouter.swift in Sources */,

@@ -18,7 +18,8 @@ struct FriendScrollView: View {
                 ForEach(self.friends, id: \.self) { friend in
                     VStack {
                         ZStack(alignment: .bottom) {
-                            AvatorCircleImage(image: friend.avatorImage, radius: self.radius)
+                            let uiImage = friend.avatarImage != nil ? UIImage(data: friend.avatarImage!) : nil
+                            AvatarCircleImage(image: uiImage, radius: self.radius)
                             
                             if self.selectedList.contains(friend.id) {
                                 HStack {

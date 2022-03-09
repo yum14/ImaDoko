@@ -14,7 +14,7 @@ struct HomeView: View {
     var body: some View {
         VStack(spacing: 0) {
             VStack {
-                AvatorCircleImage(image: nil, radius: 120)
+                AvatarImagePicker(selectedImage: self.$presenter.avatarImage, radius: 120)
                 
                 TextField("AccountName", text: self.$presenter.accountName)
                     .multilineTextAlignment(.center)
@@ -29,7 +29,7 @@ struct HomeView: View {
                 Section {
                     List {
                         ForEach(self.presenter.friends, id: \.self) { friend in
-                            FriendListItem(name: friend.name, avatorImage: friend.avatorImage)
+                            FriendListItem(name: friend.name, avatarImage: friend.avatarImage)
                         }
                     }
                 } header: {
@@ -84,10 +84,10 @@ struct HomeView: View {
         }
         
         .onAppear {
-            self.presenter.addProfileListener()
+            self.presenter.onAppear()
         }
         .onDisappear {
-            self.presenter.removeProfileListener()
+            self.presenter.onDisappear()
         }
     }
 }

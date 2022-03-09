@@ -9,11 +9,11 @@ import SwiftUI
 
 struct FriendListItem: View {
     var name: String
-    var avatorImage: Data? = nil
+    var avatarImage: Data? = nil
     
     var body: some View {
         HStack {
-            AvatorCircleImage(image: nil, radius: 36)
+            AvatarCircleImage(image: nil, radius: 36)
             
             Text(self.name)
                 .frame(height: 36)
