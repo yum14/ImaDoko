@@ -10,14 +10,15 @@ import SwiftUI
 
 final class HomePresenter: ObservableObject {
     @Published var accountName = ""
-    @Published var friends: [Profile] = [Profile(name: "友だち１"),
-                                         Profile(name: "友だち２"),
-                                         Profile(name: "友だち３")]
+//    @Published var friends: [Profile] = [Profile(name: "友だち１"),
+//                                         Profile(name: "友だち２"),
+//                                         Profile(name: "友だち３")]
+    @Published var friendProfiles: [Profile] = []
+    @Published var friendImages: [String: Data] = [:]
+    
     @Published var avatarImage: UIImage? {
         didSet {
-            if let avatarImage = self.avatarImage {
-                onAvatarImageChanged(image: avatarImage)
-            }
+            onAvatarImageChanged(image: self.avatarImage)
         }
     }
     @Published var showingQrCodeSheet = false
@@ -33,26 +34,6 @@ final class HomePresenter: ObservableObject {
             if self.accountName != profile.name {
                 self.accountName = profile.name
             }
-            
-            if self.IsDifferentAvatarLastValue(newImageData: profile.avatarImage) {
-                if let avatarImage = profile.avatarImage {
-                    self.avatarImage = UIImage(data: avatarImage)
-                } else {
-                    self.avatarImage = nil
-                }
-            }
-            
-
-            
-//            self.friends = profile.friends
-//            
-//            profileを取った後にfriendsのProfileを取得するが、画像データがある以上何度も取りに行きたくない。
-//            よって、押さえているコード以外のものがあれば取りに行くようにする。
-//            全て取得するのは初回のみにしたい・・。
-//            どこでaddlistenerするか、どこで押さえておくか（RootViewでaddするかとか、EnvironmentObjectなどで押さえておくか、など。
-            
-//              RootViewで取得するようにして、EnvironmentObjectで取得することにする。
-//              Homeでfriendが追加や削除された場合、そのEnvironmentObjectのfuncで再取得を行うようにする。
         }
     }
     
@@ -81,9 +62,13 @@ extension HomePresenter {
         }
     }
     
-    func onAvatarImageChanged(image: UIImage) {
+    func onAvatarImageChanged(image: UIImage?) {
         if self.avatarInitialLoading {
             self.avatarInitialLoading.toggle()
+            return
+        }
+        
+        guard let image = image else {
             return
         }
         
@@ -91,7 +76,7 @@ extension HomePresenter {
             return
         }
         
-        self.interactor.updateAvatarImage(id: self.uid, imageData: imageData) { error in
+        self.interactor.setAvatarImage(AvatarImage(id: self.uid, data: imageData)) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -113,10 +98,70 @@ extension HomePresenter {
             switch result {
             case .success(let profile):
                 self.profile = profile
+
+                guard let profile = profile else {
+                    return
+                }
+                
+                // アバターイメージの取得
+                self.interactor.getAvatarImage(id: profile.id) { result in
+                    switch result {
+                    case .success(let avatarImage):
+                        if let avatarImage = avatarImage {
+                            self.avatarImage = UIImage(data: avatarImage.data)
+                        } else {
+                            self.avatarImage = nil
+                        }
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
+                
+                
+                if profile.friends.count == 0 {
+                    return
+                }
+                
+                // 友だちのprofile情報を取得
+                self.interactor.get(ids: profile.friends) { result in
+                    switch result {
+                    case .success(let profiles):
+                        
+                        self.friendProfiles = profiles ?? []
+                        self.friendImages = [:]
+                        
+                        if let profiles = profiles {
+                            
+                            // アバターイメージの取得
+                            for item in profiles {
+                                self.interactor.getAvatarImage(id: item.id) { result in
+                                    switch result {
+                                    case .success(let avatarImage):
+                                        
+                                        var newFriendImages = self.friendImages
+                                        newFriendImages[item.id] = nil
+                                        
+                                        if let avatarImage = avatarImage {
+                                            newFriendImages[item.id] = avatarImage.data
+                                        }
+                                        
+                                        self.friendImages = newFriendImages
+                                        
+                                    case .failure(let error):
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                            }
+                        }
+                        
+                    case .failure(let error):
+                        print(error.localizedDescription)
+                    }
+                }
             case .failure(let error):
                 print(error.localizedDescription)
-            }
-        }
+                return
+            }        }
     }
     
     func onDisappear() {
@@ -133,6 +178,12 @@ extension HomePresenter {
                 self.showingQrCodeScannerSheet = false
                 
                 let qrCodeManager = QrCodeManager()
+                
+                 // test用
+//                let testCode = "https://icu.yum14/ImaDoko/friends/Nyhy3JLqLqMgPA5bAF8NV49Yh4I3"
+//                guard let uid = qrCodeManager.getMyAppQrCode(code: testCode) else {
+//                    return
+//                }
                 guard let uid = qrCodeManager.getMyAppQrCode(code: code) else {
                     return
                 }
@@ -179,4 +230,10 @@ extension HomePresenter {
     private func IsDifferentAvatarLastValue(newImage: UIImage?) -> Bool {
         return self.IsDifferentAvatarLastValue(newImageData: newImage?.jpegData(compressionQuality: 0.1))
     }
+}
+
+struct FriendImage: Identifiable {
+    var id: String
+    var name: String
+    var avatarImage: Data?
 }

@@ -26,6 +26,8 @@ struct MapView: View {
                               Profile(name: "友だち４"),
                               Profile(name: "友だち５")]
     
+    var avatarImages: [String:Data] = [:]
+    
     //    var myOverlayContent: some View {
     //        VStack {
     //            RoundedRectangle(cornerRadius: 20)
@@ -95,7 +97,7 @@ struct MapView: View {
                 }
             }
         }
-        .dynamicOverlay(MapOverlaySheet(friends: self.friends, editable: self.$presenter.editable, onSendMessageButtonTap: {
+        .dynamicOverlay(MapOverlaySheet(friends: self.friends, avatarImages: self.avatarImages, editable: self.$presenter.editable, onSendMessageButtonTap: {
             withAnimation {
                 self.presenter.notch = .max
             }}))

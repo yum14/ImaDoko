@@ -66,6 +66,37 @@ final class ProfileStore {
         }
     }
     
+    func getDocuments(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        db!.collection(self.collectionName).whereField("id", in: ids).getDocuments { querySnapshot, error in
+            if let error = error {
+                completion?(Result.failure(error))
+                return
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                completion?(Result.success(nil))
+                return
+            }
+
+            var profiles: [Profile] = []
+            
+            for document in documents {
+                let data = self.map(documentSnapshot: document)
+                
+                if let data = data {
+                    profiles.append(data)
+                }
+            }
+            
+            completion?(Result.success(profiles))
+        }
+
+    }
+    
     private func map(documentSnapshot: DocumentSnapshot?) -> Profile? {
         guard let documentSnapshot = documentSnapshot, documentSnapshot.exists else {
             return nil
@@ -79,7 +110,6 @@ final class ProfileStore {
         
         let profile = Profile(id: dic["id"] as! String,
                               name: dic["name"] as! String,
-                              avatarImage: dic["avatar_image"] as? Data ?? nil,
                               friends: dic["friends"] as! [String],
                               createdAt: dic["created_at"] as? Timestamp ?? nil,
                               updatedAt: dic["updated_at"] as? Timestamp ?? nil)
@@ -110,13 +140,5 @@ final class ProfileStore {
         }
         
         db!.collection(self.collectionName).document(id).updateData(["friends": friends], completion: completion)
-    }
-    
-    func updateAvatarImage(id: String, imageData: Data, completion: ((Error?) -> Void)?) {
-        if self.db == nil {
-            self.initialize()
-        }
-        
-        db!.collection(self.collectionName).document(id).updateData(["avatar_image": imageData], completion: completion)
     }
 }

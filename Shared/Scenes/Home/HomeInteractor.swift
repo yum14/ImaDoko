@@ -11,15 +11,19 @@ protocol HomeUsecase {
     func updateNameOfProfile(id: String, name: String, completion: ((Error?) -> Void)?)
     func addProfileListener(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
     func removeProfileListener()
+    func get(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
     func updateFriendsOfProfile(id: String, friends: [String], completion: ((Error?) -> Void)?)
-    func updateAvatarImage(id: String, imageData: Data, completion: ((Error?) -> Void)?)
+    func setAvatarImage(_ data: AvatarImage, completion: ((Error?) -> Void)?)
+    func getAvatarImage(id: String, completion: ((Result<AvatarImage?, Error>) -> Void)?)
 }
 
 final class HomeInteractor {
     private let profileStore: ProfileStore
+    private let avatarImageStore: AvatarImageStore
     
     init() {
         self.profileStore = ProfileStore()
+        self.avatarImageStore = AvatarImageStore()
     }
 }
 
@@ -36,11 +40,19 @@ extension HomeInteractor: HomeUsecase {
         self.profileStore.removeListener()
     }
     
+    func get(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?) {
+        self.profileStore.getDocuments(ids: ids, completion: completion)
+    }
+    
     func updateFriendsOfProfile(id: String, friends: [String], completion: ((Error?) -> Void)?) {
         self.profileStore.updateFriends(id: id, friends: friends, completion: completion)
     }
     
-    func updateAvatarImage(id: String, imageData: Data, completion: ((Error?) -> Void)?) {
-        self.profileStore.updateAvatarImage(id: id, imageData: imageData, completion: completion)
+    func setAvatarImage(_ data: AvatarImage, completion: ((Error?) -> Void)?) {
+        self.avatarImageStore.setData(data, completion: completion)
+    }
+    
+    func getAvatarImage(id: String, completion: ((Result<AvatarImage?, Error>) -> Void)?) {
+        self.avatarImageStore.getDocument(id: id, completion: completion)
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct MapOverlaySheet: View {
     
     var friends: [Profile] = []
+    var avatarImages: [String:Data] = [:]
     @Binding var editable: Bool
     var onSendMessageButtonTap: (() -> Void)?
     let bounds = UIScreen.main.bounds
@@ -30,7 +31,7 @@ struct MapOverlaySheet: View {
                     .frame(width: 320, height: 32)
                 
                 
-                FriendScrollView(friends: self.friends, selectedList: self.$selectedFriends)
+                FriendScrollView(friends: self.friends, avatarImages: self.avatarImages, selectedList: self.$selectedFriends)
                     .padding()
                 
                 HStack(spacing: 0) {

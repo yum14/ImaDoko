@@ -79,6 +79,9 @@
 		AAF864AE27D790B700AFA0E6 /* ViewDismissButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864AD27D790B700AFA0E6 /* ViewDismissButton.swift */; };
 		AAF864B027D7A40A00AFA0E6 /* AvatarImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864AF27D7A40A00AFA0E6 /* AvatarImagePicker.swift */; };
 		AAF864B227D7A43800AFA0E6 /* ImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B127D7A43800AFA0E6 /* ImagePickerController.swift */; };
+		AAF864B427DBA81800AFA0E6 /* AvatarImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B327DBA81800AFA0E6 /* AvatarImageCache.swift */; };
+		AAF864B827DBB22100AFA0E6 /* AvatarImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */; };
+		AAF864BA27DBB34500AFA0E6 /* AvatarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -164,6 +167,9 @@
 		AAF864AD27D790B700AFA0E6 /* ViewDismissButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewDismissButton.swift; sourceTree = "<group>"; };
 		AAF864AF27D7A40A00AFA0E6 /* AvatarImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImagePicker.swift; sourceTree = "<group>"; };
 		AAF864B127D7A43800AFA0E6 /* ImagePickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerController.swift; sourceTree = "<group>"; };
+		AAF864B327DBA81800AFA0E6 /* AvatarImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageCache.swift; sourceTree = "<group>"; };
+		AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageStore.swift; sourceTree = "<group>"; };
+		AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -281,6 +287,8 @@
 			children = (
 				AA35879327CA4DDD00F51AEA /* ProfileStore.swift */,
 				AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */,
+				AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */,
+				AAF864B327DBA81800AFA0E6 /* AvatarImageCache.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -390,6 +398,7 @@
 				AA658F9327C13D69001D4E17 /* Authentication.swift */,
 				AA35879127CA49F800F51AEA /* NotificationToken.swift */,
 				AA35879B27CBC33500F51AEA /* AppDelegate.swift */,
+				AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -612,6 +621,7 @@
 				AA35879427CA4DDD00F51AEA /* ProfileStore.swift in Sources */,
 				AAF864A827D78F7900AFA0E6 /* MyQrCodeScannerView.swift in Sources */,
 				AAADEFE227B7BB5E00D81A52 /* AvatarMapAnnotation.swift in Sources */,
+				AAF864BA27DBB34500AFA0E6 /* AvatarImage.swift in Sources */,
 				AA658F9427C13D69001D4E17 /* Authentication.swift in Sources */,
 				AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */,
 				AA83DC2F27AF9D01008F2226 /* HomeView.swift in Sources */,
@@ -624,6 +634,7 @@
 				AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */,
 				AA83DC4627AFC6E7008F2226 /* MessageRouter.swift in Sources */,
 				AAF864B027D7A40A00AFA0E6 /* AvatarImagePicker.swift in Sources */,
+				AAF864B827DBB22100AFA0E6 /* AvatarImageStore.swift in Sources */,
 				AA83DC4927B018AC008F2226 /* UnrepliedMessageItem.swift in Sources */,
 				AA83DC2527AF980A008F2226 /* MapView.swift in Sources */,
 				AAF864A127D6478400AFA0E6 /* MyQrCodeRouter.swift in Sources */,
@@ -645,6 +656,7 @@
 				AA26A6AC27AF9424003D1F17 /* ImaDokoApp.swift in Sources */,
 				AAADEFDC27B7907000D81A52 /* Profile.swift in Sources */,
 				AA83DC4C27B019ED008F2226 /* DateUtility.swift in Sources */,
+				AAF864B427DBA81800AFA0E6 /* AvatarImageCache.swift in Sources */,
 				AA83DC2C27AF9C50008F2226 /* MapRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

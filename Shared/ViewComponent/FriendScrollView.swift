@@ -9,6 +9,7 @@ import SwiftUI
 
 struct FriendScrollView: View {
     var friends: [Profile] = []
+    var avatarImages: [String:Data] = [:]
     @Binding var selectedList: [String]
     var radius: CGFloat = 68
     
@@ -18,9 +19,10 @@ struct FriendScrollView: View {
                 ForEach(self.friends, id: \.self) { friend in
                     VStack {
                         ZStack(alignment: .bottom) {
-                            let uiImage = friend.avatarImage != nil ? UIImage(data: friend.avatarImage!) : nil
+                            let data = self.avatarImages[friend.id]
+                            let uiImage = data != nil ? UIImage(data: data!) : nil
                             AvatarCircleImage(image: uiImage, radius: self.radius)
-                            
+
                             if self.selectedList.contains(friend.id) {
                                 HStack {
                                     Spacer()
