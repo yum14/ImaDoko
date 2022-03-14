@@ -12,6 +12,7 @@ final class ProfileStore {
     private var db: Firestore?
     private let collectionName = "profiles"
     private var listener: ListenerRegistration?
+    private let cache = ProfileCache.shared
     
     init() {}
     
@@ -47,9 +48,17 @@ final class ProfileStore {
         self.listener?.remove()
     }
     
-    func getDocument(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
+    func getDocument(id: String, noCache: Bool = false, completion: ((Result<Profile?, Error>) -> Void)?) {
         if self.db == nil {
             self.initialize()
+        }
+        
+        if !noCache {
+            let profileCache = cache.get(forKey: id)
+            if let profileCache = profileCache {
+                completion?(Result<Profile?, Error> { profileCache })
+                return
+            }
         }
         
         db!.collection(self.collectionName).document(id).getDocument { (documentSnapshot, error) in
@@ -59,19 +68,44 @@ final class ProfileStore {
                     throw error
                 }
                 
-                return self.map(documentSnapshot: documentSnapshot)
+                let profile = self.map(documentSnapshot: documentSnapshot)
+                
+                self.cache.set(profile, forKey: id)
+                return profile
             }
             
             completion?(result)
         }
     }
     
-    func getDocuments(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?) {
+    func getDocuments(ids: [String], noCache: Bool = false, completion: ((Result<[Profile]?, Error>) -> Void)?) {
         if self.db == nil {
             self.initialize()
         }
         
-        db!.collection(self.collectionName).whereField("id", in: ids).getDocuments { querySnapshot, error in
+        var profiles: [Profile] = []
+        var noCacheIds: [String] = []
+        
+        if !noCache {
+            for id in ids {
+                let profileCache = cache.get(forKey: id)
+                
+                if let profileCache = profileCache {
+                    profiles.append(profileCache)
+                } else {
+                    noCacheIds.append(id)
+                }
+            }
+        } else {
+            noCacheIds = ids
+        }
+        
+        if noCacheIds.count == 0 {
+            completion?(Result<[Profile]?, Error> { profiles.count > 0 ? profiles : nil })
+            return
+        }
+        
+        db!.collection(self.collectionName).whereField("id", in: noCacheIds).getDocuments { querySnapshot, error in
             if let error = error {
                 completion?(Result.failure(error))
                 return
@@ -82,10 +116,9 @@ final class ProfileStore {
                 return
             }
 
-            var profiles: [Profile] = []
-            
             for document in documents {
                 let data = self.map(documentSnapshot: document)
+                self.cache.set(data, forKey: document.documentID)
                 
                 if let data = data {
                     profiles.append(data)

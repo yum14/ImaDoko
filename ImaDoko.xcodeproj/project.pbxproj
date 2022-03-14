@@ -82,6 +82,7 @@
 		AAF864B427DBA81800AFA0E6 /* AvatarImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B327DBA81800AFA0E6 /* AvatarImageCache.swift */; };
 		AAF864B827DBB22100AFA0E6 /* AvatarImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */; };
 		AAF864BA27DBB34500AFA0E6 /* AvatarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */; };
+		AAF864BC27DD192700AFA0E6 /* ProfileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864BB27DD192700AFA0E6 /* ProfileCache.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -170,6 +171,7 @@
 		AAF864B327DBA81800AFA0E6 /* AvatarImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageCache.swift; sourceTree = "<group>"; };
 		AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageStore.swift; sourceTree = "<group>"; };
 		AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImage.swift; sourceTree = "<group>"; };
+		AAF864BB27DD192700AFA0E6 /* ProfileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCache.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -289,6 +291,7 @@
 				AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */,
 				AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */,
 				AAF864B327DBA81800AFA0E6 /* AvatarImageCache.swift */,
+				AAF864BB27DD192700AFA0E6 /* ProfileCache.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -605,6 +608,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF864BC27DD192700AFA0E6 /* ProfileCache.swift in Sources */,
 				AA83DC4227AFC6D2008F2226 /* MessageView.swift in Sources */,
 				AAADEFDE27B7920B00D81A52 /* FriendListItem.swift in Sources */,
 				AA83DC3527AF9F1D008F2226 /* RootPresenter.swift in Sources */,

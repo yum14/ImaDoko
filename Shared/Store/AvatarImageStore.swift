@@ -47,9 +47,7 @@ final class AvatarImageStore {
                     
                     let image = self.map(documentSnapshot: documentSnapshot)
                     
-                    if let image = image {
-                        self.cache.set(image.data, forKey: id)
-                    }
+                    self.cache.set(image?.data, forKey: id)
                     return image
                 }
                 
