@@ -7,7 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AA16D44227BA7ACB00804D0D /* FriendScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44127BA7ACB00804D0D /* FriendScrollView.swift */; };
+		AA07D9EC27E0ACC1006D4598 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9EB27E0ACC1006D4598 /* Avatar.swift */; };
+		AA16D44227BA7ACB00804D0D /* FriendHScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */; };
 		AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */; };
 		AA26A69D27AF9424003D1F17 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69C27AF9424003D1F17 /* Tests_iOS.swift */; };
 		AA26A69F27AF9424003D1F17 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69E27AF9424003D1F17 /* Tests_iOSLaunchTests.swift */; };
@@ -83,6 +84,7 @@
 		AAF864B827DBB22100AFA0E6 /* AvatarImageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */; };
 		AAF864BA27DBB34500AFA0E6 /* AvatarImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */; };
 		AAF864BC27DD192700AFA0E6 /* ProfileCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864BB27DD192700AFA0E6 /* ProfileCache.swift */; };
+		AAF864BE27DF882C00AFA0E6 /* MapInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF864BD27DF882C00AFA0E6 /* MapInteractor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -103,7 +105,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		AA16D44127BA7ACB00804D0D /* FriendScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendScrollView.swift; sourceTree = "<group>"; };
+		AA07D9EB27E0ACC1006D4598 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendHScrollView.swift; sourceTree = "<group>"; };
 		AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatorCircleImage.swift; sourceTree = "<group>"; };
 		AA26A68427AF9423003D1F17 /* ImaDokoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImaDokoApp.swift; sourceTree = "<group>"; };
 		AA26A68527AF9423003D1F17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -172,6 +175,7 @@
 		AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImageStore.swift; sourceTree = "<group>"; };
 		AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarImage.swift; sourceTree = "<group>"; };
 		AAF864BB27DD192700AFA0E6 /* ProfileCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCache.swift; sourceTree = "<group>"; };
+		AAF864BD27DF882C00AFA0E6 /* MapInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapInteractor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,6 +329,7 @@
 			children = (
 				AA83DC2427AF980A008F2226 /* MapView.swift */,
 				AA83DC3627AF9F28008F2226 /* MapPresenter.swift */,
+				AAF864BD27DF882C00AFA0E6 /* MapInteractor.swift */,
 				AA83DC2B27AF9C50008F2226 /* MapRouter.swift */,
 			);
 			path = Map;
@@ -371,7 +376,7 @@
 				AAE3F98827B7F75D007CD36D /* Triangle.swift */,
 				AAE3F98A27B80727007CD36D /* LocationButton.swift */,
 				AA9E99B127B915D7004B8272 /* MapOverlaySheet.swift */,
-				AA16D44127BA7ACB00804D0D /* FriendScrollView.swift */,
+				AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */,
 				AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */,
 				AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */,
 				AA658F9727C1F1FC001D4E17 /* GoogleSignInButton.swift */,
@@ -402,6 +407,7 @@
 				AA35879127CA49F800F51AEA /* NotificationToken.swift */,
 				AA35879B27CBC33500F51AEA /* AppDelegate.swift */,
 				AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */,
+				AA07D9EB27E0ACC1006D4598 /* Avatar.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -636,6 +642,7 @@
 				AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */,
 				AA26A6AE27AF9424003D1F17 /* ContentView.swift in Sources */,
 				AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */,
+				AAF864BE27DF882C00AFA0E6 /* MapInteractor.swift in Sources */,
 				AA83DC4627AFC6E7008F2226 /* MessageRouter.swift in Sources */,
 				AAF864B027D7A40A00AFA0E6 /* AvatarImagePicker.swift in Sources */,
 				AAF864B827DBB22100AFA0E6 /* AvatarImageStore.swift in Sources */,
@@ -648,11 +655,12 @@
 				AAF864AA27D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift in Sources */,
 				AA658F9227C13CF6001D4E17 /* LoginPresenter.swift in Sources */,
 				AA83DC3127AF9D15008F2226 /* HomeRouter.swift in Sources */,
-				AA16D44227BA7ACB00804D0D /* FriendScrollView.swift in Sources */,
+				AA16D44227BA7ACB00804D0D /* FriendHScrollView.swift in Sources */,
 				AA35879227CA49F800F51AEA /* NotificationToken.swift in Sources */,
 				AAF864AE27D790B700AFA0E6 /* ViewDismissButton.swift in Sources */,
 				AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */,
 				AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */,
+				AA07D9EC27E0ACC1006D4598 /* Avatar.swift in Sources */,
 				AA658F9027C13CEB001D4E17 /* LoginView.swift in Sources */,
 				AAF8649D27D6475600AFA0E6 /* MyQrCodeView.swift in Sources */,
 				AAF8649627CE5C2900AFA0E6 /* HomeInteractor.swift in Sources */,

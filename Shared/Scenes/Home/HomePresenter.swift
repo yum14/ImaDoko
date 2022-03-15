@@ -10,11 +10,20 @@ import SwiftUI
 
 final class HomePresenter: ObservableObject {
     @Published var accountName = ""
-//    @Published var friends: [Profile] = [Profile(name: "友だち１"),
-//                                         Profile(name: "友だち２"),
-//                                         Profile(name: "友だち３")]
-    @Published var friendProfiles: [Profile] = []
-    @Published var friendImages: [String: Data] = [:]
+    
+    @Published var friends: [Avatar] = []
+    private var friendProfiles: [Profile] = [] {
+        didSet {
+            let newFriends = self.friendProfiles.map { Avatar(id: $0.id, name: $0.name, avatarImageData: self.friendImages[$0.id]) }
+            self.friends = newFriends
+        }
+    }
+    private var friendImages: [String: Data] = [:] {
+        didSet {
+            let newFriends = self.friendProfiles.map { Avatar(id: $0.id, name: $0.name, avatarImageData: self.friendImages[$0.id]) }
+            self.friends = newFriends
+        }
+    }
     
     @Published var avatarImage: UIImage? {
         didSet {
@@ -123,7 +132,7 @@ extension HomePresenter {
                 }
                 
                 // 友だちのprofile情報を取得
-                self.interactor.get(ids: profile.friends) { result in
+                self.interactor.getProfiles(ids: profile.friends) { result in
                     switch result {
                     case .success(let profiles):
                         
@@ -161,7 +170,8 @@ extension HomePresenter {
             case .failure(let error):
                 print(error.localizedDescription)
                 return
-            }        }
+            }
+        }
     }
     
     func onDisappear() {

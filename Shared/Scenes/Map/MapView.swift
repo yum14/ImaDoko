@@ -20,11 +20,11 @@ struct MapView: View {
         center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088),
         span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
     
-    var friends: [Profile] = [Profile(name: "友だち１１１"),
-                              Profile(name: "友だち２"),
-                              Profile(name: "友だち３"),
-                              Profile(name: "友だち４"),
-                              Profile(name: "友だち５")]
+//    var friends: [Profile] = [Profile(name: "友だち１１１"),
+//                              Profile(name: "友だち２"),
+//                              Profile(name: "友だち３"),
+//                              Profile(name: "友だち４"),
+//                              Profile(name: "友だち５")]
     
     var avatarImages: [String:Data] = [:]
     
@@ -97,22 +97,23 @@ struct MapView: View {
                 }
             }
         }
-        .dynamicOverlay(MapOverlaySheet(friends: self.friends, avatarImages: self.avatarImages, editable: self.$presenter.editable, onSendMessageButtonTap: {
+        .dynamicOverlay(MapOverlaySheet(friends: self.presenter.friends, editable: self.$presenter.editable, onSendMessageButtonTap: {
             withAnimation {
                 self.presenter.notch = .max
             }}))
         .dynamicOverlayBehavior(myOverlayBehavior)
         .ignoresSafeArea(edges: [.top, .trailing, .leading])
-        
-        //        .dynamicOverlay(myOverlayContent)
-        //        .dynamicOverlayBehavior(myOverlayBehavior)
+        .onAppear {
+            self.presenter.onAppear()
+        }
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static var previews: some View {
+        let interactor = MapInteractor()
         let router = MapRouter()
-        let presenter = MapPresenter(router: router, uid: "")
+        let presenter = MapPresenter(interactor: interactor, router: router, uid: "")
         presenter.pinItems = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
         
         return ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in

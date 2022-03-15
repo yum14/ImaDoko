@@ -11,7 +11,7 @@ protocol HomeUsecase {
     func updateNameOfProfile(id: String, name: String, completion: ((Error?) -> Void)?)
     func addProfileListener(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
     func removeProfileListener()
-    func get(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
+    func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
     func updateFriendsOfProfile(id: String, friends: [String], completion: ((Error?) -> Void)?)
     func setAvatarImage(_ data: AvatarImage, completion: ((Error?) -> Void)?)
     func getAvatarImage(id: String, completion: ((Result<AvatarImage?, Error>) -> Void)?)
@@ -40,7 +40,7 @@ extension HomeInteractor: HomeUsecase {
         self.profileStore.removeListener()
     }
     
-    func get(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?) {
+    func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?) {
         self.profileStore.getDocuments(ids: ids, completion: completion)
     }
     

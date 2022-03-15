@@ -28,11 +28,8 @@ struct HomeView: View {
             Form {
                 Section {
                     List {
-                        ForEach(self.presenter.friendProfiles, id: \.self) { profile in
-                            let avatarImageData = self.presenter.friendImages[profile.id]
-                            let avatarImage = avatarImageData != nil ? UIImage(data: avatarImageData!) : nil
-                            
-                            FriendListItem(name: profile.name, avatarImage: avatarImage)
+                        ForEach(self.presenter.friends, id: \.self) { friend in
+                            FriendListItem(name: friend.name, avatarImage: friend.getAvatarImageFromImageData())
                         }
                     }
                 } header: {
@@ -103,8 +100,8 @@ struct HomeView_Previews: PreviewProvider {
         let router = HomeRouter()
         let presenter = HomePresenter(interactor: interactor, router: router, uid: "")
         presenter.accountName = "マイアカウント"
-        presenter.friendProfiles = [Profile(name: "友だち１"),
-                                    Profile(name: "友だち２")]
+        presenter.friends = [Avatar(id: "1", name: "友だち１"),
+                             Avatar(id: "2", name: "友だち２")]
         
         return ForEach(["ja_JP", "en_US"], id: \.self) { id in
             ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in

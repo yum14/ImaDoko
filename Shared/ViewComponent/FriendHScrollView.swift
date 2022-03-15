@@ -1,5 +1,5 @@
 //
-//  FriendScrollView.swift
+//  FriendHScrollView.swift
 //  ImaDoko (iOS)
 //
 //  Created by yum on 2022/02/14.
@@ -7,9 +7,8 @@
 
 import SwiftUI
 
-struct FriendScrollView: View {
-    var friends: [Profile] = []
-    var avatarImages: [String:Data] = [:]
+struct FriendHScrollView: View {
+    var friends: [Avatar] = []
     @Binding var selectedList: [String]
     var radius: CGFloat = 68
     
@@ -19,8 +18,7 @@ struct FriendScrollView: View {
                 ForEach(self.friends, id: \.self) { friend in
                     VStack {
                         ZStack(alignment: .bottom) {
-                            let data = self.avatarImages[friend.id]
-                            let uiImage = data != nil ? UIImage(data: data!) : nil
+                            let uiImage = friend.avatarImageData != nil ? UIImage(data: friend.avatarImageData!) : nil
                             AvatarCircleImage(image: uiImage, radius: self.radius)
 
                             if self.selectedList.contains(friend.id) {
@@ -66,18 +64,14 @@ struct SelectedFriend {
     var selected: Bool
 }
 
-
-struct FriendScrollView_Previews: PreviewProvider {
+struct FriendHScrollView_Previews: PreviewProvider {
     static var previews: some View {
-        let friends = [Profile(name: "友だち１aaaaa"),
-                       Profile(name: "友だち２あ"),
-                       Profile(name: "友だち３"),
-                       Profile(name: "友だち４"),
-                       Profile(name: "友だち５"),
-                       Profile(name: "友だち６")]
-        
+        let friends = [Avatar(id: "a", name: "友だち１aaaaa"),
+                       Avatar(id: "b", name: "友だち２"),
+                       Avatar(id: "c", name: "友だち３")]
+            
         ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-            FriendScrollView(friends: friends, selectedList: .constant([]))
+            FriendHScrollView(friends: friends, selectedList: .constant([]))
                 .environment(\.colorScheme, scheme)
         }
     }

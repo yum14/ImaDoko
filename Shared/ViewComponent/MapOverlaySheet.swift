@@ -9,8 +9,10 @@ import SwiftUI
 
 struct MapOverlaySheet: View {
     
-    var friends: [Profile] = []
-    var avatarImages: [String:Data] = [:]
+//    var friends: [Profile] = []
+//    var avatarImages: [String:Data] = [:]
+    var friends: [Avatar] = []
+    
     @Binding var editable: Bool
     var onSendMessageButtonTap: (() -> Void)?
     let bounds = UIScreen.main.bounds
@@ -30,8 +32,7 @@ struct MapOverlaySheet: View {
                     .fontWeight(.bold)
                     .frame(width: 320, height: 32)
                 
-                
-                FriendScrollView(friends: self.friends, avatarImages: self.avatarImages, selectedList: self.$selectedFriends)
+                FriendHScrollView(friends: self.friends, selectedList: self.$selectedFriends)
                     .padding()
                 
                 HStack(spacing: 0) {
@@ -100,12 +101,12 @@ struct MapOverlaySheet: View {
 
 struct MapOverlaySheet_Previews: PreviewProvider {
     static var previews: some View {
-        let friends = [Profile(name: "友だち１"),
-                       Profile(name: "友だち２"),
-                       Profile(name: "友だち３"),
-                       Profile(name: "友だち４"),
-                       Profile(name: "友だち５"),
-                       Profile(name: "友だち６")]
+        let friends = [Avatar(id: "1", name: "友だち１"),
+                       Avatar(id: "2a", name: "友だち２"),
+                       Avatar(id: "3", name: "友だち３"),
+                       Avatar(id: "4", name: "友だち４"),
+                       Avatar(id: "5", name: "友だち５"),
+                       Avatar(id: "6", name: "友だち６")]
         
         ForEach([true, false], id: \.self) { editable in
             ForEach(["ja_JP", "en_US"], id: \.self) { id in

@@ -34,7 +34,7 @@ final class AvatarImageCache {
                 return nil
             }
             
-            if target.limit >= .now {
+            if target.limit < .now {
                 if let index = self.cache.firstIndex(where: { $0.id == key }) {
                     self.cache.remove(at: index)
                 }
