@@ -9,7 +9,7 @@ import SwiftUI
 
 struct FriendHScrollView: View {
     var friends: [Avatar] = []
-    @Binding var selectedList: [String]
+    @Binding var selectedIds: [String]
     var radius: CGFloat = 68
     
     var body: some View {
@@ -21,7 +21,7 @@ struct FriendHScrollView: View {
                             let uiImage = friend.avatarImageData != nil ? UIImage(data: friend.avatarImageData!) : nil
                             AvatarCircleImage(image: uiImage, radius: self.radius)
 
-                            if self.selectedList.contains(friend.id) {
+                            if self.selectedIds.contains(friend.id) {
                                 HStack {
                                     Spacer()
                                     CheckCircleImage()
@@ -37,7 +37,7 @@ struct FriendHScrollView: View {
                     .padding(.horizontal, 2)
                     .onTapGesture {
                         
-                        var newList: [String] = self.selectedList
+                        var newList: [String] = self.selectedIds
                         
                         let index = newList.firstIndex(where: { $0 == friend.id })
                         
@@ -50,7 +50,7 @@ struct FriendHScrollView: View {
                         let newListWithIndex = newList.enumerated().map( { ($0.element, $0.offset) })
                         
                         // friendsの並び順に合わせてソートする
-                        self.selectedList = newListWithIndex.sorted(by: { $0.1 < $1.1 }).map { $0.0 }
+                        self.selectedIds = newListWithIndex.sorted(by: { $0.1 < $1.1 }).map { $0.0 }
                     }
                 }
                 
@@ -71,7 +71,7 @@ struct FriendHScrollView_Previews: PreviewProvider {
                        Avatar(id: "c", name: "友だち３")]
             
         ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-            FriendHScrollView(friends: friends, selectedList: .constant([]))
+            FriendHScrollView(friends: friends, selectedIds: .constant(["a"]))
                 .environment(\.colorScheme, scheme)
         }
     }

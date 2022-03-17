@@ -31,6 +31,7 @@ final class MapPresenter: ObservableObject {
         }
     }
     @Published var editable = false
+    @Published var selectedFriendIds: [String] = []
     
     private var profile: Profile?
     private let interactor: MapUsecase
@@ -101,6 +102,28 @@ extension MapPresenter {
                 return
             }
         }
+    }
+}
+
+extension MapPresenter {
+    func onImakokoButtonTap() {
+        guard let profile = self.profile else {
+            return
+        }
+        
+        if !(self.selectedFriendIds.count > 0) {
+            return
+        }
+        
+        // TODO: 現在地取得後に設定する
+        let newData = ImakokoNotification(ownerId: profile.id, ownerName: profile.name, latitude: 37.3351, longitude: -122.0088, to: self.selectedFriendIds)
+        
+        self.interactor.setImakokoNotification(newData) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
     }
 }
 

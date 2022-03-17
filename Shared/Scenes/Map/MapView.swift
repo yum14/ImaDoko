@@ -26,8 +26,6 @@ struct MapView: View {
 //                              Profile(name: "友だち４"),
 //                              Profile(name: "友だち５")]
     
-    var avatarImages: [String:Data] = [:]
-    
     //    var myOverlayContent: some View {
     //        VStack {
     //            RoundedRectangle(cornerRadius: 20)
@@ -97,10 +95,15 @@ struct MapView: View {
                 }
             }
         }
-        .dynamicOverlay(MapOverlaySheet(friends: self.presenter.friends, editable: self.$presenter.editable, onSendMessageButtonTap: {
-            withAnimation {
-                self.presenter.notch = .max
-            }}))
+        .dynamicOverlay(
+            MapOverlaySheet(friends: self.presenter.friends,
+                            editable: self.$presenter.editable,
+                            selectedIds: self.$presenter.selectedFriendIds,
+                            onSendMessageButtonTap: {
+                                withAnimation {
+                                    self.presenter.notch = .max
+                                }},
+                            onImakokoButtonTap: self.presenter.onImakokoButtonTap))
         .dynamicOverlayBehavior(myOverlayBehavior)
         .ignoresSafeArea(edges: [.top, .trailing, .leading])
         .onAppear {
@@ -113,7 +116,7 @@ struct MapView_Previews: PreviewProvider {
     static var previews: some View {
         let interactor = MapInteractor()
         let router = MapRouter()
-        let presenter = MapPresenter(interactor: interactor, router: router, uid: "")
+        let presenter = MapPresenter(interactor: interactor, router: router, uid: "1")
         presenter.pinItems = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
         
         return ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		AA07D9EC27E0ACC1006D4598 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9EB27E0ACC1006D4598 /* Avatar.swift */; };
+		AA07D9EE27E0EBFA006D4598 /* ImakokoNotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9ED27E0EBFA006D4598 /* ImakokoNotificationStore.swift */; };
+		AA07D9F027E0EC69006D4598 /* ImakokoNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9EF27E0EC69006D4598 /* ImakokoNotification.swift */; };
 		AA16D44227BA7ACB00804D0D /* FriendHScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */; };
 		AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */; };
 		AA26A69D27AF9424003D1F17 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69C27AF9424003D1F17 /* Tests_iOS.swift */; };
@@ -106,6 +108,8 @@
 
 /* Begin PBXFileReference section */
 		AA07D9EB27E0ACC1006D4598 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
+		AA07D9ED27E0EBFA006D4598 /* ImakokoNotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImakokoNotificationStore.swift; sourceTree = "<group>"; };
+		AA07D9EF27E0EC69006D4598 /* ImakokoNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImakokoNotification.swift; sourceTree = "<group>"; };
 		AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendHScrollView.swift; sourceTree = "<group>"; };
 		AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatorCircleImage.swift; sourceTree = "<group>"; };
 		AA26A68427AF9423003D1F17 /* ImaDokoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImaDokoApp.swift; sourceTree = "<group>"; };
@@ -296,6 +300,7 @@
 				AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */,
 				AAF864B327DBA81800AFA0E6 /* AvatarImageCache.swift */,
 				AAF864BB27DD192700AFA0E6 /* ProfileCache.swift */,
+				AA07D9ED27E0EBFA006D4598 /* ImakokoNotificationStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -408,6 +413,7 @@
 				AA35879B27CBC33500F51AEA /* AppDelegate.swift */,
 				AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */,
 				AA07D9EB27E0ACC1006D4598 /* Avatar.swift */,
+				AA07D9EF27E0EC69006D4598 /* ImakokoNotification.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -640,6 +646,7 @@
 				AA35879627CA5CCB00F51AEA /* NotificationTokenStore.swift in Sources */,
 				AA83DC2A27AF9BC2008F2226 /* RootRouter.swift in Sources */,
 				AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */,
+				AA07D9EE27E0EBFA006D4598 /* ImakokoNotificationStore.swift in Sources */,
 				AA26A6AE27AF9424003D1F17 /* ContentView.swift in Sources */,
 				AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */,
 				AAF864BE27DF882C00AFA0E6 /* MapInteractor.swift in Sources */,
@@ -667,6 +674,7 @@
 				AA83DC3327AF9F12008F2226 /* HomePresenter.swift in Sources */,
 				AA26A6AC27AF9424003D1F17 /* ImaDokoApp.swift in Sources */,
 				AAADEFDC27B7907000D81A52 /* Profile.swift in Sources */,
+				AA07D9F027E0EC69006D4598 /* ImakokoNotification.swift in Sources */,
 				AA83DC4C27B019ED008F2226 /* DateUtility.swift in Sources */,
 				AAF864B427DBA81800AFA0E6 /* AvatarImageCache.swift in Sources */,
 				AA83DC2C27AF9C50008F2226 /* MapRouter.swift in Sources */,

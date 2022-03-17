@@ -9,15 +9,15 @@ import SwiftUI
 
 struct MapOverlaySheet: View {
     
-//    var friends: [Profile] = []
-//    var avatarImages: [String:Data] = [:]
     var friends: [Avatar] = []
     
     @Binding var editable: Bool
+    @Binding var selectedIds: [String]
     var onSendMessageButtonTap: (() -> Void)?
-    let bounds = UIScreen.main.bounds
+    var onImakokoButtonTap: (() -> Void)?
+    var onImadokoButtonTap: (() -> Void)?
     
-    @State private var selectedFriends: [String] = []
+    let bounds = UIScreen.main.bounds
     
     var body: some View {
         VStack {
@@ -32,13 +32,13 @@ struct MapOverlaySheet: View {
                     .fontWeight(.bold)
                     .frame(width: 320, height: 32)
                 
-                FriendHScrollView(friends: self.friends, selectedList: self.$selectedFriends)
+                FriendHScrollView(friends: self.friends, selectedIds: self.$selectedIds)
                     .padding()
                 
                 HStack(spacing: 0) {
                     Spacer()
                     Button {
-                        
+                        self.onImadokoButtonTap?()
                     } label: {
                         HStack {
                             Image(systemName: "person.crop.circle.badge.questionmark")
@@ -58,7 +58,7 @@ struct MapOverlaySheet: View {
                     Spacer()
                     
                     Button {
-                        
+                        self.onImakokoButtonTap?()
                     } label: {
                         HStack {
                             Image(systemName: "dot.radiowaves.left.and.right")
@@ -102,7 +102,7 @@ struct MapOverlaySheet: View {
 struct MapOverlaySheet_Previews: PreviewProvider {
     static var previews: some View {
         let friends = [Avatar(id: "1", name: "友だち１"),
-                       Avatar(id: "2a", name: "友だち２"),
+                       Avatar(id: "2", name: "友だち２"),
                        Avatar(id: "3", name: "友だち３"),
                        Avatar(id: "4", name: "友だち４"),
                        Avatar(id: "5", name: "友だち５"),
@@ -111,7 +111,7 @@ struct MapOverlaySheet_Previews: PreviewProvider {
         ForEach([true, false], id: \.self) { editable in
             ForEach(["ja_JP", "en_US"], id: \.self) { id in
                 ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-                    MapOverlaySheet(friends: friends, editable: .constant(editable))
+                    MapOverlaySheet(friends: friends, editable: .constant(editable), selectedIds: .constant(["1", "3"]))
                         .environment(\.locale, .init(identifier: id))
                         .environment(\.colorScheme, scheme)
                 }
