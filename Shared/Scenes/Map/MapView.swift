@@ -16,9 +16,11 @@ import DynamicOverlay
 
 struct MapView: View {
     @ObservedObject var presenter: MapPresenter
-    @State var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088),
-        span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
+    @EnvironmentObject var appDelegate: AppDelegate
+    
+//    @State var region = MKCoordinateRegion(
+//        center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088),
+//        span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
     
 //    var friends: [Profile] = [Profile(name: "友だち１１１"),
 //                              Profile(name: "友だち２"),
@@ -68,7 +70,7 @@ struct MapView: View {
     var body: some View {
         ZStack {
             ZStack {
-                Map(coordinateRegion: self.$region,
+                Map(coordinateRegion: self.$appDelegate.region,
                     interactionModes: .all,
                     showsUserLocation: true,
                     userTrackingMode: .none,
@@ -103,7 +105,7 @@ struct MapView: View {
                                 withAnimation {
                                     self.presenter.notch = .max
                                 }},
-                            onImakokoButtonTap: self.presenter.onImakokoButtonTap))
+                            onImakokoButtonTap: { self.presenter.onImakokoButtonTap(location: self.appDelegate.region.center) }))
         .dynamicOverlayBehavior(myOverlayBehavior)
         .ignoresSafeArea(edges: [.top, .trailing, .leading])
         .onAppear {

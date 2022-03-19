@@ -11,6 +11,7 @@ import MapKit
 import DynamicOverlay
 
 final class MapPresenter: ObservableObject {
+    
     @Published var friends: [Avatar] = []
     @Published var pinItems: [PinItem] = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
     @Published var notch: Notch = .min {
@@ -107,7 +108,7 @@ extension MapPresenter {
 }
 
 extension MapPresenter {
-    func onImakokoButtonTap() {
+    func onImakokoButtonTap(location: CLLocationCoordinate2D) {
         guard let profile = self.profile else {
             return
         }
@@ -116,8 +117,9 @@ extension MapPresenter {
             return
         }
         
-        let location = Location(id: profile.id, latitude: 37.3351, longitude: -122.0088)
+        let location = Location(id: profile.id, latitude: location.latitude, longitude: location.longitude)
         
+        // 現在地情報を追加
         for friendId in self.selectedFriendIds {
             self.interactor.appendMyLocation(location, id: friendId) { error in
                 if let error = error {
@@ -126,8 +128,8 @@ extension MapPresenter {
             }
         }
         
-        // TODO: 現在地は仮。現在地取得後に設定する
-        let newData = ImakokoNotification(ownerId: profile.id, ownerName: profile.name, latitude: 37.3351, longitude: -122.0088, to: self.selectedFriendIds)
+        // プッシュ通知
+        let newData = ImakokoNotification(ownerId: profile.id, ownerName: profile.name, latitude: location.latitude, longitude: location.longitude, to: self.selectedFriendIds)
         
         self.interactor.setImakokoNotification(newData) { error in
             if let error = error {
