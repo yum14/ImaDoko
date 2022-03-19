@@ -23,9 +23,13 @@ final class MyLocationsStore {
         self.db = db
     }
     
-    func addListener(id: String, completion: ((Result<MyLocations?, Error>) -> Void)?) {
+    func addListener(id: String, overwrite: Bool = true, completion: ((Result<MyLocations?, Error>) -> Void)?) {
         if self.db == nil {
             self.initialize()
+        }
+        
+        if !overwrite && self.listener != nil {
+            return
         }
         
         self.listener = self.db!.collection(self.collectionName).document(id)
@@ -45,6 +49,7 @@ final class MyLocationsStore {
     
     func removeListener() {
         self.listener?.remove()
+        self.listener = nil
     }
     
     func setData(_ data: MyLocations, completion: ((Error?) -> Void)?) {

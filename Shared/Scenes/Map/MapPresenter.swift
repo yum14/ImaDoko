@@ -13,7 +13,7 @@ import DynamicOverlay
 final class MapPresenter: ObservableObject {
     
     @Published var friends: [Avatar] = []
-    @Published var pinItems: [PinItem] = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
+    @Published var pinItems: [PinItem] = []
     @Published var notch: Notch = .min {
         didSet {
             self.editable = (self.notch == .max)
@@ -49,6 +49,36 @@ final class MapPresenter: ObservableObject {
 
 extension MapPresenter {
     func onAppear() {
+        
+        self.interactor.addMyLocationsListener(id: self.uid) { result in
+            switch result {
+            case .success(let mylocations):
+                if let mylocations = mylocations {
+                    
+                    if mylocations.locations.count == 0 {
+                        self.pinItems = []
+                        return
+                    }
+                    
+                    self.interactor.getAvatarImages(ids: mylocations.locations.map { $0.id }) { result in
+                        switch result {
+                        case .success(let avatarImages):
+                            let newPinItems = mylocations.locations
+                                .map { location in
+                                    PinItem(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude),
+                                            imageData: avatarImages?.first(where: { $0.id == location.id })?.data)}
+                            
+                            self.pinItems = newPinItems
+                            
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
         
         self.interactor.getProfile(id: self.uid) { result in
             switch result {
@@ -137,6 +167,17 @@ extension MapPresenter {
             }
         }
         
+        withAnimation {
+            self.notch = .min
+            self.selectedFriendIds = []
+        }
+    }
+    
+    func onImadokoButtonTap() {
+        withAnimation {
+            self.notch = .min
+            self.selectedFriendIds = []
+        }
     }
 }
 

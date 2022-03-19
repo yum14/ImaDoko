@@ -12,5 +12,6 @@ import SwiftUI
 struct PinItem: Identifiable {
     var id = UUID().uuidString
     var coordinate: CLLocationCoordinate2D
+    var imageData: Data?
     var tint: Color?
 }

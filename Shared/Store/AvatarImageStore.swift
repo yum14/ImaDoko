@@ -10,8 +10,7 @@ import Firebase
 
 final class AvatarImageStore {
     private var db: Firestore?
-    private let parentCollectionName = "profiles"
-    private let collectionName = "avatar_image"
+    private let collectionName = "avatar_images"
     private let cache = AvatarImageCache.shared
     
     init() {}
@@ -37,8 +36,7 @@ final class AvatarImageStore {
             }
         }
         
-        db!.collection(self.parentCollectionName).document(id)
-            .collection(self.collectionName).document(id).getDocument { (documentSnapshot, error) in
+        db!.collection(self.collectionName).document(id).getDocument { (documentSnapshot, error) in
                 
                 let result = Result<AvatarImage?, Error> {
                     if let error = error {
@@ -54,6 +52,57 @@ final class AvatarImageStore {
                 
                 completion?(result)
             }
+    }
+    
+    func getDocuments(ids: [String], noCache: Bool = false, completion: ((Result<[AvatarImage]?, Error>) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        var avatarImages: [AvatarImage] = []
+        var noCacheIds: [String] = []
+        
+        if !noCache {
+            for id in ids {
+                let avatarCache = cache.get(forKey: id)
+                
+                if let avatarCache = avatarCache {
+                    avatarImages.append(AvatarImage(id: id, data: avatarCache))
+                } else {
+                    noCacheIds.append(id)
+                }
+            }
+        } else {
+            noCacheIds = ids
+        }
+        
+        if noCacheIds.count == 0 {
+            completion?(Result<[AvatarImage]?, Error> { avatarImages.count > 0 ? avatarImages : nil })
+            return
+        }
+        
+        db!.collection(self.collectionName).whereField("id", in: noCacheIds).getDocuments { querySnapshot, error in
+            if let error = error {
+                completion?(Result.failure(error))
+                return
+            }
+            
+            guard let documents = querySnapshot?.documents else {
+                completion?(Result.success(nil))
+                return
+            }
+
+            for document in documents {
+                let image = self.map(documentSnapshot: document)
+                self.cache.set(image?.data, forKey: document.documentID)
+                
+                if let image = image {
+                    avatarImages.append(image)
+                }
+            }
+            
+            completion?(Result.success(avatarImages))
+        }
     }
     
     private func map(documentSnapshot: DocumentSnapshot?) -> AvatarImage? {
@@ -79,8 +128,7 @@ final class AvatarImageStore {
             self.initialize()
         }
         
-        db!.collection(self.parentCollectionName).document(data.id)
-            .collection(self.collectionName).document(data.id).setData(data.toDictionary()) { error in
+        db!.collection(self.collectionName).document(data.id).setData(data.toDictionary()) { error in
                 
                 self.cache.set(data.data, forKey: data.id)
                 completion?(error)

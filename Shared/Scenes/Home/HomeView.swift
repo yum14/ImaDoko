@@ -18,6 +18,7 @@ struct HomeView: View {
                 
                 TextField("AccountName", text: self.$presenter.accountName)
                     .multilineTextAlignment(.center)
+                    .autocapitalization(.none)
                     .onSubmit {
                         self.presenter.onNameTextSubmit()
                     }

@@ -33,7 +33,8 @@ extension HomeInteractor: HomeUsecase {
     }
     
     func addProfileListener(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
-        self.profileStore.addListener(id: id, completion: completion)
+        // 初回のみlistenerを設定する
+        self.profileStore.addListener(id: id, overwrite: false, completion: completion)
     }
     
     func removeProfileListener() {

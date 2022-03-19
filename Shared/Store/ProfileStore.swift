@@ -24,9 +24,13 @@ final class ProfileStore {
         self.db = db
     }
     
-    func addListener(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
+    func addListener(id: String, overwrite: Bool = true, completion: ((Result<Profile?, Error>) -> Void)?) {
         if self.db == nil {
             self.initialize()
+        }
+        
+        if !overwrite && self.listener != nil {
+            return
         }
         
         self.listener = self.db!.collection(self.collectionName).document(id)
@@ -46,6 +50,7 @@ final class ProfileStore {
     
     func removeListener() {
         self.listener?.remove()
+        self.listener = nil
     }
     
     func getDocument(id: String, noCache: Bool = false, completion: ((Result<Profile?, Error>) -> Void)?) {

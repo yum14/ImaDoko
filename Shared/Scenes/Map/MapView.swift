@@ -77,7 +77,7 @@ struct MapView: View {
                     annotationItems: self.presenter.pinItems
                 ) { item in
                     MapAnnotation(coordinate: item.coordinate) {
-                        AvatarMapAnnotation()
+                        AvatarMapAnnotation(image: item.imageData != nil ? UIImage(data: item.imageData!) : nil)
                             .offset(x: 0, y: -32)
                     }
                 }
@@ -105,7 +105,8 @@ struct MapView: View {
                                 withAnimation {
                                     self.presenter.notch = .max
                                 }},
-                            onImakokoButtonTap: { self.presenter.onImakokoButtonTap(location: self.appDelegate.region.center) }))
+                            onImakokoButtonTap: { self.presenter.onImakokoButtonTap(location: self.appDelegate.region.center) },
+                            onImadokoButtonTap: self.presenter.onImadokoButtonTap))
         .dynamicOverlayBehavior(myOverlayBehavior)
         .ignoresSafeArea(edges: [.top, .trailing, .leading])
         .onAppear {
