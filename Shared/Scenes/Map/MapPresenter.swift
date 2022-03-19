@@ -12,6 +12,15 @@ import DynamicOverlay
 
 final class MapPresenter: ObservableObject {
     @Published var friends: [Avatar] = []
+    @Published var pinItems: [PinItem] = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
+    @Published var notch: Notch = .min {
+        didSet {
+            self.editable = (self.notch == .max)
+        }
+    }
+    @Published var editable = false
+    @Published var selectedFriendIds: [String] = []
+    
     private var friendProfiles: [Profile] = [] {
         didSet {
             let newFriends = self.friendProfiles.map { Avatar(id: $0.id, name: $0.name, avatarImageData: self.friendImages[$0.id]) }
@@ -24,14 +33,6 @@ final class MapPresenter: ObservableObject {
             self.friends = newFriends
         }
     }
-    @Published var pinItems: [PinItem] = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
-    @Published var notch: Notch = .min {
-        didSet {
-            self.editable = (self.notch == .max)
-        }
-    }
-    @Published var editable = false
-    @Published var selectedFriendIds: [String] = []
     
     private var profile: Profile?
     private let interactor: MapUsecase
@@ -115,7 +116,17 @@ extension MapPresenter {
             return
         }
         
-        // TODO: 現在地取得後に設定する
+        let location = Location(id: profile.id, latitude: 37.3351, longitude: -122.0088)
+        
+        for friendId in self.selectedFriendIds {
+            self.interactor.appendMyLocation(location, id: friendId) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
+        // TODO: 現在地は仮。現在地取得後に設定する
         let newData = ImakokoNotification(ownerId: profile.id, ownerName: profile.name, latitude: 37.3351, longitude: -122.0088, to: self.selectedFriendIds)
         
         self.interactor.setImakokoNotification(newData) { error in

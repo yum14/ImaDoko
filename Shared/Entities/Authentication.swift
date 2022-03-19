@@ -28,6 +28,7 @@ final class Authentication: UIResponder, ObservableObject {
     private var listener: AuthStateDidChangeListenerHandle!
     private var authToken: String?
     private var profileStore: ProfileStore
+    private var myLocationsStore: MyLocationsStore
     
     var firebaseLoginUser: Firebase.User? {
         didSet {
@@ -50,6 +51,7 @@ final class Authentication: UIResponder, ObservableObject {
     
     override init() {
         self.profileStore = ProfileStore()
+        self.myLocationsStore = MyLocationsStore()
     }
     
     deinit {
@@ -167,6 +169,13 @@ extension Authentication: Authenticatable {
             }
             
             self.profile = newProfile
+        }
+        
+        // 空で作成する
+        self.myLocationsStore.setData(MyLocations(id: firebaseLoginUser.uid, locations: [])) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
         }
     }
 }
