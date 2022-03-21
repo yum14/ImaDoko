@@ -135,6 +135,10 @@ extension MapPresenter {
             }
         }
     }
+    
+    func onDisapper() {
+        self.interactor.removeMyLocationsListener()
+    }
 }
 
 extension MapPresenter {
@@ -174,6 +178,28 @@ extension MapPresenter {
     }
     
     func onImadokoButtonTap() {
+        guard let profile = self.profile else {
+            return
+        }
+        
+        if !(self.selectedFriendIds.count > 0) {
+            return
+        }
+        
+        let message = ImadokoMessage(id: profile.id)
+        
+        // イマドコメッセージを追加
+        for friendId in self.selectedFriendIds {
+            self.interactor.appendImadokoMessages(message, id: friendId) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
+        
+        // TODO: プッシュ通知
+        
+        
         withAnimation {
             self.notch = .min
             self.selectedFriendIds = []

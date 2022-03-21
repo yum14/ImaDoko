@@ -54,8 +54,9 @@ struct LoginView_Previews: PreviewProvider {
     static let authentication = Authentication()
     
     static var previews: some View {
+        let interactor = LoginInteractor()
         let router = LoginRouter()
-        let presenter = LoginPresenter(router: router)
+        let presenter = LoginPresenter(interactor: interactor, router: router)
         
         ForEach(["ja_JP", "en_US"], id: \.self) { id in
             ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in

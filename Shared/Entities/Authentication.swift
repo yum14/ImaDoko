@@ -12,7 +12,7 @@ import Firebase
 protocol Authenticatable {
     func signIn(credential: AuthCredential, completion: ((SignInStatus) -> Void)?)
     func signOut()
-    func createUser()
+    func createUser(onCreated: ((Profile) -> Void)?)
     var isSignedIn: Bool { get set }
 }
 
@@ -155,7 +155,7 @@ extension Authentication: Authenticatable {
         }
     }
     
-    func createUser() {
+    func createUser(onCreated: ((Profile) -> Void)?) {
         guard let firebaseLoginUser = self.firebaseLoginUser else {
             return
         }
@@ -169,13 +169,8 @@ extension Authentication: Authenticatable {
             }
             
             self.profile = newProfile
-        }
-        
-        // 空で作成する
-        self.myLocationsStore.setData(MyLocations(id: firebaseLoginUser.uid, locations: [])) { error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
+            
+            onCreated?(newProfile)
         }
     }
 }

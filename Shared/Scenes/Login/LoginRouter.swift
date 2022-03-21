@@ -14,8 +14,9 @@ protocol LoginWireframe {
 
 final class LoginRouter {
     static func assembleModules() -> AnyView {
+        let interactor = LoginInteractor()
         let router = LoginRouter()
-        let presenter = LoginPresenter(router: router)
+        let presenter = LoginPresenter(interactor: interactor, router: router)
         let view = LoginView(presenter: presenter)
         return AnyView(view)
     }

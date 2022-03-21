@@ -112,6 +112,9 @@ struct MapView: View {
         .onAppear {
             self.presenter.onAppear()
         }
+        .onDisappear {
+            self.presenter.onDisapper()
+        }
     }
 }
 

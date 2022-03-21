@@ -13,11 +13,13 @@ final class LoginPresenter: ObservableObject {
     @Published var showCreateNewAccountAlert = false
     @Published var showSignInFailedAlert = false
     
+    private let interactor: LoginUsecase
     private let router: LoginWireframe
     private let profileStore: ProfileStore
     private var profile: Profile?
     
-    init(router: LoginWireframe) {
+    init(interactor: LoginUsecase, router: LoginWireframe) {
+        self.interactor = interactor
         self.router = router
         self.profileStore = ProfileStore()
     }
@@ -42,7 +44,19 @@ extension LoginPresenter {
     }
     
     func createAccount(auth: Authentication) {
-        auth.createUser()
+        auth.createUser { profile in
+            self.interactor.createInitialMyLocations(uid: profile.id) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+            
+            self.interactor.createInitialImadokoMessages(uid: profile.id) { error in
+                if let error = error {
+                    print(error.localizedDescription)
+                }
+            }
+        }
     }
     
     func cancelAccountCreation(auth: Authentication) {
