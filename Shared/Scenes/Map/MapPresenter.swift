@@ -163,9 +163,7 @@ extension MapPresenter {
         }
         
         // プッシュ通知
-        let newData = ImakokoNotification(ownerId: profile.id, ownerName: profile.name, latitude: location.latitude, longitude: location.longitude, to: self.selectedFriendIds)
-        
-        self.interactor.setImakokoNotification(newData) { error in
+        self.interactor.setImakokoNotification(fromId: profile.id, fromName: profile.name, toIds: self.selectedFriendIds) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -197,8 +195,12 @@ extension MapPresenter {
             }
         }
         
-        // TODO: プッシュ通知
-        
+        // プッシュ通知
+        self.interactor.setImadokoNotification(fromId: profile.id, fromName: profile.name, toIds: self.selectedFriendIds) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
         
         withAnimation {
             self.notch = .min

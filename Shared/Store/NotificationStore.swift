@@ -1,5 +1,5 @@
 //
-//  ImakokoNotificationStore.swift
+//  NotificationStore.swift
 //  ImaDoko (iOS)
 //
 //  Created by yum on 2022/03/16.
@@ -8,9 +8,9 @@
 import Foundation
 import Firebase
 
-final class ImakokoNotificationStore {
+final class NotificationStore {
     private var db: Firestore?
-    private let collectionName = "imakoko_notifications"
+    private let collectionName = "notifications"
     
     init() {}
     
@@ -22,7 +22,7 @@ final class ImakokoNotificationStore {
         self.db = db
     }
     
-    func setData(_ data: ImakokoNotification, completion: ((Error?) -> Void)?) {
+    func setData(_ data: Notification, completion: ((Error?) -> Void)?) {
         if self.db == nil {
             self.initialize()
         }

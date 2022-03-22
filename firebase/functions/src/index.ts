@@ -21,13 +21,12 @@ const db = admin.firestore();
 
 export const createTestData = functions.region('asia-northeast1').https.onRequest((request, response) => {
 
-    db.collection('imakoko_notifications').doc(request.query.id as string).set({
+    db.collection('notifications').doc(request.query.id as string).set({
         id: request.query.id as string,
-        latitude: 1.1234,
-        longitude: 5.1234,
-        owner_id: 'SdJQbPCU0ZPwqZjnXUJ5aHm4CMa2',
-        owner_name: 'test',
-        to: ['SdJQbPCU0ZPwqZjnXUJ5aHm4CMa2']
+        from_id: 'SdJQbPCU0ZPwqZjnXUJ5aHm4CMa2',
+        title: 'test title',
+        body: 'test body',
+        to_ids: ['SdJQbPCU0ZPwqZjnXUJ5aHm4CMa2']
     })
     .then(() => {
         response.send('success!');
@@ -37,13 +36,12 @@ export const createTestData = functions.region('asia-northeast1').https.onReques
     });
 });
 
-export const sendImakokoNotification = functions.region('asia-northeast1').firestore.document('imakoko_notifications/{id}')
+export const sendNotification = functions.region('asia-northeast1').firestore.document('notifications/{id}')
     .onCreate(async (snap, context) => {
-        const triggerData = snap.data() as ImakokoNotification;
-        functions.logger.info("imakoko_notification: ", triggerData.id);
+        const triggerData = snap.data() as Notification;
 
         try {
-            const tokensSnapshot = await db.collection('notification_tokens').where(firestore.FieldPath.documentId(), 'in', triggerData.to).get();
+            const tokensSnapshot = await db.collection('notification_tokens').where(firestore.FieldPath.documentId(), 'in', triggerData.to_ids).get();
 
             var tokens: [string?] = [];
 
@@ -59,14 +57,9 @@ export const sendImakokoNotification = functions.region('asia-northeast1').fires
                 const payload: messaging.MulticastMessage = {
                     tokens: deviceTokens,
                     notification: {
-                        title: 'イマココ',
-                        body: triggerData.owner_name + "さんからのイマココ",
+                        title: triggerData.title,
+                        body: triggerData.body,
                         // imageUrl: ''
-                    },
-                    data: {
-                        owner_id: triggerData.owner_id,
-                        latitude: triggerData.latitude.toString(),
-                        longitude: triggerData.longitude.toString(),  
                     }
                 };
 
@@ -78,29 +71,31 @@ export const sendImakokoNotification = functions.region('asia-northeast1').fires
                 }
 
             } else {
-                functions.logger.error('no notification token. owner_id: ', triggerData.owner_id);
+                functions.logger.error('no notification token. from_id: ', triggerData.from_id);
             }
 
             // データ削除
             return snap.ref.delete()
+                .then(() => {
+                    functions.logger.info('success. from_id: ' + triggerData.from_id + ', to_ids: [' + triggerData.to_ids.join(',') + ']');
+                })
                 .catch(error => {
-                    functions.logger.error('delete failed. owner_id: ', triggerData.owner_id);
+                    functions.logger.error('delete failed. from_id: ', triggerData.from_id);
                     functions.logger.error('error: ', error);
                 });
 
         } catch (error) {
             functions.logger.error('error: ', error);
-            functions.logger.error('owner_id: ', triggerData.owner_id);
+            functions.logger.error('from_id: ', triggerData.from_id);
         }
     });
 
-interface ImakokoNotification {
+interface Notification {
     id: string;
-    owner_id: string;
-    owner_name: string;
-    latitude: number;
-    longitude: number;
-    to: [string];
+    from_id: string;
+    title: string;
+    body: string;
+    to_ids: [string];
 }
 
 interface NotificationToken {
