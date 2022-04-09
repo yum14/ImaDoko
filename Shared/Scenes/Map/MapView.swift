@@ -8,46 +8,11 @@
 import SwiftUI
 import MapKit
 import DynamicOverlay
-
-//enum Notch: CaseIterable, Equatable {
-//    case min, max
-//}
-
+import PopupView
 
 struct MapView: View {
     @ObservedObject var presenter: MapPresenter
     @EnvironmentObject var appDelegate: AppDelegate
-    
-//    @State var region = MKCoordinateRegion(
-//        center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088),
-//        span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-    
-//    var friends: [Profile] = [Profile(name: "友だち１１１"),
-//                              Profile(name: "友だち２"),
-//                              Profile(name: "友だち３"),
-//                              Profile(name: "友だち４"),
-//                              Profile(name: "友だち５")]
-    
-    //    var myOverlayContent: some View {
-    //        VStack {
-    //            RoundedRectangle(cornerRadius: 20)
-    //                .fill(.secondary)
-    //                .frame(width: 36, height: 5)
-    //                .padding(.top, 4)
-    //            Text("Header")
-    //            List {
-    //                Text("Row 1")
-    //                Text("Row 2")
-    //                Text("Row 3")
-    //            }
-    //        }
-    //        .background(Color(uiColor: UIColor.systemBackground))
-    //        .drivingScrollView()
-    //    }
-    
-    
-//    @State var height: CGFloat = 0.0
-//    @State var notch: Notch = .min
     
     var myOverlayBehavior: some DynamicOverlayBehavior {
         MagneticNotchOverlayBehavior<Notch> { notch in
@@ -59,7 +24,7 @@ struct MapView: View {
             }
         }
         .onTranslation { translation in
-//            height = translation.height
+            //            height = translation.height
             print(translation.height)
         }
         .notchChange(self.$presenter.notch)
@@ -87,9 +52,7 @@ struct MapView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    LocationButton(onTap: {
-                        
-                    })
+                    LocationButton(onTap: {})
                         .cornerRadius(8)
                         .shadow(radius: 5, x: 0, y: 5)
                         .padding(.horizontal)
@@ -119,6 +82,8 @@ struct MapView: View {
 }
 
 struct MapView_Previews: PreviewProvider {
+    static let appDelegate = AppDelegate()
+    
     static var previews: some View {
         let interactor = MapInteractor()
         let router = MapRouter()
@@ -126,7 +91,8 @@ struct MapView_Previews: PreviewProvider {
         presenter.pinItems = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
         
         return ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-            MapView(presenter: presenter)
+            return   MapView(presenter: presenter)
+                .environmentObject(appDelegate)
                 .environment(\.colorScheme, scheme)
         }
     }

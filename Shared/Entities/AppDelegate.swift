@@ -117,7 +117,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let messageID = userInfo["gcm.message_id"] {
             print("Message ID: \(messageID)")
         }
-
+    
+        guard let urlString = userInfo["url"] as? String, let url = URL(string: urlString) else {
+            return
+        }
+        
+        // URLを起動する
+        // ディープリンクから起動したときと同様の動作となり、onOpenURLがキックされる
+        UIApplication.shared.open(url)
+        
         completionHandler()
     }
 }

@@ -30,3 +30,7 @@
 "OKButton" = "OK";
 "QRCodeLoading" = "Loading...";
 "QRCodeDescription" = "友だちがこのQRコードをスキャンすると、あなたを友だちに追加できます。";
+"ImadokoNotificationDesc1" = "イマドコリクエストを受け取りました。";
+"ImadokoNotificationDesc2" = "現在地を送信しますか？";
+"ImadokoNotificationSend" = "送信";
+"ImadokoNotificationDismiss" = "拒否";

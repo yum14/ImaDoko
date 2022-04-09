@@ -16,6 +16,8 @@
 		AA07D9F827E848B5006D4598 /* ImadokoMessagesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F727E848B5006D4598 /* ImadokoMessagesStore.swift */; };
 		AA07D9FA27E8C04D006D4598 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F927E8C04D006D4598 /* LoginInteractor.swift */; };
 		AA07D9FC27E9F331006D4598 /* NotificationMessageCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9FB27E9F331006D4598 /* NotificationMessageCreator.swift */; };
+		AA07D9FE27F09A5F006D4598 /* notification.apns in Resources */ = {isa = PBXBuildFile; fileRef = AA07D9FD27F09A5F006D4598 /* notification.apns */; };
+		AA07DA0027F1EAC6006D4598 /* ReceivedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */; };
 		AA16D44227BA7ACB00804D0D /* FriendHScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */; };
 		AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */; };
 		AA26A69D27AF9424003D1F17 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69C27AF9424003D1F17 /* Tests_iOS.swift */; };
@@ -72,6 +74,8 @@
 		AAADEFE227B7BB5E00D81A52 /* AvatarMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFE127B7BB5E00D81A52 /* AvatarMapAnnotation.swift */; };
 		AACE5ED727BE8CE800295A47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */; };
 		AACE5ED827BE8CE800295A47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */; };
+		AADAC0CA27FADF33006CDF0B /* ImadokoNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAC0C927FADF33006CDF0B /* ImadokoNotificationView.swift */; };
+		AAE0832227F5F4D50069A978 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = AAE0832127F5F4D50069A978 /* PopupView */; };
 		AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98827B7F75D007CD36D /* Triangle.swift */; };
 		AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98A27B80727007CD36D /* LocationButton.swift */; };
 		AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */; };
@@ -122,6 +126,8 @@
 		AA07D9F727E848B5006D4598 /* ImadokoMessagesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoMessagesStore.swift; sourceTree = "<group>"; };
 		AA07D9F927E8C04D006D4598 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		AA07D9FB27E9F331006D4598 /* NotificationMessageCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMessageCreator.swift; sourceTree = "<group>"; };
+		AA07D9FD27F09A5F006D4598 /* notification.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = notification.apns; sourceTree = "<group>"; };
+		AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedNotification.swift; sourceTree = "<group>"; };
 		AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendHScrollView.swift; sourceTree = "<group>"; };
 		AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatorCircleImage.swift; sourceTree = "<group>"; };
 		AA26A68427AF9423003D1F17 /* ImaDokoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImaDokoApp.swift; sourceTree = "<group>"; };
@@ -171,6 +177,7 @@
 		AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AACE5EE227BEA7A600295A47 /* ImaDoko--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ImaDoko--iOS--Info.plist"; sourceTree = "<group>"; };
 		AACE5EE327BEA7B800295A47 /* ImaDoko (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ImaDoko (iOS).entitlements"; sourceTree = "<group>"; };
+		AADAC0C927FADF33006CDF0B /* ImadokoNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoNotificationView.swift; sourceTree = "<group>"; };
 		AAE3F98827B7F75D007CD36D /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		AAE3F98A27B80727007CD36D /* LocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
 		AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckCircleImage.swift; sourceTree = "<group>"; };
@@ -199,6 +206,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAE0832227F5F4D50069A978 /* PopupView in Frameworks */,
 				AA35878427CA1CFC00F51AEA /* FirebaseAnalyticsSwift-Beta in Frameworks */,
 				AA35878627CA1CFC00F51AEA /* FirebaseAuth in Frameworks */,
 				AA9E99AB27B8E674004B8272 /* DynamicOverlay in Frameworks */,
@@ -263,6 +271,7 @@
 				AA26A68527AF9423003D1F17 /* ContentView.swift */,
 				AA83DC3E27AFA67F008F2226 /* Localizable.strings */,
 				AA26A68627AF9424003D1F17 /* Assets.xcassets */,
+				AA07D9FD27F09A5F006D4598 /* notification.apns */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -404,6 +413,7 @@
 				AAF864AD27D790B700AFA0E6 /* ViewDismissButton.swift */,
 				AAF864AF27D7A40A00AFA0E6 /* AvatarImagePicker.swift */,
 				AAF864B127D7A43800AFA0E6 /* ImagePickerController.swift */,
+				AADAC0C927FADF33006CDF0B /* ImadokoNotificationView.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -432,6 +442,7 @@
 				AA07D9EB27E0ACC1006D4598 /* Avatar.swift */,
 				AA07D9EF27E0EC69006D4598 /* Notification.swift */,
 				AA07D9F127E376D5006D4598 /* MyLocations.swift */,
+				AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -485,6 +496,7 @@
 				AA35878B27CA1CFC00F51AEA /* FirebaseFirestoreCombine-Community */,
 				AA35878D27CA1CFC00F51AEA /* FirebaseFirestoreSwift-Beta */,
 				AA35878F27CA1CFC00F51AEA /* FirebaseMessaging */,
+				AAE0832127F5F4D50069A978 /* PopupView */,
 			);
 			productName = "ImaDoko (iOS)";
 			productReference = AA26A68B27AF9424003D1F17 /* ImaDoko.app */;
@@ -584,6 +596,7 @@
 				AA9E99AC27B8FD12004B8272 /* XCRemoteSwiftPackageReference "StatefulTabView" */,
 				AA658FA227C1F5EF001D4E17 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				AA35878027CA1CFC00F51AEA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				AAE0832027F5F4D50069A978 /* XCRemoteSwiftPackageReference "PopupView" */,
 			);
 			productRefGroup = AA26A68C27AF9424003D1F17 /* Products */;
 			projectDirPath = "";
@@ -602,6 +615,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA07D9FE27F09A5F006D4598 /* notification.apns in Resources */,
 				AA26A6B027AF9424003D1F17 /* Assets.xcassets in Resources */,
 				AA83DC3C27AFA67F008F2226 /* Localizable.strings in Resources */,
 				AACE5ED727BE8CE800295A47 /* GoogleService-Info.plist in Resources */,
@@ -644,6 +658,7 @@
 				AA83DC3527AF9F1D008F2226 /* RootPresenter.swift in Sources */,
 				AA35879C27CBC33500F51AEA /* AppDelegate.swift in Sources */,
 				AAF8649427CD120F00AFA0E6 /* RootInteractor.swift in Sources */,
+				AA07DA0027F1EAC6006D4598 /* ReceivedNotification.swift in Sources */,
 				AA83DC4427AFC6DF008F2226 /* MessagePresenter.swift in Sources */,
 				AA83DC2827AF9B67008F2226 /* RootView.swift in Sources */,
 				AAF864B227D7A43800AFA0E6 /* ImagePickerController.swift in Sources */,
@@ -691,6 +706,7 @@
 				AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */,
 				AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */,
 				AA07D9EC27E0ACC1006D4598 /* Avatar.swift in Sources */,
+				AADAC0CA27FADF33006CDF0B /* ImadokoNotificationView.swift in Sources */,
 				AA658F9027C13CEB001D4E17 /* LoginView.swift in Sources */,
 				AA07D9F227E376D5006D4598 /* MyLocations.swift in Sources */,
 				AAF8649D27D6475600AFA0E6 /* MyQrCodeView.swift in Sources */,
@@ -1156,6 +1172,14 @@
 				minimumVersion = 0.1.8;
 			};
 		};
+		AAE0832027F5F4D50069A978 /* XCRemoteSwiftPackageReference "PopupView" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/exyte/PopupView.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -1213,6 +1237,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AA9E99AC27B8FD12004B8272 /* XCRemoteSwiftPackageReference "StatefulTabView" */;
 			productName = StatefulTabView;
+		};
+		AAE0832127F5F4D50069A978 /* PopupView */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AAE0832027F5F4D50069A978 /* XCRemoteSwiftPackageReference "PopupView" */;
+			productName = PopupView;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
