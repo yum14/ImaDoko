@@ -11,7 +11,7 @@ import MapKit
 
 final class RootPresenter: ObservableObject {
     @Published var tabSelection: Int = 2
-    @Published var receivedNotification: ReceivedNotification? {
+    var receivedNotification: ReceivedNotification? {
         didSet {
             if self.receivedNotification != nil {
                 self.showingNotificationPopup = true
@@ -50,15 +50,20 @@ extension RootPresenter {
             return
         }
         
-        // avatarImageを取得
-        self.interactor.getAvatarImage(id: userId) { result in
-            switch result {
-            case .success(let image):
-                self.tabSelection = 2
-                self.receivedNotification = ReceivedNotification(id: userId, name: userName, avatarImageData: image?.data, type: host == "imadoko" ? .imadoko : .imakoko)
-            case .failure(let error):
-                print(error.localizedDescription)
+        if host == "imadoko" {
+            // avatarImageを取得
+            self.interactor.getAvatarImage(id: userId) { result in
+                switch result {
+                case .success(let image):
+                    self.tabSelection = 2
+                    self.receivedNotification = ReceivedNotification(id: userId, name: userName, avatarImageData: image?.data, type: host == "imadoko" ? .imadoko : .imakoko)
+                case .failure(let error):
+                    print(error.localizedDescription)
+                }
             }
+        } else {
+            // imakokoではreceivedNotificationは作らない（使わないので）
+            self.tabSelection = 2
         }
         
         self.notificationUserId = userId
@@ -66,6 +71,7 @@ extension RootPresenter {
     
     func onImadokoNotificationReply(id: String, location: CLLocationCoordinate2D) {
         guard let friendId = self.notificationUserId else {
+            self.showingNotificationPopup = false
             return
         }
         

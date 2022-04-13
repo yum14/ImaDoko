@@ -16,7 +16,7 @@
 		AA07D9F827E848B5006D4598 /* ImadokoMessagesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F727E848B5006D4598 /* ImadokoMessagesStore.swift */; };
 		AA07D9FA27E8C04D006D4598 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F927E8C04D006D4598 /* LoginInteractor.swift */; };
 		AA07D9FC27E9F331006D4598 /* NotificationMessageCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9FB27E9F331006D4598 /* NotificationMessageCreator.swift */; };
-		AA07D9FE27F09A5F006D4598 /* notification.apns in Resources */ = {isa = PBXBuildFile; fileRef = AA07D9FD27F09A5F006D4598 /* notification.apns */; };
+		AA07D9FE27F09A5F006D4598 /* imadoko_notification.apns in Resources */ = {isa = PBXBuildFile; fileRef = AA07D9FD27F09A5F006D4598 /* imadoko_notification.apns */; };
 		AA07DA0027F1EAC6006D4598 /* ReceivedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */; };
 		AA16D44227BA7ACB00804D0D /* FriendHScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */; };
 		AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */; };
@@ -42,6 +42,7 @@
 		AA35879427CA4DDD00F51AEA /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879327CA4DDD00F51AEA /* ProfileStore.swift */; };
 		AA35879627CA5CCB00F51AEA /* NotificationTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */; };
 		AA35879C27CBC33500F51AEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879B27CBC33500F51AEA /* AppDelegate.swift */; };
+		AA65126A2806B94A003A68E4 /* imakoko_notification.apns in Resources */ = {isa = PBXBuildFile; fileRef = AA6512692806B94A003A68E4 /* imakoko_notification.apns */; };
 		AA658F9027C13CEB001D4E17 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658F8F27C13CEB001D4E17 /* LoginView.swift */; };
 		AA658F9227C13CF6001D4E17 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658F9127C13CF6001D4E17 /* LoginPresenter.swift */; };
 		AA658F9427C13D69001D4E17 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658F9327C13D69001D4E17 /* Authentication.swift */; };
@@ -126,7 +127,7 @@
 		AA07D9F727E848B5006D4598 /* ImadokoMessagesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoMessagesStore.swift; sourceTree = "<group>"; };
 		AA07D9F927E8C04D006D4598 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		AA07D9FB27E9F331006D4598 /* NotificationMessageCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMessageCreator.swift; sourceTree = "<group>"; };
-		AA07D9FD27F09A5F006D4598 /* notification.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = notification.apns; sourceTree = "<group>"; };
+		AA07D9FD27F09A5F006D4598 /* imadoko_notification.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = imadoko_notification.apns; sourceTree = "<group>"; };
 		AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedNotification.swift; sourceTree = "<group>"; };
 		AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendHScrollView.swift; sourceTree = "<group>"; };
 		AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatorCircleImage.swift; sourceTree = "<group>"; };
@@ -146,6 +147,7 @@
 		AA35879327CA4DDD00F51AEA /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTokenStore.swift; sourceTree = "<group>"; };
 		AA35879B27CBC33500F51AEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA6512692806B94A003A68E4 /* imakoko_notification.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imakoko_notification.apns; sourceTree = "<group>"; };
 		AA658F8F27C13CEB001D4E17 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AA658F9127C13CF6001D4E17 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		AA658F9327C13D69001D4E17 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
@@ -271,7 +273,8 @@
 				AA26A68527AF9423003D1F17 /* ContentView.swift */,
 				AA83DC3E27AFA67F008F2226 /* Localizable.strings */,
 				AA26A68627AF9424003D1F17 /* Assets.xcassets */,
-				AA07D9FD27F09A5F006D4598 /* notification.apns */,
+				AA07D9FD27F09A5F006D4598 /* imadoko_notification.apns */,
+				AA6512692806B94A003A68E4 /* imakoko_notification.apns */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -615,9 +618,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AA07D9FE27F09A5F006D4598 /* notification.apns in Resources */,
+				AA07D9FE27F09A5F006D4598 /* imadoko_notification.apns in Resources */,
 				AA26A6B027AF9424003D1F17 /* Assets.xcassets in Resources */,
 				AA83DC3C27AFA67F008F2226 /* Localizable.strings in Resources */,
+				AA65126A2806B94A003A68E4 /* imakoko_notification.apns in Resources */,
 				AACE5ED727BE8CE800295A47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
