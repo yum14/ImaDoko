@@ -23,57 +23,63 @@ struct MapView: View {
                 return .fractional(0.1)
             }
         }
-        .onTranslation { translation in
-            //            height = translation.height
-            print(translation.height)
-        }
+        .onTranslation(self.presenter.onOverlaySheetTranslation)
         .notchChange(self.$presenter.notch)
         .disable(.max, self.presenter.notch == .min)
     }
     
-    
     var body: some View {
         ZStack {
-            ZStack {
-                Map(coordinateRegion: self.$appDelegate.region,
-                    interactionModes: .all,
-                    showsUserLocation: true,
-                    userTrackingMode: .none,
-                    annotationItems: self.presenter.pinItems
-                ) { item in
-                    MapAnnotation(coordinate: item.coordinate) {
-                        AvatarMapAnnotation(image: item.imageData != nil ? UIImage(data: item.imageData!) : nil)
-                            .offset(x: 0, y: -32)
-                    }
+            Map(coordinateRegion: self.$presenter.region,
+                interactionModes: .all,
+                showsUserLocation: true,
+                userTrackingMode: .none,
+                annotationItems: self.presenter.pinItems
+            ) { item in
+                MapAnnotation(coordinate: item.coordinate) {
+                    AvatarMapAnnotation(image: item.imageData != nil ? UIImage(data: item.imageData!) : nil)
+                        .onTapGesture {
+                            self.presenter.onAvatarMapAnnotationTap(item: item)
+                        }
+                        .offset(x: 0, y: -42)
+                        .padding(.top, 42)
                 }
-                .ignoresSafeArea(edges: [.trailing, .leading, .top])
             }
+            .ignoresSafeArea(edges: [.trailing, .leading, .top])
+            
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
-                    LocationButton(onTap: {})
-                        .cornerRadius(8)
-                        .shadow(radius: 5, x: 0, y: 5)
-                        .padding(.horizontal)
-                        .padding(.bottom, 90)
+                    LocationButton(onTap: {
+                        withAnimation {
+                            self.presenter.onLocationButtonTap(region: self.appDelegate.region)
+                        }
+                    })
+                    .cornerRadius(8)
+                    .shadow(radius: 5, x: 0, y: 5)
+                    .padding(.horizontal)
+                    .padding(.bottom, 90)
                 }
+            }
+            
+            if self.presenter.overlaySheetType != .close {
+                Color.black.opacity(0.2)
+                    .onTapGesture {
+                        self.presenter.onOverlaySheetBackgroundTap()
+                    }
+                    .ignoresSafeArea()
             }
         }
         .dynamicOverlay(
-            MapOverlaySheet(friends: self.presenter.friends,
-                            editable: self.$presenter.editable,
-                            selectedIds: self.$presenter.selectedFriendIds,
-                            onSendMessageButtonTap: {
-                                withAnimation {
-                                    self.presenter.notch = .max
-                                }},
-                            onImakokoButtonTap: { self.presenter.onImakokoButtonTap(location: self.appDelegate.region.center) },
-                            onImadokoButtonTap: self.presenter.onImadokoButtonTap))
+            MapOverlaySheet {
+                self.presenter.makeAbountOverlaySheet()
+            }
+        )
         .dynamicOverlayBehavior(myOverlayBehavior)
         .ignoresSafeArea(edges: [.top, .trailing, .leading])
         .onAppear {
-            self.presenter.onAppear()
+            self.presenter.onAppear(initialRegion: self.appDelegate.region)
         }
         .onDisappear {
             self.presenter.onDisapper()
@@ -88,7 +94,7 @@ struct MapView_Previews: PreviewProvider {
         let interactor = MapInteractor()
         let router = MapRouter()
         let presenter = MapPresenter(interactor: interactor, router: router, uid: "1")
-        presenter.pinItems = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
+        presenter.pinItems = [PinItem(id: "previewId", coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088), createdAt: Date.now)]
         
         return ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
             return   MapView(presenter: presenter)

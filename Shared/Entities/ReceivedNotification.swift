@@ -24,5 +24,5 @@ struct ReceivedNotification: Identifiable {
 
 enum ReceivedNotificationType {
     case imadoko
-    case imakoko
+    case kokodayo
 }

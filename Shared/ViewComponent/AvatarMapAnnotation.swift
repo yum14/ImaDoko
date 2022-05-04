@@ -18,6 +18,9 @@ struct AvatarMapAnnotation: View {
                     Circle()
                         .frame(width: 48, height: 48)
                         .foregroundColor(.gray)
+                        .onTapGesture {
+                            print("aaaaaa")
+                        }
                     
                     if let image = image {
                         Image(uiImage: image)
@@ -26,7 +29,6 @@ struct AvatarMapAnnotation: View {
                             .frame(width: 48, height: 48)
                             .clipShape(Circle())
                             .overlay(Circle().stroke(Color(UIColor.systemBackground), lineWidth: 2))
-                        
                     } else {
                         Image(systemName: "person.crop.circle.fill")
                             .resizable()
@@ -39,11 +41,11 @@ struct AvatarMapAnnotation: View {
                     }
                 }
             }
-            .padding(.bottom, 6)
+//            .padding(.bottom, 6)
             
             Triangle()
-                .fill(.red)
-                .frame(width: 20, height: 16)
+                .fill(Color(uiColor: .systemBackground))
+                .frame(width: 8, height: 6)
         }
         .shadow(radius: 5, x: 0, y: 5)
     }

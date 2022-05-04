@@ -12,28 +12,24 @@ struct MessageView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-//        Form {
-//            Section {
-                Picker(selection: self.$presenter.messageTypeSelection) {
-                    Text("UnreadMessageHeader").tag(0)
-                } label: {
-                    Text("")
-                }
-                .pickerStyle(.segmented)
-                .padding()
-                
-                if self.presenter.messageTypeSelection == 0 {
-                    if self.presenter.unreadMessages.count > 0 {
-                        List {
-                            ForEach(self.presenter.unreadMessages, id: \.self) { message in
-                                UnrepliedMessageItem(from: message.from,
-                                                     createdAt:message.createdAt)
-                            }
+            Picker(selection: self.$presenter.messageTypeSelection) {
+                Text("UnreadMessageHeader").tag(0)
+            } label: {
+                Text("")
+            }
+            .pickerStyle(.segmented)
+            .padding()
+            
+            if self.presenter.messageTypeSelection == 0 {
+                if self.presenter.unreadMessages.count > 0 {
+                    List {
+                        ForEach(self.presenter.unreadMessages, id: \.self) { message in
+                            UnrepliedMessageItem(from: message.from,
+                                                 createdAt:message.createdAt)
                         }
                     }
                 }
-//            }
-//        }
+            }
         }
     }
 }

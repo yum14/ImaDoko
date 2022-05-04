@@ -56,13 +56,13 @@ extension RootPresenter {
                 switch result {
                 case .success(let image):
                     self.tabSelection = 2
-                    self.receivedNotification = ReceivedNotification(id: userId, name: userName, avatarImageData: image?.data, type: host == "imadoko" ? .imadoko : .imakoko)
+                    self.receivedNotification = ReceivedNotification(id: userId, name: userName, avatarImageData: image?.data, type: host == "imadoko" ? .imadoko : .kokodayo)
                 case .failure(let error):
                     print(error.localizedDescription)
                 }
             }
         } else {
-            // imakokoではreceivedNotificationは作らない（使わないので）
+            // kokodayoではreceivedNotificationは作らない（使わないので）
             self.tabSelection = 2
         }
         

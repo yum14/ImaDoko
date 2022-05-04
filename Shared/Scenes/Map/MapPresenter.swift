@@ -11,34 +11,88 @@ import MapKit
 import DynamicOverlay
 
 final class MapPresenter: ObservableObject {
+    private static let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
     
+    @Published var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088), span: coordinateSpan)
     @Published var friends: [Avatar] = []
     @Published var pinItems: [PinItem] = []
-    @Published var notch: Notch = .min {
-        didSet {
-            self.editable = (self.notch == .max)
-        }
-    }
-    @Published var editable = false
+    @Published var notch: Notch = .min
     @Published var selectedFriendIds: [String] = []
+    @Published var overlaySheetType: OverlaySheetType = .close
     
     private var friendProfiles: [Profile] = [] {
         didSet {
             let newFriends = self.friendProfiles.map { Avatar(id: $0.id, name: $0.name, avatarImageData: self.friendImages[$0.id]) }
             self.friends = newFriends
+            
+            guard let myLocations = self.myLocations else {
+                return
+            }
+            
+            if myLocations.locations.count == 0 {
+                return
+            }
+            
+            let newPinItems = myLocations.locations
+                .filter { location in
+                    self.friends.contains(where: { $0.id == location.id })
+                }
+                .map { location in
+                    PinItem(id: location.id,
+                            coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude),
+                            imageData: self.friendImages[location.id],
+                            createdAt: location.createdAt.dateValue())}
+            
+            self.pinItems = newPinItems
         }
     }
     private var friendImages: [String: Data] = [:] {
         didSet {
             let newFriends = self.friendProfiles.map { Avatar(id: $0.id, name: $0.name, avatarImageData: self.friendImages[$0.id]) }
             self.friends = newFriends
+            
+            if self.pinItems.count == 0 {
+                return
+            }
+            
+            let newPinItems = self.pinItems.map { PinItem(id: $0.id, coordinate: $0.coordinate, imageData: self.friendImages[$0.id], tint: $0.tint, createdAt: $0.createdAt) }
+            
+            self.pinItems = newPinItems
         }
     }
     
-    private var profile: Profile?
+    private var myLocations: MyLocations? {
+        didSet {
+            guard let myLocations = self.myLocations else {
+                self.pinItems = []
+                return
+            }
+            
+            if myLocations.locations.count == 0 {
+                self.pinItems = []
+                return
+            }
+            
+            
+            let newPinItems = myLocations.locations
+                .filter { location in
+                    self.friends.contains(where: { $0.id == location.id })
+                }
+                .map { location in
+                    PinItem(id: location.id,
+                            coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude),
+                            imageData: self.friendImages[location.id],
+                            createdAt: location.createdAt.dateValue())}
+            
+            self.pinItems = newPinItems
+        }
+    }
+    
+    var profile: Profile?
     private let interactor: MapUsecase
     private let router: MapWireframe
     private let uid: String
+    private var selectedPinItem: PinItem?
     
     init(interactor: MapUsecase, router: MapWireframe, uid: String) {
         self.interactor = interactor
@@ -48,33 +102,14 @@ final class MapPresenter: ObservableObject {
 }
 
 extension MapPresenter {
-    func onAppear() {
+    func onAppear(initialRegion: MKCoordinateRegion) {
+        
+        self.region = initialRegion
         
         self.interactor.addMyLocationsListener(id: self.uid) { result in
             switch result {
             case .success(let mylocations):
-                if let mylocations = mylocations {
-                    
-                    if mylocations.locations.count == 0 {
-                        self.pinItems = []
-                        return
-                    }
-                    
-                    self.interactor.getAvatarImages(ids: mylocations.locations.map { $0.id }) { result in
-                        switch result {
-                        case .success(let avatarImages):
-                            let newPinItems = mylocations.locations
-                                .map { location in
-                                    PinItem(coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude),
-                                            imageData: avatarImages?.first(where: { $0.id == location.id })?.data)}
-                            
-                            self.pinItems = newPinItems
-                            
-                        case .failure(let error):
-                            print(error.localizedDescription)
-                        }
-                    }
-                }
+                self.myLocations = mylocations
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -142,74 +177,72 @@ extension MapPresenter {
 }
 
 extension MapPresenter {
-    func onImakokoButtonTap(location: CLLocationCoordinate2D) {
-        guard let profile = self.profile else {
-            return
-        }
-        
-        if !(self.selectedFriendIds.count > 0) {
-            return
-        }
-        
-        let location = Location(id: profile.id, latitude: location.latitude, longitude: location.longitude)
-        
-        // 現在地情報を追加
-        for friendId in self.selectedFriendIds {
-            self.interactor.appendMyLocation(location, id: friendId) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-            }
-        }
-        
-        // プッシュ通知
-        self.interactor.setImakokoNotification(fromId: profile.id, fromName: profile.name, toIds: self.selectedFriendIds) { error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
-        
+    func onMessageDestinationViewDismiss() {
         withAnimation {
             self.notch = .min
             self.selectedFriendIds = []
         }
     }
     
-    func onImadokoButtonTap() {
-        guard let profile = self.profile else {
-            return
-        }
-        
-        if !(self.selectedFriendIds.count > 0) {
-            return
-        }
-        
-        let message = ImadokoMessage(id: profile.id)
-        
-        // イマドコメッセージを追加
-        for friendId in self.selectedFriendIds {
-            self.interactor.appendImadokoMessages(message, id: friendId) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
+    func onOverlaySheetTranslation(translation: MagneticNotchOverlayBehavior<Notch>.Translation) {
+        // シートを引き下げた際のView変更はここで実施
+        // notchChangeで変更された値に応じて実施すると判定が遅く、Viewの動きに違和感があるため
+        if translation.progress < 0.2 && self.overlaySheetType != .close {
+            withAnimation {
+                self.overlaySheetType = .close
             }
         }
+    }
+    
+    func onAvatarMapAnnotationTap(item: PinItem) {
+        self.selectedPinItem = item
         
-        // プッシュ通知
-        self.interactor.setImadokoNotification(fromId: profile.id, fromName: profile.name, toIds: self.selectedFriendIds) { error in
-            if let error = error {
-                print(error.localizedDescription)
-            }
-        }
+        // タップしたPinをMapのcenterにする
+        self.region = MKCoordinateRegion(center: item.coordinate, span: MapPresenter.coordinateSpan)
         
         withAnimation {
+            self.overlaySheetType = .pinDetail
+            self.notch = .max
+        }
+    }
+    
+    func onOverlaySheetBackgroundTap() {
+        withAnimation {
+            self.overlaySheetType = .close
             self.notch = .min
-            self.selectedFriendIds = []
+        }
+    }
+    
+    func onLocationButtonTap(region: MKCoordinateRegion) {
+        self.region = region
+    }
+}
+
+extension MapPresenter {
+    func makeAbountOverlaySheet() -> some View {
+        
+        switch self.overlaySheetType {
+        case .close:
+            return AnyView(SendMessageButton(onTap: {
+                withAnimation {
+                    self.overlaySheetType = .messageDestination
+                    self.notch = .max
+                }
+            }))
+        case .messageDestination:
+            return self.router.makeMessageDestinationView(myId: profile?.id ?? "", myName: profile?.name ?? "", friends: self.friends, onDismiss: {})
+        case .pinDetail:
+            return self.router.makePinDetailView(myId: self.profile?.id ?? "", myName: self.profile?.name ?? "", friend: self.friends.first(where: { $0.id == self.selectedPinItem!.id })!, createdAt: self.selectedPinItem!.createdAt, onDismiss: {})
         }
     }
 }
 
-
 enum Notch: CaseIterable, Equatable {
     case min, max
+}
+
+enum OverlaySheetType {
+    case close
+    case messageDestination
+    case pinDetail
 }

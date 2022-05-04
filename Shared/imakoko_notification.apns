@@ -5,5 +5,5 @@
         "sound":"default",
         "badge":1
     },
-    "url": "imadoko://imakoko?id=testid&name=testusername"
+    "url": "imadoko://kokodayo?id=testid&name=testusername"
 }

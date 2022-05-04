@@ -32,7 +32,7 @@ struct Location: Identifiable, Hashable {
     var longitude: Double
     var createdAt: Timestamp
     
-    init(id: String, latitude: Double, longitude: Double) {
+    init(id: String, latitude: Double, longitude: Double, createdAt: Date = Date()) {
         self.id = id
         self.latitude = latitude
         self.longitude = longitude

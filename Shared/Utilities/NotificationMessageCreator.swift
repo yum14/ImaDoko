@@ -9,9 +9,9 @@ import Foundation
 
 class NotificationMessageCreator {
     
-    static func createImakokoMessage(fromId: String, fromName: String, toIds: [String]) -> Notification {
-        let title = "イマココ"
-        let body = fromName + "さんからのイマココ"
+    static func createKokodayoMessage(fromId: String, fromName: String, toIds: [String]) -> Notification {
+        let title = "ココダヨ"
+        let body = fromName + "さんからのココダヨ"
         return Notification(fromId: fromId, title: title, body: body, toIds: toIds)
     }
     

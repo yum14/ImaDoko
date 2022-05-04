@@ -43,6 +43,17 @@
 		AA35879627CA5CCB00F51AEA /* NotificationTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */; };
 		AA35879C27CBC33500F51AEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879B27CBC33500F51AEA /* AppDelegate.swift */; };
 		AA65126A2806B94A003A68E4 /* imakoko_notification.apns in Resources */ = {isa = PBXBuildFile; fileRef = AA6512692806B94A003A68E4 /* imakoko_notification.apns */; };
+		AA65126D28130578003A68E4 /* PinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65126C28130578003A68E4 /* PinDetailView.swift */; };
+		AA65126F28130587003A68E4 /* PinDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65126E28130587003A68E4 /* PinDetailPresenter.swift */; };
+		AA651271281305B8003A68E4 /* PinDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA651270281305B8003A68E4 /* PinDetailRouter.swift */; };
+		AA651273281305FB003A68E4 /* PinDetailInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA651272281305FB003A68E4 /* PinDetailInteractor.swift */; };
+		AA65127628183136003A68E4 /* MessageDestinationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65127528183136003A68E4 /* MessageDestinationView.swift */; };
+		AA65127828183149003A68E4 /* MessageDestinationPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65127728183149003A68E4 /* MessageDestinationPresenter.swift */; };
+		AA65127A28183158003A68E4 /* MessageDestinationRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65127928183158003A68E4 /* MessageDestinationRouter.swift */; };
+		AA65127C281831C5003A68E4 /* MessageDestinationInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65127B281831C5003A68E4 /* MessageDestinationInteractor.swift */; };
+		AA65127E281E4BBD003A68E4 /* SendMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65127D281E4BBD003A68E4 /* SendMessageButton.swift */; };
+		AA651280281F9E83003A68E4 /* ImadokoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65127F281F9E83003A68E4 /* ImadokoButton.swift */; };
+		AA651282281F9E9A003A68E4 /* KokodayoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA651281281F9E9A003A68E4 /* KokodayoButton.swift */; };
 		AA658F9027C13CEB001D4E17 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658F8F27C13CEB001D4E17 /* LoginView.swift */; };
 		AA658F9227C13CF6001D4E17 /* LoginPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658F9127C13CF6001D4E17 /* LoginPresenter.swift */; };
 		AA658F9427C13D69001D4E17 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658F9327C13D69001D4E17 /* Authentication.swift */; };
@@ -148,6 +159,17 @@
 		AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTokenStore.swift; sourceTree = "<group>"; };
 		AA35879B27CBC33500F51AEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AA6512692806B94A003A68E4 /* imakoko_notification.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imakoko_notification.apns; sourceTree = "<group>"; };
+		AA65126C28130578003A68E4 /* PinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailView.swift; sourceTree = "<group>"; };
+		AA65126E28130587003A68E4 /* PinDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailPresenter.swift; sourceTree = "<group>"; };
+		AA651270281305B8003A68E4 /* PinDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailRouter.swift; sourceTree = "<group>"; };
+		AA651272281305FB003A68E4 /* PinDetailInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailInteractor.swift; sourceTree = "<group>"; };
+		AA65127528183136003A68E4 /* MessageDestinationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDestinationView.swift; sourceTree = "<group>"; };
+		AA65127728183149003A68E4 /* MessageDestinationPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDestinationPresenter.swift; sourceTree = "<group>"; };
+		AA65127928183158003A68E4 /* MessageDestinationRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDestinationRouter.swift; sourceTree = "<group>"; };
+		AA65127B281831C5003A68E4 /* MessageDestinationInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageDestinationInteractor.swift; sourceTree = "<group>"; };
+		AA65127D281E4BBD003A68E4 /* SendMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendMessageButton.swift; sourceTree = "<group>"; };
+		AA65127F281F9E83003A68E4 /* ImadokoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoButton.swift; sourceTree = "<group>"; };
+		AA651281281F9E9A003A68E4 /* KokodayoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokodayoButton.swift; sourceTree = "<group>"; };
 		AA658F8F27C13CEB001D4E17 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
 		AA658F9127C13CF6001D4E17 /* LoginPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginPresenter.swift; sourceTree = "<group>"; };
 		AA658F9327C13D69001D4E17 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
@@ -331,6 +353,28 @@
 			path = Store;
 			sourceTree = "<group>";
 		};
+		AA65126B28130523003A68E4 /* PinDetail */ = {
+			isa = PBXGroup;
+			children = (
+				AA65126C28130578003A68E4 /* PinDetailView.swift */,
+				AA65126E28130587003A68E4 /* PinDetailPresenter.swift */,
+				AA651272281305FB003A68E4 /* PinDetailInteractor.swift */,
+				AA651270281305B8003A68E4 /* PinDetailRouter.swift */,
+			);
+			path = PinDetail;
+			sourceTree = "<group>";
+		};
+		AA651274281830D8003A68E4 /* MessageDestination */ = {
+			isa = PBXGroup;
+			children = (
+				AA65127528183136003A68E4 /* MessageDestinationView.swift */,
+				AA65127728183149003A68E4 /* MessageDestinationPresenter.swift */,
+				AA65127B281831C5003A68E4 /* MessageDestinationInteractor.swift */,
+				AA65127928183158003A68E4 /* MessageDestinationRouter.swift */,
+			);
+			path = MessageDestination;
+			sourceTree = "<group>";
+		};
 		AA658F8E27C13CE0001D4E17 /* Login */ = {
 			isa = PBXGroup;
 			children = (
@@ -348,10 +392,12 @@
 				AA658F8E27C13CE0001D4E17 /* Login */,
 				AA83DC2627AF9B5A008F2226 /* Root */,
 				AA83DC2327AF97DA008F2226 /* Map */,
+				AA651274281830D8003A68E4 /* MessageDestination */,
 				AA83DC4027AFC674008F2226 /* Message */,
 				AA83DC2D27AF9CF3008F2226 /* Home */,
 				AAF8649B27D6471800AFA0E6 /* MyQrCode */,
 				AAF864A227D78E0100AFA0E6 /* MyQrCodeScanner */,
+				AA65126B28130523003A68E4 /* PinDetail */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -417,6 +463,9 @@
 				AAF864AF27D7A40A00AFA0E6 /* AvatarImagePicker.swift */,
 				AAF864B127D7A43800AFA0E6 /* ImagePickerController.swift */,
 				AADAC0C927FADF33006CDF0B /* ImadokoNotificationView.swift */,
+				AA65127D281E4BBD003A68E4 /* SendMessageButton.swift */,
+				AA65127F281F9E83003A68E4 /* ImadokoButton.swift */,
+				AA651281281F9E9A003A68E4 /* KokodayoButton.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -664,10 +713,12 @@
 				AAF8649427CD120F00AFA0E6 /* RootInteractor.swift in Sources */,
 				AA07DA0027F1EAC6006D4598 /* ReceivedNotification.swift in Sources */,
 				AA83DC4427AFC6DF008F2226 /* MessagePresenter.swift in Sources */,
+				AA65126D28130578003A68E4 /* PinDetailView.swift in Sources */,
 				AA83DC2827AF9B67008F2226 /* RootView.swift in Sources */,
 				AAF864B227D7A43800AFA0E6 /* ImagePickerController.swift in Sources */,
 				AAF8649A27D6465F00AFA0E6 /* QrCodeManager.swift in Sources */,
 				AA658FA827C286CE001D4E17 /* LoginRouter.swift in Sources */,
+				AA65127628183136003A68E4 /* MessageDestinationView.swift in Sources */,
 				AAADEFE027B7B28700D81A52 /* PinItem.swift in Sources */,
 				AAF8649F27D6477700AFA0E6 /* MyQrCodePresenter.swift in Sources */,
 				AA658FA627C281E2001D4E17 /* AppleSignInButton.swift in Sources */,
@@ -677,8 +728,10 @@
 				AAF864BA27DBB34500AFA0E6 /* AvatarImage.swift in Sources */,
 				AA658F9427C13D69001D4E17 /* Authentication.swift in Sources */,
 				AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */,
+				AA65127C281831C5003A68E4 /* MessageDestinationInteractor.swift in Sources */,
 				AA83DC2F27AF9D01008F2226 /* HomeView.swift in Sources */,
 				AA9E99B227B915D7004B8272 /* MapOverlaySheet.swift in Sources */,
+				AA651280281F9E83003A68E4 /* ImadokoButton.swift in Sources */,
 				AA83DC3727AF9F28008F2226 /* MapPresenter.swift in Sources */,
 				AA35879627CA5CCB00F51AEA /* NotificationTokenStore.swift in Sources */,
 				AA83DC2A27AF9BC2008F2226 /* RootRouter.swift in Sources */,
@@ -688,22 +741,29 @@
 				AA07D9F827E848B5006D4598 /* ImadokoMessagesStore.swift in Sources */,
 				AA07D9F427E37C4F006D4598 /* MyLocationsStore.swift in Sources */,
 				AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */,
+				AA651273281305FB003A68E4 /* PinDetailInteractor.swift in Sources */,
 				AAF864BE27DF882C00AFA0E6 /* MapInteractor.swift in Sources */,
 				AA07D9F627E846B9006D4598 /* ImadokoMessages.swift in Sources */,
 				AA83DC4627AFC6E7008F2226 /* MessageRouter.swift in Sources */,
 				AAF864B027D7A40A00AFA0E6 /* AvatarImagePicker.swift in Sources */,
 				AAF864B827DBB22100AFA0E6 /* AvatarImageStore.swift in Sources */,
+				AA651271281305B8003A68E4 /* PinDetailRouter.swift in Sources */,
+				AA65127828183149003A68E4 /* MessageDestinationPresenter.swift in Sources */,
 				AA83DC4927B018AC008F2226 /* UnrepliedMessageItem.swift in Sources */,
 				AA83DC2527AF980A008F2226 /* MapView.swift in Sources */,
+				AA651282281F9E9A003A68E4 /* KokodayoButton.swift in Sources */,
 				AAF864A127D6478400AFA0E6 /* MyQrCodeRouter.swift in Sources */,
 				AAADEFDA27B78AE500D81A52 /* Message.swift in Sources */,
 				AA658F9827C1F1FC001D4E17 /* GoogleSignInButton.swift in Sources */,
 				AAF864A627D78F3200AFA0E6 /* QrCodeScannerView.swift in Sources */,
 				AAF864AA27D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift in Sources */,
+				AA65126F28130587003A68E4 /* PinDetailPresenter.swift in Sources */,
 				AA658F9227C13CF6001D4E17 /* LoginPresenter.swift in Sources */,
 				AA07D9FA27E8C04D006D4598 /* LoginInteractor.swift in Sources */,
 				AA83DC3127AF9D15008F2226 /* HomeRouter.swift in Sources */,
+				AA65127E281E4BBD003A68E4 /* SendMessageButton.swift in Sources */,
 				AA07D9FC27E9F331006D4598 /* NotificationMessageCreator.swift in Sources */,
+				AA65127A28183158003A68E4 /* MessageDestinationRouter.swift in Sources */,
 				AA16D44227BA7ACB00804D0D /* FriendHScrollView.swift in Sources */,
 				AA35879227CA49F800F51AEA /* NotificationToken.swift in Sources */,
 				AAF864AE27D790B700AFA0E6 /* ViewDismissButton.swift in Sources */,

@@ -9,6 +9,8 @@ import Foundation
 import SwiftUI
 
 protocol MapWireframe {
+    func makePinDetailView(myId: String, myName: String, friend: Avatar, createdAt: Date, onDismiss: (() -> Void)?) -> AnyView
+    func makeMessageDestinationView(myId: String, myName: String, friends: [Avatar], onDismiss: (() -> Void)?) -> AnyView
 }
 
 final class MapRouter {
@@ -22,5 +24,11 @@ final class MapRouter {
 }
 
 extension MapRouter: MapWireframe {
+    func makePinDetailView(myId: String, myName: String, friend: Avatar, createdAt: Date, onDismiss: (() -> Void)?) -> AnyView {
+        return PinDetailRouter.assembleModules(myId: myId, myName: myName, friend: friend, createdAt: createdAt, onDismiss: onDismiss)
+    }
     
+    func makeMessageDestinationView(myId: String, myName: String, friends: [Avatar], onDismiss: (() -> Void)?) -> AnyView {
+        return MessageDestinationRouter.assembleModules(myId: myId, myName: myName, friends: friends, onDismiss: onDismiss)
+    }
 }

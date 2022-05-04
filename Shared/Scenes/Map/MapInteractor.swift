@@ -12,12 +12,8 @@ protocol MapUsecase {
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
     func getAvatarImage(id: String, completion: ((Result<AvatarImage?, Error>) -> Void)?)
     func getAvatarImages(ids: [String], completion: ((Result<[AvatarImage]?, Error>) -> Void)?)
-    func setImakokoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?)
-    func setImadokoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?)
-    func appendMyLocation(_ data: Location, id: String, completion: ((Error?) -> Void)?)
     func addMyLocationsListener(id: String, completion: ((Result<MyLocations?, Error>) -> Void)?)
     func removeMyLocationsListener()
-    func appendImadokoMessages(_ data: ImadokoMessage, id: String, completion: ((Error?) -> Void)?)
 }
 
 final class MapInteractor {
@@ -53,29 +49,11 @@ extension MapInteractor: MapUsecase {
         self.avatarImageStore.getDocuments(ids: ids, completion: completion)
     }
     
-    func setImakokoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?) {
-        let data = NotificationMessageCreator.createImakokoMessage(fromId: fromId, fromName: fromName, toIds: toIds)
-        self.notificationStore.setData(data, completion: completion)
-    }
-    
-    func setImadokoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?) {
-        let data = NotificationMessageCreator.createImadokoMessage(fromId: fromId, fromName: fromName, toIds: toIds)
-        self.notificationStore.setData(data, completion: completion)
-    }
-    
-    func appendMyLocation(_ data: Location, id: String, completion: ((Error?) -> Void)?) {
-        self.myLocationsStore.appendLocation(data, id: id, completion: completion)
-    }
-    
     func addMyLocationsListener(id: String, completion: ((Result<MyLocations?, Error>) -> Void)?) {
         self.myLocationsStore.addListener(id: id, overwrite: false, completion: completion)
     }
     
     func removeMyLocationsListener() {
         self.myLocationsStore.removeListener()
-    }
-    
-    func appendImadokoMessages(_ data: ImadokoMessage, id: String, completion: ((Error?) -> Void)?) {
-        self.imadokoMessagesStore.appendImadokoMessage(data, id: id, completion: completion)
     }
 }
