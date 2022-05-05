@@ -20,6 +20,8 @@ final class MapPresenter: ObservableObject {
     @Published var selectedFriendIds: [String] = []
     @Published var overlaySheetType: OverlaySheetType = .close
     
+    private var firstAppear = true
+    
     private var friendProfiles: [Profile] = [] {
         didSet {
             let newFriends = self.friendProfiles.map { Avatar(id: $0.id, name: $0.name, avatarImageData: self.friendImages[$0.id]) }
@@ -104,7 +106,10 @@ final class MapPresenter: ObservableObject {
 extension MapPresenter {
     func onAppear(initialRegion: MKCoordinateRegion) {
         
-        self.region = initialRegion
+        if self.firstAppear {
+            self.region = initialRegion
+            self.firstAppear.toggle()
+        }
         
         self.interactor.addMyLocationsListener(id: self.uid) { result in
             switch result {
