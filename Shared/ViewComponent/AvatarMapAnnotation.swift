@@ -18,10 +18,7 @@ struct AvatarMapAnnotation: View {
                     Circle()
                         .frame(width: 48, height: 48)
                         .foregroundColor(.gray)
-                        .onTapGesture {
-                            print("aaaaaa")
-                        }
-                    
+
                     if let image = image {
                         Image(uiImage: image)
                             .resizable()
@@ -41,11 +38,10 @@ struct AvatarMapAnnotation: View {
                     }
                 }
             }
-//            .padding(.bottom, 6)
             
             Triangle()
                 .fill(Color(uiColor: .systemBackground))
-                .frame(width: 8, height: 6)
+                .frame(width: 8, height: 8)
         }
         .shadow(radius: 5, x: 0, y: 5)
     }

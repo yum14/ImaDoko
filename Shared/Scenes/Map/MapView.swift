@@ -41,8 +41,8 @@ struct MapView: View {
                         .onTapGesture {
                             self.presenter.onAvatarMapAnnotationTap(item: item)
                         }
-                        .offset(x: 0, y: -42)
-                        .padding(.top, 42)
+                        .offset(x: 0, y: -44)
+                        .padding(.top, 44)
                 }
             }
             .ignoresSafeArea(edges: [.trailing, .leading, .top])

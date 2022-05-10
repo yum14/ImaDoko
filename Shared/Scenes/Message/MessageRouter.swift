@@ -13,8 +13,9 @@ protocol MessageWireframe {
 
 final class MessageRouter {
     static func assembleModules(uid: String) -> AnyView {
+        let interactor = MessageInteractor()
         let router = MessageRouter()
-        let presenter = MessagePresenter(router: router, uid: uid)
+        let presenter = MessagePresenter(interactor: interactor, router: router, uid: uid)
         let view = MessageView(presenter: presenter)
         return AnyView(view)
     }

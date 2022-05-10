@@ -81,7 +81,7 @@ final class ImadokoMessagesStore {
         }
         
         let data = (dic["messages"] as! [[String:Any]])
-            .map { ImadokoMessage(id: $0["id"] as! String) }
+            .map { ImadokoMessage(id: $0["id"] as! String, createdAt: ($0["created_at"] as! Timestamp).dateValue(), replyed: $0["replyed"] as! Bool) }
         
         let messages = ImadokoMessages(id: dic["id"] as! String,
                                        messages: data)

@@ -84,6 +84,11 @@ extension RootPresenter {
             }
         }
         
+        
+        // TODO: イマドコ通知を既読にする
+        
+        
+        
         self.showingNotificationPopup = false
     }
     

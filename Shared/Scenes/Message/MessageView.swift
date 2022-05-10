@@ -21,23 +21,26 @@ struct MessageView: View {
             .padding()
             
             if self.presenter.messageTypeSelection == 0 {
-                if self.presenter.unreadMessages.count > 0 {
-                    List {
-                        ForEach(self.presenter.unreadMessages, id: \.self) { message in
-                            UnrepliedMessageItem(from: message.from,
-                                                 createdAt:message.createdAt)
-                        }
+                List {
+                    ForEach(self.presenter.unreadMessages, id: \.self) { message in
+                        UnrepliedMessageItem(from: message.from,
+                                             createdAt: message.createdAt,
+                                             avatarImage: message.avatarImage)
                     }
                 }
             }
+        }
+        .onAppear {
+            self.presenter.onAppear()
         }
     }
 }
 
 struct MessageView_Previews: PreviewProvider {
     static var previews: some View {
+        let interactor = MessageInteractor()
         let router = MessageRouter()
-        let presenter = MessagePresenter(router: router, uid: "")
+        let presenter = MessagePresenter(interactor: interactor, router: router, uid: "")
         presenter.unreadMessages = [Message(from: "アカウント1"),
                                     Message(from: "アカウント2")]
         

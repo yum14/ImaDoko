@@ -21,14 +21,12 @@ final class MapInteractor {
     private let avatarImageStore: AvatarImageStore
     private let notificationStore: NotificationStore
     private let myLocationsStore: MyLocationsStore
-    private let imadokoMessagesStore: ImadokoMessagesStore
     
     init() {
         self.profileStore = ProfileStore()
         self.avatarImageStore = AvatarImageStore()
         self.notificationStore = NotificationStore()
         self.myLocationsStore = MyLocationsStore()
-        self.imadokoMessagesStore = ImadokoMessagesStore()
     }
 }
 
