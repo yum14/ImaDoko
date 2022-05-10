@@ -57,7 +57,7 @@ extension MessagePresenter {
                             if let profiles = profiles {
                                 // 対象は1日前まで
                                 let newMessages = imadokoMessages.messages
-                                    .filter({ !$0.replyed && $0.createdAt.dateValue().addingTimeInterval(60*60*24*10) >= Date.now })
+                                    .filter({ !$0.replyed && $0.createdAt.dateValue().addingTimeInterval(60*60*24) >= Date.now })
                                     .map({ message in
                                         Message(id: message.id, from: profiles.first{ $0.id == message.id }?.name ?? "",
                                                 avatarImage: nil,
