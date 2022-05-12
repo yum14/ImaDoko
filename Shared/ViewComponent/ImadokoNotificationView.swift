@@ -33,7 +33,7 @@ struct ImadokoNotificationView: View {
                     Button {
                         self.onReply?()
                     } label: {
-                        Text("ImadokoNotificationSend")
+                        Text("NotificationSend")
                             .foregroundColor(.white)
                             .fontWeight(.bold)
                             .frame(width: 120, height: 40)

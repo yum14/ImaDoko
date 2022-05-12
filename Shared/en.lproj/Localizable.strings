@@ -33,5 +33,8 @@
 "QRCodeDescription" = "Your friends can scan this QR code to add you to your friends.";
 "ImadokoNotificationDesc1" = "You received a Imadoko-request.";
 "ImadokoNotificationDesc2" = "Do you want to send your current location?";
-"ImadokoNotificationSend" = "Send";
+"NotificationSend" = "Send";
 "ImadokoNotificationDismiss" = "Dismiss";
+"DeleteButton" = "Delete";
+"DeleteUnrepliedMessage" = "Do you want to delete unreplied message from \"%@\"?";
+"SendNotificationFromUnrepliedMessage" = "Do you want to send your current location to \"%@\"?";

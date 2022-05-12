@@ -6,10 +6,17 @@
 //
 
 import Foundation
+import MapKit
 
 final class MessagePresenter: ObservableObject {
     @Published var messageTypeSelection = 0
     @Published var unreadMessages: [Message] = []
+
+    @Published var showingDeleteAlert = false
+    @Published var showingSendNotificationAlert = false
+    
+    var selectedMessage: Message?
+    var profile: Profile?
     
     private var messageAvatarImages: [String: Data] = [:] {
         didSet {
@@ -42,6 +49,16 @@ extension MessagePresenter {
     
     func onAppear() {
         
+        // profile取得
+        self.interactor.getProfile(id: self.uid) { result in
+            switch result {
+            case .success(let profile):
+                self.profile = profile
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
         // イマドコメッセージのリスナー作成
         self.interactor.addImadokoMessagesListener(id: self.uid) { result in
             switch result {
@@ -57,7 +74,7 @@ extension MessagePresenter {
                             if let profiles = profiles {
                                 // 対象は1日前まで
                                 let newMessages = imadokoMessages.messages
-                                    .filter({ !$0.replyed && $0.createdAt.dateValue().addingTimeInterval(60*60*24) >= Date.now })
+                                    .filter({ !$0.replyed && $0.createdAt.dateValue().addingTimeInterval(60*60*24*12) >= Date.now })
                                     .map({ message in
                                         Message(id: message.id, from: profiles.first{ $0.id == message.id }?.name ?? "",
                                                 avatarImage: nil,
@@ -95,5 +112,42 @@ extension MessagePresenter {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func onDisappear() {
+        self.interactor.removeImadokoMessagesListener()
+    }
+    
+    func onSendButtonTap(message: Message) {
+        self.selectedMessage = message
+        self.showingSendNotificationAlert = true
+    }
+    
+    func onTrashButtonTap(message: Message) {
+        self.selectedMessage = message
+        self.showingDeleteAlert = true
+    }
+    
+    func onSendLocationConfirm(myLocation: CLLocationCoordinate2D) {
+        guard let selectedMessage = self.selectedMessage, let profile = self.profile else {
+            return
+        }
+
+        let location = Location(id: profile.id, latitude: myLocation.latitude, longitude: myLocation.longitude)
+
+        // 現在地情報を追加
+        self.interactor.appendMyLocation(location, id: selectedMessage.id) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+
+        // プッシュ通知
+        self.interactor.setKokodayoNotification(fromId: profile.id, fromName: profile.name, toIds: [selectedMessage.id]) { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
+        
     }
 }

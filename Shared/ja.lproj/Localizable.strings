@@ -32,5 +32,9 @@
 "QRCodeDescription" = "友だちがこのQRコードをスキャンすると、あなたを友だちに追加できます。";
 "ImadokoNotificationDesc1" = "イマドコリクエストを受け取りました。";
 "ImadokoNotificationDesc2" = "現在地を送信しますか？";
-"ImadokoNotificationSend" = "送信";
+"NotificationSend" = "送信";
 "ImadokoNotificationDismiss" = "拒否";
+"DeleteButton" = "削除";
+"DeleteUnrepliedMessage" = "\"%@\"さんからの未返信のメッセージを削除しますか？";
+"SendNotificationFromUnrepliedMessage" = "\"%@\"さんに現在地を送信しますか？";
+
