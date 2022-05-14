@@ -33,7 +33,7 @@ final class LocationStore {
         }
         
         self.listener = self.db!.collection(self.collectionName)
-            .whereField("ownerId", isEqualTo: ownerId)
+            .whereField("owner_id", isEqualTo: ownerId)
             .addSnapshotListener { querySnapshot, error in
                 
                 let result = Result<[Location]?, Error> {
@@ -61,6 +61,34 @@ final class LocationStore {
         db!.collection(self.collectionName).document(data.id).setData(data.toDictionary(), completion: completion)
     }
     
+    func delete(id: String, completion: ((Error?) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        db!.collection(self.collectionName).document(id).delete(completion: completion)
+    }
+    
+    func getDocuments(ownerId: String, userId: String, completion: ((Result<[Location]?, Error>) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        db!.collection(self.collectionName)
+            .whereField("owner_id", isEqualTo: ownerId)
+            .whereField("user_id", isEqualTo: userId)
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    completion?(Result.failure(error))
+                    return
+                }
+                
+                let locations = self.map(querySnapshot: querySnapshot)
+                
+                completion?(Result.success(locations))
+            }
+    }
+    
     private func map(querySnapshot: QuerySnapshot?) -> [Location] {
         guard let querySnapshot = querySnapshot, querySnapshot.documents.count > 0 else {
             return []
@@ -69,8 +97,8 @@ final class LocationStore {
         let locations = querySnapshot.documents.map { documentSnapshot -> Location in
             let doc = documentSnapshot.data(with: .estimate)
             return Location(id: doc["id"] as! String,
-                            userId: doc["userId"] as! String,
-                            ownerId: doc["ownerId"] as! String,
+                            userId: doc["user_id"] as! String,
+                            ownerId: doc["owner_id"] as! String,
                             latitude: doc["latitude"] as! Double,
                             longitude: doc["longitude"] as! Double,
                             createdAt: (doc["created_at"] as! Timestamp).dateValue())

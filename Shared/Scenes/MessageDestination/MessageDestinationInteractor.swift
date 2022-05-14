@@ -29,7 +29,23 @@ final class MessageDestinationInteractor {
 extension MessageDestinationInteractor: MessageDestinationUsecase {
     
     func setLocation(_ data: Location, completion: ((Error?) -> Void)?) {
-        self.locationStore.setData(data, completion: completion)
+        self.locationStore.getDocuments(ownerId: data.ownerId, userId: data.userId) { result in
+            switch result {
+            case .success(let locations):
+                if let locations = locations {
+            
+                    // 現在地情報を削除
+                    for location in locations {
+                        self.locationStore.delete(id: location.id, completion: { _ in })
+                    }
+                    
+                    // 現在地情報を追加
+                    self.locationStore.setData(data, completion: completion)
+                }
+            case .failure(let error):
+                completion?(error)
+            }
+        }
     }
     
     func setImadokoMessage(_ data: ImadokoMessage, completion: ((Error?) -> Void)?) {

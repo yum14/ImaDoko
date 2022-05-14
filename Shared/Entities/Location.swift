@@ -28,8 +28,8 @@ struct Location: Identifiable, Hashable {
     func toDictionary() -> [String: Any] {
         var dic: [String: Any] = [:]
         dic["id"] = self.id
-        dic["userId"] = self.userId
-        dic["ownerId"] = self.ownerId
+        dic["user_id"] = self.userId
+        dic["owner_id"] = self.ownerId
         dic["latitude"] = self.latitude
         dic["longitude"] = self.longitude
         dic["created_at"] = self.createdAt

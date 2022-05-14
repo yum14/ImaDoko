@@ -230,9 +230,21 @@ extension MapPresenter {
                 }
             }))
         case .messageDestination:
-            return self.router.makeMessageDestinationView(myId: profile?.id ?? "", myName: profile?.name ?? "", friends: self.friends, onDismiss: {})
+            return self.router.makeMessageDestinationView(myId: profile?.id ?? "", myName: profile?.name ?? "", friends: self.friends, onDismiss: {
+                withAnimation {
+                    self.overlaySheetType = .close
+                    self.notch = .min
+                    self.selectedFriendIds = []
+                }
+            })
         case .pinDetail:
-            return self.router.makePinDetailView(myId: self.profile?.id ?? "", myName: self.profile?.name ?? "", friend: self.friends.first(where: { $0.id == self.selectedPinItem!.id })!, createdAt: self.selectedPinItem!.createdAt, onDismiss: {})
+            return self.router.makePinDetailView(myId: self.profile?.id ?? "", myName: self.profile?.name ?? "", friend: self.friends.first(where: { $0.id == self.selectedPinItem!.id })!, createdAt: self.selectedPinItem!.createdAt, onDismiss: {
+                withAnimation {
+                    self.overlaySheetType = .close
+                    self.notch = .min
+                    self.selectedFriendIds = []
+                }
+            })
         }
     }
 }
