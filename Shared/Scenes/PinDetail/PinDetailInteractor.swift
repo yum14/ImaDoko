@@ -8,32 +8,32 @@
 import Foundation
 
 protocol PinDetailUsecase {
-    func appendMyLocation(_ data: Location, id: String, completion: ((Error?) -> Void)?)
-    func appendImadokoMessages(_ data: ImadokoMessage, id: String, completion: ((Error?) -> Void)?)
+    func setLocation(_ data: Location, completion: ((Error?) -> Void)?)
+    func setImadokoMessage(_ data: ImadokoMessage, completion: ((Error?) -> Void)?)
     func setKokodayoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?)
     func setImadokoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?)
 }
 
 final class PinDetailInteractor {
     private let notificationStore: NotificationStore
-    private let myLocationsStore: MyLocationsStore
-    private let imadokoMessagesStore: ImadokoMessagesStore
+    private let locationStore: LocationStore
+    private let imadokoMessageStore: ImadokoMessageStore
     
     init() {
         self.notificationStore = NotificationStore()
-        self.myLocationsStore = MyLocationsStore()
-        self.imadokoMessagesStore = ImadokoMessagesStore()
+        self.locationStore = LocationStore()
+        self.imadokoMessageStore = ImadokoMessageStore()
     }
 }
 
 extension PinDetailInteractor: PinDetailUsecase {
     
-    func appendMyLocation(_ data: Location, id: String, completion: ((Error?) -> Void)?) {
-        self.myLocationsStore.appendLocation(data, id: id, completion: completion)
+    func setLocation(_ data: Location, completion: ((Error?) -> Void)?) {
+        self.locationStore.setData(data, completion: completion)
     }
     
-    func appendImadokoMessages(_ data: ImadokoMessage, id: String, completion: ((Error?) -> Void)?) {
-        self.imadokoMessagesStore.appendImadokoMessage(data, id: id, completion: completion)
+    func setImadokoMessage(_ data: ImadokoMessage, completion: ((Error?) -> Void)?) {
+        self.imadokoMessageStore.setData(data, completion: completion)
     }
     
     func setKokodayoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?) {

@@ -7,27 +7,8 @@
 
 import Foundation
 
-protocol LoginUsecase {
-    func createInitialMyLocations(uid: String, completion: ((Error?) -> Void)?)
-    func createInitialImadokoMessages(uid: String, completion: ((Error?) -> Void)?)
-}
+protocol LoginUsecase {}
 
-final class LoginInteractor {
-    private let myLocationsStore: MyLocationsStore
-    private let imadokoMessagesStore: ImadokoMessagesStore
-    
-    init() {
-        self.myLocationsStore = MyLocationsStore()
-        self.imadokoMessagesStore = ImadokoMessagesStore()
-    }
-}
+final class LoginInteractor {}
 
-extension LoginInteractor: LoginUsecase {
-    func createInitialMyLocations(uid: String, completion: ((Error?) -> Void)?) {
-        self.myLocationsStore.setData(MyLocations(id: uid, locations: []), completion: completion)
-    }
-    
-    func createInitialImadokoMessages(uid: String, completion: ((Error?) -> Void)?) {
-        self.imadokoMessagesStore.setData(ImadokoMessages(id: uid, messages: []), completion: completion)
-    }
-}
+extension LoginInteractor: LoginUsecase {}

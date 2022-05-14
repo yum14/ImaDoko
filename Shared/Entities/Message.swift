@@ -9,17 +9,20 @@ import Foundation
 
 struct Message: Identifiable, Hashable, Codable {
     var id: String
-    var from: String
+    var userId: String
+    var userName: String
     var avatarImage: Data?
     var createdAt: Date
     
     init(id: String = UUID().uuidString,
-         from: String,
+         userId: String,
+         userName: String,
          avatarImage: Data? = nil,
          createdAt: Date = Date()) {
         
         self.id = id
-        self.from = from
+        self.userId = userId
+        self.userName = userName
         self.avatarImage = avatarImage
         self.createdAt = createdAt
     }

@@ -41,12 +41,11 @@ extension MessageDestinationPresenter {
         if self.selectedIds.count == 0 {
             return
         }
-
-        let location = Location(id: self.myId, latitude: myLocation.latitude, longitude: myLocation.longitude)
-
+        
         // 現在地情報を追加
         for friendId in self.selectedIds {
-            self.interactor.appendMyLocation(location, id: friendId) { error in
+            let location = Location(userId: self.myId, ownerId: friendId, latitude: myLocation.latitude, longitude: myLocation.longitude)
+            self.interactor.setLocation(location) { error in
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -68,11 +67,10 @@ extension MessageDestinationPresenter {
             return
         }
 
-        let message = ImadokoMessage(id: self.myId)
-
         // イマドコメッセージを追加
         for friendId in self.selectedIds {
-            self.interactor.appendImadokoMessages(message, id: friendId) { error in
+            let message = ImadokoMessage(userId: self.myId, ownerId: friendId)
+            self.interactor.setImadokoMessage(message) { error in
                 if let error = error {
                     print(error.localizedDescription)
                 }

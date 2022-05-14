@@ -44,19 +44,7 @@ extension LoginPresenter {
     }
     
     func createAccount(auth: Authentication) {
-        auth.createUser { profile in
-            self.interactor.createInitialMyLocations(uid: profile.id) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-            }
-            
-            self.interactor.createInitialImadokoMessages(uid: profile.id) { error in
-                if let error = error {
-                    print(error.localizedDescription)
-                }
-            }
-        }
+        auth.createUser(onCreated: { _ in })
     }
     
     func cancelAccountCreation(auth: Authentication) {

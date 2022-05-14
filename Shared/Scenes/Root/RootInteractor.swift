@@ -10,18 +10,18 @@ import Foundation
 protocol RootUsecase {
     func setNotificationToken(data: NotificationToken, completion: ((Error?) -> Void)?)
     func getAvatarImage(id: String, completion: ((Result<AvatarImage?, Error>) -> Void)?)
-    func appendMyLocation(_ data: Location, id: String, completion: ((Error?) -> Void)?)
+    func setLocation(_ data: Location, completion: ((Error?) -> Void)?)
 }
 
 final class RootInteractor {
     private let tokenStore: NotificationTokenStore
     private let avatarImageStore: AvatarImageStore
-    private let myLocationsStore: MyLocationsStore
+    private let locationStore: LocationStore
     
     init() {
         self.tokenStore = NotificationTokenStore()
         self.avatarImageStore = AvatarImageStore()
-        self.myLocationsStore = MyLocationsStore()
+        self.locationStore = LocationStore()
     }
 }
 
@@ -34,7 +34,7 @@ extension RootInteractor: RootUsecase {
         self.avatarImageStore.getDocument(id: id, completion: completion)
     }
     
-    func appendMyLocation(_ data: Location, id: String, completion: ((Error?) -> Void)?) {
-        self.myLocationsStore.appendLocation(data, id: id, completion: completion)
+    func setLocation(_ data: Location, completion: ((Error?) -> Void)?) {
+        self.locationStore.setData(data, completion: completion)
     }
 }

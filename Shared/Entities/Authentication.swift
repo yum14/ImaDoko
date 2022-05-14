@@ -28,7 +28,7 @@ final class Authentication: UIResponder, ObservableObject {
     private var listener: AuthStateDidChangeListenerHandle!
     private var authToken: String?
     private var profileStore: ProfileStore
-    private var myLocationsStore: MyLocationsStore
+    private var locationStore: LocationStore
     
     var firebaseLoginUser: Firebase.User? {
         didSet {
@@ -51,7 +51,7 @@ final class Authentication: UIResponder, ObservableObject {
     
     override init() {
         self.profileStore = ProfileStore()
-        self.myLocationsStore = MyLocationsStore()
+        self.locationStore = LocationStore()
     }
     
     deinit {

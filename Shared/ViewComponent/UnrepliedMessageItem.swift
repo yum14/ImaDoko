@@ -33,6 +33,7 @@ struct UnrepliedMessageItem: View {
                 
                 VStack(alignment: .leading) {
                     Text(self.from)
+                        .lineLimit(1)
                     Text(DateUtility.toString(date: self.createdAt, template: "ydMMM HH:mm:ss"))
                         .font(.caption)
                         .foregroundColor(.secondary)

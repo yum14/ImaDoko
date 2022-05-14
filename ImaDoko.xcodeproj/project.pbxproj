@@ -10,10 +10,10 @@
 		AA07D9EC27E0ACC1006D4598 /* Avatar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9EB27E0ACC1006D4598 /* Avatar.swift */; };
 		AA07D9EE27E0EBFA006D4598 /* NotificationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9ED27E0EBFA006D4598 /* NotificationStore.swift */; };
 		AA07D9F027E0EC69006D4598 /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9EF27E0EC69006D4598 /* Notification.swift */; };
-		AA07D9F227E376D5006D4598 /* MyLocations.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F127E376D5006D4598 /* MyLocations.swift */; };
-		AA07D9F427E37C4F006D4598 /* MyLocationsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F327E37C4F006D4598 /* MyLocationsStore.swift */; };
-		AA07D9F627E846B9006D4598 /* ImadokoMessages.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F527E846B9006D4598 /* ImadokoMessages.swift */; };
-		AA07D9F827E848B5006D4598 /* ImadokoMessagesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F727E848B5006D4598 /* ImadokoMessagesStore.swift */; };
+		AA07D9F227E376D5006D4598 /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F127E376D5006D4598 /* Location.swift */; };
+		AA07D9F427E37C4F006D4598 /* LocationStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F327E37C4F006D4598 /* LocationStore.swift */; };
+		AA07D9F627E846B9006D4598 /* ImadokoMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F527E846B9006D4598 /* ImadokoMessage.swift */; };
+		AA07D9F827E848B5006D4598 /* ImadokoMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F727E848B5006D4598 /* ImadokoMessageStore.swift */; };
 		AA07D9FA27E8C04D006D4598 /* LoginInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9F927E8C04D006D4598 /* LoginInteractor.swift */; };
 		AA07D9FC27E9F331006D4598 /* NotificationMessageCreator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9FB27E9F331006D4598 /* NotificationMessageCreator.swift */; };
 		AA07D9FE27F09A5F006D4598 /* imadoko_notification.apns in Resources */ = {isa = PBXBuildFile; fileRef = AA07D9FD27F09A5F006D4598 /* imadoko_notification.apns */; };
@@ -133,10 +133,10 @@
 		AA07D9EB27E0ACC1006D4598 /* Avatar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Avatar.swift; sourceTree = "<group>"; };
 		AA07D9ED27E0EBFA006D4598 /* NotificationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationStore.swift; sourceTree = "<group>"; };
 		AA07D9EF27E0EC69006D4598 /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
-		AA07D9F127E376D5006D4598 /* MyLocations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocations.swift; sourceTree = "<group>"; };
-		AA07D9F327E37C4F006D4598 /* MyLocationsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyLocationsStore.swift; sourceTree = "<group>"; };
-		AA07D9F527E846B9006D4598 /* ImadokoMessages.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoMessages.swift; sourceTree = "<group>"; };
-		AA07D9F727E848B5006D4598 /* ImadokoMessagesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoMessagesStore.swift; sourceTree = "<group>"; };
+		AA07D9F127E376D5006D4598 /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		AA07D9F327E37C4F006D4598 /* LocationStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationStore.swift; sourceTree = "<group>"; };
+		AA07D9F527E846B9006D4598 /* ImadokoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoMessage.swift; sourceTree = "<group>"; };
+		AA07D9F727E848B5006D4598 /* ImadokoMessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoMessageStore.swift; sourceTree = "<group>"; };
 		AA07D9F927E8C04D006D4598 /* LoginInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginInteractor.swift; sourceTree = "<group>"; };
 		AA07D9FB27E9F331006D4598 /* NotificationMessageCreator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationMessageCreator.swift; sourceTree = "<group>"; };
 		AA07D9FD27F09A5F006D4598 /* imadoko_notification.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = imadoko_notification.apns; sourceTree = "<group>"; };
@@ -349,8 +349,8 @@
 				AAF864B327DBA81800AFA0E6 /* AvatarImageCache.swift */,
 				AAF864BB27DD192700AFA0E6 /* ProfileCache.swift */,
 				AA07D9ED27E0EBFA006D4598 /* NotificationStore.swift */,
-				AA07D9F327E37C4F006D4598 /* MyLocationsStore.swift */,
-				AA07D9F727E848B5006D4598 /* ImadokoMessagesStore.swift */,
+				AA07D9F327E37C4F006D4598 /* LocationStore.swift */,
+				AA07D9F727E848B5006D4598 /* ImadokoMessageStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -487,7 +487,7 @@
 			isa = PBXGroup;
 			children = (
 				AAADEFD927B78AE500D81A52 /* Message.swift */,
-				AA07D9F527E846B9006D4598 /* ImadokoMessages.swift */,
+				AA07D9F527E846B9006D4598 /* ImadokoMessage.swift */,
 				AAADEFDB27B7907000D81A52 /* Profile.swift */,
 				AAADEFDF27B7B28700D81A52 /* PinItem.swift */,
 				AA658F9327C13D69001D4E17 /* Authentication.swift */,
@@ -496,7 +496,7 @@
 				AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */,
 				AA07D9EB27E0ACC1006D4598 /* Avatar.swift */,
 				AA07D9EF27E0EC69006D4598 /* Notification.swift */,
-				AA07D9F127E376D5006D4598 /* MyLocations.swift */,
+				AA07D9F127E376D5006D4598 /* Location.swift */,
 				AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */,
 			);
 			path = Entities;
@@ -741,12 +741,12 @@
 				AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */,
 				AA07D9EE27E0EBFA006D4598 /* NotificationStore.swift in Sources */,
 				AA26A6AE27AF9424003D1F17 /* ContentView.swift in Sources */,
-				AA07D9F827E848B5006D4598 /* ImadokoMessagesStore.swift in Sources */,
-				AA07D9F427E37C4F006D4598 /* MyLocationsStore.swift in Sources */,
+				AA07D9F827E848B5006D4598 /* ImadokoMessageStore.swift in Sources */,
+				AA07D9F427E37C4F006D4598 /* LocationStore.swift in Sources */,
 				AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */,
 				AA651273281305FB003A68E4 /* PinDetailInteractor.swift in Sources */,
 				AAF864BE27DF882C00AFA0E6 /* MapInteractor.swift in Sources */,
-				AA07D9F627E846B9006D4598 /* ImadokoMessages.swift in Sources */,
+				AA07D9F627E846B9006D4598 /* ImadokoMessage.swift in Sources */,
 				AA83DC4627AFC6E7008F2226 /* MessageRouter.swift in Sources */,
 				AAF864B027D7A40A00AFA0E6 /* AvatarImagePicker.swift in Sources */,
 				AAF864B827DBB22100AFA0E6 /* AvatarImageStore.swift in Sources */,
@@ -776,7 +776,7 @@
 				AA07D9EC27E0ACC1006D4598 /* Avatar.swift in Sources */,
 				AADAC0CA27FADF33006CDF0B /* ImadokoNotificationView.swift in Sources */,
 				AA658F9027C13CEB001D4E17 /* LoginView.swift in Sources */,
-				AA07D9F227E376D5006D4598 /* MyLocations.swift in Sources */,
+				AA07D9F227E376D5006D4598 /* Location.swift in Sources */,
 				AAF8649D27D6475600AFA0E6 /* MyQrCodeView.swift in Sources */,
 				AAF8649627CE5C2900AFA0E6 /* HomeInteractor.swift in Sources */,
 				AA83DC3327AF9F12008F2226 /* HomePresenter.swift in Sources */,

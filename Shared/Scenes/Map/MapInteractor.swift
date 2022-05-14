@@ -12,21 +12,21 @@ protocol MapUsecase {
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
     func getAvatarImage(id: String, completion: ((Result<AvatarImage?, Error>) -> Void)?)
     func getAvatarImages(ids: [String], completion: ((Result<[AvatarImage]?, Error>) -> Void)?)
-    func addMyLocationsListener(id: String, completion: ((Result<MyLocations?, Error>) -> Void)?)
-    func removeMyLocationsListener()
+    func addLocationListener(ownerId: String, completion: ((Result<[Location]?, Error>) -> Void)?)
+    func removeLocationListener()
 }
 
 final class MapInteractor {
     private let profileStore: ProfileStore
     private let avatarImageStore: AvatarImageStore
     private let notificationStore: NotificationStore
-    private let myLocationsStore: MyLocationsStore
+    private let locationStore: LocationStore
     
     init() {
         self.profileStore = ProfileStore()
         self.avatarImageStore = AvatarImageStore()
         self.notificationStore = NotificationStore()
-        self.myLocationsStore = MyLocationsStore()
+        self.locationStore = LocationStore()
     }
 }
 
@@ -47,11 +47,11 @@ extension MapInteractor: MapUsecase {
         self.avatarImageStore.getDocuments(ids: ids, completion: completion)
     }
     
-    func addMyLocationsListener(id: String, completion: ((Result<MyLocations?, Error>) -> Void)?) {
-        self.myLocationsStore.addListener(id: id, overwrite: false, completion: completion)
+    func addLocationListener(ownerId: String, completion: ((Result<[Location]?, Error>) -> Void)?) {
+        self.locationStore.addListener(ownerId: ownerId, overwrite: false, completion: completion)
     }
     
-    func removeMyLocationsListener() {
-        self.myLocationsStore.removeListener()
+    func removeLocationListener() {
+        self.locationStore.removeListener()
     }
 }

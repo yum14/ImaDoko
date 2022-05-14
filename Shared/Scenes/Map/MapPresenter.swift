@@ -27,22 +27,18 @@ final class MapPresenter: ObservableObject {
             let newFriends = self.friendProfiles.map { Avatar(id: $0.id, name: $0.name, avatarImageData: self.friendImages[$0.id]) }
             self.friends = newFriends
             
-            guard let myLocations = self.myLocations else {
+            if self.locations.count == 0 {
                 return
             }
             
-            if myLocations.locations.count == 0 {
-                return
-            }
-            
-            let newPinItems = myLocations.locations
+            let newPinItems = self.locations
                 .filter { location in
-                    self.friends.contains(where: { $0.id == location.id })
+                    self.friends.contains(where: { $0.id == location.userId })
                 }
                 .map { location in
-                    PinItem(id: location.id,
+                    PinItem(id: location.userId,
                             coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude),
-                            imageData: self.friendImages[location.id],
+                            imageData: self.friendImages[location.userId],
                             createdAt: location.createdAt.dateValue())}
             
             self.pinItems = newPinItems
@@ -63,27 +59,22 @@ final class MapPresenter: ObservableObject {
         }
     }
     
-    private var myLocations: MyLocations? {
+    private var locations: [Location] = [] {
         didSet {
-            guard let myLocations = self.myLocations else {
-                self.pinItems = []
-                return
-            }
-            
-            if myLocations.locations.count == 0 {
+            if self.locations.count == 0 {
                 self.pinItems = []
                 return
             }
             
             
-            let newPinItems = myLocations.locations
+            let newPinItems = locations
                 .filter { location in
-                    self.friends.contains(where: { $0.id == location.id })
+                    self.friends.contains(where: { $0.id == location.userId })
                 }
                 .map { location in
-                    PinItem(id: location.id,
+                    PinItem(id: location.userId,
                             coordinate: CLLocationCoordinate2D(latitude: location.latitude, longitude: location.longitude),
-                            imageData: self.friendImages[location.id],
+                            imageData: self.friendImages[location.userId],
                             createdAt: location.createdAt.dateValue())}
             
             self.pinItems = newPinItems
@@ -111,10 +102,14 @@ extension MapPresenter {
             self.firstAppear.toggle()
         }
         
-        self.interactor.addMyLocationsListener(id: self.uid) { result in
+        self.interactor.addLocationListener(ownerId: self.uid) { result in
             switch result {
-            case .success(let mylocations):
-                self.myLocations = mylocations
+            case .success(let locations):
+                if let locations = locations {
+                    self.locations = locations
+                } else {
+                    self.locations = []
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -177,7 +172,7 @@ extension MapPresenter {
     }
     
     func onDisapper() {
-        self.interactor.removeMyLocationsListener()
+        self.interactor.removeLocationListener()
     }
 }
 

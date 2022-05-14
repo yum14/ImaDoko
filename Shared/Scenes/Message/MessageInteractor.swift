@@ -8,38 +8,39 @@
 import Foundation
 
 protocol MessageUsecase {
-    func addImadokoMessagesListener(id: String, completion: ((Result<ImadokoMessages?, Error>) -> Void)?)
-    func removeImadokoMessagesListener()
+    func addImadokoMessageListener(ownerId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
+    func removeImadokoMessageListener()
     func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
     func getAvatarImages(ids: [String], completion: ((Result<[AvatarImage]?, Error>) -> Void)?)
-    func appendMyLocation(_ data: Location, id: String, completion: ((Error?) -> Void)?)
+    func setLocation(_ data: Location, completion: ((Error?) -> Void)?)
     func setKokodayoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?)
+    func deleteImadokoMessage(id: String, completion: ((Error?) -> Void)?)
 }
 
 final class MessageInteractor {
-    private let imadokoMessagesStore: ImadokoMessagesStore
+    private let imadokoMessageStore: ImadokoMessageStore
     private let profileStore: ProfileStore
     private let avatarImageStore: AvatarImageStore
-    private let myLocationsStore: MyLocationsStore
+    private let locationStore: LocationStore
     private let notificationStore: NotificationStore
     
     init() {
-        self.imadokoMessagesStore = ImadokoMessagesStore()
+        self.imadokoMessageStore = ImadokoMessageStore()
         self.profileStore = ProfileStore()
         self.avatarImageStore = AvatarImageStore()
-        self.myLocationsStore = MyLocationsStore()
+        self.locationStore = LocationStore()
         self.notificationStore = NotificationStore()
     }
 }
 
 extension MessageInteractor: MessageUsecase {
-    func addImadokoMessagesListener(id: String, completion: ((Result<ImadokoMessages?, Error>) -> Void)?) {
-        self.imadokoMessagesStore.addListener(id: id, completion: completion)
+    func addImadokoMessageListener(ownerId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        self.imadokoMessageStore.addListener(ownerId: ownerId, completion: completion)
     }
     
-    func removeImadokoMessagesListener() {
-        self.imadokoMessagesStore.removeListener()
+    func removeImadokoMessageListener() {
+        self.imadokoMessageStore.removeListener()
     }
     
     func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
@@ -54,12 +55,16 @@ extension MessageInteractor: MessageUsecase {
         self.avatarImageStore.getDocuments(ids: ids, completion: completion)
     }
     
-    func appendMyLocation(_ data: Location, id: String, completion: ((Error?) -> Void)?) {
-        self.myLocationsStore.appendLocation(data, id: id, completion: completion)
+    func setLocation(_ data: Location, completion: ((Error?) -> Void)?) {
+        self.locationStore.setData(data, completion: completion)
     }
     
     func setKokodayoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?) {
         let data = NotificationMessageCreator.createKokodayoMessage(fromId: fromId, fromName: fromName, toIds: toIds)
         self.notificationStore.setData(data, completion: completion)
+    }
+    
+    func deleteImadokoMessage(id: String, completion: ((Error?) -> Void)?) {
+        self.imadokoMessageStore.delete(id: id, completion: completion)
     }
 }

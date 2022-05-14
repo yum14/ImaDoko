@@ -75,10 +75,10 @@ extension RootPresenter {
             return
         }
         
-        let location = Location(id: id, latitude: location.latitude, longitude: location.longitude)
-        
         // イマドコ通知元のユーザのデータとして、自分のロケーションを追加する
-        self.interactor.appendMyLocation(location, id: friendId) { error in
+        let location = Location(userId: id, ownerId: friendId, latitude: location.latitude, longitude: location.longitude)
+        
+        self.interactor.setLocation(location) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
