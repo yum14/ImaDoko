@@ -32,12 +32,17 @@ final class RootPresenter: ObservableObject {
 }
 
 extension RootPresenter {
-    func setNotificationToken(id: String, notificationToken: String) {
-        self.interactor.setNotificationToken(data: NotificationToken(id: id, notificationToken: notificationToken)) { error in
+    func onAppear(uid: String, notificationToken: String) {
+        self.interactor.setNotificationToken(data: NotificationToken(id: uid, notificationToken: notificationToken)) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
         }
+        
+        let yesterday = Date().addingTimeInterval(-60*60*24)
+        
+        // 期限切れデータを削除
+        self.interactor.deleteExpiredData(ownerId: uid, deadline: yesterday)
     }
     
     func onOpenUrl(url: URL) {

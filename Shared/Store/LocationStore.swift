@@ -89,6 +89,26 @@ final class LocationStore {
             }
     }
     
+    func getDocuments(ownerId: String, isLessThan: Date, completion: ((Result<[Location]?, Error>) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        db!.collection(self.collectionName)
+            .whereField("owner_id", isEqualTo: ownerId)
+            .whereField("created_at", isLessThan: isLessThan)
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    completion?(Result.failure(error))
+                    return
+                }
+                
+                let locations = self.map(querySnapshot: querySnapshot)
+                
+                completion?(Result.success(locations))
+            }
+    }
+    
     private func map(querySnapshot: QuerySnapshot?) -> [Location] {
         guard let querySnapshot = querySnapshot, querySnapshot.documents.count > 0 else {
             return []

@@ -30,8 +30,8 @@ struct ImadokoMessage: Identifiable, Hashable {
     func toDictionary() -> [String: Any] {
         var dic: [String: Any] = [:]
         dic["id"] = self.id
-        dic["userId"] = self.userId
-        dic["ownerId"] = self.ownerId
+        dic["user_id"] = self.userId
+        dic["owner_id"] = self.ownerId
         dic["replyed"] = self.replyed
         dic["created_at"] = self.createdAt
         

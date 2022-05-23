@@ -78,7 +78,7 @@ struct RootView: View {
                             guard let firebaseLoginUser = self.auth.firebaseLoginUser, let notificationToken = self.appDelegate.notificationToken else {
                                 return
                             }
-                            self.presenter.setNotificationToken(id: firebaseLoginUser.uid, notificationToken: notificationToken)
+                            self.presenter.onAppear(uid: firebaseLoginUser.uid, notificationToken: notificationToken)
                         }
                         .onOpenURL(perform: self.presenter.onOpenUrl)
                     }

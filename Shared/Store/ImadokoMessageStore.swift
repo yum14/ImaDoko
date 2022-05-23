@@ -33,7 +33,7 @@ final class ImadokoMessageStore {
         }
         
         self.listener = self.db!.collection(self.collectionName)
-            .whereField("ownerId", isEqualTo: ownerId)
+            .whereField("owner_id", isEqualTo: ownerId)
             .addSnapshotListener { querySnapshot, error in
                 
                 let result = Result<[ImadokoMessage]?, Error> {
@@ -51,6 +51,26 @@ final class ImadokoMessageStore {
     func removeListener() {
         self.listener?.remove()
         self.listener = nil
+    }
+    
+    func getDocuments(ownerId: String, isLessThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        db!.collection(self.collectionName)
+            .whereField("owner_id", isEqualTo: ownerId)
+            .whereField("created_at", isLessThan: isLessThan)
+            .getDocuments { querySnapshot, error in
+                if let error = error {
+                    completion?(Result.failure(error))
+                    return
+                }
+                
+                let messages = self.map(querySnapshot: querySnapshot)
+                
+                completion?(Result.success(messages))
+            }
     }
     
     func setData(_ data: ImadokoMessage, completion: ((Error?) -> Void)?) {
@@ -77,8 +97,8 @@ final class ImadokoMessageStore {
         let messages = querySnapshot.documents.map { documentSnapshot -> ImadokoMessage in
             let doc = documentSnapshot.data(with: .estimate)
             return ImadokoMessage(id: doc["id"] as! String,
-                                  userId: doc["userId"] as! String,
-                                  ownerId: doc["ownerId"] as! String,
+                                  userId: doc["user_id"] as! String,
+                                  ownerId: doc["owner_id"] as! String,
                                   replyed: doc["replyed"] as! Bool,
                                   createdAt: (doc["created_at"] as! Timestamp).dateValue())
         }
