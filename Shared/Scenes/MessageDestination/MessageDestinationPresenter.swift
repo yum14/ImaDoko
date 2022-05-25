@@ -17,6 +17,19 @@ final class MessageDestinationPresenter: ObservableObject {
     let myId: String
     let myName: String
     let onDismiss: (() -> Void)?
+    let onSend: (([Error]) -> Void)?
+    
+    var sendStatus: [String:Error?] = [:] {
+        didSet {
+            if self.selectedIds.count != self.sendStatus.count {
+                return
+            }
+
+            let errors = self.sendStatus.compactMap({(key, error) in error})
+            
+            self.onSend?(errors)
+        }
+    }
     
     private let interactor: MessageDestinationUsecase
     private let router: MessageDestinationWireframe
@@ -26,13 +39,15 @@ final class MessageDestinationPresenter: ObservableObject {
          myId: String,
          myName: String,
          friends: [Avatar],
-         onDismiss: (() -> Void)?) {
+         onDismiss: (() -> Void)?,
+         onSend: (([Error]) -> Void)?) {
         self.interactor = interactor
         self.router = router
         self.myId = myId
         self.myName = myName
         self.friends = friends
         self.onDismiss = onDismiss
+        self.onSend = onSend
     }
 }
 
@@ -49,6 +64,8 @@ extension MessageDestinationPresenter {
                 if let error = error {
                     print(error.localizedDescription)
                 }
+                
+                self.sendStatus[friendId] = error
             }
         }
 
@@ -59,6 +76,7 @@ extension MessageDestinationPresenter {
             }
         }
         
+        self.sendStatus = [:]
         self.onDismiss?()
     }
     
@@ -74,6 +92,8 @@ extension MessageDestinationPresenter {
                 if let error = error {
                     print(error.localizedDescription)
                 }
+                
+                self.sendStatus[friendId] = error
             }
         }
 
@@ -84,6 +104,7 @@ extension MessageDestinationPresenter {
             }
         }
         
+        self.sendStatus = [:]
         self.onDismiss?()
     }
 }

@@ -14,7 +14,9 @@ final class MessagePresenter: ObservableObject {
     
     @Published var showingDeleteAlert = false
     @Published var showingSendNotificationAlert = false
+    @Published var showingSendResultFloater = false
     
+    var resultType: SendResultFloater.ResultType = .complete
     var selectedMessage: Message?
     var profile: Profile?
     
@@ -145,6 +147,9 @@ extension MessagePresenter {
             if let error = error {
                 print(error.localizedDescription)
             }
+            
+            self.resultType = error != nil ? .failed : .complete
+            self.showingSendResultFloater = true
         }
         
         // プッシュ通知

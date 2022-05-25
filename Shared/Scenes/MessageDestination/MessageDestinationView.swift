@@ -50,7 +50,7 @@ struct MessageDestinationView_Previews: PreviewProvider {
         
         let interactor = MessageDestinationInteractor()
         let router = MessageDestinationRouter()
-        let presenter = MessageDestinationPresenter(interactor: interactor, router: router, myId: "preview_id", myName: "preview_name", friends: friends, onDismiss: {})
+        let presenter = MessageDestinationPresenter(interactor: interactor, router: router, myId: "preview_id", myName: "preview_name", friends: friends, onDismiss: {}, onSend: { _ in })
         MessageDestinationView(presenter: presenter)
             .environmentObject(appDelegate)
     }

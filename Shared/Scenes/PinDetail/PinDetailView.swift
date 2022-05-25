@@ -50,7 +50,7 @@ struct PinDetailView_Previews: PreviewProvider {
     static var previews: some View {
         let interactor = PinDetailInteractor()
         let router = PinDetailRouter()
-        let presenter = PinDetailPresenter(interactor: interactor, router: router, myId: "myId", myName: "myName", friend: Avatar(id: "friendId", name: "friendName"), createdAt: Date.now, onDismiss: {})
+        let presenter = PinDetailPresenter(interactor: interactor, router: router, myId: "myId", myName: "myName", friend: Avatar(id: "friendId", name: "friendName"), createdAt: Date.now, onDismiss: {}, onSend: { _ in })
         PinDetailView(presenter: presenter)
             .environmentObject(appDelegate)
     }

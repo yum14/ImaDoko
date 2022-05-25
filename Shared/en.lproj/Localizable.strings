@@ -38,3 +38,5 @@
 "DeleteButton" = "Delete";
 "DeleteUnrepliedMessage" = "Do you want to delete unreplied message from \"%@\"?";
 "SendNotificationFromUnrepliedMessage" = "Do you want to send your current location to \"%@\"?";
+"SendCompleted" = "completed!";
+"SendFailed" = "failed!";

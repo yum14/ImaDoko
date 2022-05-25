@@ -16,6 +16,7 @@ final class PinDetailPresenter: ObservableObject {
     @Published var createdAt: Date
     
     var onDismiss: (() -> Void)?
+    var onSend: ((Error?) -> Void)?
     
     private let interactor: PinDetailUsecase
     private let router: PinDetailWireframe
@@ -26,7 +27,8 @@ final class PinDetailPresenter: ObservableObject {
          myName: String,
          friend: Avatar,
          createdAt: Date,
-         onDismiss: (() -> Void)?) {
+         onDismiss: (() -> Void)?,
+         onSend: ((Error?) -> Void)?) {
         self.interactor = interactor
         self.router = router
         self.myId = myId
@@ -34,6 +36,7 @@ final class PinDetailPresenter: ObservableObject {
         self.friend = friend
         self.createdAt = createdAt
         self.onDismiss = onDismiss
+        self.onSend = onSend
     }
 }
 
@@ -47,6 +50,8 @@ extension PinDetailPresenter {
             if let error = error {
                 print(error.localizedDescription)
             }
+            
+            self.onSend?(error)
         }
 
         // プッシュ通知
@@ -68,6 +73,8 @@ extension PinDetailPresenter {
             if let error = error {
                 print(error.localizedDescription)
             }
+            
+            self.onSend?(error)
         }
 
         // プッシュ通知

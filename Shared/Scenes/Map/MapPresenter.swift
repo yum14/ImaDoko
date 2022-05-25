@@ -19,6 +19,9 @@ final class MapPresenter: ObservableObject {
     @Published var notch: Notch = .min
     @Published var selectedFriendIds: [String] = []
     @Published var overlaySheetType: OverlaySheetType = .close
+    @Published var showingSendResultFloater = false
+    
+    var resultType: SendResultFloater.ResultType = .complete
     
     private var firstAppear = true
     
@@ -236,6 +239,9 @@ extension MapPresenter {
                     self.notch = .min
                     self.selectedFriendIds = []
                 }
+            }, onSend: { errors in
+                self.resultType = errors.count > 0 ? .failed : .complete
+                self.showingSendResultFloater = true
             })
         case .pinDetail:
             return self.router.makePinDetailView(myId: self.profile?.id ?? "", myName: self.profile?.name ?? "", friend: self.friends.first(where: { $0.id == self.selectedPinItem!.id })!, createdAt: self.selectedPinItem!.createdAt, onDismiss: {
@@ -244,6 +250,9 @@ extension MapPresenter {
                     self.notch = .min
                     self.selectedFriendIds = []
                 }
+            }, onSend: { error in
+                self.resultType = error != nil ? .failed : .complete
+                self.showingSendResultFloater = true
             })
         }
     }

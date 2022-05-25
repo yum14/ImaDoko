@@ -34,6 +34,13 @@ struct MessageView: View {
             }
         }
         
+        .popup(isPresented: self.$presenter.showingSendResultFloater,
+               type: .floater(verticalPadding: 40),
+               position: .top,
+               autohideIn: 3.0) {
+            SendResultFloater(result: self.presenter.resultType)
+        }
+        
         .alert(String(format: NSLocalizedString("SendNotificationFromUnrepliedMessage", comment: ""), self.presenter.selectedMessage?.userName ?? ""), isPresented: self.$presenter.showingSendNotificationAlert) {
             Button("CencelButton", role: .cancel) {
                 print("cancel")

@@ -37,4 +37,5 @@
 "DeleteButton" = "削除";
 "DeleteUnrepliedMessage" = "\"%@\"さんからの未返信のメッセージを削除しますか？";
 "SendNotificationFromUnrepliedMessage" = "\"%@\"さんに現在地を送信しますか？";
-
+"SendCompleted" = "送信完了！";
+"SendFailed" = "送信失敗！";

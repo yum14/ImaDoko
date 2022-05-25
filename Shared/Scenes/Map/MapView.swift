@@ -77,6 +77,14 @@ struct MapView: View {
             }
         )
         .dynamicOverlayBehavior(myOverlayBehavior)
+        
+        .popup(isPresented: self.$presenter.showingSendResultFloater,
+               type: .floater(verticalPadding: 40),
+               position: .top,
+               autohideIn: 3.0) {
+            SendResultFloater(result: self.presenter.resultType)
+        }
+        
         .ignoresSafeArea(edges: [.top, .trailing, .leading])
         .onAppear {
             self.presenter.onAppear(initialRegion: self.appDelegate.region)
