@@ -13,6 +13,7 @@ import PopupView
 struct MapView: View {
     @ObservedObject var presenter: MapPresenter
     @EnvironmentObject var appDelegate: AppDelegate
+    @EnvironmentObject var resultNotification: ResultNotification
     
     var myOverlayBehavior: some DynamicOverlayBehavior {
         MagneticNotchOverlayBehavior<Notch> { notch in
@@ -73,24 +74,17 @@ struct MapView: View {
         }
         .dynamicOverlay(
             MapOverlaySheet {
-                self.presenter.makeAbountOverlaySheet()
+                self.presenter.makeAbountOverlaySheet(resultNotification: self.resultNotification)
             }
         )
         .dynamicOverlayBehavior(myOverlayBehavior)
-        
-        .popup(isPresented: self.$presenter.showingSendResultFloater,
-               type: .floater(verticalPadding: 40),
-               position: .top,
-               autohideIn: 3.0) {
-            SendResultFloater(result: self.presenter.resultType)
-        }
-        
         .ignoresSafeArea(edges: [.top, .trailing, .leading])
         .onAppear {
             self.presenter.onAppear(initialRegion: self.appDelegate.region)
         }
         .onDisappear {
             self.presenter.onDisapper()
+            self.resultNotification.hide()
         }
     }
 }

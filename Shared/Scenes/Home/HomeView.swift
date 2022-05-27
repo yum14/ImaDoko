@@ -6,10 +6,12 @@
 //
 
 import SwiftUI
+import Combine
 
 struct HomeView: View {
     @ObservedObject var presenter: HomePresenter
     @EnvironmentObject var auth: Authentication
+    @EnvironmentObject var resultNotification: ResultNotification
     
     var body: some View {
         VStack(spacing: 0) {
@@ -19,6 +21,12 @@ struct HomeView: View {
                 TextField("AccountName", text: self.$presenter.accountName)
                     .multilineTextAlignment(.center)
                     .autocapitalization(.none)
+                    .onReceive(Just(self.presenter.accountName)) { _ in
+                        //最大文字数を超えたら、最大文字数までの文字列を代入する
+                        if self.presenter.accountName.count > 20 {
+                            self.presenter.accountName = String(self.presenter.accountName.prefix(20))
+                        }
+                    }
                     .onSubmit {
                         self.presenter.onNameTextSubmit()
                     }
@@ -80,7 +88,7 @@ struct HomeView: View {
         }
         .fullScreenCover(isPresented: self.$presenter.showingQrCodeScannerSheet) {
             NavigationView {
-                self.presenter.makeAboutTeamQrCodeScannerView()
+                self.presenter.makeAboutTeamQrCodeScannerView(resultNotification: self.resultNotification)
             }
         }
         
@@ -89,6 +97,7 @@ struct HomeView: View {
         }
         .onDisappear {
             self.presenter.onDisappear()
+            self.resultNotification.hide()
         }
     }
 }

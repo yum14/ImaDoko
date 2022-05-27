@@ -40,3 +40,5 @@
 "SendNotificationFromUnrepliedMessage" = "Do you want to send your current location to \"%@\"?";
 "SendCompleted" = "completed!";
 "SendFailed" = "failed!";
+"AddFriendFailed" = "failed!";
+"AddFriendAlreadyAdded" = "\"%@\" has already added.";

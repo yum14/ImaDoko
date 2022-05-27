@@ -14,9 +14,7 @@ final class MessagePresenter: ObservableObject {
     
     @Published var showingDeleteAlert = false
     @Published var showingSendNotificationAlert = false
-    @Published var showingSendResultFloater = false
     
-    var resultType: SendResultFloater.ResultType = .complete
     var selectedMessage: Message?
     var profile: Profile?
     
@@ -135,7 +133,7 @@ extension MessagePresenter {
         self.showingDeleteAlert = true
     }
     
-    func onSendLocationConfirm(myLocation: CLLocationCoordinate2D) {
+    func onSendLocationConfirm(myLocation: CLLocationCoordinate2D, resultNotification: ResultNotification) {
         guard let selectedMessage = self.selectedMessage, let profile = self.profile else {
             return
         }
@@ -148,8 +146,7 @@ extension MessagePresenter {
                 print(error.localizedDescription)
             }
             
-            self.resultType = error != nil ? .failed : .complete
-            self.showingSendResultFloater = true
+            resultNotification.show(text: NSLocalizedString((error == nil) ? "SendCompleted" : "SendFailed", comment: ""))
         }
         
         // プッシュ通知

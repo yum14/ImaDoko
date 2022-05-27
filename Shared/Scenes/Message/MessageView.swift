@@ -10,6 +10,7 @@ import SwiftUI
 struct MessageView: View {
     @ObservedObject var presenter: MessagePresenter
     @EnvironmentObject var appDelegate: AppDelegate
+    @EnvironmentObject var resultNotification: ResultNotification
     
     var body: some View {
         VStack(spacing: 0) {
@@ -33,20 +34,13 @@ struct MessageView: View {
                 }
             }
         }
-        
-        .popup(isPresented: self.$presenter.showingSendResultFloater,
-               type: .floater(verticalPadding: 40),
-               position: .top,
-               autohideIn: 3.0) {
-            SendResultFloater(result: self.presenter.resultType)
-        }
-        
         .alert(String(format: NSLocalizedString("SendNotificationFromUnrepliedMessage", comment: ""), self.presenter.selectedMessage?.userName ?? ""), isPresented: self.$presenter.showingSendNotificationAlert) {
             Button("CencelButton", role: .cancel) {
                 print("cancel")
             }
             Button("NotificationSend") {
-                self.presenter.onSendLocationConfirm(myLocation: self.appDelegate.region.center)
+                self.presenter.onSendLocationConfirm(myLocation: self.appDelegate.region.center,
+                                                     resultNotification: self.resultNotification)
             }
         }
         .alert(String(format: NSLocalizedString("DeleteUnrepliedMessage", comment: ""), self.presenter.selectedMessage?.userName ?? ""), isPresented: self.$presenter.showingDeleteAlert) {
@@ -59,6 +53,7 @@ struct MessageView: View {
         }
         .onDisappear {
             self.presenter.onDisappear()
+            self.resultNotification.hide()
         }
     }
 }

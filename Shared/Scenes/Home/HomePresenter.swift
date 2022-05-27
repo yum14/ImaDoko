@@ -182,14 +182,14 @@ extension HomePresenter {
         return router.makeMyQrCodeView(uid: self.profile!.id)
     }
     
-    func makeAboutTeamQrCodeScannerView() -> some View {
+    func makeAboutTeamQrCodeScannerView(resultNotification: ResultNotification) -> some View {
         return router.makeMyQrCodeScannerView(
             onFound: { code in
                 self.showingQrCodeScannerSheet = false
                 
                 let qrCodeManager = QrCodeManager()
                 
-                 // test用
+//                 // test用
 //                let testCode = "https://icu.yum14/ImaDoko/friends/Nyhy3JLqLqMgPA5bAF8NV49Yh4I3"
 //                guard let uid = qrCodeManager.getMyAppQrCode(code: testCode) else {
 //                    return
@@ -203,7 +203,9 @@ extension HomePresenter {
                 }
                 
                 if profile.friends.contains(uid) {
-                    // TODO: すでに追加済である旨のバナー表示
+                    let message = String(format: NSLocalizedString("AddFriendAlreadyAdded", comment: ""),
+                                         self.friendProfiles.first { $0.id == uid }?.name ?? "")
+                    resultNotification.show(text: message)
                     return
                 }
                 
@@ -214,7 +216,8 @@ extension HomePresenter {
                     if let error = error {
                         print(error.localizedDescription)
                         
-                        // TODO: 追加に失敗した旨のバナー表示
+                        resultNotification.show(text: NSLocalizedString("AddFriendFailed", comment: ""))
+                        return
                     }
                 }
             },

@@ -15,7 +15,7 @@ struct ImadokoButton: View {
             self.onTap?()
         } label: {
             HStack {
-                Image(systemName: "person.crop.circle.badge.questionmark")
+                Image(systemName: "mappin.and.ellipse")
                     .font(.title)
                     .foregroundColor(.white)
                 
@@ -23,7 +23,8 @@ struct ImadokoButton: View {
                     .foregroundColor(.white)
                     .fontWeight(.bold)
             }
-            .frame(width: 184, height: 40)
+//            .frame(width: 184, height: 40)
+            .frame(width: 160, height: 40)
             .background(Color("MainColor"))
             .cornerRadius(24)
         }

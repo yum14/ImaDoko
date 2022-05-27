@@ -79,7 +79,8 @@
 		AA9E99AB27B8E674004B8272 /* DynamicOverlay in Frameworks */ = {isa = PBXBuildFile; productRef = AA9E99AA27B8E674004B8272 /* DynamicOverlay */; };
 		AA9E99AE27B8FD12004B8272 /* StatefulTabView in Frameworks */ = {isa = PBXBuildFile; productRef = AA9E99AD27B8FD12004B8272 /* StatefulTabView */; };
 		AA9E99B227B915D7004B8272 /* MapOverlaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9E99B127B915D7004B8272 /* MapOverlaySheet.swift */; };
-		AAABD6D4283E71130038D844 /* SendResultFloater.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAABD6D3283E71130038D844 /* SendResultFloater.swift */; };
+		AAABD6D4283E71130038D844 /* ResultFloater.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAABD6D3283E71130038D844 /* ResultFloater.swift */; };
+		AAABD6D6283FBB370038D844 /* ResultNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAABD6D5283FBB370038D844 /* ResultNotification.swift */; };
 		AAADEFDA27B78AE500D81A52 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFD927B78AE500D81A52 /* Message.swift */; };
 		AAADEFDC27B7907000D81A52 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDB27B7907000D81A52 /* Profile.swift */; };
 		AAADEFDE27B7920B00D81A52 /* FriendListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */; };
@@ -195,7 +196,8 @@
 		AA83DC4827B018AC008F2226 /* UnrepliedMessageItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnrepliedMessageItem.swift; sourceTree = "<group>"; };
 		AA83DC4B27B019ED008F2226 /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
 		AA9E99B127B915D7004B8272 /* MapOverlaySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOverlaySheet.swift; sourceTree = "<group>"; };
-		AAABD6D3283E71130038D844 /* SendResultFloater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendResultFloater.swift; sourceTree = "<group>"; };
+		AAABD6D3283E71130038D844 /* ResultFloater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultFloater.swift; sourceTree = "<group>"; };
+		AAABD6D5283FBB370038D844 /* ResultNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultNotification.swift; sourceTree = "<group>"; };
 		AAADEFD927B78AE500D81A52 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AAADEFDB27B7907000D81A52 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListItem.swift; sourceTree = "<group>"; };
@@ -471,7 +473,7 @@
 				AA65127D281E4BBD003A68E4 /* SendMessageButton.swift */,
 				AA65127F281F9E83003A68E4 /* ImadokoButton.swift */,
 				AA651281281F9E9A003A68E4 /* KokodayoButton.swift */,
-				AAABD6D3283E71130038D844 /* SendResultFloater.swift */,
+				AAABD6D3283E71130038D844 /* ResultFloater.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -501,6 +503,7 @@
 				AA07D9EF27E0EC69006D4598 /* Notification.swift */,
 				AA07D9F127E376D5006D4598 /* Location.swift */,
 				AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */,
+				AAABD6D5283FBB370038D844 /* ResultNotification.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -722,7 +725,7 @@
 				AA65126D28130578003A68E4 /* PinDetailView.swift in Sources */,
 				AA83DC2827AF9B67008F2226 /* RootView.swift in Sources */,
 				AAF864B227D7A43800AFA0E6 /* ImagePickerController.swift in Sources */,
-				AAABD6D4283E71130038D844 /* SendResultFloater.swift in Sources */,
+				AAABD6D4283E71130038D844 /* ResultFloater.swift in Sources */,
 				AAF8649A27D6465F00AFA0E6 /* QrCodeManager.swift in Sources */,
 				AA658FA827C286CE001D4E17 /* LoginRouter.swift in Sources */,
 				AA65127628183136003A68E4 /* MessageDestinationView.swift in Sources */,
@@ -768,6 +771,7 @@
 				AA658F9227C13CF6001D4E17 /* LoginPresenter.swift in Sources */,
 				AA07D9FA27E8C04D006D4598 /* LoginInteractor.swift in Sources */,
 				AA83DC3127AF9D15008F2226 /* HomeRouter.swift in Sources */,
+				AAABD6D6283FBB370038D844 /* ResultNotification.swift in Sources */,
 				AA65127E281E4BBD003A68E4 /* SendMessageButton.swift in Sources */,
 				AA07D9FC27E9F331006D4598 /* NotificationMessageCreator.swift in Sources */,
 				AAE91A1A28256194000543C9 /* MessageInteractor.swift in Sources */,

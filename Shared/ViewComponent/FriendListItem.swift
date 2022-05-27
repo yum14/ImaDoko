@@ -20,7 +20,6 @@ struct FriendListItem: View {
             
             Spacer()
         }
-        .background(Color(uiColor: .systemBackground))
     }
 }
 

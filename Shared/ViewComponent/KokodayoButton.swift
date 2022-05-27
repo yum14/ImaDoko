@@ -16,15 +16,19 @@ struct KokodayoButton: View {
             self.onTap?()
         } label: {
             HStack {
-                Image(systemName: "dot.radiowaves.left.and.right")
+//                Image(systemName: "dot.radiowaves.left.and.right")
+//                    .font(.title)
+//                    .foregroundColor(.white)
+                Image(systemName: "figure.wave")
                     .font(.title)
                     .foregroundColor(.white)
-                                            
+                
                 Text("KokodayoButton")
                     .foregroundColor(.white)
                     .fontWeight(.bold)
             }
-            .frame(width: 184, height: 40)
+//            .frame(width: 184, height: 40)
+            .frame(width: 160, height: 40)
             .background(Color("MainColor"))
             .cornerRadius(24)
         }
