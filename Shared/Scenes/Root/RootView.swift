@@ -101,6 +101,7 @@ struct RootView: View {
 
 struct RootView_Previews: PreviewProvider {
     static let auth = Authentication()
+    static let notification = ResultNotification()
     
     static var previews: some View {
         let interactor = RootInteractor()
@@ -112,6 +113,7 @@ struct RootView_Previews: PreviewProvider {
                 RootView(presenter: presenter)
                     .environment(\.locale, .init(identifier: id))
                     .environmentObject(auth)
+                    .environmentObject(notification)
             }
         }
     }

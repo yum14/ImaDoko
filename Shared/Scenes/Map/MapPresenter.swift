@@ -222,7 +222,7 @@ extension MapPresenter {
 }
 
 extension MapPresenter {
-    func makeAbountOverlaySheet(resultNotification: ResultNotification) -> some View {
+    func makeAbountOverlaySheet(resultNotification: ResultNotification, locationAuthorizationStatus: CLAuthorizationStatus) -> some View {
         
         switch self.overlaySheetType {
         case .close:
@@ -231,7 +231,7 @@ extension MapPresenter {
                     self.overlaySheetType = .messageDestination
                     self.notch = .max
                 }
-            }))
+            }, disabled: locationAuthorizationStatus == .denied))
         case .messageDestination:
             return self.router.makeMessageDestinationView(myId: profile?.id ?? "", myName: profile?.name ?? "", friends: self.friends, onDismiss: {
                 withAnimation {
@@ -254,6 +254,10 @@ extension MapPresenter {
             })
         }
     }
+    
+//    func makeOverlayView() -> some View {
+//        
+//    }
     
     private func createResultNotificationText(success: Bool) -> String {
         return NSLocalizedString(success ? "SendCompleted" : "SendFailed", comment: "")

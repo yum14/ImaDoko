@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SendMessageButton: View {
     var onTap: (() -> Void)?
+    var disabled: Bool = false
     
     var body: some View {
         Button {
@@ -18,9 +19,10 @@ struct SendMessageButton: View {
                 .foregroundColor(.white)
                 .fontWeight(.bold)
                 .frame(width: 320, height: 40)
-                .background(Color("MainColor"))
+                .background(self.disabled ? Color.gray :  Color("MainColor"))
                 .cornerRadius(16)
         }
+        .disabled(self.disabled)
     }
 }
 

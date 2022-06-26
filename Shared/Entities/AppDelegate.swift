@@ -16,6 +16,8 @@ final class AppDelegate: UIResponder, ObservableObject {
     @Published var notificationToken: String?
     @Published var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088), span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
     
+    @Published var locationAuthorizationStatus: CLAuthorizationStatus = .notDetermined
+    
     private let initialLocation = CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088)
     private let initialCoordinateSpan = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
     
@@ -153,5 +155,10 @@ extension AppDelegate: CLLocationManagerDelegate {
             self.location = newLocation
         }
         print("緯度: ", newLocation.latitude, "経度: ", newLocation.longitude)
+    }
+    
+    // 位置情報の許可のステータス変更で呼ばれる
+    func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+        self.locationAuthorizationStatus = status
     }
 }

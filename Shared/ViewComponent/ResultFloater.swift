@@ -13,27 +13,16 @@ struct ResultFloater: View {
     
     var body: some View {
         VStack {
-//            RoundedRectangle(cornerRadius: 20)
-//                .fill(Color("NotificationViewColor"))
-    
             Text(self.text)
                 .foregroundColor(.white)
                 .fontWeight(.bold)
-//                .background(Color("NotificationViewColor"))
                 .lineLimit(nil)
-//                .cornerRadius(100)
-//                .frame(height: 40)
-//                .frame(width: 240)
                 .padding(.horizontal, 40)
                 .padding(.vertical, 8)
                 
         }
-//        .padding(.horizontal, 40)
-//        .padding(.vertical, 8)
-        .background(Color("NotificationViewColor"))
+        .background(Color("MainColor"))
         .cornerRadius(100)
-//        .frame(width: 240)
-//        .frame(height: 40)
     }
 }
 

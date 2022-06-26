@@ -10,6 +10,7 @@ import Combine
 
 struct HomeView: View {
     @ObservedObject var presenter: HomePresenter
+    @EnvironmentObject var appDelegate: AppDelegate
     @EnvironmentObject var auth: Authentication
     @EnvironmentObject var resultNotification: ResultNotification
     
@@ -80,6 +81,36 @@ struct HomeView: View {
 
                 }
             }
+            
+            if !(self.appDelegate.locationAuthorizationStatus == .authorizedAlways || self.appDelegate.locationAuthorizationStatus == .authorizedWhenInUse) {
+                VStack(alignment: .trailing) {
+                    HStack {
+                        Text("AccessToLocationIsNotAllowed1")
+                            .font(.footnote)
+                        Spacer()
+                    }
+                    HStack(spacing: 0) {
+                        
+                        if ["ja-US", "ja-JP"].contains(Locale.current.identifier) {
+                            Link("AccessToLocationIsNotAllowed2", destination: URL(string: UIApplication.openSettingsURLString)!)
+                                .font(.footnote)
+                                .padding(.vertical, 1)
+                            Text("AccessToLocationIsNotAllowed3")
+                                .font(.footnote)
+                        } else {
+                            Text("AccessToLocationIsNotAllowed3")
+                                .font(.footnote)
+                            Link("AccessToLocationIsNotAllowed2", destination: URL(string: UIApplication.openSettingsURLString)!)
+                                .font(.footnote)
+                                .padding(.vertical, 1)
+                        }
+                        
+                        Spacer()
+                    }
+                }
+                .padding()
+                .background(Color("MainColor").opacity(0.5))
+            }
         }
         .sheet(isPresented: self.$presenter.showingQrCodeSheet) {
             NavigationView {
@@ -104,6 +135,8 @@ struct HomeView: View {
 
 struct HomeView_Previews: PreviewProvider {
     static let auth = Authentication()
+    static let appDelegate = AppDelegate()
+    static let resultNotification = ResultNotification()
     
     static var previews: some View {
         let interactor = HomeInteractor()
@@ -118,7 +151,9 @@ struct HomeView_Previews: PreviewProvider {
                 HomeView(presenter: presenter)
                     .environment(\.locale, .init(identifier: id))
                     .environment(\.colorScheme, scheme)
+                    .environmentObject(appDelegate)
                     .environmentObject(auth)
+                    .environmentObject(resultNotification)
             }
         }
     }

@@ -52,11 +52,14 @@ struct MapView: View {
                 Spacer()
                 HStack {
                     Spacer()
-                    LocationButton(onTap: {
-                        withAnimation {
-                            self.presenter.onLocationButtonTap(region: self.appDelegate.region)
-                        }
-                    })
+                    VStack(spacing: 0) {
+                        LocationButton(onTap: {
+                            withAnimation {
+                                self.presenter.onLocationButtonTap(region: self.appDelegate.region)
+                            }
+                        })
+                        .padding(0)
+                    }
                     .cornerRadius(8)
                     .shadow(radius: 5, x: 0, y: 5)
                     .padding(.horizontal)
@@ -70,11 +73,15 @@ struct MapView: View {
                         self.presenter.onOverlaySheetBackgroundTap()
                     }
                     .ignoresSafeArea()
+            } else {
+                // 本来は不要だがelseでもViewを作っておかないと上記のViewが表示されないので仕方なく
+                Color.black.opacity(0)
+                    .frame(width: 0, height: 0, alignment: .topLeading)
             }
         }
         .dynamicOverlay(
             MapOverlaySheet {
-                self.presenter.makeAbountOverlaySheet(resultNotification: self.resultNotification)
+                self.presenter.makeAbountOverlaySheet(resultNotification: self.resultNotification, locationAuthorizationStatus: self.appDelegate.locationAuthorizationStatus)
             }
         )
         .dynamicOverlayBehavior(myOverlayBehavior)
@@ -91,6 +98,8 @@ struct MapView: View {
 
 struct MapView_Previews: PreviewProvider {
     static let appDelegate = AppDelegate()
+    static let notification = ResultNotification()
+    static let auth = Authentication()
     
     static var previews: some View {
         let interactor = MapInteractor()
@@ -101,6 +110,8 @@ struct MapView_Previews: PreviewProvider {
         return ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
             return   MapView(presenter: presenter)
                 .environmentObject(appDelegate)
+                .environmentObject(auth)
+                .environmentObject(notification)
                 .environment(\.colorScheme, scheme)
         }
     }

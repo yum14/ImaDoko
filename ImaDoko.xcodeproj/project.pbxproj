@@ -42,7 +42,6 @@
 		AA35879427CA4DDD00F51AEA /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879327CA4DDD00F51AEA /* ProfileStore.swift */; };
 		AA35879627CA5CCB00F51AEA /* NotificationTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */; };
 		AA35879C27CBC33500F51AEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879B27CBC33500F51AEA /* AppDelegate.swift */; };
-		AA65126A2806B94A003A68E4 /* imakoko_notification.apns in Resources */ = {isa = PBXBuildFile; fileRef = AA6512692806B94A003A68E4 /* imakoko_notification.apns */; };
 		AA65126D28130578003A68E4 /* PinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65126C28130578003A68E4 /* PinDetailView.swift */; };
 		AA65126F28130587003A68E4 /* PinDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65126E28130587003A68E4 /* PinDetailPresenter.swift */; };
 		AA651271281305B8003A68E4 /* PinDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA651270281305B8003A68E4 /* PinDetailRouter.swift */; };
@@ -161,7 +160,6 @@
 		AA35879327CA4DDD00F51AEA /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTokenStore.swift; sourceTree = "<group>"; };
 		AA35879B27CBC33500F51AEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AA6512692806B94A003A68E4 /* imakoko_notification.apns */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = imakoko_notification.apns; sourceTree = "<group>"; };
 		AA65126C28130578003A68E4 /* PinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailView.swift; sourceTree = "<group>"; };
 		AA65126E28130587003A68E4 /* PinDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailPresenter.swift; sourceTree = "<group>"; };
 		AA651270281305B8003A68E4 /* PinDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailRouter.swift; sourceTree = "<group>"; };
@@ -302,7 +300,6 @@
 				AA83DC3E27AFA67F008F2226 /* Localizable.strings */,
 				AA26A68627AF9424003D1F17 /* Assets.xcassets */,
 				AA07D9FD27F09A5F006D4598 /* imadoko_notification.apns */,
-				AA6512692806B94A003A68E4 /* imakoko_notification.apns */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -679,7 +676,6 @@
 				AA07D9FE27F09A5F006D4598 /* imadoko_notification.apns in Resources */,
 				AA26A6B027AF9424003D1F17 /* Assets.xcassets in Resources */,
 				AA83DC3C27AFA67F008F2226 /* Localizable.strings in Resources */,
-				AA65126A2806B94A003A68E4 /* imakoko_notification.apns in Resources */,
 				AACE5ED727BE8CE800295A47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -976,6 +972,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ImaDoko--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Imadoko;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "このアプリケーションは位置情報を使用します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -1009,6 +1006,7 @@
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "ImaDoko--iOS--Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = Imadoko;
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "このアプリケーションは位置情報を使用します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;

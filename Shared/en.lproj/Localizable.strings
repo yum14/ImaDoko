@@ -42,3 +42,7 @@
 "SendFailed" = "failed!";
 "AddFriendFailed" = "failed!";
 "AddFriendAlreadyAdded" = "\"%@\" has already added.";
+"AccessToLocationIsNotAllowed1" = "Key functionality is restricted because access to location information is not allowed.";
+"AccessToLocationIsNotAllowed2" = "allow access to it on the settings screen.";
+"AccessToLocationIsNotAllowed3" = "You need to ";
+

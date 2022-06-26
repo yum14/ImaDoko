@@ -41,3 +41,7 @@
 "SendFailed" = "送信失敗しました";
 "AddFriendFailed" = "友だちの追加に失敗しました";
 "AddFriendAlreadyAdded" = "\"%@\"さんはすでに追加されています";
+"AccessToLocationIsNotAllowed1" = "位置情報へのアクセスが許可されていないため、主要な機能が制限されています。";
+"AccessToLocationIsNotAllowed2" = "設定画面でアクセスを許可";
+"AccessToLocationIsNotAllowed3" = "してください。";
+
