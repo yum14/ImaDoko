@@ -91,7 +91,7 @@ struct HomeView: View {
                     }
                     HStack(spacing: 0) {
                         
-                        if ["ja-US", "ja-JP"].contains(Locale.current.identifier) {
+                        if ["ja_US", "ja_JP"].contains(Locale.current.identifier) {
                             Link("AccessToLocationIsNotAllowed2", destination: URL(string: UIApplication.openSettingsURLString)!)
                                 .font(.footnote)
                                 .padding(.vertical, 1)
