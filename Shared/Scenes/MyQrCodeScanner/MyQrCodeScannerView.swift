@@ -14,19 +14,12 @@ struct MyQrCodeScannerView: View {
         QrCodeScannerView()
             .found(r: self.presenter.onFoundQrCode)
             .interval(delay: self.presenter.scanInterval)
-        
-            .navigationBarTitleDisplayMode(.inline)
-            .toolbar {
-                ToolbarItem(placement: .navigationBarLeading) {
-                    ViewDismissButton(onTap: self.presenter.onDismiss)
-                }
-            }
     }
 }
 
 struct MyQrCodeScannerView_Previews: PreviewProvider {
     static var previews: some View {
-        let presenter = MyQrCodeScannerPresenter(onFound: { _ in }, onDismiss: {})
+        let presenter = MyQrCodeScannerPresenter(onFound: { _ in })
         MyQrCodeScannerView(presenter: presenter)
     }
 }

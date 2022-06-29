@@ -53,7 +53,16 @@ struct MapView: View {
                 HStack {
                     Spacer()
                     VStack(spacing: 0) {
-                        LocationButton(onTap: {
+                        UnreadMessageButton(badgeText: self.presenter.unrepliedButtonBadgeText,
+                                            width: 54,
+                                            onTap: self.presenter.onUnreadMessageButtonTap)
+                            .padding(0)
+                        
+                        Divider()
+                            .frame(width: 54)
+                        
+                        LocationButton(width: 54,
+                                       onTap: {
                             withAnimation {
                                 self.presenter.onLocationButtonTap(region: self.appDelegate.region)
                             }
@@ -85,6 +94,25 @@ struct MapView: View {
             }
         )
         .dynamicOverlayBehavior(myOverlayBehavior)
+        
+        .fullScreenCover(isPresented: self.$presenter.showingMessageSheet) {
+            NavigationView {
+                self.presenter.makeAboutMessageView()
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle(Text("MessageViewTitle"))
+                    .navigationBarBackButtonHidden(true)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button {
+                                self.presenter.onMessageViewBackButtonTap()
+                            } label: {
+                                Image(systemName: "chevron.left")
+                            }
+                        }
+                    }
+            }
+        }
+        
         .ignoresSafeArea(edges: [.top, .trailing, .leading])
         .onAppear {
             self.presenter.onAppear(initialRegion: self.appDelegate.region)

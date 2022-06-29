@@ -9,8 +9,8 @@ import Foundation
 import SwiftUI
 
 final class MyQrCodeScannerRouter {
-    static func assembleModules(onFound: ((String) -> Void)?, onDismiss: (() -> Void)?) -> AnyView {
-        let presenter = MyQrCodeScannerPresenter(onFound: onFound, onDismiss: onDismiss)
+    static func assembleModules(onFound: ((String) -> Void)?) -> AnyView {
+        let presenter = MyQrCodeScannerPresenter(onFound: onFound)
         let view = MyQrCodeScannerView(presenter: presenter)
         return AnyView(view)
     }

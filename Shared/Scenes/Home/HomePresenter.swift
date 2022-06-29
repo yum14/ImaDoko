@@ -101,6 +101,10 @@ extension HomePresenter {
         self.showingQrCodeScannerSheet = true
     }
     
+    func onQrCodeScannerBackButtonTap() {
+        self.showingQrCodeScannerSheet = false
+    }
+    
     func onAppear() {
         self.avatarInitialLoading = true
         
@@ -221,8 +225,7 @@ extension HomePresenter {
                         return
                     }
                 }
-            },
-            onDismiss: { self.showingQrCodeScannerSheet = false })
+            })
     }
     
     

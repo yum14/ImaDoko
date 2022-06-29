@@ -14,9 +14,12 @@ protocol MapUsecase {
     func getAvatarImages(ids: [String], completion: ((Result<[AvatarImage]?, Error>) -> Void)?)
     func addLocationListener(ownerId: String, completion: ((Result<[Location]?, Error>) -> Void)?)
     func removeLocationListener()
+    func addImadokoMessageListener(ownerId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
+    func removeImadokoMessageListener()
 }
 
 final class MapInteractor {
+    private let imadokoMessageStore: ImadokoMessageStore
     private let profileStore: ProfileStore
     private let avatarImageStore: AvatarImageStore
     private let notificationStore: NotificationStore
@@ -27,6 +30,7 @@ final class MapInteractor {
         self.avatarImageStore = AvatarImageStore()
         self.notificationStore = NotificationStore()
         self.locationStore = LocationStore()
+        self.imadokoMessageStore = ImadokoMessageStore()
     }
 }
 
@@ -53,5 +57,13 @@ extension MapInteractor: MapUsecase {
     
     func removeLocationListener() {
         self.locationStore.removeListener()
+    }
+    
+    func addImadokoMessageListener(ownerId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        self.imadokoMessageStore.addListener(ownerId: ownerId, completion: completion)
+    }
+    
+    func removeImadokoMessageListener() {
+        self.imadokoMessageStore.removeListener()
     }
 }

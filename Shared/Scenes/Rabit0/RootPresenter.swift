@@ -10,7 +10,7 @@ import SwiftUI
 import MapKit
 
 final class RootPresenter: ObservableObject {
-    @Published var tabSelection: Int = 2
+    @Published var tabSelection: Int = 1
     var receivedNotification: ReceivedNotification? {
         didSet {
             if self.receivedNotification != nil {

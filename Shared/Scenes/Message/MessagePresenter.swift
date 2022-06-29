@@ -9,9 +9,7 @@ import Foundation
 import MapKit
 
 final class MessagePresenter: ObservableObject {
-    @Published var messageTypeSelection = 0
-    @Published var unreadMessages: [Message] = []
-    
+    @Published var unrepliedMessages: [Message] = []
     @Published var showingDeleteAlert = false
     @Published var showingSendNotificationAlert = false
     
@@ -20,15 +18,15 @@ final class MessagePresenter: ObservableObject {
     
     private var messageAvatarImages: [String: Data] = [:] {
         didSet {
-            let newMessages = self.unreadMessages.map { Message(id: $0.id, userId: $0.userId, userName: $0.userName, avatarImage: self.messageAvatarImages[$0.id], createdAt: $0.createdAt) }
-            self.unreadMessages = newMessages
+            let newMessages = self.unrepliedMessages.map { Message(id: $0.id, userId: $0.userId, userName: $0.userName, avatarImage: self.messageAvatarImages[$0.userId], createdAt: $0.createdAt) }
+            self.unrepliedMessages = newMessages
         }
     }
     
     private var messagesWithoutAvatarImage: [Message] = [] {
         didSet {
             let newMessages = self.messagesWithoutAvatarImage.map { Message(id: $0.id, userId: $0.userId, userName: $0.userName, avatarImage: self.messageAvatarImages[$0.id], createdAt: $0.createdAt) }
-            self.unreadMessages = newMessages
+            self.unrepliedMessages = newMessages
         }
     }
     

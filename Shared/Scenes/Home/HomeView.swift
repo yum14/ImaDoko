@@ -120,6 +120,16 @@ struct HomeView: View {
         .fullScreenCover(isPresented: self.$presenter.showingQrCodeScannerSheet) {
             NavigationView {
                 self.presenter.makeAboutTeamQrCodeScannerView(resultNotification: self.resultNotification)
+                    .navigationBarTitleDisplayMode(.inline)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button {
+                                self.presenter.onQrCodeScannerBackButtonTap()
+                            } label: {
+                                Image(systemName: "chevron.left")
+                            }
+                        }
+                    }
             }
         }
         

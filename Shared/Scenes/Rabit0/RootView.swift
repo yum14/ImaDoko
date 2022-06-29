@@ -34,14 +34,6 @@ struct RootView: View {
                                 }
                             }
                             
-                            Tab(title: NSLocalizedString("MessageViewTitle", comment: ""), systemImageName: "message.fill") {
-                                NavigationView {
-                                    self.presenter.makeAboutMessageView(uid: loginUser.uid)
-                                        .navigationBarTitleDisplayMode(.inline)
-                                        .navigationTitle(Text("MessageViewTitle"))
-                                        .navigationBarHidden(true)
-                                }
-                            }
                             Tab(title: NSLocalizedString("MapViewTitle", comment: ""), systemImageName: "mappin.and.ellipse") {
                                 NavigationView {
                                     self.presenter.makeAboutMapView(uid: loginUser.uid)

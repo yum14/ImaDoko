@@ -11,6 +11,7 @@ import SwiftUI
 protocol MapWireframe {
     func makePinDetailView(myId: String, myName: String, friend: Avatar, createdAt: Date, onDismiss: (() -> Void)?, onSend: ((Error?) -> Void)?) -> AnyView
     func makeMessageDestinationView(myId: String, myName: String, friends: [Avatar], onDismiss: (() -> Void)?, onSend: (([Error]) -> Void)?) -> AnyView
+    func makeMessageView(uid: String) -> AnyView
 }
 
 final class MapRouter {
@@ -30,5 +31,9 @@ extension MapRouter: MapWireframe {
     
     func makeMessageDestinationView(myId: String, myName: String, friends: [Avatar], onDismiss: (() -> Void)?, onSend: (([Error]) -> Void)?) -> AnyView {
         return MessageDestinationRouter.assembleModules(myId: myId, myName: myName, friends: friends, onDismiss: onDismiss, onSend: onSend)
+    }
+    
+    func makeMessageView(uid: String) -> AnyView {
+        return MessageRouter.assembleModules(uid: uid)
     }
 }

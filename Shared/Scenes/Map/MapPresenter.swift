@@ -20,6 +20,18 @@ final class MapPresenter: ObservableObject {
     @Published var notch: Notch = .min
     @Published var selectedFriendIds: [String] = []
     @Published var overlaySheetType: OverlaySheetType = .close
+    @Published var showingMessageSheet = false
+    @Published var unrepliedButtonBadgeText: String?
+    
+    private var unrepliedMessageCount: Int = 0 {
+        didSet {
+            if self.unrepliedMessageCount > 0 {
+                self.unrepliedButtonBadgeText = String(self.unrepliedMessageCount)
+            } else {
+                self.unrepliedButtonBadgeText = nil
+            }
+        }
+    }
     
     private var firstAppear = true
     
@@ -116,6 +128,21 @@ extension MapPresenter {
             }
         }
         
+        // イマドコメッセージのリスナー作成
+        self.interactor.addImadokoMessageListener(ownerId: self.uid) { result in
+            switch result {
+            case .success(let imadokoMessages):
+                guard let imadokoMessages = imadokoMessages else {
+                    self.unrepliedMessageCount = 0
+                    return
+                }
+                
+                self.unrepliedMessageCount = imadokoMessages.count
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
         self.interactor.getProfile(id: self.uid) { result in
             switch result {
             case .success(let profile):
@@ -176,6 +203,7 @@ extension MapPresenter {
         self.notch = .min
         self.selectedFriendIds = []
         self.interactor.removeLocationListener()
+        self.interactor.removeImadokoMessageListener()
     }
 }
 
@@ -219,6 +247,14 @@ extension MapPresenter {
     func onLocationButtonTap(region: MKCoordinateRegion) {
         self.region = region
     }
+    
+    func onUnreadMessageButtonTap() {
+        self.showingMessageSheet = true
+    }
+    
+    func onMessageViewBackButtonTap() {
+        self.showingMessageSheet = false
+    }
 }
 
 extension MapPresenter {
@@ -255,9 +291,9 @@ extension MapPresenter {
         }
     }
     
-//    func makeOverlayView() -> some View {
-//        
-//    }
+    func makeAboutMessageView() -> some View {
+        return router.makeMessageView(uid: self.uid)
+    }
     
     private func createResultNotificationText(success: Bool) -> String {
         return NSLocalizedString(success ? "SendCompleted" : "SendFailed", comment: "")

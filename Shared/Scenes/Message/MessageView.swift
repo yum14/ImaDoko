@@ -14,23 +14,37 @@ struct MessageView: View {
     
     var body: some View {
         VStack(spacing: 0) {
-            Picker(selection: self.$presenter.messageTypeSelection) {
-                Text("UnreadMessageHeader").tag(0)
-            } label: {
-                Text("")
-            }
-            .pickerStyle(.segmented)
-            .padding()
-            
-            if self.presenter.messageTypeSelection == 0 {
+            if self.presenter.unrepliedMessages.count > 0 {
                 List {
-                    ForEach(self.presenter.unreadMessages, id: \.self) { message in
-                        UnrepliedMessageItem(from: message.userName,
-                                             createdAt: message.createdAt,
-                                             avatarImage: message.avatarImage,
-                                             onArrowTap: { self.presenter.onSendButtonTap(message: message) },
-                                             onTrashTap: { self.presenter.onTrashButtonTap(message: message) })
+                    Section {
+                        ForEach(self.presenter.unrepliedMessages, id: \.self) { message in
+                            UnrepliedMessageItem(from: message.userName,
+                                                 createdAt: message.createdAt,
+                                                 avatarImage: message.avatarImage,
+                                                 onArrowTap: { self.presenter.onSendButtonTap(message: message) },
+                                                 onTrashTap: { self.presenter.onTrashButtonTap(message: message) })
+                        }
+                    } footer: {
+                        HStack {
+                            Text("NoMessagesSub")
+                                .font(.footnote)
+                            Spacer()
+                        }
                     }
+                }
+                
+            } else {
+                VStack {
+                    Text("NoMessagesMain")
+                        .font(.title2)
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal, 16)
+                        .padding(.bottom, 12)
+                    
+                    Text("NoMessagesSub")
+                        .font(.footnote)
+                        .foregroundColor(.secondary)
+                        .padding(.horizontal, 64)
                 }
             }
         }
@@ -65,8 +79,8 @@ struct MessageView_Previews: PreviewProvider {
         let interactor = MessageInteractor()
         let router = MessageRouter()
         let presenter = MessagePresenter(interactor: interactor, router: router, uid: "uid")
-        presenter.unreadMessages = [Message(userId: "userId1", userName: "アカウント1"),
-                                    Message(userId: "userId2", userName: "アカウント2")]
+        presenter.unrepliedMessages = [Message(userId: "userId1", userName: "アカウント1"),
+                                       Message(userId: "userId2", userName: "アカウント2")]
         
         return ForEach(["ja_JP", "en_US"], id: \.self) { id in
             ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in

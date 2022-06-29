@@ -12,11 +12,9 @@ final class MyQrCodeScannerPresenter: ObservableObject {
     
     let scanInterval: Double = 1.0
     var onFound: ((String) -> Void)?
-    var onDismiss: (() -> Void)?
     
-    init(onFound: ((String) -> Void)?, onDismiss: (() -> Void)?) {
+    init(onFound: ((String) -> Void)?) {
         self.onFound = onFound
-        self.onDismiss = onDismiss
     }
     
     func onFoundQrCode(_ code: String) {
