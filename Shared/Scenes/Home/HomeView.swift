@@ -78,7 +78,6 @@ struct HomeView: View {
                             Spacer()
                         }
                     }
-
                 }
             }
             
