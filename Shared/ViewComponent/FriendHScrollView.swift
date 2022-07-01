@@ -1,5 +1,5 @@
 //
-//  FriendScrollView.swift
+//  FriendHScrollView.swift
 //  ImaDoko (iOS)
 //
 //  Created by yum on 2022/02/14.
@@ -7,9 +7,9 @@
 
 import SwiftUI
 
-struct FriendScrollView: View {
-    var friends: [User] = []
-    @Binding var selectedList: [String]
+struct FriendHScrollView: View {
+    var friends: [Avatar] = []
+    @Binding var selectedIds: [String]
     var radius: CGFloat = 68
     
     var body: some View {
@@ -18,9 +18,10 @@ struct FriendScrollView: View {
                 ForEach(self.friends, id: \.self) { friend in
                     VStack {
                         ZStack(alignment: .bottom) {
-                            AvatorCircleImage(image: friend.avatorImage, radius: self.radius)
-                            
-                            if self.selectedList.contains(friend.id) {
+                            let uiImage = friend.avatarImageData != nil ? UIImage(data: friend.avatarImageData!) : nil
+                            AvatarCircleImage(image: uiImage, radius: self.radius)
+
+                            if self.selectedIds.contains(friend.id) {
                                 HStack {
                                     Spacer()
                                     CheckCircleImage()
@@ -36,7 +37,7 @@ struct FriendScrollView: View {
                     .padding(.horizontal, 2)
                     .onTapGesture {
                         
-                        var newList: [String] = self.selectedList
+                        var newList: [String] = self.selectedIds
                         
                         let index = newList.firstIndex(where: { $0 == friend.id })
                         
@@ -49,7 +50,7 @@ struct FriendScrollView: View {
                         let newListWithIndex = newList.enumerated().map( { ($0.element, $0.offset) })
                         
                         // friendsの並び順に合わせてソートする
-                        self.selectedList = newListWithIndex.sorted(by: { $0.1 < $1.1 }).map { $0.0 }
+                        self.selectedIds = newListWithIndex.sorted(by: { $0.1 < $1.1 }).map { $0.0 }
                     }
                 }
                 
@@ -63,18 +64,14 @@ struct SelectedFriend {
     var selected: Bool
 }
 
-
-struct FriendScrollView_Previews: PreviewProvider {
+struct FriendHScrollView_Previews: PreviewProvider {
     static var previews: some View {
-        let friends = [User(name: "友だち１aaaaa"),
-                       User(name: "友だち２あ"),
-                       User(name: "友だち３"),
-                       User(name: "友だち４"),
-                       User(name: "友だち５"),
-                       User(name: "友だち６")]
-        
+        let friends = [Avatar(id: "a", name: "友だち１aaaaa"),
+                       Avatar(id: "b", name: "友だち２"),
+                       Avatar(id: "c", name: "友だち３")]
+            
         ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-            FriendScrollView(friends: friends, selectedList: .constant([]))
+            FriendHScrollView(friends: friends, selectedIds: .constant(["a"]))
                 .environment(\.colorScheme, scheme)
         }
     }

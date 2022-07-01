@@ -9,7 +9,7 @@ import SwiftUI
 
 struct LocationButton: View {
     var font: Font = .title2
-    var padding: CGFloat = 12
+    var width: CGFloat = 54
     var onTap: (() -> Void)?
     
     var body: some View {
@@ -19,7 +19,7 @@ struct LocationButton: View {
             Image(systemName: "location")
                 .foregroundColor(Color("IconColor"))
                 .font(self.font)
-                .padding(self.padding)
+                .frame(width: self.width, height: self.width)
         }
         .background(Color(uiColor: .systemBackground))
     }

@@ -10,7 +10,9 @@ import CoreLocation
 import SwiftUI
 
 struct PinItem: Identifiable {
-    var id = UUID().uuidString
+    var id: String
     var coordinate: CLLocationCoordinate2D
+    var imageData: Data?
     var tint: Color?
+    var createdAt: Date
 }

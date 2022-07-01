@@ -8,44 +8,12 @@
 import SwiftUI
 import MapKit
 import DynamicOverlay
-
-//enum Notch: CaseIterable, Equatable {
-//    case min, max
-//}
-
+import PopupView
 
 struct MapView: View {
     @ObservedObject var presenter: MapPresenter
-    @State var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088),
-        span: MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02))
-    
-    var friends: [User] = [User(name: "友だち１１１"),
-                           User(name: "友だち２"),
-                           User(name: "友だち３"),
-                           User(name: "友だち４"),
-                           User(name: "友だち５")]
-    
-    //    var myOverlayContent: some View {
-    //        VStack {
-    //            RoundedRectangle(cornerRadius: 20)
-    //                .fill(.secondary)
-    //                .frame(width: 36, height: 5)
-    //                .padding(.top, 4)
-    //            Text("Header")
-    //            List {
-    //                Text("Row 1")
-    //                Text("Row 2")
-    //                Text("Row 3")
-    //            }
-    //        }
-    //        .background(Color(uiColor: UIColor.systemBackground))
-    //        .drivingScrollView()
-    //    }
-    
-    
-//    @State var height: CGFloat = 0.0
-//    @State var notch: Notch = .min
+    @EnvironmentObject var appDelegate: AppDelegate
+    @EnvironmentObject var resultNotification: ResultNotification
     
     var myOverlayBehavior: some DynamicOverlayBehavior {
         MagneticNotchOverlayBehavior<Notch> { notch in
@@ -53,68 +21,125 @@ struct MapView: View {
             case .max:
                 return .fractional(0.35)
             case .min:
-                return .fractional(0.08)
+                return .fractional(0.1)
             }
         }
-        .onTranslation { translation in
-//            height = translation.height
-            print(translation.height)
-        }
+        .onTranslation(self.presenter.onOverlaySheetTranslation)
         .notchChange(self.$presenter.notch)
         .disable(.max, self.presenter.notch == .min)
     }
     
-    
     var body: some View {
         ZStack {
-            ZStack {
-                Map(coordinateRegion: self.$region,
-                    interactionModes: .all,
-                    showsUserLocation: true,
-                    userTrackingMode: .none,
-                    annotationItems: self.presenter.pinItems
-                ) { item in
-                    MapAnnotation(coordinate: item.coordinate) {
-                        AvatorMapAnnotation()
-                            .offset(x: 0, y: -32)
-                    }
+            Map(coordinateRegion: self.$presenter.region,
+                interactionModes: .all,
+                showsUserLocation: true,
+                userTrackingMode: .none,
+                annotationItems: self.presenter.pinItems
+            ) { item in
+                MapAnnotation(coordinate: item.coordinate) {
+                    AvatarMapAnnotation(image: item.imageData != nil ? UIImage(data: item.imageData!) : nil)
+                        .onTapGesture {
+                            self.presenter.onAvatarMapAnnotationTap(item: item)
+                        }
+                        .offset(x: 0, y: -44)
+                        .padding(.top, 44)
                 }
-                .ignoresSafeArea(edges: [.trailing, .leading, .top])
             }
+            .ignoresSafeArea(edges: [.trailing, .leading, .top])
+            
             VStack {
                 Spacer()
                 HStack {
                     Spacer()
-                    LocationButton(onTap: {
+                    VStack(spacing: 0) {
+                        UnreadMessageButton(badgeText: self.presenter.unrepliedButtonBadgeText,
+                                            width: 54,
+                                            onTap: self.presenter.onUnreadMessageButtonTap)
+                            .padding(0)
                         
-                    })
-                        .cornerRadius(8)
-                        .shadow(radius: 5, x: 0, y: 5)
-                        .padding(.horizontal)
-                        .padding(.bottom, 80)
+                        Divider()
+                            .frame(width: 54)
+                        
+                        LocationButton(width: 54,
+                                       onTap: {
+                            withAnimation {
+                                self.presenter.onLocationButtonTap(region: self.appDelegate.region)
+                            }
+                        })
+                        .padding(0)
+                    }
+                    .cornerRadius(8)
+                    .shadow(radius: 5, x: 0, y: 5)
+                    .padding(.horizontal)
+                    .padding(.bottom, 90)
                 }
             }
+            
+            if self.presenter.overlaySheetType != .close {
+                Color.black.opacity(0.2)
+                    .onTapGesture {
+                        self.presenter.onOverlaySheetBackgroundTap()
+                    }
+                    .ignoresSafeArea()
+            } else {
+                // 本来は不要だがelseでもViewを作っておかないと上記のViewが表示されないので仕方なく
+                Color.black.opacity(0)
+                    .frame(width: 0, height: 0, alignment: .topLeading)
+            }
         }
-        .dynamicOverlay(MapOverlaySheet(friends: self.friends, editable: self.$presenter.editable, onSendMessageButtonTap: {
-            withAnimation {
-                self.presenter.notch = .max
-            }}))
+        .dynamicOverlay(
+            MapOverlaySheet {
+                self.presenter.makeAbountOverlaySheet(resultNotification: self.resultNotification, locationAuthorizationStatus: self.appDelegate.locationAuthorizationStatus)
+            }
+        )
         .dynamicOverlayBehavior(myOverlayBehavior)
-        .ignoresSafeArea(edges: [.top, .trailing, .leading])
         
-        //        .dynamicOverlay(myOverlayContent)
-        //        .dynamicOverlayBehavior(myOverlayBehavior)
+        .fullScreenCover(isPresented: self.$presenter.showingMessageSheet) {
+            NavigationView {
+                self.presenter.makeAboutMessageView()
+                    .navigationBarTitleDisplayMode(.inline)
+                    .navigationTitle(Text("MessageViewTitle"))
+                    .navigationBarBackButtonHidden(true)
+                    .toolbar {
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button {
+                                self.presenter.onMessageViewBackButtonTap()
+                            } label: {
+                                Image(systemName: "chevron.left")
+                            }
+                        }
+                    }
+            }
+        }
+        
+        .ignoresSafeArea(edges: [.top, .trailing, .leading])
+        .onAppear {
+            self.presenter.onAppear(initialRegion: self.appDelegate.region)
+        }
+        .onDisappear {
+            self.presenter.onDisapper()
+            self.resultNotification.hide()
+        }
     }
 }
 
 struct MapView_Previews: PreviewProvider {
+    static let appDelegate = AppDelegate()
+    static let notification = ResultNotification()
+    static let auth = Authentication()
+    
     static var previews: some View {
+        let interactor = MapInteractor()
         let router = MapRouter()
-        let presenter = MapPresenter(router: router)
-        presenter.pinItems = [PinItem(coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088))]
+        let presenter = MapPresenter(interactor: interactor, router: router, uid: "1")
+        presenter.pinItems = [PinItem(id: "previewId", coordinate: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088), createdAt: Date.now)]
         
         return ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in
-            MapView(presenter: presenter)
+            return   MapView(presenter: presenter)
+                .environmentObject(appDelegate)
+                .environmentObject(auth)
+                .environmentObject(notification)
                 .environment(\.colorScheme, scheme)
         }
     }

@@ -9,18 +9,17 @@ import SwiftUI
 
 struct FriendListItem: View {
     var name: String
-    var avatorImage: Data? = nil
+    var avatarImage: UIImage?
     
     var body: some View {
         HStack {
-            AvatorCircleImage(image: nil, radius: 36)
+            AvatarCircleImage(image: self.avatarImage, radius: 36)
             
             Text(self.name)
                 .frame(height: 36)
             
             Spacer()
         }
-        .background(Color(uiColor: .systemBackground))
     }
 }
 

@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 
 struct ContentView: View {
-    @StateObject var presenter = RootPresenter(router: RootRouter())
+    @StateObject var presenter = RootPresenter(interactor: RootInteractor(), router: RootRouter())
     
     var body: some View {
         RootView(presenter: presenter)
@@ -17,7 +17,12 @@ struct ContentView: View {
 }
 
 struct ContentView_Previews: PreviewProvider {
+    static let auth = Authentication()
+    static let notification = ResultNotification()
+    
     static var previews: some View {
         ContentView()
+            .environmentObject(auth)
+            .environmentObject(notification)
     }
 }

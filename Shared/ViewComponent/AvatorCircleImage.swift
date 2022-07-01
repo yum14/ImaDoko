@@ -1,5 +1,5 @@
 //
-//  AvatorCircleImage.swift
+//  AvatarCircleImage.swift
 //  ImaDoko (iOS)
 //
 //  Created by yum on 2022/02/14.
@@ -7,14 +7,14 @@
 
 import SwiftUI
 
-struct AvatorCircleImage: View {
-    var image: Data?
+struct AvatarCircleImage: View {
+    var image: UIImage?
     var radius: CGFloat = 36
     
     var body: some View {
         Group {
-            if let image = image, let uiImage = UIImage(data: image) {
-                Image(uiImage: uiImage)
+            if let image = self.image {
+                Image(uiImage: image)
                     .resizable()
             } else {
                 Image(systemName: "person.crop.circle.fill")
@@ -28,8 +28,8 @@ struct AvatorCircleImage: View {
     }
 }
 
-struct AvatorCircleImage_Previews: PreviewProvider {
+struct AvatarCircleImage_Previews: PreviewProvider {
     static var previews: some View {
-        AvatorCircleImage()
+        AvatarCircleImage()
     }
 }
