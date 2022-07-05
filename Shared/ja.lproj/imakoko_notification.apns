@@ -1,0 +1,9 @@
+{
+    "Simulator Target Bundle": "icu.yum14.ImaDoko",
+    "aps":{
+        "alert":"Test",
+        "sound":"default",
+        "badge":1
+    },
+    "url": "imadoko://kokodayo?id=testid&name=testusername"
+}
