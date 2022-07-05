@@ -393,7 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				AA658F8E27C13CE0001D4E17 /* Login */,
-				AA83DC2627AF9B5A008F2226 /* Rabit0 */,
+				AA83DC2627AF9B5A008F2226 /* Root */,
 				AA83DC2327AF97DA008F2226 /* Map */,
 				AA651274281830D8003A68E4 /* MessageDestination */,
 				AA83DC4027AFC674008F2226 /* Message */,
@@ -416,7 +416,7 @@
 			path = Map;
 			sourceTree = "<group>";
 		};
-		AA83DC2627AF9B5A008F2226 /* Rabit0 */ = {
+		AA83DC2627AF9B5A008F2226 /* Root */ = {
 			isa = PBXGroup;
 			children = (
 				AA83DC2727AF9B67008F2226 /* RootView.swift */,
@@ -424,7 +424,7 @@
 				AAF8649327CD120F00AFA0E6 /* RootInteractor.swift */,
 				AA83DC2927AF9BC2008F2226 /* RootRouter.swift */,
 			);
-			path = Rabit0;
+			path = Root;
 			sourceTree = "<group>";
 		};
 		AA83DC2D27AF9CF3008F2226 /* Home */ = {
