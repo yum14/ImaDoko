@@ -104,16 +104,18 @@ final class MapPresenter: ObservableObject {
         self.interactor = interactor
         self.router = router
         self.uid = uid
+        
+        self.addListner()
+    }
+    
+    deinit {
+        self.removeListener()
     }
 }
 
 extension MapPresenter {
-    func onAppear(initialRegion: MKCoordinateRegion) {
-        
-        if self.firstAppear {
-            self.region = initialRegion
-            self.firstAppear.toggle()
-        }
+    
+    private func addListner() {
         
         self.interactor.addLocationListener(ownerId: self.uid) { result in
             switch result {
@@ -199,11 +201,21 @@ extension MapPresenter {
         }
     }
     
+    private func removeListener() {
+        self.interactor.removeLocationListener()
+        self.interactor.removeImadokoMessageListener()
+    }
+    
+    func onAppear(initialRegion: MKCoordinateRegion) {
+        if self.firstAppear {
+            self.region = initialRegion
+            self.firstAppear.toggle()
+        }
+    }
+    
     func onDisapper() {
         self.notch = .min
         self.selectedFriendIds = []
-        self.interactor.removeLocationListener()
-        self.interactor.removeImadokoMessageListener()
     }
 }
 
