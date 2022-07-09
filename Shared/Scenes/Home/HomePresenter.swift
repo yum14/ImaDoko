@@ -55,6 +55,12 @@ final class HomePresenter: ObservableObject {
         self.interactor = interactor
         self.router = router
         self.uid = uid
+        
+        self.addListner()
+    }
+    
+    deinit {
+        self.removeListner()
     }
 }
 
@@ -105,9 +111,7 @@ extension HomePresenter {
         self.showingQrCodeScannerSheet = false
     }
     
-    func onAppear() {
-        self.avatarInitialLoading = true
-        
+    private func addListner() {
         self.interactor.addProfileListener(id: self.uid) { result in
             switch result {
             case .success(let profile):
@@ -179,8 +183,12 @@ extension HomePresenter {
         }
     }
     
-    func onDisappear() {
+    private func removeListner() {
         self.interactor.removeProfileListener()
+    }
+    
+    func onAppear() {
+        self.avatarInitialLoading = true
     }
     
     func makeAboutMyQrCodeView() -> some View {

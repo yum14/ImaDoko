@@ -40,12 +40,20 @@ final class MessagePresenter: ObservableObject {
         self.interactor = interactor
         self.router = router
         self.uid = uid
+        
+        // Listner追加
+        // onAppearではバックグラウンド⇨フォアグラウンドのときに対応できないためinitで実施する
+        self.addListener()
+    }
+    
+    deinit {
+        self.removeListener()
     }
 }
 
 extension MessagePresenter {
     
-    func onAppear() {
+    private func addListener() {
         
         // profile取得
         self.interactor.getProfile(id: self.uid) { result in
@@ -117,7 +125,7 @@ extension MessagePresenter {
         }
     }
     
-    func onDisappear() {
+    private func removeListener() {
         self.interactor.removeImadokoMessageListener()
     }
     
