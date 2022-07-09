@@ -136,7 +136,6 @@ struct HomeView: View {
             self.presenter.onAppear()
         }
         .onDisappear {
-            self.presenter.onDisappear()
             self.resultNotification.hide()
         }
     }

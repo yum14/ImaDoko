@@ -62,11 +62,7 @@ struct MessageView: View {
                 self.presenter.onDeleteMessageConfirm()
             }
         }
-        .onAppear {
-            self.presenter.onAppear()
-        }
         .onDisappear {
-            self.presenter.onDisappear()
             self.resultNotification.hide()
         }
     }
