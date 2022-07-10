@@ -23,7 +23,7 @@
 "SignInFailedAlertTitle" = "Sign-in failed.";
 "SignInFailedAlertTitle" = "Sign-in";
 "SignInFailedAlertMessage" = "Sign-in failed.";
-"CreateNewUserAlertTitle" = "No Account";
+"CreateNewUserAlertTitle" = "No Account.";
 "CreateNewUserAlertMessage" = "Do you want to create new account?";
 "CreateButton" = "Create";
 "CencelButton" = "Cancel";

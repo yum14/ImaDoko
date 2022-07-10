@@ -22,7 +22,7 @@ struct Location: Identifiable, Hashable {
         self.ownerId = ownerId
         self.latitude = latitude
         self.longitude = longitude
-        self.createdAt = Timestamp(date: Date())
+        self.createdAt = Timestamp(date: createdAt)
     }
     
     func toDictionary() -> [String: Any] {

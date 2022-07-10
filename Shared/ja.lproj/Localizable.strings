@@ -22,7 +22,7 @@
 "NewDefaultUserName" = "新しいユーザー";
 "SignInFailedAlertTitle" = "サインイン";
 "SignInFailedAlertMessage" = "サインインに失敗しました。";
-"CreateNewUserAlertTitle" = "アカウントが存在しない";
+"CreateNewUserAlertTitle" = "アカウントが存在しません。";
 "CreateNewUserAlertMessage" = "新たにアカウントを作成しますか？";
 "CreateButton" = "作成する";
 "CencelButton" = "キャンセル";
