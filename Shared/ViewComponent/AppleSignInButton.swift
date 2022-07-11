@@ -181,13 +181,22 @@ extension AppleSignInViewController: ASAuthorizationControllerDelegate {
                 self.signedIn?(nil)
                 return
             }
+            
+            // Appleの認証情報を元にFirebase Authenticationの認証情報を作成
             let credential = OAuthProvider.credential(
                 withProviderID: "apple.com",
                 idToken: idTokenString,
                 rawNonce: nonce
             )
             
-            self.signedIn?(credential)
+            // TODO: ユーザ名取れるようなのだが・・何もはいっていない。保留。
+            // request.requestedScopes = [.fullName, .email] と指定はしているのになぜ
+//            let formatter = PersonNameComponentsFormatter()
+//            let name = formatter.string(from: appleIDCredential.fullName!)
+            
+            DispatchQueue.main.async {
+                self.signedIn?(credential)
+            }
         }
     }
     

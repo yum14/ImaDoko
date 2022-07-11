@@ -21,8 +21,8 @@
 "SignInWithGoogle" = "Googleでログイン";
 "NewDefaultUserName" = "新しいユーザー";
 "SignInFailedAlertTitle" = "サインイン";
-"SignInFailedAlertMessage" = "サインインに失敗しました。";
-"CreateNewUserAlertTitle" = "アカウントが存在しません。";
+"SignInFailedAlertMessage" = "サインインに失敗しました";
+"CreateNewUserAlertTitle" = "アカウントが存在しません";
 "CreateNewUserAlertMessage" = "新たにアカウントを作成しますか？";
 "CreateButton" = "作成する";
 "CencelButton" = "キャンセル";
