@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MapUsecase {
-    func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
+//    func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
     func getAvatarImage(id: String, completion: ((Result<AvatarImage?, Error>) -> Void)?)
     func getAvatarImages(ids: [String], completion: ((Result<[AvatarImage]?, Error>) -> Void)?)
@@ -16,6 +16,8 @@ protocol MapUsecase {
     func removeLocationListener()
     func addImadokoMessageListener(ownerId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
     func removeImadokoMessageListener()
+    func addProfileListener(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
+    func removeProfileListener()
 }
 
 final class MapInteractor {
@@ -35,9 +37,9 @@ final class MapInteractor {
 }
 
 extension MapInteractor: MapUsecase {
-    func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
-        self.profileStore.getDocument(id: id, completion: completion)
-    }
+//    func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
+//        self.profileStore.getDocument(id: id, completion: completion)
+//    }
     
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?) {
         self.profileStore.getDocuments(ids: ids, completion: completion)
@@ -65,5 +67,13 @@ extension MapInteractor: MapUsecase {
     
     func removeImadokoMessageListener() {
         self.imadokoMessageStore.removeListener()
+    }
+    
+    func addProfileListener(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
+        self.profileStore.addListener(id: id, overwrite: false, completion: completion)
+    }
+    
+    func removeProfileListener() {
+        self.profileStore.removeListener()
     }
 }

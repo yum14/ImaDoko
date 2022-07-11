@@ -145,7 +145,8 @@ extension MapPresenter {
             }
         }
         
-        self.interactor.getProfile(id: self.uid) { result in
+        // プロフィールのリスナー作成
+        self.interactor.addProfileListener(id: self.uid) { result in
             switch result {
             case .success(let profile):
                 self.profile = profile
