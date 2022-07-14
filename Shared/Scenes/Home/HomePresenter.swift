@@ -206,12 +206,12 @@ extension HomePresenter {
 //                let testCode = "https://icu.yum14/ImaDoko/friends/Nyhy3JLqLqMgPA5bAF8NV49Yh4I3"
 //                guard let uid = qrCodeManager.getMyAppQrCode(code: testCode) else {
 //                    return
-//                }
-                guard let uid = qrCodeManager.getMyAppQrCode(code: code) else {
-                    return
-                }
-                
-                guard let profile = self.profile else {
+                //                }
+                                guard let uid = qrCodeManager.getMyAppQrCode(code: code) else {
+                                    return
+                                }
+                                
+                                guard let profile = self.profile else {
                     return
                 }
                 
@@ -237,24 +237,24 @@ extension HomePresenter {
     }
     
     
-    private func IsDifferentAvatarLastValue(newImageData: Data?) -> Bool {
-        if let newImageData = newImageData {
-            // 比較のために一度Data型とする
-            let oldImageData = self.avatarImage?.jpegData(compressionQuality: 0.1)
-            
-            if oldImageData == nil {
-                return true
-            } else {
-                return newImageData != oldImageData
-            }
-        } else {
-            return self.avatarImage != nil
-        }
-    }
-    
-    private func IsDifferentAvatarLastValue(newImage: UIImage?) -> Bool {
-        return self.IsDifferentAvatarLastValue(newImageData: newImage?.jpegData(compressionQuality: 0.1))
-    }
+//    private func IsDifferentAvatarLastValue(newImageData: Data?) -> Bool {
+//        if let newImageData = newImageData {
+//            // 比較のために一度Data型とする
+//            let oldImageData = self.avatarImage?.jpegData(compressionQuality: 0.1)
+//            
+//            if oldImageData == nil {
+//                return true
+//            } else {
+//                return newImageData != oldImageData
+//            }
+//        } else {
+//            return self.avatarImage != nil
+//        }
+//    }
+//    
+//    private func IsDifferentAvatarLastValue(newImage: UIImage?) -> Bool {
+//        return self.IsDifferentAvatarLastValue(newImageData: newImage?.jpegData(compressionQuality: 0.1))
+//    }
 }
 
 struct FriendImage: Identifiable {
