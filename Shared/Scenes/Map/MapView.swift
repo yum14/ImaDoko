@@ -56,7 +56,7 @@ struct MapView: View {
                         UnreadMessageButton(badgeText: self.presenter.unrepliedButtonBadgeText,
                                             width: 54,
                                             onTap: self.presenter.onUnreadMessageButtonTap)
-                            .padding(0)
+                        .padding(0)
                         
                         Divider()
                             .frame(width: 54)

@@ -14,7 +14,13 @@ final class MapPresenter: ObservableObject {
     
     private static let coordinateSpan = MKCoordinateSpan(latitudeDelta: 0.02, longitudeDelta: 0.02)
     
-    @Published var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088), span: coordinateSpan)
+    @Published var region: MKCoordinateRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: 37.3351, longitude: -122.0088), span: coordinateSpan) {
+        didSet {
+            print("変更後2")
+            print(String(self.region.center.latitude))
+            print(String(self.region.center.longitude))
+        }
+    }
     @Published var friends: [Avatar] = []
     @Published var pinItems: [PinItem] = []
     @Published var notch: Notch = .min
@@ -258,7 +264,9 @@ extension MapPresenter {
     }
     
     func onLocationButtonTap(region: MKCoordinateRegion) {
-        self.region = region
+        DispatchQueue.main.async {
+            self.region = region
+        }
     }
     
     func onUnreadMessageButtonTap() {
