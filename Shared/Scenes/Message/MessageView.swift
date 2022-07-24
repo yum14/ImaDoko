@@ -10,7 +10,6 @@ import SwiftUI
 struct MessageView: View {
     @ObservedObject var presenter: MessagePresenter
     @EnvironmentObject var appDelegate: AppDelegate
-    @EnvironmentObject var resultNotification: ResultNotification
     
     var body: some View {
         VStack(spacing: 0) {
@@ -18,7 +17,7 @@ struct MessageView: View {
                 List {
                     Section {
                         ForEach(self.presenter.unrepliedMessages, id: \.self) { message in
-                            UnrepliedMessageItem(from: message.userName,
+                            UnrepliedMessageItem(from: message.fromName,
                                                  createdAt: message.createdAt,
                                                  avatarImage: message.avatarImage,
                                                  onArrowTap: { self.presenter.onSendButtonTap(message: message) },
@@ -48,22 +47,21 @@ struct MessageView: View {
                 }
             }
         }
-        .alert(String(format: NSLocalizedString("SendNotificationFromUnrepliedMessage", comment: ""), self.presenter.selectedMessage?.userName ?? ""), isPresented: self.$presenter.showingSendNotificationAlert) {
+        .alert(String(format: NSLocalizedString("SendNotificationFromUnrepliedMessage", comment: ""), self.presenter.selectedMessage?.fromName ?? ""), isPresented: self.$presenter.showingSendNotificationAlert) {
             Button("CencelButton", role: .cancel) {
                 print("cancel")
             }
             Button("NotificationSend") {
-                self.presenter.onSendLocationConfirm(myLocation: self.appDelegate.region.center,
-                                                     resultNotification: self.resultNotification)
+                self.presenter.onSendLocationConfirm(myLocation: self.appDelegate.region.center)
             }
         }
-        .alert(String(format: NSLocalizedString("DeleteUnrepliedMessage", comment: ""), self.presenter.selectedMessage?.userName ?? ""), isPresented: self.$presenter.showingDeleteAlert) {
+        .alert(String(format: NSLocalizedString("DeleteUnrepliedMessage", comment: ""), self.presenter.selectedMessage?.fromName ?? ""), isPresented: self.$presenter.showingDeleteAlert) {
             Button("DeleteButton", role: .destructive) {
                 self.presenter.onDeleteMessageConfirm()
             }
         }
         .onDisappear {
-            self.resultNotification.hide()
+            self.presenter.onDisappear()
         }
     }
 }
@@ -75,8 +73,8 @@ struct MessageView_Previews: PreviewProvider {
         let interactor = MessageInteractor()
         let router = MessageRouter()
         let presenter = MessagePresenter(interactor: interactor, router: router, uid: "uid")
-        presenter.unrepliedMessages = [Message(userId: "userId1", userName: "アカウント1"),
-                                       Message(userId: "userId2", userName: "アカウント2")]
+        presenter.unrepliedMessages = [Message(fromId: "userId1", fromName: "アカウント1"),
+                                       Message(fromId: "userId2", fromName: "アカウント2")]
         
         return ForEach(["ja_JP", "en_US"], id: \.self) { id in
             ForEach([ColorScheme.light, ColorScheme.dark], id: \.self) { scheme in

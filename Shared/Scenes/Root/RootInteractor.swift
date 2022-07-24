@@ -59,7 +59,7 @@ extension RootInteractor: RootUsecase {
             }
         }
         
-        self.imadokoMessageStore.getDocuments(ownerId: ownerId, isLessThan: deadline) { result in
+        self.imadokoMessageStore.getDocuments(toId: ownerId, isLessThan: deadline) { result in
             switch result {
             case .success(let messages):
                 if let messages = messages {

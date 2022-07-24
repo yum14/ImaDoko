@@ -8,20 +8,24 @@
 import Foundation
 
 protocol MapUsecase {
-//    func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
     func getAvatarImage(id: String, completion: ((Result<AvatarImage?, Error>) -> Void)?)
     func getAvatarImages(ids: [String], completion: ((Result<[AvatarImage]?, Error>) -> Void)?)
     func addLocationListener(ownerId: String, completion: ((Result<[Location]?, Error>) -> Void)?)
     func removeLocationListener()
-    func addImadokoMessageListener(ownerId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
+    func addImadokoMessageListener(toId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
+    func addKokodayoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[KokodayoMessage], Error>) -> Void)?)
     func removeImadokoMessageListener()
+    func removeKokodayoMessageListener()
     func addProfileListener(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
     func removeProfileListener()
+    func addLocations(locations: [Location], completion: ((Error?) -> Void)?)
+    func updateKokodayoMessageToAlreadyRead(ids: [String], completion: ((Error?) -> Void)?)
 }
 
 final class MapInteractor {
     private let imadokoMessageStore: ImadokoMessageStore
+    private let kokodayoMessageStore: KokodayoMessageStore
     private let profileStore: ProfileStore
     private let avatarImageStore: AvatarImageStore
     private let notificationStore: NotificationStore
@@ -33,14 +37,11 @@ final class MapInteractor {
         self.notificationStore = NotificationStore()
         self.locationStore = LocationStore()
         self.imadokoMessageStore = ImadokoMessageStore()
+        self.kokodayoMessageStore = KokodayoMessageStore()
     }
 }
 
 extension MapInteractor: MapUsecase {
-//    func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
-//        self.profileStore.getDocument(id: id, completion: completion)
-//    }
-    
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?) {
         self.profileStore.getDocuments(ids: ids, completion: completion)
     }
@@ -61,12 +62,20 @@ extension MapInteractor: MapUsecase {
         self.locationStore.removeListener()
     }
     
-    func addImadokoMessageListener(ownerId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
-        self.imadokoMessageStore.addListener(ownerId: ownerId, completion: completion)
+    func addImadokoMessageListener(toId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        self.imadokoMessageStore.addListener(toId: toId, completion: completion)
+    }
+    
+    func addKokodayoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[KokodayoMessage], Error>) -> Void)?) {
+        self.kokodayoMessageStore.addListenerForAdditionalData(toId: toId, isGreaterThan: isGreaterThan, completion: completion)
     }
     
     func removeImadokoMessageListener() {
         self.imadokoMessageStore.removeListener()
+    }
+    
+    func removeKokodayoMessageListener() {
+        self.kokodayoMessageStore.removeListener()
     }
     
     func addProfileListener(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
@@ -75,5 +84,13 @@ extension MapInteractor: MapUsecase {
     
     func removeProfileListener() {
         self.profileStore.removeListener()
+    }
+    
+    func addLocations(locations: [Location], completion: ((Error?) -> Void)?) {
+        self.locationStore.batchInsert(locations, completion: completion)
+    }
+    
+    func updateKokodayoMessageToAlreadyRead(ids: [String], completion: ((Error?) -> Void)?) {
+        self.kokodayoMessageStore.batchUpdateToAlreadyRead(ids: ids, completion: completion)
     }
 }

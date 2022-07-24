@@ -45,3 +45,5 @@
 "AccessToLocationIsNotAllowed3" = "You need to ";
 "NoMessagesMain" = "No messages";
 "NoMessagesSub" = "Messages received within 24 hours will be displayed";
+"KokodayoReceived" = "You Received \"I'm here!\"";
+

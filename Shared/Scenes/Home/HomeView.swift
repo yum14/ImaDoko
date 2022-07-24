@@ -7,12 +7,12 @@
 
 import SwiftUI
 import Combine
+import PopupView
 
 struct HomeView: View {
     @ObservedObject var presenter: HomePresenter
     @EnvironmentObject var appDelegate: AppDelegate
     @EnvironmentObject var auth: Authentication
-    @EnvironmentObject var resultNotification: ResultNotification
     
     var body: some View {
         VStack(spacing: 0) {
@@ -118,7 +118,7 @@ struct HomeView: View {
         }
         .fullScreenCover(isPresented: self.$presenter.showingQrCodeScannerSheet) {
             NavigationView {
-                self.presenter.makeAboutTeamQrCodeScannerView(resultNotification: self.resultNotification)
+                self.presenter.makeAboutTeamQrCodeScannerView()
                     .navigationBarTitleDisplayMode(.inline)
                     .toolbar {
                         ToolbarItem(placement: .navigationBarLeading) {
@@ -131,12 +131,18 @@ struct HomeView: View {
                     }
             }
         }
-        
+        .popup(isPresented: self.$presenter.showingResultFloater,
+               type: .floater(verticalPadding: 40),
+               position: .top,
+               autohideIn: 3.0) {
+            ResultFloater(text: self.presenter.resultFloaterText)
+        }
+
         .onAppear {
             self.presenter.onAppear()
         }
         .onDisappear {
-            self.resultNotification.hide()
+            self.presenter.onDisappear()
         }
     }
 }
@@ -144,7 +150,6 @@ struct HomeView: View {
 struct HomeView_Previews: PreviewProvider {
     static let auth = Authentication()
     static let appDelegate = AppDelegate()
-    static let resultNotification = ResultNotification()
     
     static var previews: some View {
         let interactor = HomeInteractor()
@@ -161,7 +166,6 @@ struct HomeView_Previews: PreviewProvider {
                     .environment(\.colorScheme, scheme)
                     .environmentObject(appDelegate)
                     .environmentObject(auth)
-                    .environmentObject(resultNotification)
             }
         }
     }

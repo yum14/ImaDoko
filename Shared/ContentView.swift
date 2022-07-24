@@ -18,11 +18,9 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static let auth = Authentication()
-    static let notification = ResultNotification()
     
     static var previews: some View {
         ContentView()
             .environmentObject(auth)
-            .environmentObject(notification)
     }
 }

@@ -10,19 +10,19 @@ import Firebase
 
 struct ImadokoMessage: Identifiable, Hashable {
     var id: String
-    var userId: String
-    var ownerId: String
+    var fromId: String
+    var toId: String
     var replyed: Bool
     var createdAt: Timestamp
     
     init(id: String = UUID().uuidString,
-         userId: String,
-         ownerId: String,
+         fromId: String,
+         toId: String,
          replyed: Bool = false,
          createdAt: Date = Date()) {
         self.id = id
-        self.userId = userId
-        self.ownerId = ownerId
+        self.fromId = fromId
+        self.toId = toId
         self.replyed = replyed
         self.createdAt = Timestamp(date: createdAt)
     }
@@ -30,8 +30,8 @@ struct ImadokoMessage: Identifiable, Hashable {
     func toDictionary() -> [String: Any] {
         var dic: [String: Any] = [:]
         dic["id"] = self.id
-        dic["user_id"] = self.userId
-        dic["owner_id"] = self.ownerId
+        dic["from_id"] = self.fromId
+        dic["to_id"] = self.toId
         dic["replyed"] = self.replyed
         dic["created_at"] = self.createdAt
         

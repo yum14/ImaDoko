@@ -42,6 +42,10 @@
 		AA35879427CA4DDD00F51AEA /* ProfileStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879327CA4DDD00F51AEA /* ProfileStore.swift */; };
 		AA35879627CA5CCB00F51AEA /* NotificationTokenStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */; };
 		AA35879C27CBC33500F51AEA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA35879B27CBC33500F51AEA /* AppDelegate.swift */; };
+		AA491F85288309EC0013DBA7 /* KokodayoMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA491F84288309EC0013DBA7 /* KokodayoMessage.swift */; };
+		AA491F872883E1D10013DBA7 /* KokodayoMessageStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA491F862883E1D10013DBA7 /* KokodayoMessageStore.swift */; };
+		AA491F8B2887E6FB0013DBA7 /* KokodayoFloater.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA491F8A2887E6FB0013DBA7 /* KokodayoFloater.swift */; };
+		AA491F8D2887E7670013DBA7 /* KokodayoNotificationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA491F8C2887E7670013DBA7 /* KokodayoNotificationMessage.swift */; };
 		AA4B79382868B01F004AF74F /* UnreadMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B79372868B01F004AF74F /* UnreadMessageButton.swift */; };
 		AA65126D28130578003A68E4 /* PinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65126C28130578003A68E4 /* PinDetailView.swift */; };
 		AA65126F28130587003A68E4 /* PinDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65126E28130587003A68E4 /* PinDetailPresenter.swift */; };
@@ -80,7 +84,6 @@
 		AA9E99AE27B8FD12004B8272 /* StatefulTabView in Frameworks */ = {isa = PBXBuildFile; productRef = AA9E99AD27B8FD12004B8272 /* StatefulTabView */; };
 		AA9E99B227B915D7004B8272 /* MapOverlaySheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA9E99B127B915D7004B8272 /* MapOverlaySheet.swift */; };
 		AAABD6D4283E71130038D844 /* ResultFloater.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAABD6D3283E71130038D844 /* ResultFloater.swift */; };
-		AAABD6D6283FBB370038D844 /* ResultNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAABD6D5283FBB370038D844 /* ResultNotification.swift */; };
 		AAADEFDA27B78AE500D81A52 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFD927B78AE500D81A52 /* Message.swift */; };
 		AAADEFDC27B7907000D81A52 /* Profile.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDB27B7907000D81A52 /* Profile.swift */; };
 		AAADEFDE27B7920B00D81A52 /* FriendListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */; };
@@ -160,6 +163,10 @@
 		AA35879327CA4DDD00F51AEA /* ProfileStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileStore.swift; sourceTree = "<group>"; };
 		AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationTokenStore.swift; sourceTree = "<group>"; };
 		AA35879B27CBC33500F51AEA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		AA491F84288309EC0013DBA7 /* KokodayoMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokodayoMessage.swift; sourceTree = "<group>"; };
+		AA491F862883E1D10013DBA7 /* KokodayoMessageStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokodayoMessageStore.swift; sourceTree = "<group>"; };
+		AA491F8A2887E6FB0013DBA7 /* KokodayoFloater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokodayoFloater.swift; sourceTree = "<group>"; };
+		AA491F8C2887E7670013DBA7 /* KokodayoNotificationMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokodayoNotificationMessage.swift; sourceTree = "<group>"; };
 		AA4B79372868B01F004AF74F /* UnreadMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessageButton.swift; sourceTree = "<group>"; };
 		AA65126C28130578003A68E4 /* PinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailView.swift; sourceTree = "<group>"; };
 		AA65126E28130587003A68E4 /* PinDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailPresenter.swift; sourceTree = "<group>"; };
@@ -196,7 +203,6 @@
 		AA83DC4B27B019ED008F2226 /* DateUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateUtility.swift; sourceTree = "<group>"; };
 		AA9E99B127B915D7004B8272 /* MapOverlaySheet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapOverlaySheet.swift; sourceTree = "<group>"; };
 		AAABD6D3283E71130038D844 /* ResultFloater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultFloater.swift; sourceTree = "<group>"; };
-		AAABD6D5283FBB370038D844 /* ResultNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultNotification.swift; sourceTree = "<group>"; };
 		AAADEFD927B78AE500D81A52 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		AAADEFDB27B7907000D81A52 /* Profile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Profile.swift; sourceTree = "<group>"; };
 		AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListItem.swift; sourceTree = "<group>"; };
@@ -352,6 +358,7 @@
 				AA07D9ED27E0EBFA006D4598 /* NotificationStore.swift */,
 				AA07D9F327E37C4F006D4598 /* LocationStore.swift */,
 				AA07D9F727E848B5006D4598 /* ImadokoMessageStore.swift */,
+				AA491F862883E1D10013DBA7 /* KokodayoMessageStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -470,6 +477,7 @@
 				AA65127F281F9E83003A68E4 /* ImadokoButton.swift */,
 				AA651281281F9E9A003A68E4 /* KokodayoButton.swift */,
 				AAABD6D3283E71130038D844 /* ResultFloater.swift */,
+				AA491F8A2887E6FB0013DBA7 /* KokodayoFloater.swift */,
 				AA4B79372868B01F004AF74F /* UnreadMessageButton.swift */,
 			);
 			path = ViewComponent;
@@ -490,6 +498,7 @@
 			children = (
 				AAADEFD927B78AE500D81A52 /* Message.swift */,
 				AA07D9F527E846B9006D4598 /* ImadokoMessage.swift */,
+				AA491F84288309EC0013DBA7 /* KokodayoMessage.swift */,
 				AAADEFDB27B7907000D81A52 /* Profile.swift */,
 				AAADEFDF27B7B28700D81A52 /* PinItem.swift */,
 				AA658F9327C13D69001D4E17 /* Authentication.swift */,
@@ -500,7 +509,7 @@
 				AA07D9EF27E0EC69006D4598 /* Notification.swift */,
 				AA07D9F127E376D5006D4598 /* Location.swift */,
 				AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */,
-				AAABD6D5283FBB370038D844 /* ResultNotification.swift */,
+				AA491F8C2887E7670013DBA7 /* KokodayoNotificationMessage.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -733,6 +742,7 @@
 				AAF864A827D78F7900AFA0E6 /* MyQrCodeScannerView.swift in Sources */,
 				AAADEFE227B7BB5E00D81A52 /* AvatarMapAnnotation.swift in Sources */,
 				AAF864BA27DBB34500AFA0E6 /* AvatarImage.swift in Sources */,
+				AA491F872883E1D10013DBA7 /* KokodayoMessageStore.swift in Sources */,
 				AA658F9427C13D69001D4E17 /* Authentication.swift in Sources */,
 				AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */,
 				AA65127C281831C5003A68E4 /* MessageDestinationInteractor.swift in Sources */,
@@ -743,10 +753,12 @@
 				AA35879627CA5CCB00F51AEA /* NotificationTokenStore.swift in Sources */,
 				AA83DC2A27AF9BC2008F2226 /* RootRouter.swift in Sources */,
 				AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */,
+				AA491F8B2887E6FB0013DBA7 /* KokodayoFloater.swift in Sources */,
 				AA07D9EE27E0EBFA006D4598 /* NotificationStore.swift in Sources */,
 				AA26A6AE27AF9424003D1F17 /* ContentView.swift in Sources */,
 				AA07D9F827E848B5006D4598 /* ImadokoMessageStore.swift in Sources */,
 				AA07D9F427E37C4F006D4598 /* LocationStore.swift in Sources */,
+				AA491F8D2887E7670013DBA7 /* KokodayoNotificationMessage.swift in Sources */,
 				AAF864AC27D7901600AFA0E6 /* MyQrCodeScannerRouter.swift in Sources */,
 				AA651273281305FB003A68E4 /* PinDetailInteractor.swift in Sources */,
 				AAF864BE27DF882C00AFA0E6 /* MapInteractor.swift in Sources */,
@@ -768,7 +780,6 @@
 				AA658F9227C13CF6001D4E17 /* LoginPresenter.swift in Sources */,
 				AA07D9FA27E8C04D006D4598 /* LoginInteractor.swift in Sources */,
 				AA83DC3127AF9D15008F2226 /* HomeRouter.swift in Sources */,
-				AAABD6D6283FBB370038D844 /* ResultNotification.swift in Sources */,
 				AA65127E281E4BBD003A68E4 /* SendMessageButton.swift in Sources */,
 				AA07D9FC27E9F331006D4598 /* NotificationMessageCreator.swift in Sources */,
 				AAE91A1A28256194000543C9 /* MessageInteractor.swift in Sources */,
@@ -780,6 +791,7 @@
 				AA07D9EC27E0ACC1006D4598 /* Avatar.swift in Sources */,
 				AADAC0CA27FADF33006CDF0B /* ImadokoNotificationView.swift in Sources */,
 				AA658F9027C13CEB001D4E17 /* LoginView.swift in Sources */,
+				AA491F85288309EC0013DBA7 /* KokodayoMessage.swift in Sources */,
 				AA07D9F227E376D5006D4598 /* Location.swift in Sources */,
 				AAF8649D27D6475600AFA0E6 /* MyQrCodeView.swift in Sources */,
 				AAF8649627CE5C2900AFA0E6 /* HomeInteractor.swift in Sources */,
@@ -977,6 +989,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -990,7 +1003,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -1012,6 +1025,7 @@
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
@@ -1025,7 +1039,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;

@@ -8,7 +8,7 @@
 import Foundation
 
 protocol MessageUsecase {
-    func addImadokoMessageListener(ownerId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
+    func addImadokoMessageListener(toId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
     func removeImadokoMessageListener()
     func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
@@ -35,8 +35,8 @@ final class MessageInteractor {
 }
 
 extension MessageInteractor: MessageUsecase {
-    func addImadokoMessageListener(ownerId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
-        self.imadokoMessageStore.addListener(ownerId: ownerId, completion: completion)
+    func addImadokoMessageListener(toId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        self.imadokoMessageStore.addListener(toId: toId, completion: completion)
     }
     
     func removeImadokoMessageListener() {

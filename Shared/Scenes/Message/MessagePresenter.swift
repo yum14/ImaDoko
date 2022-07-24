@@ -12,20 +12,22 @@ final class MessagePresenter: ObservableObject {
     @Published var unrepliedMessages: [Message] = []
     @Published var showingDeleteAlert = false
     @Published var showingSendNotificationAlert = false
+    @Published var showingResultFloater = false
     
     var selectedMessage: Message?
     var profile: Profile?
+    var resultFloaterText: String = ""
     
     private var messageAvatarImages: [String: Data] = [:] {
         didSet {
-            let newMessages = self.unrepliedMessages.map { Message(id: $0.id, userId: $0.userId, userName: $0.userName, avatarImage: self.messageAvatarImages[$0.userId], createdAt: $0.createdAt) }
+            let newMessages = self.unrepliedMessages.map { Message(id: $0.id, fromId: $0.fromId, fromName: $0.fromName, avatarImage: self.messageAvatarImages[$0.fromId], createdAt: $0.createdAt) }
             self.unrepliedMessages = newMessages
         }
     }
     
     private var messagesWithoutAvatarImage: [Message] = [] {
         didSet {
-            let newMessages = self.messagesWithoutAvatarImage.map { Message(id: $0.id, userId: $0.userId, userName: $0.userName, avatarImage: self.messageAvatarImages[$0.id], createdAt: $0.createdAt) }
+            let newMessages = self.messagesWithoutAvatarImage.map { Message(id: $0.id, fromId: $0.fromId, fromName: $0.fromName, avatarImage: self.messageAvatarImages[$0.id], createdAt: $0.createdAt) }
             self.unrepliedMessages = newMessages
         }
     }
@@ -66,61 +68,73 @@ extension MessagePresenter {
         }
         
         // イマドコメッセージのリスナー作成
-        self.interactor.addImadokoMessageListener(ownerId: self.uid) { result in
+        self.interactor.addImadokoMessageListener(toId: self.uid) { result in
             switch result {
             case .success(let imadokoMessages):
                 
                 self.messagesWithoutAvatarImage = []
-   
+                
                 if let imadokoMessages = imadokoMessages {
                     
-                    let userIds = imadokoMessages.map { $0.userId }
+                    let userIds = imadokoMessages.map { $0.fromId }
                     
-                    // イマドコメッセージ送信元のユーザ名を取得
-                    self.interactor.getProfiles(ids: userIds) { result in
-                        switch result {
-                        case .success(let profiles):
-                            if let profiles = profiles {
-                                // 対象は1日前まで
-                                let newMessages = imadokoMessages
-                                    .filter({ !$0.replyed && $0.createdAt.dateValue().addingTimeInterval(60*60*24) >= Date.now })
-                                    .map({ message in
-                                        Message(id: message.id,
-                                                userId: message.userId,
-                                                userName: profiles.first{ $0.id == message.userId }?.name ?? "",
-                                                avatarImage: nil,
-                                                createdAt: message.createdAt.dateValue())
-                                    })
-                                
-                                self.messagesWithoutAvatarImage = newMessages
-                                
-                            }
-                        case .failure(let error):
-                            print(error.localizedDescription)
+                    // イマドコメッセージ送信元のユーザ名を取得（キャッシュあり）
+                    self.getProfiles(ids: userIds) { profiles in
+                        if let profiles = profiles {
+                            // 対象は1日前まで
+                            let newMessages = imadokoMessages
+                                .filter({ !$0.replyed && $0.createdAt.dateValue().addingTimeInterval(60*60*24) >= Date.now })
+                                .map({ message in
+                                    Message(id: message.id,
+                                            fromId: message.fromId,
+                                            fromName: profiles.first{ $0.id == message.fromId }?.name ?? "",
+                                            avatarImage: nil,
+                                            createdAt: message.createdAt.dateValue())
+                                })
+                            
+                            self.messagesWithoutAvatarImage = newMessages
                         }
                     }
                     
-                    // イマドコメッセージ送信元のアバターイメージを取得
-                    self.interactor.getAvatarImages(ids: userIds) { result in
-                        switch result {
-                        case .success(let avatarImages):
-                            if let avatarImages = avatarImages {
-                                
-                                var newImages: [String:Data] = [:]
-                                for image in avatarImages {
-                                    newImages[image.id] = image.data
-                                }
-                                
-                                self.messageAvatarImages = newImages
+                    // イマドコメッセージ送信元のアバターイメージを取得（キャッシュあり）
+                    self.getAvatarImages(ids: userIds) { avatarImages in
+                        if let avatarImages = avatarImages {
+                            var newImages: [String:Data] = [:]
+                            for image in avatarImages {
+                                newImages[image.id] = image.data
                             }
-                        case .failure(let error):
-                            print(error.localizedDescription)
+                            
+                            self.messageAvatarImages = newImages
                         }
                     }
                 }
-                
             case .failure(let error):
                 print(error.localizedDescription)
+            }
+        }
+        
+    }
+    
+    private func getProfiles(ids: [String], completion: (([Profile]?) -> Void)?) {
+        self.interactor.getProfiles(ids: ids) { result in
+            switch result {
+            case .success(let profiles):
+                completion?(profiles)
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion?(nil)
+            }
+        }
+    }
+    
+    private func getAvatarImages(ids: [String], completion: (([AvatarImage]?) -> Void)?) {
+        self.interactor.getAvatarImages(ids: ids) { result in
+            switch result {
+            case .success(let avatarImages):
+                completion?(avatarImages)
+            case .failure(let error):
+                print(error.localizedDescription)
+                completion?(nil)
             }
         }
     }
@@ -139,7 +153,7 @@ extension MessagePresenter {
         self.showingDeleteAlert = true
     }
     
-    func onSendLocationConfirm(myLocation: CLLocationCoordinate2D, resultNotification: ResultNotification) {
+    func onSendLocationConfirm(myLocation: CLLocationCoordinate2D) {
         guard let selectedMessage = self.selectedMessage, let profile = self.profile else {
             return
         }
@@ -152,7 +166,8 @@ extension MessagePresenter {
                 print(error.localizedDescription)
             }
             
-            resultNotification.show(text: NSLocalizedString((error == nil) ? "SendCompleted" : "SendFailed", comment: ""))
+            self.resultFloaterText = NSLocalizedString((error == nil) ? "SendCompleted" : "SendFailed", comment: "")
+            self.showingResultFloater = true
         }
         
         // プッシュ通知
@@ -181,5 +196,9 @@ extension MessagePresenter {
                 print(error.localizedDescription)
             }
         }
+    }
+    
+    func onDisappear() {
+        self.showingResultFloater = false
     }
 }
