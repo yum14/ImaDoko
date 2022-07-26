@@ -33,6 +33,9 @@ final class HomePresenter: ObservableObject {
     }
     @Published var showingQrCodeSheet = false
     @Published var showingQrCodeScannerSheet = false
+    @Published var showingResultFloater = false
+    
+    var resultFloaterText: String = ""
     
     private var avatarInitialLoading = false
     private var profile: Profile? {
@@ -191,11 +194,15 @@ extension HomePresenter {
         self.avatarInitialLoading = true
     }
     
+    func onDisappear() {
+        self.showingResultFloater = false
+    }
+    
     func makeAboutMyQrCodeView() -> some View {
         return router.makeMyQrCodeView(uid: self.profile!.id)
     }
     
-    func makeAboutTeamQrCodeScannerView(resultNotification: ResultNotification) -> some View {
+    func makeAboutTeamQrCodeScannerView() -> some View {
         return router.makeMyQrCodeScannerView(
             onFound: { code in
                 self.showingQrCodeScannerSheet = false
@@ -218,7 +225,8 @@ extension HomePresenter {
                 if profile.friends.contains(uid) {
                     let message = String(format: NSLocalizedString("AddFriendAlreadyAdded", comment: ""),
                                          self.friendProfiles.first { $0.id == uid }?.name ?? "")
-                    resultNotification.show(text: message)
+                    self.resultFloaterText = message
+                    self.showingResultFloater = true
                     return
                 }
                 
@@ -229,32 +237,13 @@ extension HomePresenter {
                     if let error = error {
                         print(error.localizedDescription)
                         
-                        resultNotification.show(text: NSLocalizedString("AddFriendFailed", comment: ""))
+                        self.resultFloaterText = NSLocalizedString("AddFriendFailed", comment: "")
+                        self.showingResultFloater = true
                         return
                     }
                 }
             })
     }
-    
-    
-//    private func IsDifferentAvatarLastValue(newImageData: Data?) -> Bool {
-//        if let newImageData = newImageData {
-//            // 比較のために一度Data型とする
-//            let oldImageData = self.avatarImage?.jpegData(compressionQuality: 0.1)
-//            
-//            if oldImageData == nil {
-//                return true
-//            } else {
-//                return newImageData != oldImageData
-//            }
-//        } else {
-//            return self.avatarImage != nil
-//        }
-//    }
-//    
-//    private func IsDifferentAvatarLastValue(newImage: UIImage?) -> Bool {
-//        return self.IsDifferentAvatarLastValue(newImageData: newImage?.jpegData(compressionQuality: 0.1))
-//    }
 }
 
 struct FriendImage: Identifiable {

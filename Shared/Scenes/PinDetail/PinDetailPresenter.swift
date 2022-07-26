@@ -43,10 +43,10 @@ final class PinDetailPresenter: ObservableObject {
 extension PinDetailPresenter {
     func onKokodayoButtonTap(myLocation: CLLocationCoordinate2D) {
 
-        let location = Location(userId: self.myId, ownerId: self.friend.id, latitude: myLocation.latitude, longitude: myLocation.longitude)
+        let message = KokodayoMessage(fromId: self.myId, toId: self.friend.id, latitude: myLocation.latitude, longitude: myLocation.longitude)
         
-        // 現在地情報を追加
-        self.interactor.setLocation(location) { error in
+        // ココダヨメッセージを追加
+        self.interactor.setKokodayoMessage(message) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -66,7 +66,7 @@ extension PinDetailPresenter {
     
     func onImadokoButtonTap() {
 
-        let message = ImadokoMessage(userId: self.myId, ownerId: self.friend.id)
+        let message = ImadokoMessage(fromId: self.myId, toId: self.friend.id)
         
         // イマドコメッセージを追加
         self.interactor.setImadokoMessage(message) { error in

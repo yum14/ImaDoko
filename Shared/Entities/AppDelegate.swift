@@ -154,7 +154,6 @@ extension AppDelegate: CLLocationManagerDelegate {
         } else {
             self.location = newLocation
         }
-        print("緯度: ", newLocation.latitude, "経度: ", newLocation.longitude)
     }
     
     // 位置情報の許可のステータス変更で呼ばれる

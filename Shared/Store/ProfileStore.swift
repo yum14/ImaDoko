@@ -33,6 +33,8 @@ final class ProfileStore {
             return
         }
         
+        self.removeListener()
+        
         self.listener = self.db!.collection(self.collectionName).document(id)
             .addSnapshotListener { documentSnapshot, error in
                 

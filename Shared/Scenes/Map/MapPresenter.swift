@@ -22,6 +22,13 @@ final class MapPresenter: ObservableObject {
     @Published var overlaySheetType: OverlaySheetType = .close
     @Published var showingMessageSheet = false
     @Published var unrepliedButtonBadgeText: String?
+    @Published var showingImakokoNotification = false
+    @Published var showingResultFloater = false
+    @Published var showingKokodayoFloater = false
+    
+    var profile: Profile?
+    var resultFloaterText: String = ""
+    var kokodayoNotificationMessages: [KokodayoNotificationMessage] = []
     
     private var unrepliedMessageCount: Int = 0 {
         didSet {
@@ -79,7 +86,7 @@ final class MapPresenter: ObservableObject {
                 return
             }
             
-            
+            // MapPinデータ生成
             let newPinItems = locations
                 .filter { location in
                     self.friends.contains(where: { $0.id == location.userId })
@@ -94,7 +101,6 @@ final class MapPresenter: ObservableObject {
         }
     }
     
-    var profile: Profile?
     private let interactor: MapUsecase
     private let router: MapWireframe
     private let uid: String
@@ -117,29 +123,25 @@ extension MapPresenter {
     
     private func addListner() {
         
-        self.interactor.addLocationListener(ownerId: self.uid) { result in
+        // 24時間以内のlocationのみ取得
+        self.interactor.addLocationListenerForAdditionalData(ownerId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
             switch result {
             case .success(let locations):
                 if let locations = locations {
-                    self.locations = locations
+                    
+                    let grouped = Dictionary(grouping: locations, by: { location in
+                        location.userId
+                    })
+                    
+                    // ユーザーごとに最新１件のみとする
+                    let newLocations = grouped.map { locationByUser in
+                        return locationByUser.value.sorted { $0.createdAt.dateValue() > $1.createdAt.dateValue() }.first!
+                    }
+                    
+                    self.locations = newLocations
                 } else {
                     self.locations = []
                 }
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-        
-        // イマドコメッセージのリスナー作成
-        self.interactor.addImadokoMessageListener(ownerId: self.uid) { result in
-            switch result {
-            case .success(let imadokoMessages):
-                guard let imadokoMessages = imadokoMessages else {
-                    self.unrepliedMessageCount = 0
-                    return
-                }
-                
-                self.unrepliedMessageCount = imadokoMessages.count
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -200,6 +202,115 @@ extension MapPresenter {
                 return
             }
         }
+        
+        // イマドコメッセージのリスナー作成
+        self.interactor.addImadokoMessageListenerForAdditionalData(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
+            switch result {
+            case .success(let imadokoMessages):
+                guard let imadokoMessages = imadokoMessages else {
+                    self.unrepliedMessageCount = 0
+                    return
+                }
+                
+                // 対象は1日前まで
+                self.unrepliedMessageCount = imadokoMessages.count
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+        // ココダヨメッセージのリスナー作成
+        self.interactor.addKokodayoMessageListenerForAdditionalData(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
+            switch result {
+            case .success(let kokodayoMessages):
+                
+                if kokodayoMessages.count > 0 {
+                    let ids = kokodayoMessages.map { $0.fromId }
+                    
+                    //ココダヨッセージ送信元のユーザ名を取得（キャッシュあり）
+                    self.interactor.getProfiles(ids: ids) { result in
+                        switch result {
+                        case .success(let profiles):
+                            
+                            if let profiles = profiles {
+                                // ココダヨメッセージ送信元のアバターイメージを取得（キャッシュあり）
+                                self.interactor.getAvatarImages(ids: ids) { result in
+                                    switch result {
+                                    case .success(let avatarImages):
+                                        
+                                        if let avatarImages = avatarImages {
+                                            
+                                            // Locationに追加する
+                                            let newLocations = kokodayoMessages.map { Location(userId: $0.fromId,
+                                                                                               ownerId: self.uid,
+                                                                                               latitude: $0.latitude,
+                                                                                               longitude: $0.longitude,
+                                                                                               createdAt: $0.createdAt.dateValue())}
+                                            
+                                            self.interactor.addLocations(locations: newLocations) { error in
+                                                if let error = error {
+                                                    print(error.localizedDescription)
+                                                    return
+                                                }
+                                                
+                                                // 追加済のココダヨを既読にする
+                                                self.interactor.updateKokodayoMessageToAlreadyRead(ids: kokodayoMessages.map { $0.id }) { error in
+                                                    if let error = error {
+                                                        print(error.localizedDescription)
+                                                    }
+                                                }
+                                                
+                                                // Floater通知メッセージ
+                                                let allMessages: [KokodayoNotificationMessage] = kokodayoMessages.compactMap { message in
+                                                    
+                                                    let targetProfile = profiles.first { $0.id == message.fromId }
+                                                    let targetImage = avatarImages.first { $0.id == message.fromId }
+                                                    
+                                                    guard let targetProfile = targetProfile else {
+                                                        // ありえないはず
+                                                        return nil
+                                                    }
+                                                    
+                                                    return KokodayoNotificationMessage(id: message.id,
+                                                                                       fromId: message.fromId,
+                                                                                       fromName: targetProfile.name,
+                                                                                       avatarImage: targetImage?.data,
+                                                                                       createdAt: message.createdAt.dateValue())
+                                                }
+                                                
+                                                
+                                                // ユーザごとに最新のみとする
+                                                let groupingDic = Dictionary(grouping: allMessages, by: { $0.fromId })
+                                                let newMessages = groupingDic.map { everyUser in
+                                                    everyUser.value.sorted(by: { $0.createdAt > $1.createdAt }).first!
+                                                }
+                                                
+                                                self.kokodayoNotificationMessages = newMessages
+                                                
+                                                // イニシャライズ時に読み込まれた場合はここではFloaterは表示しない（できない）
+                                                // onAppearにて表示する
+                                                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                    if self.kokodayoNotificationMessages.count > 0 {
+                                                        self.showingKokodayoFloater = true
+                                                        self.showingResultFloater = false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    case .failure(let error):
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                            }
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
     
     private func removeListener() {
@@ -208,15 +319,28 @@ extension MapPresenter {
     }
     
     func onAppear(initialRegion: MKCoordinateRegion) {
+        // 再描画のときは呼ばれないので注意
+        
         if self.firstAppear {
             self.region = initialRegion
             self.firstAppear.toggle()
+        }
+        
+        // イニシャライズのリスナー追加時にイマココが読み込まれていた場合はここで表示する
+        // ※KokodayoFloaterDismissで空にしているが時間差があるため、あえてasyncAfterの中で判定している
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+            if self.kokodayoNotificationMessages.count > 0 {
+                self.showingKokodayoFloater = true
+                self.showingResultFloater = false
+            }
         }
     }
     
     func onDisapper() {
         self.notch = .min
         self.selectedFriendIds = []
+        self.showingResultFloater = false
+        self.showingKokodayoFloater = false
     }
 }
 
@@ -258,7 +382,9 @@ extension MapPresenter {
     }
     
     func onLocationButtonTap(region: MKCoordinateRegion) {
-        self.region = region
+        DispatchQueue.main.async {
+            self.region = region
+        }
     }
     
     func onUnreadMessageButtonTap() {
@@ -268,10 +394,14 @@ extension MapPresenter {
     func onMessageViewBackButtonTap() {
         self.showingMessageSheet = false
     }
+    
+    func onKokodayoFloaterDismiss() {
+        self.kokodayoNotificationMessages = []
+    }
 }
 
 extension MapPresenter {
-    func makeAbountOverlaySheet(resultNotification: ResultNotification, locationAuthorizationStatus: CLAuthorizationStatus) -> some View {
+    func makeAbountOverlaySheet(locationAuthorizationStatus: CLAuthorizationStatus) -> some View {
         
         switch self.overlaySheetType {
         case .close:
@@ -289,7 +419,7 @@ extension MapPresenter {
                     self.selectedFriendIds = []
                 }
             }, onSend: { errors in
-                resultNotification.show(text: self.createResultNotificationText(success: errors.count == 0))
+                self.showResultFloater(success: errors.count == 0)
             })
         case .pinDetail:
             return self.router.makePinDetailView(myId: self.profile?.id ?? "", myName: self.profile?.name ?? "", friend: self.friends.first(where: { $0.id == self.selectedPinItem!.id })!, createdAt: self.selectedPinItem!.createdAt, onDismiss: {
@@ -299,7 +429,7 @@ extension MapPresenter {
                     self.selectedFriendIds = []
                 }
             }, onSend: { error in
-                resultNotification.show(text: self.createResultNotificationText(success: error == nil))
+                self.showResultFloater(success: error == nil)
             })
         }
     }
@@ -308,8 +438,10 @@ extension MapPresenter {
         return router.makeMessageView(uid: self.uid)
     }
     
-    private func createResultNotificationText(success: Bool) -> String {
-        return NSLocalizedString(success ? "SendCompleted" : "SendFailed", comment: "")
+    private func showResultFloater(success: Bool) {
+        self.resultFloaterText = NSLocalizedString(success ? "SendCompleted" : "SendFailed", comment: "")
+        self.showingResultFloater = true
+        self.showingKokodayoFloater = false
     }
 }
 
