@@ -11,9 +11,9 @@ protocol MapUsecase {
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
     func getAvatarImage(id: String, completion: ((Result<AvatarImage?, Error>) -> Void)?)
     func getAvatarImages(ids: [String], completion: ((Result<[AvatarImage]?, Error>) -> Void)?)
-    func addLocationListener(ownerId: String, completion: ((Result<[Location]?, Error>) -> Void)?)
+    func addLocationListenerForAdditionalData(ownerId: String, isGreaterThan: Date, completion: ((Result<[Location]?, Error>) -> Void)?)
     func removeLocationListener()
-    func addImadokoMessageListener(toId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
+    func addImadokoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
     func addKokodayoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[KokodayoMessage], Error>) -> Void)?)
     func removeImadokoMessageListener()
     func removeKokodayoMessageListener()
@@ -54,16 +54,16 @@ extension MapInteractor: MapUsecase {
         self.avatarImageStore.getDocuments(ids: ids, completion: completion)
     }
     
-    func addLocationListener(ownerId: String, completion: ((Result<[Location]?, Error>) -> Void)?) {
-        self.locationStore.addListener(ownerId: ownerId, overwrite: false, completion: completion)
+    func addLocationListenerForAdditionalData(ownerId: String, isGreaterThan: Date, completion: ((Result<[Location]?, Error>) -> Void)?) {
+        self.locationStore.addListenerForAdditionalData(ownerId: ownerId, isGreaterThan: isGreaterThan, overwrite: false, completion: completion)
     }
     
     func removeLocationListener() {
         self.locationStore.removeListener()
     }
     
-    func addImadokoMessageListener(toId: String, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
-        self.imadokoMessageStore.addListener(toId: toId, completion: completion)
+    func addImadokoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        self.imadokoMessageStore.addListenerForAdditionalData(toId: toId, isGreaterThan: isGreaterThan, completion: completion)
     }
     
     func addKokodayoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[KokodayoMessage], Error>) -> Void)?) {

@@ -45,10 +45,10 @@ extension RootPresenter {
             }
         }
         
-        let yesterday = Date().addingTimeInterval(-60*60*24)
-        
-        // 期限切れデータを削除
-        self.interactor.deleteExpiredData(ownerId: uid, deadline: yesterday)
+//        let yesterday = Date().addingTimeInterval(-60*60*24)
+//        
+//        // 期限切れデータを削除
+//        self.interactor.deleteExpiredData(ownerId: uid, deadline: yesterday)
     }
     
     func onOpenUrl(url: URL) {

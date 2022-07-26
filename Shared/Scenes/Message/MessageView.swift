@@ -48,9 +48,7 @@ struct MessageView: View {
             }
         }
         .alert(String(format: NSLocalizedString("SendNotificationFromUnrepliedMessage", comment: ""), self.presenter.selectedMessage?.fromName ?? ""), isPresented: self.$presenter.showingSendNotificationAlert) {
-            Button("CencelButton", role: .cancel) {
-                print("cancel")
-            }
+            Button("CencelButton", role: .cancel) {}
             Button("NotificationSend") {
                 self.presenter.onSendLocationConfirm(myLocation: self.appDelegate.region.center)
             }

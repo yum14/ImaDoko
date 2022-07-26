@@ -23,7 +23,7 @@ final class LocationStore {
         self.db = db
     }
     
-    func addListener(ownerId: String, overwrite: Bool = true, completion: ((Result<[Location]?, Error>) -> Void)?) {
+    func addListenerForAdditionalData(ownerId: String, isGreaterThan: Date, overwrite: Bool = true, completion: ((Result<[Location]?, Error>) -> Void)?) {
         if self.db == nil {
             self.initialize()
         }
@@ -36,6 +36,7 @@ final class LocationStore {
         
         self.listener = self.db!.collection(self.collectionName)
             .whereField("owner_id", isEqualTo: ownerId)
+            .whereField("created_at", isGreaterThan: isGreaterThan)
             .addSnapshotListener { querySnapshot, error in
                 
                 let result = Result<[Location]?, Error> {

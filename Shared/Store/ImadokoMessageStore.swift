@@ -23,7 +23,7 @@ final class ImadokoMessageStore {
         self.db = db
     }
     
-    func addListener(toId: String, overwrite: Bool = true, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+    func addListenerForAdditionalData(toId: String, isGreaterThan: Date, overwrite: Bool = true, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
         if self.db == nil {
             self.initialize()
         }
@@ -36,6 +36,8 @@ final class ImadokoMessageStore {
         
         self.listener = self.db!.collection(self.collectionName)
             .whereField("to_id", isEqualTo: toId)
+            .whereField("replyed", isEqualTo: false)
+            .whereField("created_at", isGreaterThan: isGreaterThan)
             .addSnapshotListener { querySnapshot, error in
                 
                 let result = Result<[ImadokoMessage]?, Error> {
@@ -55,25 +57,25 @@ final class ImadokoMessageStore {
         self.listener = nil
     }
     
-    func getDocuments(toId: String, isLessThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
-        if self.db == nil {
-            self.initialize()
-        }
-        
-        db!.collection(self.collectionName)
-            .whereField("to_id", isEqualTo: toId)
-            .whereField("created_at", isLessThan: isLessThan)
-            .getDocuments { querySnapshot, error in
-                if let error = error {
-                    completion?(Result.failure(error))
-                    return
-                }
-                
-                let messages = self.map(querySnapshot: querySnapshot)
-                
-                completion?(Result.success(messages))
-            }
-    }
+//    func getDocuments(toId: String, isLessThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+//        if self.db == nil {
+//            self.initialize()
+//        }
+//        
+//        db!.collection(self.collectionName)
+//            .whereField("to_id", isEqualTo: toId)
+//            .whereField("created_at", isLessThan: isLessThan)
+//            .getDocuments { querySnapshot, error in
+//                if let error = error {
+//                    completion?(Result.failure(error))
+//                    return
+//                }
+//                
+//                let messages = self.map(querySnapshot: querySnapshot)
+//                
+//                completion?(Result.success(messages))
+//            }
+//    }
     
     func setData(_ data: ImadokoMessage, completion: ((Error?) -> Void)?) {
         if self.db == nil {

@@ -123,11 +123,22 @@ extension MapPresenter {
     
     private func addListner() {
         
-        self.interactor.addLocationListener(ownerId: self.uid) { result in
+        // 24時間以内のlocationのみ取得
+        self.interactor.addLocationListenerForAdditionalData(ownerId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
             switch result {
             case .success(let locations):
                 if let locations = locations {
-                    self.locations = locations
+                    
+                    let grouped = Dictionary(grouping: locations, by: { location in
+                        location.userId
+                    })
+                    
+                    // ユーザーごとに最新１件のみとする
+                    let newLocations = grouped.map { locationByUser in
+                        return locationByUser.value.sorted { $0.createdAt.dateValue() > $1.createdAt.dateValue() }.first!
+                    }
+                    
+                    self.locations = newLocations
                 } else {
                     self.locations = []
                 }
@@ -193,7 +204,7 @@ extension MapPresenter {
         }
         
         // イマドコメッセージのリスナー作成
-        self.interactor.addImadokoMessageListener(toId: self.uid) { result in
+        self.interactor.addImadokoMessageListenerForAdditionalData(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
             switch result {
             case .success(let imadokoMessages):
                 guard let imadokoMessages = imadokoMessages else {
@@ -202,16 +213,14 @@ extension MapPresenter {
                 }
                 
                 // 対象は1日前まで
-                self.unrepliedMessageCount = imadokoMessages.filter({ !$0.replyed && $0.createdAt.dateValue().addingTimeInterval(60*60*24) >= Date.now }).count
+                self.unrepliedMessageCount = imadokoMessages.count
             case .failure(let error):
                 print(error.localizedDescription)
             }
         }
         
-        let yesterday = Date().addingTimeInterval(-60*60*24)
-        
         // ココダヨメッセージのリスナー作成
-        self.interactor.addKokodayoMessageListenerForAdditionalData(toId: self.uid, isGreaterThan: yesterday) { result in
+        self.interactor.addKokodayoMessageListenerForAdditionalData(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
             switch result {
             case .success(let kokodayoMessages):
                 

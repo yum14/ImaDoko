@@ -68,7 +68,7 @@ extension MessagePresenter {
         }
         
         // イマドコメッセージのリスナー作成
-        self.interactor.addImadokoMessageListener(toId: self.uid) { result in
+        self.interactor.addImadokoMessageListenerForAdditionalData(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
             switch result {
             case .success(let imadokoMessages):
                 
@@ -81,9 +81,7 @@ extension MessagePresenter {
                     // イマドコメッセージ送信元のユーザ名を取得（キャッシュあり）
                     self.getProfiles(ids: userIds) { profiles in
                         if let profiles = profiles {
-                            // 対象は1日前まで
                             let newMessages = imadokoMessages
-                                .filter({ !$0.replyed && $0.createdAt.dateValue().addingTimeInterval(60*60*24) >= Date.now })
                                 .map({ message in
                                     Message(id: message.id,
                                             fromId: message.fromId,
