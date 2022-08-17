@@ -156,20 +156,16 @@ extension MessagePresenter {
             return
         }
         
-        let location = Location(userId: profile.id, ownerId: selectedMessage.id, latitude: myLocation.latitude, longitude: myLocation.longitude)
-        
-        // 現在地情報を追加
-        self.interactor.setLocation(location) { error in
+        // ココダヨメッセージを追加
+        let message = KokodayoMessage(fromId: profile.id, toId: selectedMessage.fromId, latitude: myLocation.latitude, longitude: myLocation.longitude)
+        self.interactor.setKokodayoMessage(message) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
-            
-            self.resultFloaterText = NSLocalizedString((error == nil) ? "SendCompleted" : "SendFailed", comment: "")
-            self.showingResultFloater = true
         }
         
         // プッシュ通知
-        self.interactor.setKokodayoNotification(fromId: profile.id, fromName: profile.name, toIds: [selectedMessage.id]) { error in
+        self.interactor.setKokodayoNotification(fromId: profile.id, fromName: profile.name, toIds: [selectedMessage.fromId]) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
