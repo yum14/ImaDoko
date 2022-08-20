@@ -118,6 +118,13 @@ struct MapView: View {
                dismissCallback: self.presenter.onKokodayoFloaterDismiss) {
             KokodayoFloater(avatarImages: self.presenter.kokodayoNotificationMessages.map { $0.avatarImage == nil ? nil : UIImage(data: $0.avatarImage!) })
         }
+        .popup(isPresented: self.$presenter.showingImadokoFloater,
+               type: .floater(verticalPadding: 40),
+               position: .top,
+               autohideIn: 3.0,
+               dismissCallback: self.presenter.onImadokoFloaterDismiss) {
+            ImadokoFloater(avatarImages: self.presenter.imadokoNotificationMessages.map { $0.avatarImage == nil ? nil : UIImage(data: $0.avatarImage!) })
+        }
         .popup(isPresented: self.$presenter.showingResultFloater,
                type: .floater(verticalPadding: 40),
                position: .top,

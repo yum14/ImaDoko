@@ -65,6 +65,7 @@
 		AA658FA427C1F5EF001D4E17 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = AA658FA327C1F5EF001D4E17 /* GoogleSignIn */; };
 		AA658FA627C281E2001D4E17 /* AppleSignInButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658FA527C281E2001D4E17 /* AppleSignInButton.swift */; };
 		AA658FA827C286CE001D4E17 /* LoginRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA658FA727C286CE001D4E17 /* LoginRouter.swift */; };
+		AA7EEB8328AD2BAC0063565B /* ImadokoFloater.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA7EEB8228AD2BAC0063565B /* ImadokoFloater.swift */; };
 		AA83DC2527AF980A008F2226 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83DC2427AF980A008F2226 /* MapView.swift */; };
 		AA83DC2827AF9B67008F2226 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83DC2727AF9B67008F2226 /* RootView.swift */; };
 		AA83DC2A27AF9BC2008F2226 /* RootRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA83DC2927AF9BC2008F2226 /* RootRouter.swift */; };
@@ -185,6 +186,7 @@
 		AA658F9727C1F1FC001D4E17 /* GoogleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleSignInButton.swift; sourceTree = "<group>"; };
 		AA658FA527C281E2001D4E17 /* AppleSignInButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleSignInButton.swift; sourceTree = "<group>"; };
 		AA658FA727C286CE001D4E17 /* LoginRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginRouter.swift; sourceTree = "<group>"; };
+		AA7EEB8228AD2BAC0063565B /* ImadokoFloater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoFloater.swift; sourceTree = "<group>"; };
 		AA83DC2427AF980A008F2226 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		AA83DC2727AF9B67008F2226 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		AA83DC2927AF9BC2008F2226 /* RootRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRouter.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				AA651281281F9E9A003A68E4 /* KokodayoButton.swift */,
 				AAABD6D3283E71130038D844 /* ResultFloater.swift */,
 				AA491F8A2887E6FB0013DBA7 /* KokodayoFloater.swift */,
+				AA7EEB8228AD2BAC0063565B /* ImadokoFloater.swift */,
 				AA4B79372868B01F004AF74F /* UnreadMessageButton.swift */,
 			);
 			path = ViewComponent;
@@ -783,6 +786,7 @@
 				AA65127E281E4BBD003A68E4 /* SendMessageButton.swift in Sources */,
 				AA07D9FC27E9F331006D4598 /* NotificationMessageCreator.swift in Sources */,
 				AAE91A1A28256194000543C9 /* MessageInteractor.swift in Sources */,
+				AA7EEB8328AD2BAC0063565B /* ImadokoFloater.swift in Sources */,
 				AA65127A28183158003A68E4 /* MessageDestinationRouter.swift in Sources */,
 				AA16D44227BA7ACB00804D0D /* FriendHScrollView.swift in Sources */,
 				AA35879227CA49F800F51AEA /* NotificationToken.swift in Sources */,

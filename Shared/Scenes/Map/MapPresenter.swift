@@ -25,10 +25,12 @@ final class MapPresenter: ObservableObject {
     @Published var showingImakokoNotification = false
     @Published var showingResultFloater = false
     @Published var showingKokodayoFloater = false
+    @Published var showingImadokoFloater = false
     
     var profile: Profile?
     var resultFloaterText: String = ""
-    var kokodayoNotificationMessages: [KokodayoNotificationMessage] = []
+    var kokodayoNotificationMessages: [FloaterNotificationMessage] = []
+    var imadokoNotificationMessages: [FloaterNotificationMessage] = []
     
     private var unrepliedMessageCount: Int = 0 {
         didSet {
@@ -214,6 +216,80 @@ extension MapPresenter {
                 
                 // 対象は1日前まで
                 self.unrepliedMessageCount = imadokoMessages.count
+                
+                if imadokoMessages.count > 0 {
+                    let ids = imadokoMessages.map { $0.fromId }
+                    
+                    // イマドコメッセージ送信元のユーザ名を取得（キャッシュあり）
+                    self.interactor.getProfiles(ids: ids) { result in
+                        switch result {
+                        case .success(let profiles):
+                            
+                            if let profiles = profiles {
+                                // イマドコメッセージ送信元のアバターイメージを取得（キャッシュあり）
+                                self.interactor.getAvatarImages(ids: ids) { result in
+                                    switch result {
+                                    case .success(let avatarImages):
+                                        
+                                        if let avatarImages = avatarImages {
+                                            
+                                            // Floater通知メッセージ
+                                            let allMessages: [FloaterNotificationMessage] = imadokoMessages.compactMap { message in
+                                                
+                                                let targetProfile = profiles.first { $0.id == message.fromId }
+                                                let targetImage = avatarImages.first { $0.id == message.fromId }
+                                                
+                                                guard let targetProfile = targetProfile else {
+                                                    // ありえないはず
+                                                    return nil
+                                                }
+                                                
+                                                return FloaterNotificationMessage(id: message.id,
+                                                                                  fromId: message.fromId,
+                                                                                  fromName: targetProfile.name,
+                                                                                  avatarImage: targetImage?.data,
+                                                                                  createdAt: message.createdAt.dateValue())
+                                            }
+                                            
+                                            
+                                            // ユーザごとに最新のみとする
+                                            let groupingDic = Dictionary(grouping: allMessages, by: { $0.fromId })
+                                            let newMessages = groupingDic.map { everyUser in
+                                                everyUser.value.sorted(by: { $0.createdAt > $1.createdAt }).first!
+                                            }
+                                            
+                                            self.imadokoNotificationMessages = newMessages
+                                            
+                                            // イニシャライズ時に読み込まれた場合はここではFloaterは表示しない（できない）
+                                            // onAppearにて表示する
+                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                
+                                                if self.imadokoNotificationMessages.count > 0 {
+                                                    if self.showingKokodayoFloater == true {
+                                                        // ココダヨが表示されている場合は少し待ってから表示する
+                                                        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                            self.showingImadokoFloater = true
+                                                            self.showingKokodayoFloater = false
+                                                            self.showingResultFloater = false
+                                                        }
+                                                    } else {
+                                                        self.showingImadokoFloater = true
+                                                        self.showingKokodayoFloater = false
+                                                        self.showingResultFloater = false
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    case .failure(let error):
+                                        print(error.localizedDescription)
+                                    }
+                                }
+                            }
+                        case .failure(let error):
+                            print(error.localizedDescription)
+                        }
+                    }
+                }
             case .failure(let error):
                 print(error.localizedDescription)
             }
@@ -227,7 +303,7 @@ extension MapPresenter {
                 if kokodayoMessages.count > 0 {
                     let ids = kokodayoMessages.map { $0.fromId }
                     
-                    //ココダヨッセージ送信元のユーザ名を取得（キャッシュあり）
+                    // ココダヨッセージ送信元のユーザ名を取得（キャッシュあり）
                     self.interactor.getProfiles(ids: ids) { result in
                         switch result {
                         case .success(let profiles):
@@ -261,7 +337,7 @@ extension MapPresenter {
                                                 }
                                                 
                                                 // Floater通知メッセージ
-                                                let allMessages: [KokodayoNotificationMessage] = kokodayoMessages.compactMap { message in
+                                                let allMessages: [FloaterNotificationMessage] = kokodayoMessages.compactMap { message in
                                                     
                                                     let targetProfile = profiles.first { $0.id == message.fromId }
                                                     let targetImage = avatarImages.first { $0.id == message.fromId }
@@ -271,11 +347,11 @@ extension MapPresenter {
                                                         return nil
                                                     }
                                                     
-                                                    return KokodayoNotificationMessage(id: message.id,
-                                                                                       fromId: message.fromId,
-                                                                                       fromName: targetProfile.name,
-                                                                                       avatarImage: targetImage?.data,
-                                                                                       createdAt: message.createdAt.dateValue())
+                                                    return FloaterNotificationMessage(id: message.id,
+                                                                                      fromId: message.fromId,
+                                                                                      fromName: targetProfile.name,
+                                                                                      avatarImage: targetImage?.data,
+                                                                                      createdAt: message.createdAt.dateValue())
                                                 }
                                                 
                                                 
@@ -291,8 +367,18 @@ extension MapPresenter {
                                                 // onAppearにて表示する
                                                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                                                     if self.kokodayoNotificationMessages.count > 0 {
-                                                        self.showingKokodayoFloater = true
-                                                        self.showingResultFloater = false
+                                                        if self.showingImadokoFloater == true {
+                                                            // イマドコが表示されている場合は少し待ってから表示する
+                                                            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                                                                self.showingKokodayoFloater = true
+                                                                self.showingImadokoFloater = false
+                                                                self.showingResultFloater = false
+                                                            }
+                                                        } else {
+                                                            self.showingKokodayoFloater = true
+                                                            self.showingImadokoFloater = false
+                                                            self.showingResultFloater = false
+                                                        }
                                                     }
                                                 }
                                             }
@@ -331,7 +417,23 @@ extension MapPresenter {
         DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             if self.kokodayoNotificationMessages.count > 0 {
                 self.showingKokodayoFloater = true
+                self.showingImadokoFloater = false
                 self.showingResultFloater = false
+            }
+            
+            if self.imadokoNotificationMessages.count > 0 {
+                if self.showingKokodayoFloater == true {
+                    // ココダヨが表示されている場合は少し待ってから表示する
+                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+                        self.showingImadokoFloater = true
+                        self.showingKokodayoFloater = false
+                        self.showingResultFloater = false
+                    }
+                } else {
+                    self.showingImadokoFloater = true
+                    self.showingKokodayoFloater = false
+                    self.showingResultFloater = false
+                }
             }
         }
     }
@@ -341,6 +443,7 @@ extension MapPresenter {
         self.selectedFriendIds = []
         self.showingResultFloater = false
         self.showingKokodayoFloater = false
+        self.showingImadokoFloater = false
     }
 }
 
@@ -398,6 +501,10 @@ extension MapPresenter {
     func onKokodayoFloaterDismiss() {
         self.kokodayoNotificationMessages = []
     }
+    
+    func onImadokoFloaterDismiss() {
+        self.imadokoNotificationMessages = []
+    }
 }
 
 extension MapPresenter {
@@ -442,6 +549,7 @@ extension MapPresenter {
         self.resultFloaterText = NSLocalizedString(success ? "SendCompleted" : "SendFailed", comment: "")
         self.showingResultFloater = true
         self.showingKokodayoFloater = false
+        self.showingImadokoFloater = false
     }
 }
 

@@ -46,3 +46,4 @@
 "NoMessagesMain" = "メッセージがありません";
 "NoMessagesSub" = "24時間以内に受け取ったメッセージが表示されます";
 "KokodayoReceived" = "\"ココダヨ！\"が届きました";
+"ImadokoReceived" = "\"イマドコ？\"が届きました";

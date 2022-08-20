@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct KokodayoNotificationMessage: Identifiable {
+struct FloaterNotificationMessage: Identifiable {
     var id: String
     var fromId: String
     var fromName: String
