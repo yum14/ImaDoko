@@ -57,10 +57,10 @@ extension MessageDestinationPresenter {
             return
         }
         
-        // 現在地情報を追加
+        // ココダヨメッセージを追加
         for friendId in self.selectedIds {
-            let location = Location(userId: self.myId, ownerId: friendId, latitude: myLocation.latitude, longitude: myLocation.longitude)
-            self.interactor.setLocation(location) { error in
+            let message = KokodayoMessage(fromId: self.myId, toId: friendId, latitude: myLocation.latitude, longitude: myLocation.longitude)
+            self.interactor.setKokodayoMessage(message) { error in
                 if let error = error {
                     print(error.localizedDescription)
                 }
@@ -87,7 +87,7 @@ extension MessageDestinationPresenter {
 
         // イマドコメッセージを追加
         for friendId in self.selectedIds {
-            let message = ImadokoMessage(userId: self.myId, ownerId: friendId)
+            let message = ImadokoMessage(fromId: self.myId, toId: friendId)
             self.interactor.setImadokoMessage(message) { error in
                 if let error = error {
                     print(error.localizedDescription)

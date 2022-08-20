@@ -15,7 +15,7 @@
 "ShowMyQRCodeButton" = "Show My QR-Code";
 "SignOutButton" = "Sign out";
 "MapOverlaySheetButton" = "Send a message to my friends";
-"SelectDestinationHeader" = "Select a destination";
+"SelectDestinationHeader" = "Select destination";
 "KokodayoButton" = "I'm here!";
 "ImaDokoButton" = "Where are you?";
 "SignInWithGoogle" = "Sign in with Google";
@@ -45,3 +45,5 @@
 "AccessToLocationIsNotAllowed3" = "You need to ";
 "NoMessagesMain" = "No messages";
 "NoMessagesSub" = "Messages received within 24 hours will be displayed";
+"KokodayoReceived" = "You Received \"I'm here!\"";
+"KokodayoReceived" = "You Received \"Where are you?\"";

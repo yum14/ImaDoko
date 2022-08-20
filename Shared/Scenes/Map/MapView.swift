@@ -13,7 +13,6 @@ import PopupView
 struct MapView: View {
     @ObservedObject var presenter: MapPresenter
     @EnvironmentObject var appDelegate: AppDelegate
-    @EnvironmentObject var resultNotification: ResultNotification
     
     var myOverlayBehavior: some DynamicOverlayBehavior {
         MagneticNotchOverlayBehavior<Notch> { notch in
@@ -56,7 +55,7 @@ struct MapView: View {
                         UnreadMessageButton(badgeText: self.presenter.unrepliedButtonBadgeText,
                                             width: 54,
                                             onTap: self.presenter.onUnreadMessageButtonTap)
-                            .padding(0)
+                        .padding(0)
                         
                         Divider()
                             .frame(width: 54)
@@ -90,7 +89,7 @@ struct MapView: View {
         }
         .dynamicOverlay(
             MapOverlaySheet {
-                self.presenter.makeAbountOverlaySheet(resultNotification: self.resultNotification, locationAuthorizationStatus: self.appDelegate.locationAuthorizationStatus)
+                self.presenter.makeAbountOverlaySheet(locationAuthorizationStatus: self.appDelegate.locationAuthorizationStatus)
             }
         )
         .dynamicOverlayBehavior(myOverlayBehavior)
@@ -112,21 +111,38 @@ struct MapView: View {
                     }
             }
         }
-        
+        .popup(isPresented: self.$presenter.showingKokodayoFloater,
+               type: .floater(verticalPadding: 40),
+               position: .top,
+               autohideIn: 3.0,
+               dismissCallback: self.presenter.onKokodayoFloaterDismiss) {
+            KokodayoFloater(avatarImages: self.presenter.kokodayoNotificationMessages.map { $0.avatarImage == nil ? nil : UIImage(data: $0.avatarImage!) })
+        }
+        .popup(isPresented: self.$presenter.showingImadokoFloater,
+               type: .floater(verticalPadding: 40),
+               position: .top,
+               autohideIn: 3.0,
+               dismissCallback: self.presenter.onImadokoFloaterDismiss) {
+            ImadokoFloater(avatarImages: self.presenter.imadokoNotificationMessages.map { $0.avatarImage == nil ? nil : UIImage(data: $0.avatarImage!) })
+        }
+        .popup(isPresented: self.$presenter.showingResultFloater,
+               type: .floater(verticalPadding: 40),
+               position: .top,
+               autohideIn: 3.0) {
+            ResultFloater(text: self.presenter.resultFloaterText)
+        }
         .ignoresSafeArea(edges: [.top, .trailing, .leading])
         .onAppear {
             self.presenter.onAppear(initialRegion: self.appDelegate.region)
         }
         .onDisappear {
             self.presenter.onDisapper()
-            self.resultNotification.hide()
         }
     }
 }
 
 struct MapView_Previews: PreviewProvider {
     static let appDelegate = AppDelegate()
-    static let notification = ResultNotification()
     static let auth = Authentication()
     
     static var previews: some View {
@@ -139,7 +155,6 @@ struct MapView_Previews: PreviewProvider {
             return   MapView(presenter: presenter)
                 .environmentObject(appDelegate)
                 .environmentObject(auth)
-                .environmentObject(notification)
                 .environment(\.colorScheme, scheme)
         }
     }

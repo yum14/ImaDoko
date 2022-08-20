@@ -14,7 +14,6 @@ struct RootView: View {
     @ObservedObject var presenter: RootPresenter
     @EnvironmentObject var auth: Authentication
     @EnvironmentObject var appDelegate: AppDelegate
-    @EnvironmentObject var resultNotification: ResultNotification
     
     var body: some View {
         VStack {
@@ -66,14 +65,6 @@ struct RootView: View {
                                                     onDismiss: self.presenter.onImadokoNotificationDismiss)
                             EmptyView()
                         })
-                        
-                        .popup(isPresented: self.$resultNotification.showing,
-                               type: .floater(verticalPadding: 40),
-                               position: .top,
-                               autohideIn: 3.0) {
-                            ResultFloater(text: self.resultNotification.text)
-                        }
-                        
                         .onAppear {
                             guard let firebaseLoginUser = self.auth.firebaseLoginUser, let notificationToken = self.appDelegate.notificationToken else {
                                 return
@@ -93,7 +84,6 @@ struct RootView: View {
 
 struct RootView_Previews: PreviewProvider {
     static let auth = Authentication()
-    static let notification = ResultNotification()
     
     static var previews: some View {
         let interactor = RootInteractor()
@@ -105,7 +95,6 @@ struct RootView_Previews: PreviewProvider {
                 RootView(presenter: presenter)
                     .environment(\.locale, .init(identifier: id))
                     .environmentObject(auth)
-                    .environmentObject(notification)
             }
         }
     }

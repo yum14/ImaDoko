@@ -23,7 +23,7 @@ final class LocationStore {
         self.db = db
     }
     
-    func addListener(ownerId: String, overwrite: Bool = true, completion: ((Result<[Location]?, Error>) -> Void)?) {
+    func addListenerForAdditionalData(ownerId: String, isGreaterThan: Date, overwrite: Bool = true, completion: ((Result<[Location]?, Error>) -> Void)?) {
         if self.db == nil {
             self.initialize()
         }
@@ -32,8 +32,11 @@ final class LocationStore {
             return
         }
         
+        self.removeListener()
+        
         self.listener = self.db!.collection(self.collectionName)
             .whereField("owner_id", isEqualTo: ownerId)
+            .whereField("created_at", isGreaterThan: isGreaterThan)
             .addSnapshotListener { querySnapshot, error in
                 
                 let result = Result<[Location]?, Error> {
@@ -59,6 +62,21 @@ final class LocationStore {
         }
         
         db!.collection(self.collectionName).document(data.id).setData(data.toDictionary(), completion: completion)
+    }
+    
+    func batchInsert(_ locations: [Location], completion: ((Error?) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        let batch = db!.batch()
+        
+        for location in locations {
+            let nycRef = db!.collection(self.collectionName).document(location.id)
+            batch.setData(location.toDictionary(), forDocument: nycRef)
+        }
+        
+        batch.commit(completion: completion)
     }
     
     func delete(id: String, completion: ((Error?) -> Void)?) {
