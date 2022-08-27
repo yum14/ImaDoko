@@ -517,7 +517,7 @@ extension MapPresenter {
                     self.overlaySheetType = .messageDestination
                     self.notch = .max
                 }
-            }, disabled: locationAuthorizationStatus == .denied))
+            }, disabled: !(locationAuthorizationStatus != .denied && self.friends.count > 0)))
         case .messageDestination:
             return self.router.makeMessageDestinationView(myId: profile?.id ?? "", myName: profile?.name ?? "", friends: self.friends, onDismiss: {
                 withAnimation {
