@@ -36,59 +36,108 @@ export const createTestData = functions.region('asia-northeast1').https.onReques
     });
 });
 
-export const sendNotification = functions.region('asia-northeast1').firestore.document('notifications/{id}')
-    .onCreate(async (snap, context) => {
-        const triggerData = snap.data() as Notification;
+export const sendNotification = functions.region('asia-northeast1').firestore.document('notifications/{id}').onCreate(async (snap, context) => {
+    const triggerData = snap.data() as Notification;
 
-        try {
-            const tokensSnapshot = await db.collection('notification_tokens').where(firestore.FieldPath.documentId(), 'in', triggerData.to_ids).get();
+    // デモ用データは削除しない
+    if (triggerData.id === 'demo') {
+        return;
+    }
 
-            var tokens: [string?] = [];
+    try {
+        const tokensSnapshot = await db.collection('notification_tokens').where(firestore.FieldPath.documentId(), 'in', triggerData.to_ids).get();
 
-            tokensSnapshot.forEach(doc => {
-                const token = doc.data() as NotificationToken;
-                tokens.push(token.notification_token);
-            });
+        var tokens: [string?] = [];
 
-            const deviceTokens: [string] = tokens.filter(Boolean) as [string]
+        tokensSnapshot.forEach(doc => {
+            const token = doc.data() as NotificationToken;
+            tokens.push(token.notification_token);
+        });
 
-            if (deviceTokens.length > 0) {
+        const deviceTokens: [string] = tokens.filter(Boolean) as [string]
 
-                const payload: messaging.MulticastMessage = {
-                    tokens: deviceTokens,
-                    notification: {
-                        title: triggerData.title,
-                        body: triggerData.body,
-                        // imageUrl: ''
-                    }
-                };
+        if (deviceTokens.length > 0) {
 
-                const response = await admin.messaging().sendMulticast(payload)
-                // .sendToDevice(deviceTokens, payload);
-
-                if (response.failureCount > 0) {
-                    functions.logger.error('Failure sending notification. messageid: ' + response.responses[0].messageId, response.responses[0].error);
+            const payload: messaging.MulticastMessage = {
+                tokens: deviceTokens,
+                notification: {
+                　  title: triggerData.title,
+                    body: triggerData.body,
+                    // imageUrl: ''
                 }
+            };
 
-            } else {
-                functions.logger.error('no notification token. from_id: ', triggerData.from_id);
+            const response = await admin.messaging().sendMulticast(payload)
+            // .sendToDevice(deviceTokens, payload);
+
+            if (response.failureCount > 0) {
+                functions.logger.error('Failure sending notification. messageid: ' + response.responses[0].messageId, response.responses[0].error);
             }
 
-            // データ削除
-            return snap.ref.delete()
-                .then(() => {
-                    functions.logger.info('success. from_id: ' + triggerData.from_id + ', to_ids: [' + triggerData.to_ids.join(',') + ']');
-                })
-                .catch(error => {
-                    functions.logger.error('delete failed. from_id: ', triggerData.from_id);
-                    functions.logger.error('error: ', error);
-                });
-
-        } catch (error) {
-            functions.logger.error('error: ', error);
-            functions.logger.error('from_id: ', triggerData.from_id);
+        } else {
+            functions.logger.error('no notification token. from_id: ', triggerData.from_id);
         }
-    });
+
+        // データ削除
+        return snap.ref.delete().then(() => {
+            functions.logger.info('success. from_id: ' + triggerData.from_id + ', to_ids: [' + triggerData.to_ids.join(',') + ']');
+        })
+        .catch(error => {
+                  functions.logger.error('delete failed. from_id: ', triggerData.from_id);
+                  functions.logger.error('error: ', error);
+        });
+    } catch (error) {
+        functions.logger.error('from_id: ', triggerData.from_id, ', error: ', error);
+    }
+});
+
+export const removeExpiredData = functions.region('asia-northeast1').pubsub.schedule('0 2 1 * *').timeZone('Asia/Tokyo').onRun(async (context) => {
+// export const removeExpiredData = functions.region('asia-northeast1').pubsub.schedule('*/5 * * * *').timeZone('Asia/Tokyo').onRun(async (context) => { //これはテスト用
+
+    // 毎月1日2時にスケジュール実行
+    try {
+
+        // 削除対象年月は２日前
+        const dt = new Date();
+        dt.setDate(dt.getDate() - 2);
+
+        const locationsSnap = await db.collection('locations').where('created_at', '<', dt).get();
+
+        locationsSnap.forEach(doc => {
+            doc.ref.delete().then(() => {
+                // 何もしない
+            }).catch((error) => {
+                functions.logger.error('id: ', doc.id, ', error: ', error);
+            });
+        });
+
+        const imadokoMessageSnap = await db.collection('imadoko_messages').where('created_at', '<', dt).get();
+
+        imadokoMessageSnap.forEach(doc => {
+            doc.ref.delete().then(() => {
+                // 何もしない
+            }).catch((error) => {
+                functions.logger.error('id: ', doc.id, ', error: ', error);
+            });
+        });
+
+        const kokodayoMessageSnap = await db.collection('kokodayo_messages').where('created_at', '<', dt).get();
+
+        kokodayoMessageSnap.forEach(doc => {
+            doc.ref.delete().then(() => {
+                // 何もしない
+            }).catch((error) => {
+                functions.logger.error('id: ', doc.id, ', error: ', error);
+            });
+        });
+
+        functions.logger.info("success. deleted data before ", dt.toString());
+
+    } catch (error) {
+        functions.logger.error('error: ', error);
+    }
+});
+
 
 interface Notification {
     id: string;
