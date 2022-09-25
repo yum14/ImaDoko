@@ -90,8 +90,11 @@
 		AAADEFDE27B7920B00D81A52 /* FriendListItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */; };
 		AAADEFE027B7B28700D81A52 /* PinItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFDF27B7B28700D81A52 /* PinItem.swift */; };
 		AAADEFE227B7BB5E00D81A52 /* AvatarMapAnnotation.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAADEFE127B7BB5E00D81A52 /* AvatarMapAnnotation.swift */; };
-		AACE5ED727BE8CE800295A47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */; };
-		AACE5ED827BE8CE800295A47 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */; };
+		AAAF476828DEA2930038A143 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AAAF476728DEA2920038A143 /* GoogleService-Info.plist */; };
+		AAAF476B28DEE1240038A143 /* LaunchScreenView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAF476A28DEE1240038A143 /* LaunchScreenView.swift */; };
+		AAAF476D28DF4E850038A143 /* LaunchScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAF476C28DF4E850038A143 /* LaunchScreenRouter.swift */; };
+		AAAF476F28DF52F30038A143 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAAF476E28DF52F30038A143 /* LaunchScreen.storyboard */; };
+		AAAF477128DF58800038A143 /* ActiveIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAF477028DF58800038A143 /* ActiveIndicator.swift */; };
 		AADAC0CA27FADF33006CDF0B /* ImadokoNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAC0C927FADF33006CDF0B /* ImadokoNotificationView.swift */; };
 		AAE0832227F5F4D50069A978 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = AAE0832127F5F4D50069A978 /* PopupView */; };
 		AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98827B7F75D007CD36D /* Triangle.swift */; };
@@ -210,7 +213,11 @@
 		AAADEFDD27B7920B00D81A52 /* FriendListItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendListItem.swift; sourceTree = "<group>"; };
 		AAADEFDF27B7B28700D81A52 /* PinItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinItem.swift; sourceTree = "<group>"; };
 		AAADEFE127B7BB5E00D81A52 /* AvatarMapAnnotation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatarMapAnnotation.swift; sourceTree = "<group>"; };
-		AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AAAF476728DEA2920038A143 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AAAF476A28DEE1240038A143 /* LaunchScreenView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenView.swift; sourceTree = "<group>"; };
+		AAAF476C28DF4E850038A143 /* LaunchScreenRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchScreenRouter.swift; sourceTree = "<group>"; };
+		AAAF476E28DF52F30038A143 /* LaunchScreen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LaunchScreen.storyboard; sourceTree = "<group>"; };
+		AAAF477028DF58800038A143 /* ActiveIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveIndicator.swift; sourceTree = "<group>"; };
 		AACE5EE227BEA7A600295A47 /* ImaDoko--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ImaDoko--iOS--Info.plist"; sourceTree = "<group>"; };
 		AACE5EE327BEA7B800295A47 /* ImaDoko (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ImaDoko (iOS).entitlements"; sourceTree = "<group>"; };
 		AADAC0C927FADF33006CDF0B /* ImadokoNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoNotificationView.swift; sourceTree = "<group>"; };
@@ -297,7 +304,7 @@
 		AA26A68327AF9423003D1F17 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				AACE5ED627BE8CE800295A47 /* GoogleService-Info.plist */,
+				AAAF476728DEA2920038A143 /* GoogleService-Info.plist */,
 				AA35877D27C3D95E00F51AEA /* Store */,
 				AAADEFD827B78ABF00D81A52 /* Entities */,
 				AA83DC4A27B019D6008F2226 /* Utilities */,
@@ -401,6 +408,7 @@
 		AA83DC2227AF97C5008F2226 /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				AAAF476928DEE1010038A143 /* LaunchScreen */,
 				AA658F8E27C13CE0001D4E17 /* Login */,
 				AA83DC2627AF9B5A008F2226 /* Root */,
 				AA83DC2327AF97DA008F2226 /* Map */,
@@ -410,6 +418,7 @@
 				AAF8649B27D6471800AFA0E6 /* MyQrCode */,
 				AAF864A227D78E0100AFA0E6 /* MyQrCodeScanner */,
 				AA65126B28130523003A68E4 /* PinDetail */,
+				AAAF476E28DF52F30038A143 /* LaunchScreen.storyboard */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -482,6 +491,7 @@
 				AA491F8A2887E6FB0013DBA7 /* KokodayoFloater.swift */,
 				AA7EEB8228AD2BAC0063565B /* ImadokoFloater.swift */,
 				AA4B79372868B01F004AF74F /* UnreadMessageButton.swift */,
+				AAAF477028DF58800038A143 /* ActiveIndicator.swift */,
 			);
 			path = ViewComponent;
 			sourceTree = "<group>";
@@ -515,6 +525,15 @@
 				AA491F8C2887E7670013DBA7 /* KokodayoNotificationMessage.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		AAAF476928DEE1010038A143 /* LaunchScreen */ = {
+			isa = PBXGroup;
+			children = (
+				AAAF476A28DEE1240038A143 /* LaunchScreenView.swift */,
+				AAAF476C28DF4E850038A143 /* LaunchScreenRouter.swift */,
+			);
+			path = LaunchScreen;
 			sourceTree = "<group>";
 		};
 		AAF8649B27D6471800AFA0E6 /* MyQrCode */ = {
@@ -686,9 +705,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA07D9FE27F09A5F006D4598 /* imadoko_notification.apns in Resources */,
+				AAAF476828DEA2930038A143 /* GoogleService-Info.plist in Resources */,
 				AA26A6B027AF9424003D1F17 /* Assets.xcassets in Resources */,
+				AAAF476F28DF52F30038A143 /* LaunchScreen.storyboard in Resources */,
 				AA83DC3C27AFA67F008F2226 /* Localizable.strings in Resources */,
-				AACE5ED727BE8CE800295A47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -697,7 +717,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA26A6B127AF9424003D1F17 /* Assets.xcassets in Resources */,
-				AACE5ED827BE8CE800295A47 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -731,6 +750,7 @@
 				AA07DA0027F1EAC6006D4598 /* ReceivedNotification.swift in Sources */,
 				AA83DC4427AFC6DF008F2226 /* MessagePresenter.swift in Sources */,
 				AA65126D28130578003A68E4 /* PinDetailView.swift in Sources */,
+				AAAF476D28DF4E850038A143 /* LaunchScreenRouter.swift in Sources */,
 				AA83DC2827AF9B67008F2226 /* RootView.swift in Sources */,
 				AAF864B227D7A43800AFA0E6 /* ImagePickerController.swift in Sources */,
 				AAABD6D4283E71130038D844 /* ResultFloater.swift in Sources */,
@@ -777,9 +797,11 @@
 				AAF864A127D6478400AFA0E6 /* MyQrCodeRouter.swift in Sources */,
 				AAADEFDA27B78AE500D81A52 /* Message.swift in Sources */,
 				AA658F9827C1F1FC001D4E17 /* GoogleSignInButton.swift in Sources */,
+				AAAF476B28DEE1240038A143 /* LaunchScreenView.swift in Sources */,
 				AAF864A627D78F3200AFA0E6 /* QrCodeScannerView.swift in Sources */,
 				AAF864AA27D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift in Sources */,
 				AA65126F28130587003A68E4 /* PinDetailPresenter.swift in Sources */,
+				AAAF477128DF58800038A143 /* ActiveIndicator.swift in Sources */,
 				AA658F9227C13CF6001D4E17 /* LoginPresenter.swift in Sources */,
 				AA07D9FA27E8C04D006D4598 /* LoginInteractor.swift in Sources */,
 				AA83DC3127AF9D15008F2226 /* HomeRouter.swift in Sources */,
@@ -992,10 +1014,9 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "現在地の表示、及び友だちへの送信のために位置情報を使用します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1028,10 +1049,9 @@
 				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "現在地の表示、及び友だちへの送信のために位置情報を使用します";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
-				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

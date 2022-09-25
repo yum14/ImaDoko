@@ -14,15 +14,14 @@
 "AddFriendButton" = "Add friends";
 "ShowMyQRCodeButton" = "Show My QR-Code";
 "SignOutButton" = "Sign out";
-"MapOverlaySheetButton" = "Send a message to my friends";
+"MapOverlaySheetButton" = "Send a message to my friends.";
 "SelectDestinationHeader" = "Select destination";
 "KokodayoButton" = "I'm here!";
 "ImaDokoButton" = "Where are you?";
 "SignInWithGoogle" = "Sign in with Google";
 "NewDefaultUserName" = "New User";
-"SignInFailedAlertTitle" = "Sign-in";
-"SignInFailedAlertMessage" = "Sign-in failed";
-"CreateNewUserAlertTitle" = "No Account";
+"SignInFailedAlertTitle" = "Sign-in failed.";
+"CreateNewUserAlertTitle" = "No Account.";
 "CreateNewUserAlertMessage" = "Do you want to create new account?";
 "CreateButton" = "Create";
 "CencelButton" = "Cancel";
@@ -44,6 +43,6 @@
 "AccessToLocationIsNotAllowed2" = "allow access to it on the settings screen.";
 "AccessToLocationIsNotAllowed3" = "You need to ";
 "NoMessagesMain" = "No messages";
-"NoMessagesSub" = "Messages received within 24 hours will be displayed";
+"NoMessagesSub" = "Messages received within 24 hours will be displayed.";
 "KokodayoReceived" = "You Received \"I'm here!\"";
 "KokodayoReceived" = "You Received \"Where are you?\"";

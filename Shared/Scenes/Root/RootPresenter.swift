@@ -30,6 +30,7 @@ final class RootPresenter: ObservableObject {
     private let router: RootWireframe
     
     private var notificationUserId: String?
+    private var loginView: AnyView?
     
     init(interactor: RootUsecase, router: RootWireframe) {
         self.interactor = interactor
@@ -95,11 +96,6 @@ extension RootPresenter {
             }
         }
         
-        
-        // TODO: イマドコ通知を既読にする
-        
-        
-        
         self.showingNotificationPopup = false
     }
     
@@ -108,8 +104,18 @@ extension RootPresenter {
     }
     
     
-    func makeAboutLoginView() -> some View {
-        return router.makeLoginView()
+    func makeAboutLoginView(signInStatus: SignInStatus) -> some View {
+        guard let loginView = self.loginView else {
+            self.loginView = router.makeLoginView()
+            return self.loginView!
+        }
+        
+        if signInStatus == .newUser {
+            return loginView
+        } else {
+            self.loginView = router.makeLoginView()
+            return self.loginView!
+        }
     }
     
     func makeAboutMapView(uid: String) -> some View {
@@ -138,5 +144,9 @@ extension RootPresenter {
 
             return self.homeView!
         }
+    }
+    
+    func makeAboutLaunchScreenView() -> some View {
+        return self.router.makeLaunchScreenView()
     }
 }
