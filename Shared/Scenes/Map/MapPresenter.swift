@@ -513,8 +513,8 @@ extension MapPresenter {
         switch self.overlaySheetType {
         case .close:
             return AnyView(SendMessageButton(onTap: {
+                self.overlaySheetType = .messageDestination
                 withAnimation {
-                    self.overlaySheetType = .messageDestination
                     self.notch = .max
                 }
             }, disabled: !(locationAuthorizationStatus != .denied && self.friends.count > 0)))
