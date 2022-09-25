@@ -10,44 +10,31 @@ import SwiftUI
 import Firebase
 
 protocol Authenticatable {
-    func signIn(credential: AuthCredential, completion: ((SignInStatus) -> Void)?)
+    func signIn(credential: AuthCredential)
     func signOut()
-    func createUser(onCreated: ((Profile) -> Void)?)
-    var isSignedIn: Bool { get set }
+    func createUser()
+    var signInStatus: SignInStatus { get set }
 }
 
 enum SignInStatus {
-    case success
-    case failure
+    case notYet
+    case signedIn
+    case failed
     case newUser
 }
 
 final class Authentication: UIResponder, ObservableObject {
-    @Published var isSignedIn: Bool = false
+    
+    @Published var signInStatus: SignInStatus = .notYet
     
     private var listener: AuthStateDidChangeListenerHandle!
     private var authToken: String?
     private var profileStore: ProfileStore
     private var locationStore: LocationStore
+    private var notAuthenticationStateDidChangeListenListen = false
     
-    var firebaseLoginUser: Firebase.User? {
-        didSet {
-            // 不要な通知を防ぐため、変更がある場合のみ設定する
-            let newValue = (self.firebaseLoginUser != nil && self.profile != nil)
-            if self.isSignedIn != newValue {
-                self.isSignedIn = newValue
-            }
-        }
-    }
-    var profile: Profile? {
-        didSet {
-            // 不要な通知を防ぐため、変更がある場合のみ設定する
-            let newValue = (self.firebaseLoginUser != nil && self.profile != nil)
-            if self.isSignedIn != newValue {
-                self.isSignedIn = newValue
-            }
-        }
-    }
+    var firebaseLoginUser: Firebase.User?
+    var profile: Profile?
     
     override init() {
         self.profileStore = ProfileStore()
@@ -61,6 +48,7 @@ final class Authentication: UIResponder, ObservableObject {
     func addListener() {
         
         self.listener = Auth.auth().addStateDidChangeListener { (auth, user) in
+            
             self.authStateDidChangeListener(auth: auth, user: user)
             
             user?.getIDTokenForcingRefresh(true, completion: self.onIdTokenForcingRefresh)
@@ -71,6 +59,7 @@ final class Authentication: UIResponder, ObservableObject {
         guard let user = user else {
             self.firebaseLoginUser = nil
             self.profile = nil
+            self.signInStatus = .failed
             return
         }
         
@@ -81,12 +70,15 @@ final class Authentication: UIResponder, ObservableObject {
             case .success(let profile):
                 if profile != nil {
                     self.profile = profile
+                    self.signInStatus = .signedIn
                 } else {
                     self.profile = nil
+                    self.signInStatus = .newUser
                 }
             case .failure(let error):
                 print(error.localizedDescription)
                 self.profile = nil
+                self.signInStatus = .failed
             }
         }
     }
@@ -101,40 +93,10 @@ final class Authentication: UIResponder, ObservableObject {
 
 extension Authentication: Authenticatable {
     
-    func signIn(credential: AuthCredential, completion: ((SignInStatus) -> Void)?) {
+    func signIn(credential: AuthCredential) {
         Auth.auth().signIn(with: credential) { authDataResult, error in
             if let error = error {
                 print(error.localizedDescription)
-                self.firebaseLoginUser = nil
-                self.profile = nil
-                completion?(.failure)
-                return
-            }
-            
-            guard let authDataResult = authDataResult else {
-                self.firebaseLoginUser = nil
-                self.profile = nil
-                completion?(.failure)
-                return
-            }
-            
-            self.firebaseLoginUser = authDataResult.user
-            
-            self.profileStore.getDocument(id: authDataResult.user.uid) { result in
-                switch result {
-                case .success(let profile):
-                    if profile != nil {
-                        self.profile = profile
-                        completion?(.success)
-                    } else {
-                        self.profile = nil
-                        completion?(.newUser)
-                    }
-                case .failure(let error):
-                    print(error.localizedDescription)
-                    self.profile = nil
-                    completion?(.failure)
-                }
             }
         }
     }
@@ -146,16 +108,83 @@ extension Authentication: Authenticatable {
         
         switch result {
         case .success():
-            self.firebaseLoginUser = nil
-            self.profile = nil
+            break
         case .failure(let error):
-            print("signout error. \(error.localizedDescription)")
-            self.firebaseLoginUser = nil
-            self.profile = nil
+            print(error.localizedDescription)
         }
     }
     
-    func createUser(onCreated: ((Profile) -> Void)?) {
+//    func signIn(credential: AuthCredential, completion: ((SignInStatus) -> Void)?) {
+//
+//        self.notAuthenticationStateDidChangeListenListen = true
+//
+//        Auth.auth().signIn(with: credential) { authDataResult, error in
+//            if let error = error {
+//                print(error.localizedDescription)
+//                self.firebaseLoginUser = nil
+//                self.profile = nil
+//                completion?(.failure)
+//                self.notAuthenticationStateDidChangeListenListen = false
+//                return
+//            }
+//
+//            guard let authDataResult = authDataResult else {
+//                self.firebaseLoginUser = nil
+//                self.profile = nil
+//                completion?(.failure)
+//                self.notAuthenticationStateDidChangeListenListen = false
+//                return
+//            }
+//
+//            self.firebaseLoginUser = authDataResult.user
+//
+//            self.profileStore.getDocument(id: authDataResult.user.uid) { result in
+//                switch result {
+//                case .success(let profile):
+//                    if profile != nil {
+//                        self.profile = profile
+//                        self.signInProcessing = .signedIn
+//                        completion?(.success)
+//                    } else {
+//                        self.profile = nil
+//                        self.signInProcessing = .notSignedIn
+//                        completion?(.newUser)
+//                    }
+//                case .failure(let error):
+//                    print(error.localizedDescription)
+//                    self.profile = nil
+//                    self.signInProcessing = .notSignedIn
+//                    completion?(.failure)
+//                }
+//
+//
+//                self.notAuthenticationStateDidChangeListenListen = false
+//            }
+//        }
+//    }
+//
+//    func signOut() {
+//
+//        self.notAuthenticationStateDidChangeListenListen = true
+//
+//        let result = Result {
+//            try Auth.auth().signOut()
+//        }
+//
+//        switch result {
+//        case .success():
+//            self.firebaseLoginUser = nil
+//            self.profile = nil
+//        case .failure(let error):
+//            print("signout error. \(error.localizedDescription)")
+//            self.firebaseLoginUser = nil
+//            self.profile = nil
+//        }
+//
+//        self.notAuthenticationStateDidChangeListenListen = true
+//    }
+    
+    func createUser() {
         guard let firebaseLoginUser = self.firebaseLoginUser else {
             return
         }
@@ -169,8 +198,7 @@ extension Authentication: Authenticatable {
             }
             
             self.profile = newProfile
-            
-            onCreated?(newProfile)
+            self.signInStatus = .signedIn
         }
     }
 }

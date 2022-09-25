@@ -21,16 +21,16 @@ final class LoginPresenter: ObservableObject {
 }
 
 extension LoginPresenter {
-    func signedIn(auth: Authenticatable, authCredential: AuthCredential?, completion: ((SignInStatus) -> Void)?) {
+    func signedIn(auth: Authenticatable, authCredential: AuthCredential?) {
         guard let authCredential = authCredential else {
             return
         }
 
-        auth.signIn(credential: authCredential, completion: completion)
+        auth.signIn(credential: authCredential)
     }
     
     func createAccount(auth: Authenticatable) {
-        auth.createUser(onCreated: { _ in })
+        auth.createUser()
     }
     
     func cancelAccountCreation(auth: Authenticatable) {
