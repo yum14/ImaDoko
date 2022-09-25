@@ -15,6 +15,10 @@ protocol MapWireframe {
 }
 
 final class MapRouter {
+    
+    private var previousMessageViewUid: String?
+    private var messageView: AnyView?
+    
     static func assembleModules(uid: String) -> AnyView {
         let interactor = MapInteractor()
         let router = MapRouter()
@@ -25,6 +29,7 @@ final class MapRouter {
 }
 
 extension MapRouter: MapWireframe {
+    
     func makePinDetailView(myId: String, myName: String, friend: Avatar, createdAt: Date, onDismiss: (() -> Void)?, onSend: ((Error?) -> Void)?) -> AnyView {
         return PinDetailRouter.assembleModules(myId: myId, myName: myName, friend: friend, createdAt: createdAt, onDismiss: onDismiss, onSend: onSend)
     }
@@ -34,6 +39,20 @@ extension MapRouter: MapWireframe {
     }
     
     func makeMessageView(uid: String) -> AnyView {
-        return MessageRouter.assembleModules(uid: uid)
+        
+        guard let previousMessageViewUid = self.previousMessageViewUid, let previousView = self.messageView else {
+            self.previousMessageViewUid = uid
+            self.messageView = MessageRouter.assembleModules(uid: uid)
+            return self.messageView!
+        }
+
+        if previousMessageViewUid == uid {
+            return previousView
+        }
+        
+        self.previousMessageViewUid = uid
+        self.messageView = MessageRouter.assembleModules(uid: uid)
+        
+        return self.messageView!
     }
 }
