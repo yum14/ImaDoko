@@ -11,7 +11,8 @@ import Firebase
 final class ImadokoMessageStore {
     private var db: Firestore?
     private let collectionName = "imadoko_messages"
-    private var listener: ListenerRegistration?
+    private var listenerOnNotReplyed: ListenerRegistration?
+    private var listenerOnNotReplyedAndUnRead: ListenerRegistration?
     
     init() {}
     
@@ -28,13 +29,13 @@ final class ImadokoMessageStore {
             self.initialize()
         }
         
-        if !overwrite && self.listener != nil {
+        if !overwrite && self.listenerOnNotReplyed != nil {
             return
         }
         
-        self.removeListener()
+        self.removeListenerOnNotReplyed()
         
-        self.listener = self.db!.collection(self.collectionName)
+        self.listenerOnNotReplyed = self.db!.collection(self.collectionName)
             .whereField("to_id", isEqualTo: toId)
             .whereField("replyed", isEqualTo: false)
             .whereField("created_at", isGreaterThan: isGreaterThan)
@@ -57,13 +58,13 @@ final class ImadokoMessageStore {
             self.initialize()
         }
         
-        if !overwrite && self.listener != nil {
+        if !overwrite && self.listenerOnNotReplyedAndUnRead != nil {
             return
         }
         
-        self.removeListener()
+        self.removeListenerOnNotReplyedAndUnRead()
         
-        self.listener = self.db!.collection(self.collectionName)
+        self.listenerOnNotReplyedAndUnRead = self.db!.collection(self.collectionName)
             .whereField("to_id", isEqualTo: toId)
             .whereField("replyed", isEqualTo: false)
             .whereField("is_read", isEqualTo: false)
@@ -82,9 +83,14 @@ final class ImadokoMessageStore {
             }
     }
     
-    func removeListener() {
-        self.listener?.remove()
-        self.listener = nil
+    func removeListenerOnNotReplyed() {
+        self.listenerOnNotReplyed?.remove()
+        self.listenerOnNotReplyed = nil
+    }
+    
+    func removeListenerOnNotReplyedAndUnRead() {
+        self.listenerOnNotReplyedAndUnRead?.remove()
+        self.listenerOnNotReplyedAndUnRead = nil
     }
     
     func setData(_ data: ImadokoMessage, completion: ((Error?) -> Void)?) {
