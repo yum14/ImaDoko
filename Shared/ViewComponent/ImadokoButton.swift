@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ImadokoButton: View {
     var onTap: (() -> Void)?
+    var disabled: Bool = false
     
     var body: some View {
         Button {
@@ -25,10 +26,11 @@ struct ImadokoButton: View {
             }
 //            .frame(width: 184, height: 40)
             .frame(width: 160, height: 40)
-            .background(Color("MainColor"))
+            .background(self.disabled ? Color.gray :  Color("MainColor"))
             .cornerRadius(24)
         }
         .padding(.bottom, 24)
+        .disabled(self.disabled)
     }
 }
 

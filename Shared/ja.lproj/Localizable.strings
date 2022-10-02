@@ -7,7 +7,7 @@
 */
 
 "HomeViewTitle" = "ホーム";
-"MessageViewTitle" = "未返信のメッセージ";
+"MessageViewTitle" = "友だちからのメッセージ";
 "MapViewTitle" = "マップ";
 "AccountName" = "アカウント名";
 "FriendListHeader" = "友だち";
@@ -43,6 +43,6 @@
 "AccessToLocationIsNotAllowed2" = "設定画面でアクセスを許可";
 "AccessToLocationIsNotAllowed3" = "してください。";
 "NoMessagesMain" = "メッセージがありません";
-"NoMessagesSub" = "24時間以内に受け取ったメッセージが表示されます。";
+"NoMessagesSub" = "24時間以内に受け取った未返信のイマドコが表示されます。";
 "KokodayoReceived" = "\"ココダヨ！\"が届きました。";
 "ImadokoReceived" = "\"イマドコ？\"が届きました。";
