@@ -14,11 +14,21 @@ protocol HomeWireframe {
 }
 
 final class HomeRouter {
+    private static var lastView: HomeView?
+    private static var lastUid: String?
+    
     static func assembleModules(uid: String) -> AnyView {
+        
+        if let lastUid = self.lastUid, let lastView = self.lastView, lastUid == uid {
+            return AnyView(lastView)
+        }
+        
         let router = HomeRouter()
         let interactor = HomeInteractor()
         let presenter = HomePresenter(interactor: interactor, router: router, uid: uid)
         let view = HomeView(presenter: presenter)
+        self.lastUid = uid
+        self.lastView = view
         return AnyView(view)
     }
 }
