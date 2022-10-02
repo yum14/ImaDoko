@@ -40,7 +40,7 @@ extension MessageInteractor: MessageUsecase {
     }
     
     func removeImadokoMessageListener() {
-        self.imadokoMessageStore.removeListener()
+        self.imadokoMessageStore.removeListenerOnNotReplyed()
     }
     
     func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?) {
