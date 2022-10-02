@@ -68,26 +68,6 @@ final class KokodayoMessageStore {
         self.listener = nil
     }
     
-//    func getDocuments(toId: String, isLessThan: Date, completion: ((Result<[KokodayoMessage]?, Error>) -> Void)?) {
-//        if self.db == nil {
-//            self.initialize()
-//        }
-//
-//        db!.collection(self.collectionName)
-//            .whereField("to_id", isEqualTo: toId)
-//            .whereField("created_at", isLessThan: isLessThan)
-//            .getDocuments { querySnapshot, error in
-//                if let error = error {
-//                    completion?(Result.failure(error))
-//                    return
-//                }
-//
-//                let messages = self.map(querySnapshot: querySnapshot)
-//
-//                completion?(Result.success(messages))
-//            }
-//    }
-    
     func setData(_ data: KokodayoMessage, completion: ((Error?) -> Void)?) {
         if self.db == nil {
             self.initialize()
@@ -96,14 +76,6 @@ final class KokodayoMessageStore {
         db!.collection(self.collectionName).document(data.id).setData(data.toDictionary(), completion: completion)
     }
 
-    func delete(id: String, completion: ((Error?) -> Void)?) {
-        if self.db == nil {
-            self.initialize()
-        }
-        
-        db!.collection(self.collectionName).document(id).delete(completion: completion)
-    }
-    
     func batchUpdateToAlreadyRead(ids: [String], completion: ((Error?) -> Void)?) {
         if self.db == nil {
             self.initialize()

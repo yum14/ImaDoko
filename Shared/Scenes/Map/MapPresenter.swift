@@ -206,7 +206,7 @@ extension MapPresenter {
         }
         
         // イマドコメッセージのリスナー作成
-        self.interactor.addImadokoMessageListenerForAdditionalData(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
+        self.interactor.addImadokoMessageListenerOnNotReplyedAndUnRead(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
             switch result {
             case .success(let imadokoMessages):
                 guard let imadokoMessages = imadokoMessages else {
@@ -232,6 +232,13 @@ extension MapPresenter {
                                     case .success(let avatarImages):
                                         
                                         if let avatarImages = avatarImages {
+                                            
+                                            // 追加済のイマドコを既読にする
+                                            self.interactor.updateImadokoMessageToAlreadyRead(ids: imadokoMessages.map { $0.id }) { error in
+                                                if let error = error {
+                                                    print(error.localizedDescription)
+                                                }
+                                            }
                                             
                                             // Floater通知メッセージ
                                             let allMessages: [FloaterNotificationMessage] = imadokoMessages.compactMap { message in

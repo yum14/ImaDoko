@@ -23,7 +23,7 @@ final class ImadokoMessageStore {
         self.db = db
     }
     
-    func addListenerForAdditionalData(toId: String, isGreaterThan: Date, overwrite: Bool = true, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+    func addListenerOnNotReplyed(toId: String, isGreaterThan: Date, overwrite: Bool = true, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
         if self.db == nil {
             self.initialize()
         }
@@ -52,30 +52,40 @@ final class ImadokoMessageStore {
             }
     }
     
+    func addListenerOnNotReplyedAndUnRead(toId: String, isGreaterThan: Date, overwrite: Bool = true, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        if !overwrite && self.listener != nil {
+            return
+        }
+        
+        self.removeListener()
+        
+        self.listener = self.db!.collection(self.collectionName)
+            .whereField("to_id", isEqualTo: toId)
+            .whereField("replyed", isEqualTo: false)
+            .whereField("is_read", isEqualTo: false)
+            .whereField("created_at", isGreaterThan: isGreaterThan)
+            .addSnapshotListener { querySnapshot, error in
+                
+                let result = Result<[ImadokoMessage]?, Error> {
+                    if let error = error {
+                        throw error
+                    }
+                    
+                    return self.map(querySnapshot: querySnapshot)
+                }
+                
+                completion?(result)
+            }
+    }
+    
     func removeListener() {
         self.listener?.remove()
         self.listener = nil
     }
-    
-//    func getDocuments(toId: String, isLessThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
-//        if self.db == nil {
-//            self.initialize()
-//        }
-//        
-//        db!.collection(self.collectionName)
-//            .whereField("to_id", isEqualTo: toId)
-//            .whereField("created_at", isLessThan: isLessThan)
-//            .getDocuments { querySnapshot, error in
-//                if let error = error {
-//                    completion?(Result.failure(error))
-//                    return
-//                }
-//                
-//                let messages = self.map(querySnapshot: querySnapshot)
-//                
-//                completion?(Result.success(messages))
-//            }
-//    }
     
     func setData(_ data: ImadokoMessage, completion: ((Error?) -> Void)?) {
         if self.db == nil {
@@ -85,12 +95,34 @@ final class ImadokoMessageStore {
         db!.collection(self.collectionName).document(data.id).setData(data.toDictionary(), completion: completion)
     }
 
-    func delete(id: String, completion: ((Error?) -> Void)?) {
+    func batchUpdateToAlreadyRead(ids: [String], completion: ((Error?) -> Void)?) {
         if self.db == nil {
             self.initialize()
         }
         
-        db!.collection(self.collectionName).document(id).delete(completion: completion)
+        let batch = db!.batch()
+        
+        for id in ids {
+            let nycRef = db!.collection(self.collectionName).document(id)
+            batch.updateData(["is_read": true], forDocument: nycRef)
+        }
+        
+        batch.commit(completion: completion)
+    }
+
+    func batchUpdateToReplyed(ids: [String], completion: ((Error?) -> Void)?) {
+        if self.db == nil {
+            self.initialize()
+        }
+        
+        let batch = db!.batch()
+        
+        for id in ids {
+            let nycRef = db!.collection(self.collectionName).document(id)
+            batch.updateData(["replyed": true], forDocument: nycRef)
+        }
+        
+        batch.commit(completion: completion)
     }
     
     private func map(querySnapshot: QuerySnapshot?) -> [ImadokoMessage] {
