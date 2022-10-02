@@ -1022,7 +1022,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = icu.yum14.ImaDoko;
 				PRODUCT_NAME = ImaDoko;
 				SDKROOT = iphoneos;
@@ -1057,7 +1057,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 0.1.3;
+				MARKETING_VERSION = 0.1.4;
 				PRODUCT_BUNDLE_IDENTIFIER = icu.yum14.ImaDoko;
 				PRODUCT_NAME = ImaDoko;
 				SDKROOT = iphoneos;
