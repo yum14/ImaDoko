@@ -34,6 +34,7 @@ struct MessageDestinationView: View {
                 Spacer()
             }
         }
+        .onAppear(perform: self.presenter.onAppear)
     }
 }
 

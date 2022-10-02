@@ -10,15 +10,13 @@ import MapKit
 
 struct KokodayoButton: View {
     var onTap: (() -> Void)?
+    var disabled: Bool = false
     
     var body: some View {
         Button {
             self.onTap?()
         } label: {
             HStack {
-//                Image(systemName: "dot.radiowaves.left.and.right")
-//                    .font(.title)
-//                    .foregroundColor(.white)
                 Image(systemName: "figure.wave")
                     .font(.title)
                     .foregroundColor(.white)
@@ -29,10 +27,11 @@ struct KokodayoButton: View {
             }
 //            .frame(width: 184, height: 40)
             .frame(width: 160, height: 40)
-            .background(Color("MainColor"))
+            .background(self.disabled ? Color.gray :  Color("MainColor"))
             .cornerRadius(24)
         }
         .padding(.bottom, 24)
+        .disabled(self.disabled)
     }
 }
 

@@ -52,6 +52,10 @@ final class MessageDestinationPresenter: ObservableObject {
 }
 
 extension MessageDestinationPresenter {
+    func onAppear() {
+        self.selectedIds = []
+    }
+    
     func onKokodayoButtonTap(myLocation: CLLocationCoordinate2D) {
         if self.selectedIds.count == 0 {
             return

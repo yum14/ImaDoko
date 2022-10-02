@@ -7,7 +7,7 @@
 */
 
 "HomeViewTitle" = "Home";
-"MessageViewTitle" = "Unreplied Messages";
+"MessageViewTitle" = "Messages from friends";
 "MapViewTitle" = "Map";
 "AccountName" = "Name";
 "FriendListHeader" = "Friends";
@@ -43,6 +43,6 @@
 "AccessToLocationIsNotAllowed2" = "allow access to it on the settings screen.";
 "AccessToLocationIsNotAllowed3" = "You need to ";
 "NoMessagesMain" = "No messages";
-"NoMessagesSub" = "Messages received within 24 hours will be displayed.";
+"NoMessagesSub" = "Unreplied Imadoko received within 24 hours will be displayed.";
 "KokodayoReceived" = "You Received \"I'm here!\"";
 "KokodayoReceived" = "You Received \"Where are you?\"";
