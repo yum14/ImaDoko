@@ -14,6 +14,7 @@ protocol MapUsecase {
     func addLocationListenerForAdditionalData(ownerId: String, isGreaterThan: Date, completion: ((Result<[Location]?, Error>) -> Void)?)
     func removeLocationListener()
     func addImadokoMessageListenerOnNotReplyedAndUnRead(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
+    func addImadokoMessageListenerOnNotReplyed(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
     func addKokodayoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[KokodayoMessage], Error>) -> Void)?)
     func removeImadokoMessageListener()
     func removeKokodayoMessageListener()
@@ -67,12 +68,17 @@ extension MapInteractor: MapUsecase {
         self.imadokoMessageStore.addListenerOnNotReplyedAndUnRead(toId: toId, isGreaterThan: isGreaterThan, completion: completion)
     }
     
+    func addImadokoMessageListenerOnNotReplyed(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        self.imadokoMessageStore.addListenerOnNotReplyed(toId: toId, isGreaterThan: isGreaterThan, completion: completion)
+    }
+    
     func addKokodayoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[KokodayoMessage], Error>) -> Void)?) {
         self.kokodayoMessageStore.addListenerForAdditionalData(toId: toId, isGreaterThan: isGreaterThan, completion: completion)
     }
     
     func removeImadokoMessageListener() {
-        self.imadokoMessageStore.removeListener()
+        self.imadokoMessageStore.removeListenerOnNotReplyed()
+        self.imadokoMessageStore.removeListenerOnNotReplyedAndUnRead()
     }
     
     func removeKokodayoMessageListener() {

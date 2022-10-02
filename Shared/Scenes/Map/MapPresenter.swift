@@ -205,8 +205,7 @@ extension MapPresenter {
             }
         }
         
-        // イマドコメッセージのリスナー作成
-        self.interactor.addImadokoMessageListenerOnNotReplyedAndUnRead(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
+        self.interactor.addImadokoMessageListenerOnNotReplyed(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
             switch result {
             case .success(let imadokoMessages):
                 guard let imadokoMessages = imadokoMessages else {
@@ -214,8 +213,19 @@ extension MapPresenter {
                     return
                 }
                 
-                // 対象は1日前まで
                 self.unrepliedMessageCount = imadokoMessages.count
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
+        
+        // イマドコメッセージのリスナー作成
+        self.interactor.addImadokoMessageListenerOnNotReplyedAndUnRead(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
+            switch result {
+            case .success(let imadokoMessages):
+                guard let imadokoMessages = imadokoMessages else {
+                    return
+                }
                 
                 if imadokoMessages.count > 0 {
                     let ids = imadokoMessages.map { $0.fromId }
