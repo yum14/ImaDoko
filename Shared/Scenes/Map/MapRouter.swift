@@ -16,14 +16,21 @@ protocol MapWireframe {
 
 final class MapRouter {
     
-    private var previousMessageViewUid: String?
-    private var messageView: AnyView?
+    private static var lastUid: String?
+    private static var lastView: MapView?
     
     static func assembleModules(uid: String) -> AnyView {
+        
+        if let lastUid = self.lastUid, let lastView = self.lastView, lastUid == uid {
+            return AnyView(lastView)
+        }
+        
         let interactor = MapInteractor()
         let router = MapRouter()
         let presenter = MapPresenter(interactor: interactor, router: router, uid: uid)
         let view = MapView(presenter: presenter)
+        self.lastUid = uid
+        self.lastView = view
         return AnyView(view)
     }
 }
@@ -39,20 +46,6 @@ extension MapRouter: MapWireframe {
     }
     
     func makeMessageView(uid: String) -> AnyView {
-        
-        guard let previousMessageViewUid = self.previousMessageViewUid, let previousView = self.messageView else {
-            self.previousMessageViewUid = uid
-            self.messageView = MessageRouter.assembleModules(uid: uid)
-            return self.messageView!
-        }
-
-        if previousMessageViewUid == uid {
-            return previousView
-        }
-        
-        self.previousMessageViewUid = uid
-        self.messageView = MessageRouter.assembleModules(uid: uid)
-        
-        return self.messageView!
+        return MessageRouter.assembleModules(uid: uid)
     }
 }
