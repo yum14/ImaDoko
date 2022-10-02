@@ -12,6 +12,7 @@ protocol RootWireframe {
     func makeLoginView() -> AnyView
     func makeMapView(uid: String) -> AnyView
     func makeHomeView(uid: String) -> AnyView
+    func makeLaunchScreenView() -> AnyView
 }
 
 final class RootRouter {
@@ -35,5 +36,9 @@ extension RootRouter: RootWireframe {
     
     func makeHomeView(uid: String) -> AnyView {
         return HomeRouter.assembleModules(uid: uid)
+    }
+    
+    func makeLaunchScreenView() -> AnyView {
+        return LaunchScreenRouter.assembleModules()
     }
 }

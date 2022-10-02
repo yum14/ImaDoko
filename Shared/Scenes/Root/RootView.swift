@@ -17,12 +17,14 @@ struct RootView: View {
     
     var body: some View {
         VStack {
-            if !self.auth.isSignedIn {
-                self.presenter.makeAboutLoginView()
+            if self.auth.signInStatus == .notYet {
+                self.presenter.makeAboutLaunchScreenView()
+            } else if [SignInStatus.failed, SignInStatus.newUser].contains { $0 == self.auth.signInStatus } {
+                self.presenter.makeAboutLoginView(signInStatus: self.auth.signInStatus)
             } else {
                 if let loginUser = self.auth.firebaseLoginUser {
                     ZStack {
-                        
+
                         StatefulTabView(selectedIndex: self.$presenter.tabSelection) {
                             Tab(title: NSLocalizedString("HomeViewTitle", comment: ""), systemImageName: "house") {
                                 NavigationView {
@@ -32,14 +34,14 @@ struct RootView: View {
                                         .navigationBarHidden(true)
                                 }
                             }
-                            
+
                             Tab(title: NSLocalizedString("MapViewTitle", comment: ""), systemImageName: "mappin.and.ellipse") {
                                 NavigationView {
                                     self.presenter.makeAboutMapView(uid: loginUser.uid)
                                         .navigationBarTitleDisplayMode(.inline)
                                         .navigationBarHidden(true)
                                 }
-                                
+
                             }
                         }
                         .barTintColor(UIColor(Color("MainColor")))
@@ -47,7 +49,7 @@ struct RootView: View {
                         .barBackgroundColor(UIColor.systemBackground)
                         .barAppearanceConfiguration(.transparent)
                         .navigationBarTitleDisplayMode(.inline)
-                        
+
                         .popup(isPresented: self.$presenter.showingNotificationPopup,
                                type: .default,
                                position: .bottom,

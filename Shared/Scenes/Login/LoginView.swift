@@ -10,7 +10,7 @@ import FirebaseAuth
 
 struct LoginView: View {
     @ObservedObject var presenter: LoginPresenter
-    @EnvironmentObject var authentication: Authentication
+    @EnvironmentObject var auth: Authentication
     
     // 本来はPresenterで持ちたいのだが、AppleでサインインのときにPresenterのフラグを更新して通知がされないためViewに持つ
     @State var showCreateNewAccountAlert = false
@@ -23,40 +23,32 @@ struct LoginView: View {
           
             VStack {
                 GoogleSignInButton { authCredential in
-                    self.presenter.signedIn(auth: self.authentication,
-                                            authCredential: authCredential) { signInStatus in
-                        switch signInStatus {
-                        case .success:
-                            break
-                        case .newUser:
-                            self.showCreateNewAccountAlert = true
-                        case .failure:
-                            self.showSignInFailedAlert = true
-                        }
-                    }
+                    self.presenter.signedIn(auth: self.auth, authCredential: authCredential)
                 }
                 AppleSignInButton { authCredential in
-                    self.presenter.signedIn(auth: self.authentication,
-                                            authCredential: authCredential) { signInStatus in
-                        switch signInStatus {
-                        case .success:
-                            break
-                        case .newUser:
-                            self.showCreateNewAccountAlert = true
-                        case .failure:
-                            self.showSignInFailedAlert = true
-                        }
-                    }
+                    self.presenter.signedIn(auth: self.auth, authCredential: authCredential)
                 }
                 
+            }
+            .onChange(of: self.auth.signInStatus) { newValue in
+                switch newValue {
+                case .signedIn:
+                    break
+                case .newUser:
+                    self.showCreateNewAccountAlert = true
+                case .failed:
+                    self.showSignInFailedAlert = true
+                case .notYet:
+                    break
+                }
             }
             .alert("CreateNewUserAlertTitle",
                    isPresented: self.$showCreateNewAccountAlert) {
                 Button("CreateButton") {
-                    self.presenter.createAccount(auth: self.authentication)
+                    self.presenter.createAccount(auth: self.auth)
                 }
                 Button(NSLocalizedString("CencelButton", comment: ""), role: .cancel) {
-                    self.presenter.cancelAccountCreation(auth: self.authentication)
+                    self.presenter.cancelAccountCreation(auth: self.auth)
                 }
             } message: {
                 Text("CreateNewUserAlertMessage")
@@ -64,10 +56,8 @@ struct LoginView: View {
             .alert("SignInFailedAlertTitle",
                    isPresented: self.$showSignInFailedAlert) {
                 Button("OKButton") {
-                    self.presenter.agreeAccountCreationFailed(auth: self.authentication)
+                    self.presenter.agreeAccountCreationFailed(auth: self.auth)
                 }
-            } message: {
-                Text("SignInFailedAlertMessage")
             }
         }
     }

@@ -20,16 +20,11 @@ final class RootPresenter: ObservableObject {
     }
     @Published var showingNotificationPopup = false
     
-    
-    var homeView: AnyView?
-    var mapView: AnyView?
-    var uidOnHomeView: String?
-    var uidOnMapView: String?
-    
     private let interactor: RootUsecase
     private let router: RootWireframe
     
     private var notificationUserId: String?
+    private var loginView: AnyView?
     
     init(interactor: RootUsecase, router: RootWireframe) {
         self.interactor = interactor
@@ -44,11 +39,6 @@ extension RootPresenter {
                 print(error.localizedDescription)
             }
         }
-        
-//        let yesterday = Date().addingTimeInterval(-60*60*24)
-//        
-//        // 期限切れデータを削除
-//        self.interactor.deleteExpiredData(ownerId: uid, deadline: yesterday)
     }
     
     func onOpenUrl(url: URL) {
@@ -95,11 +85,6 @@ extension RootPresenter {
             }
         }
         
-        
-        // TODO: イマドコ通知を既読にする
-        
-        
-        
         self.showingNotificationPopup = false
     }
     
@@ -108,35 +93,29 @@ extension RootPresenter {
     }
     
     
-    func makeAboutLoginView() -> some View {
-        return router.makeLoginView()
+    func makeAboutLoginView(signInStatus: SignInStatus) -> some View {
+        guard let loginView = self.loginView else {
+            self.loginView = router.makeLoginView()
+            return self.loginView!
+        }
+
+        if signInStatus == .newUser {
+            return loginView
+        } else {
+            self.loginView = router.makeLoginView()
+            return self.loginView!
+        }
     }
     
     func makeAboutMapView(uid: String) -> some View {
-       
-//        return router.makeMapView(uid: uid)
-        
-        // タブを切り替えるたびにMapViewのイニシャライズを走らせたくないため、キャッシュ化する
-        if self.mapView != nil && uid == self.uidOnMapView {
-            return self.mapView!
-        } else {
-            self.mapView = router.makeMapView(uid: uid)
-            self.uidOnMapView = uid
-
-            return self.mapView!
-        }
+        return self.router.makeMapView(uid: uid)
     }
     
     func makeAboutHomeView(uid: String) -> some View {
-
-        // タブを切り替えるたびにHomeViewのイニシャライズを走らせたくないため、キャッシュ化する
-        if self.homeView != nil && uid == self.uidOnHomeView {
-            return self.homeView!
-        } else {
-            self.homeView = router.makeHomeView(uid: uid)
-            self.uidOnHomeView = uid
-
-            return self.homeView!
-        }
+        return self.router.makeHomeView(uid: uid)
+    }
+    
+    func makeAboutLaunchScreenView() -> some View {
+        return self.router.makeLaunchScreenView()
     }
 }

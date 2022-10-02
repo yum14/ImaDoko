@@ -8,14 +8,14 @@
 import Foundation
 
 protocol MessageUsecase {
-    func addImadokoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
+    func addImadokoMessageListenerOnNotReplyed(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
     func removeImadokoMessageListener()
     func getProfile(id: String, completion: ((Result<Profile?, Error>) -> Void)?)
     func getProfiles(ids: [String], completion: ((Result<[Profile]?, Error>) -> Void)?)
     func getAvatarImages(ids: [String], completion: ((Result<[AvatarImage]?, Error>) -> Void)?)
     func setKokodayoMessage(_ data: KokodayoMessage, completion: ((Error?) -> Void)?)
     func setKokodayoNotification(fromId: String, fromName: String, toIds: [String], completion: ((Error?) -> Void)?)
-    func deleteImadokoMessage(id: String, completion: ((Error?) -> Void)?)
+    func batchUpdateToReplyed(ids: [String], completion: ((Error?) -> Void)?)
 }
 
 final class MessageInteractor {
@@ -35,8 +35,8 @@ final class MessageInteractor {
 }
 
 extension MessageInteractor: MessageUsecase {
-    func addImadokoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
-        self.imadokoMessageStore.addListenerForAdditionalData(toId: toId, isGreaterThan: isGreaterThan, completion: completion)
+    func addImadokoMessageListenerOnNotReplyed(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        self.imadokoMessageStore.addListenerOnNotReplyed(toId: toId, isGreaterThan: isGreaterThan, completion: completion)
     }
     
     func removeImadokoMessageListener() {
@@ -64,7 +64,7 @@ extension MessageInteractor: MessageUsecase {
         self.notificationStore.setData(data, completion: completion)
     }
     
-    func deleteImadokoMessage(id: String, completion: ((Error?) -> Void)?) {
-        self.imadokoMessageStore.delete(id: id, completion: completion)
+    func batchUpdateToReplyed(ids: [String], completion: ((Error?) -> Void)?) {
+        self.imadokoMessageStore.batchUpdateToReplyed(ids: ids, completion: completion)
     }
 }

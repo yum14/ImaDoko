@@ -13,17 +13,20 @@ struct ImadokoMessage: Identifiable, Hashable {
     var fromId: String
     var toId: String
     var replyed: Bool
+    var isRead: Bool
     var createdAt: Timestamp
     
     init(id: String = UUID().uuidString,
          fromId: String,
          toId: String,
          replyed: Bool = false,
+         isRead: Bool = false,
          createdAt: Date = Date()) {
         self.id = id
         self.fromId = fromId
         self.toId = toId
         self.replyed = replyed
+        self.isRead = isRead
         self.createdAt = Timestamp(date: createdAt)
     }
     
@@ -33,6 +36,7 @@ struct ImadokoMessage: Identifiable, Hashable {
         dic["from_id"] = self.fromId
         dic["to_id"] = self.toId
         dic["replyed"] = self.replyed
+        dic["is_read"] = self.isRead
         dic["created_at"] = self.createdAt
         
         return dic

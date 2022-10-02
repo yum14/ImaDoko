@@ -15,16 +15,28 @@ protocol MapWireframe {
 }
 
 final class MapRouter {
+    
+    private static var lastUid: String?
+    private static var lastView: MapView?
+    
     static func assembleModules(uid: String) -> AnyView {
+        
+        if let lastUid = self.lastUid, let lastView = self.lastView, lastUid == uid {
+            return AnyView(lastView)
+        }
+        
         let interactor = MapInteractor()
         let router = MapRouter()
         let presenter = MapPresenter(interactor: interactor, router: router, uid: uid)
         let view = MapView(presenter: presenter)
+        self.lastUid = uid
+        self.lastView = view
         return AnyView(view)
     }
 }
 
 extension MapRouter: MapWireframe {
+    
     func makePinDetailView(myId: String, myName: String, friend: Avatar, createdAt: Date, onDismiss: (() -> Void)?, onSend: ((Error?) -> Void)?) -> AnyView {
         return PinDetailRouter.assembleModules(myId: myId, myName: myName, friend: friend, createdAt: createdAt, onDismiss: onDismiss, onSend: onSend)
     }
