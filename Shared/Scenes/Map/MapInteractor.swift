@@ -13,7 +13,7 @@ protocol MapUsecase {
     func getAvatarImages(ids: [String], completion: ((Result<[AvatarImage]?, Error>) -> Void)?)
     func addLocationListenerForAdditionalData(ownerId: String, isGreaterThan: Date, completion: ((Result<[Location]?, Error>) -> Void)?)
     func removeLocationListener()
-    func addImadokoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
+    func addImadokoMessageListenerOnNotReplyedAndUnRead(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?)
     func addKokodayoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[KokodayoMessage], Error>) -> Void)?)
     func removeImadokoMessageListener()
     func removeKokodayoMessageListener()
@@ -21,6 +21,7 @@ protocol MapUsecase {
     func removeProfileListener()
     func addLocations(locations: [Location], completion: ((Error?) -> Void)?)
     func updateKokodayoMessageToAlreadyRead(ids: [String], completion: ((Error?) -> Void)?)
+    func updateImadokoMessageToAlreadyRead(ids: [String], completion: ((Error?) -> Void)?)
 }
 
 final class MapInteractor {
@@ -62,8 +63,8 @@ extension MapInteractor: MapUsecase {
         self.locationStore.removeListener()
     }
     
-    func addImadokoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
-        self.imadokoMessageStore.addListenerForAdditionalData(toId: toId, isGreaterThan: isGreaterThan, completion: completion)
+    func addImadokoMessageListenerOnNotReplyedAndUnRead(toId: String, isGreaterThan: Date, completion: ((Result<[ImadokoMessage]?, Error>) -> Void)?) {
+        self.imadokoMessageStore.addListenerOnNotReplyedAndUnRead(toId: toId, isGreaterThan: isGreaterThan, completion: completion)
     }
     
     func addKokodayoMessageListenerForAdditionalData(toId: String, isGreaterThan: Date, completion: ((Result<[KokodayoMessage], Error>) -> Void)?) {
@@ -92,5 +93,9 @@ extension MapInteractor: MapUsecase {
     
     func updateKokodayoMessageToAlreadyRead(ids: [String], completion: ((Error?) -> Void)?) {
         self.kokodayoMessageStore.batchUpdateToAlreadyRead(ids: ids, completion: completion)
+    }
+    
+    func updateImadokoMessageToAlreadyRead(ids: [String], completion: ((Error?) -> Void)?) {
+        self.imadokoMessageStore.batchUpdateToAlreadyRead(ids: ids, completion: completion)
     }
 }

@@ -68,7 +68,7 @@ extension MessagePresenter {
         }
         
         // イマドコメッセージのリスナー作成
-        self.interactor.addImadokoMessageListenerForAdditionalData(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
+        self.interactor.addImadokoMessageListenerOnNotReplyed(toId: self.uid, isGreaterThan: Date().addingTimeInterval(-60*60*24)) { result in
             switch result {
             case .success(let imadokoMessages):
                 
@@ -171,8 +171,8 @@ extension MessagePresenter {
             }
         }
         
-        // イマドコメッセージを削除
-        self.interactor.deleteImadokoMessage(id: selectedMessage.id) { error in
+        // イマドコメッセージを返信済にする
+        self.interactor.batchUpdateToReplyed(ids: [selectedMessage.id]) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
@@ -184,8 +184,8 @@ extension MessagePresenter {
             return
         }
         
-        // イマドコメッセージを削除
-        self.interactor.deleteImadokoMessage(id: selectedMessage.id) { error in
+        // イマドコメッセージを返信済にする
+        self.interactor.batchUpdateToReplyed(ids: [selectedMessage.id]) { error in
             if let error = error {
                 print(error.localizedDescription)
             }
