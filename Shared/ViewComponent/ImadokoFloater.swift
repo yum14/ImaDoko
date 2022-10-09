@@ -14,11 +14,7 @@ struct ImadokoFloater: View {
     var body: some View {
         HStack {
             ZStack(alignment: .trailing) {
-                
-                // 逆順（後勝ち）とし３件まで
-                let displayImages = Array(self.avatarImages.reversed().enumerated()).filter { $0.offset < 3 }.map { $0.element }
-                
-                ForEach(Array(displayImages.enumerated()), id: \.offset) { offset, image in
+                ForEach(Array(self.avatarImages.enumerated()), id: \.offset) { offset, image in
                     AvatarCircleImage(image: image, radius: self.radius)
                         .padding(.trailing, CGFloat(offset) * 20)
                 }

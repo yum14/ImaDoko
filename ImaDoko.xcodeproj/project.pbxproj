@@ -47,6 +47,7 @@
 		AA491F8B2887E6FB0013DBA7 /* KokodayoFloater.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA491F8A2887E6FB0013DBA7 /* KokodayoFloater.swift */; };
 		AA491F8D2887E7670013DBA7 /* KokodayoNotificationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA491F8C2887E7670013DBA7 /* KokodayoNotificationMessage.swift */; };
 		AA4B79382868B01F004AF74F /* UnreadMessageButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA4B79372868B01F004AF74F /* UnreadMessageButton.swift */; };
+		AA645A2528EC6AFB006B101B /* ImadokoNotificationMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA645A2428EC6AFB006B101B /* ImadokoNotificationMessage.swift */; };
 		AA65126D28130578003A68E4 /* PinDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65126C28130578003A68E4 /* PinDetailView.swift */; };
 		AA65126F28130587003A68E4 /* PinDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA65126E28130587003A68E4 /* PinDetailPresenter.swift */; };
 		AA651271281305B8003A68E4 /* PinDetailRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA651270281305B8003A68E4 /* PinDetailRouter.swift */; };
@@ -172,6 +173,7 @@
 		AA491F8A2887E6FB0013DBA7 /* KokodayoFloater.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokodayoFloater.swift; sourceTree = "<group>"; };
 		AA491F8C2887E7670013DBA7 /* KokodayoNotificationMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KokodayoNotificationMessage.swift; sourceTree = "<group>"; };
 		AA4B79372868B01F004AF74F /* UnreadMessageButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnreadMessageButton.swift; sourceTree = "<group>"; };
+		AA645A2428EC6AFB006B101B /* ImadokoNotificationMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoNotificationMessage.swift; sourceTree = "<group>"; };
 		AA65126C28130578003A68E4 /* PinDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailView.swift; sourceTree = "<group>"; };
 		AA65126E28130587003A68E4 /* PinDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailPresenter.swift; sourceTree = "<group>"; };
 		AA651270281305B8003A68E4 /* PinDetailRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinDetailRouter.swift; sourceTree = "<group>"; };
@@ -523,6 +525,7 @@
 				AA07D9F127E376D5006D4598 /* Location.swift */,
 				AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */,
 				AA491F8C2887E7670013DBA7 /* KokodayoNotificationMessage.swift */,
+				AA645A2428EC6AFB006B101B /* ImadokoNotificationMessage.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -763,6 +766,7 @@
 				AA658FA627C281E2001D4E17 /* AppleSignInButton.swift in Sources */,
 				AA35879427CA4DDD00F51AEA /* ProfileStore.swift in Sources */,
 				AAF864A827D78F7900AFA0E6 /* MyQrCodeScannerView.swift in Sources */,
+				AA645A2528EC6AFB006B101B /* ImadokoNotificationMessage.swift in Sources */,
 				AAADEFE227B7BB5E00D81A52 /* AvatarMapAnnotation.swift in Sources */,
 				AAF864BA27DBB34500AFA0E6 /* AvatarImage.swift in Sources */,
 				AA491F872883E1D10013DBA7 /* KokodayoMessageStore.swift in Sources */,
