@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import UIKit
 
 struct KokodayoNotificationMessage: Identifiable {
     var id: String
@@ -25,15 +24,5 @@ struct KokodayoNotificationMessage: Identifiable {
         self.latitude = latitude
         self.longitude = longitude
         self.createdAt = createdAt
-    }
-}
-
-extension KokodayoNotificationMessage {
-    func getAvatarImageAsUIImage() -> UIImage? {
-        guard let avatarImage = self.avatarImage else {
-            return nil
-        }
-        
-        return UIImage(data: avatarImage)
     }
 }
