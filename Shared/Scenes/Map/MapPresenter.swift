@@ -29,8 +29,23 @@ final class MapPresenter: ObservableObject {
     
     var profile: Profile?
     var resultFloaterText: String = ""
-    var kokodayoNotificationMessages: [FloaterNotificationMessage] = []
-    var imadokoNotificationMessages: [FloaterNotificationMessage] = []
+    
+    var kokodayoNotificationDisplayMessages: [KokodayoNotificationMessage] = []
+    private var kokodayoNotificationDisplayLastMessages: [KokodayoNotificationMessage] = []
+    private var kokodayoNotificationMessages: [KokodayoNotificationMessage] = [] {
+        didSet {
+            // 逆順（後勝ち）とし３件まで
+            self.kokodayoNotificationDisplayMessages = Array(self.kokodayoNotificationMessages.reversed().enumerated()).filter { $0.offset < 3 }.map { $0.element }
+        }
+    }
+    
+    var imadokoNotificationDisplayMessages: [ImadokoNotificationMessage] = []
+    private var imadokoNotificationMessages: [ImadokoNotificationMessage] = [] {
+        didSet {
+            // 逆順（後勝ち）とし３件まで
+            self.imadokoNotificationDisplayMessages = Array(self.imadokoNotificationMessages.reversed().enumerated()).filter { $0.offset < 3 }.map { $0.element }
+        }
+    }
     
     private var unrepliedMessageCount: Int = 0 {
         didSet {
@@ -251,19 +266,14 @@ extension MapPresenter {
                                             }
                                             
                                             // Floater通知メッセージ
-                                            let allMessages: [FloaterNotificationMessage] = imadokoMessages.compactMap { message in
+                                            let allMessages: [ImadokoNotificationMessage] = imadokoMessages.compactMap { message in
                                                 
                                                 let targetProfile = profiles.first { $0.id == message.fromId }
                                                 let targetImage = avatarImages.first { $0.id == message.fromId }
                                                 
-                                                guard let targetProfile = targetProfile else {
-                                                    // ありえないはず
-                                                    return nil
-                                                }
-                                                
-                                                return FloaterNotificationMessage(id: message.id,
+                                                return ImadokoNotificationMessage(id: message.id,
                                                                                   fromId: message.fromId,
-                                                                                  fromName: targetProfile.name,
+                                                                                  fromName: targetProfile!.name,
                                                                                   avatarImage: targetImage?.data,
                                                                                   createdAt: message.createdAt.dateValue())
                                             }
@@ -354,7 +364,7 @@ extension MapPresenter {
                                                 }
                                                 
                                                 // Floater通知メッセージ
-                                                let allMessages: [FloaterNotificationMessage] = kokodayoMessages.compactMap { message in
+                                                let allMessages: [KokodayoNotificationMessage] = kokodayoMessages.compactMap { message in
                                                     
                                                     let targetProfile = profiles.first { $0.id == message.fromId }
                                                     let targetImage = avatarImages.first { $0.id == message.fromId }
@@ -364,11 +374,13 @@ extension MapPresenter {
                                                         return nil
                                                     }
                                                     
-                                                    return FloaterNotificationMessage(id: message.id,
-                                                                                      fromId: message.fromId,
-                                                                                      fromName: targetProfile.name,
-                                                                                      avatarImage: targetImage?.data,
-                                                                                      createdAt: message.createdAt.dateValue())
+                                                    return KokodayoNotificationMessage(id: message.id,
+                                                                                       fromId: message.fromId,
+                                                                                       fromName: targetProfile.name,
+                                                                                       avatarImage: targetImage?.data,
+                                                                                       latitude: message.latitude,
+                                                                                       longitude: message.longitude,
+                                                                                       createdAt: message.createdAt.dateValue())
                                                 }
                                                 
                                                 
@@ -516,11 +528,26 @@ extension MapPresenter {
     }
     
     func onKokodayoFloaterDismiss() {
+        self.kokodayoNotificationDisplayLastMessages = self.kokodayoNotificationDisplayMessages
         self.kokodayoNotificationMessages = []
     }
     
     func onImadokoFloaterDismiss() {
         self.imadokoNotificationMessages = []
+    }
+    
+    func onKokodayoFloaterTap() {
+        guard let target = self.kokodayoNotificationDisplayLastMessages.first else {
+            return
+        }
+        
+        let newRegion = MKCoordinateRegion(center: CLLocationCoordinate2D(latitude: target.latitude, longitude: target.longitude), span: MapPresenter.coordinateSpan)
+        
+        DispatchQueue.main.async {
+            withAnimation {
+                self.region = newRegion
+            }
+        }
     }
 }
 
