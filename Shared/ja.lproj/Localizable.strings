@@ -42,7 +42,7 @@
 "AccessToLocationIsNotAllowed1" = "位置情報へのアクセスが許可されていないため、主要な機能が制限されています。";
 "AccessToLocationIsNotAllowed2" = "設定画面でアクセスを許可";
 "AccessToLocationIsNotAllowed3" = "してください。";
-"NoMessagesMain" = "メッセージがありません";
-"NoMessagesSub" = "24時間以内に受け取った未返信のイマドコが表示されます。";
+"NoMessagesMain" = "イマドコがありません";
+"NoMessagesSub" = "24時間以内に受け取った返信されていないイマドコが表示されます。";
 "KokodayoReceived" = "\"ココダヨ！\"が届きました。";
 "ImadokoReceived" = "\"イマドコ？\"が届きました。";
