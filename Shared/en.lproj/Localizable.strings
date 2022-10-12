@@ -42,7 +42,7 @@
 "AccessToLocationIsNotAllowed1" = "Key functionality is restricted because access to location information is not allowed.";
 "AccessToLocationIsNotAllowed2" = "allow access to it on the settings screen.";
 "AccessToLocationIsNotAllowed3" = "You need to ";
-"NoMessagesMain" = "No messages";
+"NoMessagesMain" = "No Imadoko";
 "NoMessagesSub" = "Unreplied Imadoko received within 24 hours will be displayed.";
 "KokodayoReceived" = "You Received \"I'm here!\"";
 "KokodayoReceived" = "You Received \"Where are you?\"";

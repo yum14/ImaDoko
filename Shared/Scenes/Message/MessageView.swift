@@ -29,6 +29,7 @@ struct MessageView: View {
                                 .font(.footnote)
                             Spacer()
                         }
+                        .padding(.top, 12)
                     }
                 }
                 

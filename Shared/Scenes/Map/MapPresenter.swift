@@ -499,9 +499,9 @@ extension MapPresenter {
         
         // タップしたPinをMapのcenterにする
         self.region = MKCoordinateRegion(center: item.coordinate, span: MapPresenter.coordinateSpan)
+        self.overlaySheetType = .pinDetail
         
         withAnimation {
-            self.overlaySheetType = .pinDetail
             self.notch = .max
         }
     }
