@@ -536,6 +536,10 @@ extension MapPresenter {
         self.imadokoNotificationMessages = []
     }
     
+    func onImadokoFloaterTap() {
+        self.showingMessageSheet = true
+    }
+    
     func onKokodayoFloaterTap() {
         guard let target = self.kokodayoNotificationDisplayLastMessages.first else {
             return
