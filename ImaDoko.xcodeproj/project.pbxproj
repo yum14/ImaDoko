@@ -96,7 +96,6 @@
 		AAAF476D28DF4E850038A143 /* LaunchScreenRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAF476C28DF4E850038A143 /* LaunchScreenRouter.swift */; };
 		AAAF476F28DF52F30038A143 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AAAF476E28DF52F30038A143 /* LaunchScreen.storyboard */; };
 		AAAF477128DF58800038A143 /* ActiveIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAAF477028DF58800038A143 /* ActiveIndicator.swift */; };
-		AADAC0CA27FADF33006CDF0B /* ImadokoNotificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AADAC0C927FADF33006CDF0B /* ImadokoNotificationView.swift */; };
 		AAE0832227F5F4D50069A978 /* PopupView in Frameworks */ = {isa = PBXBuildFile; productRef = AAE0832127F5F4D50069A978 /* PopupView */; };
 		AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98827B7F75D007CD36D /* Triangle.swift */; };
 		AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98A27B80727007CD36D /* LocationButton.swift */; };
@@ -222,7 +221,6 @@
 		AAAF477028DF58800038A143 /* ActiveIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActiveIndicator.swift; sourceTree = "<group>"; };
 		AACE5EE227BEA7A600295A47 /* ImaDoko--iOS--Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "ImaDoko--iOS--Info.plist"; sourceTree = "<group>"; };
 		AACE5EE327BEA7B800295A47 /* ImaDoko (iOS).entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "ImaDoko (iOS).entitlements"; sourceTree = "<group>"; };
-		AADAC0C927FADF33006CDF0B /* ImadokoNotificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImadokoNotificationView.swift; sourceTree = "<group>"; };
 		AAE3F98827B7F75D007CD36D /* Triangle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Triangle.swift; sourceTree = "<group>"; };
 		AAE3F98A27B80727007CD36D /* LocationButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationButton.swift; sourceTree = "<group>"; };
 		AAE91A1928256194000543C9 /* MessageInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageInteractor.swift; sourceTree = "<group>"; };
@@ -485,7 +483,6 @@
 				AA658FA527C281E2001D4E17 /* AppleSignInButton.swift */,
 				AAF864AF27D7A40A00AFA0E6 /* AvatarImagePicker.swift */,
 				AAF864B127D7A43800AFA0E6 /* ImagePickerController.swift */,
-				AADAC0C927FADF33006CDF0B /* ImadokoNotificationView.swift */,
 				AA65127D281E4BBD003A68E4 /* SendMessageButton.swift */,
 				AA65127F281F9E83003A68E4 /* ImadokoButton.swift */,
 				AA651281281F9E9A003A68E4 /* KokodayoButton.swift */,
@@ -819,7 +816,6 @@
 				AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */,
 				AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */,
 				AA07D9EC27E0ACC1006D4598 /* Avatar.swift in Sources */,
-				AADAC0CA27FADF33006CDF0B /* ImadokoNotificationView.swift in Sources */,
 				AA658F9027C13CEB001D4E17 /* LoginView.swift in Sources */,
 				AA491F85288309EC0013DBA7 /* KokodayoMessage.swift in Sources */,
 				AA07D9F227E376D5006D4598 /* Location.swift in Sources */,
