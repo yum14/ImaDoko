@@ -1,6 +1,7 @@
 import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { firestore, messaging } from "firebase-admin";
+import * as nodemailer from 'nodemailer';
 
 admin.initializeApp();
 
@@ -13,28 +14,18 @@ const db = admin.firestore();
 // firebase emulators:start
 // firebase deploy --only functions:[method]
 
+interface Notification {
+    id: string;
+    from_id: string;
+    title: string;
+    body: string;
+    to_ids: [string];
+}
 
-// export const helloWorld = functions.region('asia-northeast1').https.onRequest((request, response) => {
-//     functions.logger.info("Hello logs!", {structuredData: true});
-//     response.send("Hello from Firebase!");
-// });
-
-export const createTestData = functions.region('asia-northeast1').https.onRequest((request, response) => {
-
-    db.collection('notifications').doc(request.query.id as string).set({
-        id: request.query.id as string,
-        from_id: 'SdJQbPCU0ZPwqZjnXUJ5aHm4CMa2',
-        title: 'test title',
-        body: 'test body',
-        to_ids: ['SdJQbPCU0ZPwqZjnXUJ5aHm4CMa2']
-    })
-    .then(() => {
-        response.send('success!');
-    })
-    .catch((error) => {
-        response.send(error);
-    });
-});
+interface NotificationToken {
+    id: string;
+    notification_token: string;
+}
 
 export const sendNotification = functions.region('asia-northeast1').firestore.document('notifications/{id}').onCreate(async (snap, context) => {
     const triggerData = snap.data() as Notification;
@@ -138,16 +129,68 @@ export const removeExpiredData = functions.region('asia-northeast1').pubsub.sche
     }
 });
 
+// 認証情報やメールアドレスはconfigに記載
+// firebase functions:config:get
 
-interface Notification {
-    id: string;
-    from_id: string;
-    title: string;
-    body: string;
-    to_ids: [string];
-}
+// gmailパスワードは以下のアプリパスワードで取得したものを設定（Googleアカウント→セキュリティ→アプリパスワード）
+// https://myaccount.google.com/u/4/apppasswords?rapt=AEjHL4Nyyj6BDa8wPloKHONA04hFDvqO23xLbGR5VA_19LgDFp2h3o-NhEHtYodAzyHzGirG_qqoXK6yEtFpwH-3Fvh1mngL5Q
+// 2022/5以降、「安全性の低いアプリ〜」の許可はできなくなった
 
-interface NotificationToken {
-    id: string;
-    notification_token: string;
-}
+const gmailEmail = functions.config().gmail.email;
+const gmailPassword = functions.config().gmail.password;
+const adminEmail = functions.config().admin.email;
+
+// 送信に使用するメールサーバーの設定
+let transporter = nodemailer.createTransport({
+  service: 'gmail',
+  auth: {
+      user: gmailEmail,
+      pass: gmailPassword
+  }
+});
+
+
+const createContent = (data: any) => {
+  return `以下の内容でお問い合わせを受けました。
+  
+  お名前:
+  ${data.name}
+  
+  メールアドレス:
+  ${data.email}
+  
+  題名:
+  ${data.title}
+
+  本文:
+  ${data.message}
+  `;
+};
+
+
+exports.sendMail = functions.region('asia-northeast1').https.onCall(async (data, context) => {
+  // メール設定
+  let mailOptions = {
+    from: gmailEmail,
+    to: adminEmail,
+    subject: "【Imadoko】お問い合わせ",
+    text: createContent(data),
+  };
+  
+
+  functions.logger.info(`from: ${mailOptions.from}, to: ${mailOptions.to}, subject: ${mailOptions.subject}, text: ${mailOptions.text}`);
+
+  // 管理者へのメール送信
+  try {
+    transporter.sendMail(mailOptions, (err: Error | null, info: any) => {
+      if (err) {
+        functions.logger.warn(err.message);
+      } else {
+        functions.logger.info(`メール送信に成功`);
+      }
+    });
+  } catch (e) {
+    functions.logger.warn(`send failed. ${e}`);
+    throw new functions.https.HttpsError('internal', 'send failed');
+  }
+});
