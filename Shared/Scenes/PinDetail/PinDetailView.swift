@@ -16,6 +16,8 @@ struct PinDetailView: View {
             Spacer()
 
             AvatarCircleImage(image: self.presenter.friend.getAvatarImageFromImageData(), radius: 80)
+                .padding(.top, 6)
+            
             Text(self.presenter.friend.name)
                 .font(.title3)
                 .lineLimit(1)
@@ -24,6 +26,7 @@ struct PinDetailView: View {
             
             Text(DateUtility.toString(date: self.presenter.createdAt, template: "ydMMM HH:mm:ss"))
                 .font(.caption)
+                .frame(minHeight: 50, alignment: .top)
             
             Spacer()
             
@@ -38,7 +41,7 @@ struct PinDetailView: View {
                     self.presenter.onKokodayoButtonTap(myLocation: self.appDelegate.region.center)
                 })
                 
-//                Spacer()
+                Spacer()
             }
         }
     }

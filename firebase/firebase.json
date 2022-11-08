@@ -4,7 +4,7 @@
     "source": "functions"
   },
   "hosting": {
-    "public": "imadoko-support/public",
+    "public": "imadoko-support/build",
     "ignore": [
       "firebase.json",
       "**/.*",

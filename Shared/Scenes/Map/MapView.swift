@@ -127,6 +127,9 @@ struct MapView: View {
                autohideIn: 3.0,
                dismissCallback: self.presenter.onImadokoFloaterDismiss) {
             ImadokoFloater(avatarImages: self.presenter.imadokoNotificationDisplayMessages.map { $0.avatarImage == nil ? nil : UIImage(data: $0.avatarImage!) })
+                .onTapGesture {
+                    self.presenter.onImadokoFloaterTap()
+                }
         }
         .popup(isPresented: self.$presenter.showingResultFloater,
                type: .floater(verticalPadding: 40),

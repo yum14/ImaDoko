@@ -499,9 +499,9 @@ extension MapPresenter {
         
         // タップしたPinをMapのcenterにする
         self.region = MKCoordinateRegion(center: item.coordinate, span: MapPresenter.coordinateSpan)
+        self.overlaySheetType = .pinDetail
         
         withAnimation {
-            self.overlaySheetType = .pinDetail
             self.notch = .max
         }
     }
@@ -534,6 +534,10 @@ extension MapPresenter {
     
     func onImadokoFloaterDismiss() {
         self.imadokoNotificationMessages = []
+    }
+    
+    func onImadokoFloaterTap() {
+        self.showingMessageSheet = true
     }
     
     func onKokodayoFloaterTap() {

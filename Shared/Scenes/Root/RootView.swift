@@ -49,24 +49,6 @@ struct RootView: View {
                         .barBackgroundColor(UIColor.systemBackground)
                         .barAppearanceConfiguration(.transparent)
                         .navigationBarTitleDisplayMode(.inline)
-
-                        .popup(isPresented: self.$presenter.showingNotificationPopup,
-                               type: .default,
-                               position: .bottom,
-                               animation: .default,
-                               dragToDismiss: true,
-                               closeOnTap: false,
-                               closeOnTapOutside: false,
-                               backgroundColor: Color.black.opacity(0.2),
-                               dismissCallback: {},
-                               view: {
-                            ImadokoNotificationView(userName: self.presenter.receivedNotification?.name,
-                                                    avatarImage: self.presenter.receivedNotification?.avatarImage,
-                                                    onReply: {
-                                self.presenter.onImadokoNotificationReply(id: self.auth.profile!.id, location: self.appDelegate.region.center)},
-                                                    onDismiss: self.presenter.onImadokoNotificationDismiss)
-                            EmptyView()
-                        })
                         .onAppear {
                             guard let firebaseLoginUser = self.auth.firebaseLoginUser, let notificationToken = self.appDelegate.notificationToken else {
                                 return

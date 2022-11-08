@@ -1,0 +1,25 @@
+body {
+  margin: 0;
+  font-family: "Roboto", "Noto Sans JP", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 1.7rem;
+  letter-spacing: 0.1rem;
+  line-height: 3rem;
+  /* min-height: 100%; */
+  color: #555;
+  display: flex;
+  flex-flow: column;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+html, body, #root {
+  height: 100%;
+}
