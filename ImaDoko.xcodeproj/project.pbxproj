@@ -20,6 +20,8 @@
 		AA07DA0027F1EAC6006D4598 /* ReceivedNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */; };
 		AA16D44227BA7ACB00804D0D /* FriendHScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */; };
 		AA16D44427BA7BA900804D0D /* AvatorCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */; };
+		AA2145EC291E2C82000CF698 /* SignInHistory.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2145EB291E2C82000CF698 /* SignInHistory.swift */; };
+		AA2145EE291E2D2A000CF698 /* SignInHistoriesStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA2145ED291E2D2A000CF698 /* SignInHistoriesStore.swift */; };
 		AA26A69D27AF9424003D1F17 /* Tests_iOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69C27AF9424003D1F17 /* Tests_iOS.swift */; };
 		AA26A69F27AF9424003D1F17 /* Tests_iOSLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A69E27AF9424003D1F17 /* Tests_iOSLaunchTests.swift */; };
 		AA26A6A927AF9424003D1F17 /* Tests_macOS.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA26A6A827AF9424003D1F17 /* Tests_macOS.swift */; };
@@ -151,6 +153,8 @@
 		AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceivedNotification.swift; sourceTree = "<group>"; };
 		AA16D44127BA7ACB00804D0D /* FriendHScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendHScrollView.swift; sourceTree = "<group>"; };
 		AA16D44327BA7BA900804D0D /* AvatorCircleImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvatorCircleImage.swift; sourceTree = "<group>"; };
+		AA2145EB291E2C82000CF698 /* SignInHistory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHistory.swift; sourceTree = "<group>"; };
+		AA2145ED291E2D2A000CF698 /* SignInHistoriesStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInHistoriesStore.swift; sourceTree = "<group>"; };
 		AA26A68427AF9423003D1F17 /* ImaDokoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImaDokoApp.swift; sourceTree = "<group>"; };
 		AA26A68527AF9423003D1F17 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		AA26A68627AF9424003D1F17 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -368,6 +372,7 @@
 				AA07D9F327E37C4F006D4598 /* LocationStore.swift */,
 				AA07D9F727E848B5006D4598 /* ImadokoMessageStore.swift */,
 				AA491F862883E1D10013DBA7 /* KokodayoMessageStore.swift */,
+				AA2145ED291E2D2A000CF698 /* SignInHistoriesStore.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -523,6 +528,7 @@
 				AA07D9FF27F1EAC6006D4598 /* ReceivedNotification.swift */,
 				AA491F8C2887E7670013DBA7 /* KokodayoNotificationMessage.swift */,
 				AA645A2428EC6AFB006B101B /* ImadokoNotificationMessage.swift */,
+				AA2145EB291E2C82000CF698 /* SignInHistory.swift */,
 			);
 			path = Entities;
 			sourceTree = "<group>";
@@ -749,6 +755,7 @@
 				AAF8649427CD120F00AFA0E6 /* RootInteractor.swift in Sources */,
 				AA07DA0027F1EAC6006D4598 /* ReceivedNotification.swift in Sources */,
 				AA83DC4427AFC6DF008F2226 /* MessagePresenter.swift in Sources */,
+				AA2145EC291E2C82000CF698 /* SignInHistory.swift in Sources */,
 				AA65126D28130578003A68E4 /* PinDetailView.swift in Sources */,
 				AAAF476D28DF4E850038A143 /* LaunchScreenRouter.swift in Sources */,
 				AA83DC2827AF9B67008F2226 /* RootView.swift in Sources */,
@@ -802,6 +809,7 @@
 				AAF864A627D78F3200AFA0E6 /* QrCodeScannerView.swift in Sources */,
 				AAF864AA27D78FC200AFA0E6 /* MyQrCodeScannerPresenter.swift in Sources */,
 				AA65126F28130587003A68E4 /* PinDetailPresenter.swift in Sources */,
+				AA2145EE291E2D2A000CF698 /* SignInHistoriesStore.swift in Sources */,
 				AAAF477128DF58800038A143 /* ActiveIndicator.swift in Sources */,
 				AA658F9227C13CF6001D4E17 /* LoginPresenter.swift in Sources */,
 				AA07D9FA27E8C04D006D4598 /* LoginInteractor.swift in Sources */,
