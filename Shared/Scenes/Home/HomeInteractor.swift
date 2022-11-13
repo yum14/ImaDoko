@@ -20,10 +20,12 @@ protocol HomeUsecase {
 final class HomeInteractor {
     private let profileStore: ProfileStore
     private let avatarImageStore: AvatarImageStore
+    private let notificationTokenStore: NotificationTokenStore
     
     init() {
         self.profileStore = ProfileStore()
         self.avatarImageStore = AvatarImageStore()
+        self.notificationTokenStore = NotificationTokenStore()
     }
 }
 

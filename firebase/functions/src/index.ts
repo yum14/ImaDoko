@@ -82,7 +82,7 @@ export const sendNotification = functions.region('asia-northeast1').firestore.do
     }
 });
 
-export const removeExpiredData = functions.region('asia-northeast1').pubsub.schedule('0 2 1 * *').timeZone('Asia/Tokyo').onRun(async (context) => {
+export const deleteExpiredData = functions.region('asia-northeast1').pubsub.schedule('0 2 1 * *').timeZone('Asia/Tokyo').onRun(async (context) => {
 // export const removeExpiredData = functions.region('asia-northeast1').pubsub.schedule('*/5 * * * *').timeZone('Asia/Tokyo').onRun(async (context) => { //これはテスト用
 
     // 毎月1日2時にスケジュール実行
@@ -147,6 +147,50 @@ let transporter = nodemailer.createTransport({
       user: gmailEmail,
       pass: gmailPassword
   }
+});
+
+export const deleteNonExistentUser = functions.region('asia-northeast1').pubsub.schedule('0 4 1 * *').timeZone('Asia/Tokyo').onRun(async (context) => {
+// export const deleteNonExistentUser = functions.region('asia-northeast1').pubsub.schedule('*/10 * * * *').timeZone('Asia/Tokyo').onRun(async (context) => { //これはテスト用
+
+    // 毎月1日4時にスケジュール実行
+    try {
+
+        const dt = new Date();
+        dt.setMonth(dt.getMonth() - 1)
+
+        // 1月サインインされていないアカウントを対象とする
+        const historySnap = await db.collection('sign_in_histories').where('last_sign_in_at', '<', dt).get();
+
+        historySnap.forEach(doc => {
+
+            admin.auth().getUser(doc.id).then((value: admin.auth.UserRecord) => {
+                // 存在するユーザは処理を行わない
+            }).catch(async (reason: any) => {
+                
+                // エラーの中でも該当ドキュメントが存在しない場合のみ処理続行
+                if (String(reason).indexOf('Error: There is no user') !== 0) {
+                    return;
+                }
+
+                try {
+                    const batch = db.batch();
+                    batch.delete(db.collection('profiles').doc(doc.id));
+                    batch.delete(db.collection('avatar_images').doc(doc.id));
+                    batch.delete(db.collection('notification_tokens').doc(doc.id));
+                    batch.delete(db.collection('sign_in_histories').doc(doc.id));
+                    await batch.commit();
+
+                    functions.logger.info('アカウントデータ削除 uid: ', doc.id);
+                    
+                } catch (error) {
+                    functions.logger.error('error: ', error);
+                }
+
+            })
+        });
+    } catch (error) {
+        functions.logger.error('error: ', error);
+    }
 });
 
 

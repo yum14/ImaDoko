@@ -34,6 +34,8 @@ final class HomePresenter: ObservableObject {
     @Published var showingQrCodeSheet = false
     @Published var showingQrCodeScannerSheet = false
     @Published var showingResultFloater = false
+    @Published var showingDeleteAccountAlert = false
+    @Published var showingDeleteAccountFailedAlert = false
     
     var resultFloaterText: String = ""
     
@@ -71,6 +73,28 @@ extension HomePresenter {
     
     func onSignOutButtonTapped(auth: Authenticatable) {
         auth.signOut()
+    }
+    
+    func onDeleteAccountButtonTapped(auth: Authenticatable) {
+        DispatchQueue.main.async {
+            self.showingDeleteAccountAlert = true
+        }
+    }
+    
+    func onDeleteAccountAlertButtonTapped(auth: Authenticatable) {
+        
+        // しばらくサインインしっぱなしだと失敗することがある模様
+        // 削除成功するとデータ削除する権限がなくなるし、ユーザ削除前に関連情報を削除すると、ユーザ情報削除に失敗した場合にどうしようもなくなる
+        // よって、ユーザ情報のみ削除し、他の情報はfirebase.functionsによって削除することとする
+        auth.deleteUser { error in
+            if let error = error {
+                print(error.localizedDescription)
+
+                DispatchQueue.main.async {
+                    self.showingDeleteAccountFailedAlert = true
+                }
+            }
+        }
     }
     
     func onNameTextSubmit() {
@@ -214,11 +238,12 @@ extension HomePresenter {
 //                guard let uid = qrCodeManager.getMyAppQrCode(code: testCode) else {
 //                    return
                 //                }
-                                guard let uid = qrCodeManager.getMyAppQrCode(code: code) else {
-                                    return
-                                }
+                guard let uid = qrCodeManager.getMyAppQrCode(code: code) else {
+                    return
+                    
+                }
                                 
-                                guard let profile = self.profile else {
+                guard let profile = self.profile else {
                     return
                 }
                 
