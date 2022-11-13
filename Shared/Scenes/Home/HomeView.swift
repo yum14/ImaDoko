@@ -69,7 +69,7 @@ struct HomeView: View {
                 }
                 
                 Section {
-                    Button(role: .destructive) {
+                    Button {
                         self.presenter.onSignOutButtonTapped(auth: self.auth)
                     } label: {
                         HStack {
@@ -79,6 +79,19 @@ struct HomeView: View {
                         }
                     }
                 }
+                
+                Section {
+                    Button(role: .destructive) {
+                        self.presenter.onDeleteAccountButtonTapped(auth: self.auth)
+                    } label: {
+                        HStack {
+                            Spacer()
+                            Text("DeleteAccountButton")
+                            Spacer()
+                        }
+                    }
+                }
+                
             }
             
             if !(self.appDelegate.locationAuthorizationStatus == .authorizedAlways || self.appDelegate.locationAuthorizationStatus == .authorizedWhenInUse) {
@@ -110,6 +123,23 @@ struct HomeView: View {
                 .padding()
                 .background(Color("MainColor").opacity(0.5))
             }
+        }
+        .alert("DeleteAccountAlertTitle",
+               isPresented: self.$presenter.showingDeleteAccountAlert) {
+            Button("DeleteAccountAlertButton", role: .destructive) {
+                self.presenter.onDeleteAccountAlertButtonTapped(auth: self.auth)
+            }
+            Button(NSLocalizedString("DeleteAccountAlertCancelButton", comment: ""), role: .cancel) {
+                
+            }
+        } message: {
+            Text("DeleteAccountAlertMessage")
+        }
+        .alert("DeleteAccountFailedAlertTitle",
+               isPresented: self.$presenter.showingDeleteAccountFailedAlert) {
+            Button("DeleteAccountFailedAlertButton") { }
+        } message: {
+            Text("DeleteAccountFailedAlertMessage")
         }
         .sheet(isPresented: self.$presenter.showingQrCodeSheet) {
             NavigationView {

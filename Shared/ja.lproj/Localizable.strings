@@ -14,6 +14,14 @@
 "AddFriendButton" = "友だちを追加する";
 "ShowMyQRCodeButton" = "QRコードを表示する";
 "SignOutButton" = "サインアウト";
+"DeleteAccountButton" = "アカウント削除";
+"DeleteAccountAlertTitle" = "アカウントを削除しますか？";
+"DeleteAccountAlertMessage" = "すべてのデータは削除され、二度と復元することはできません。";
+"DeleteAccountAlertButton" = "削除する";
+"DeleteAccountAlertCancelButton" = "キャンセル";
+"DeleteAccountFailedAlertTitle" = "アカウントの削除に失敗しました。";
+"DeleteAccountFailedAlertMessage" = "サインアウト→サインインを行い、再度お試しください。";
+"DeleteAccountFailedAlertButton" = "OK";
 "MapOverlaySheetButton" = "友だちへメッセージを送る";
 "SelectDestinationHeader" = "送信先を選択";
 "KokodayoButton" = "ココダヨ！";
