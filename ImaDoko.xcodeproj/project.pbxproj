@@ -102,6 +102,8 @@
 		AAE3F98927B7F75D007CD36D /* Triangle.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98827B7F75D007CD36D /* Triangle.swift */; };
 		AAE3F98B27B80727007CD36D /* LocationButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE3F98A27B80727007CD36D /* LocationButton.swift */; };
 		AAE91A1A28256194000543C9 /* MessageInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAE91A1928256194000543C9 /* MessageInteractor.swift */; };
+		AAEBB052294A0730008FC897 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = AAEBB051294A0730008FC897 /* FirebaseFunctions */; };
+		AAEBB054294A0730008FC897 /* FirebaseFunctionsCombine-Community in Frameworks */ = {isa = PBXBuildFile; productRef = AAEBB053294A0730008FC897 /* FirebaseFunctionsCombine-Community */; };
 		AAF2B53527BA82DA009FD63C /* CheckCircleImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF2B53427BA82DA009FD63C /* CheckCircleImage.swift */; };
 		AAF8649427CD120F00AFA0E6 /* RootInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649327CD120F00AFA0E6 /* RootInteractor.swift */; };
 		AAF8649627CE5C2900AFA0E6 /* HomeInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = AAF8649527CE5C2900AFA0E6 /* HomeInteractor.swift */; };
@@ -260,8 +262,10 @@
 				AA35878C27CA1CFC00F51AEA /* FirebaseFirestoreCombine-Community in Frameworks */,
 				AA9E99AE27B8FD12004B8272 /* StatefulTabView in Frameworks */,
 				AA35878227CA1CFC00F51AEA /* FirebaseAnalytics in Frameworks */,
+				AAEBB054294A0730008FC897 /* FirebaseFunctionsCombine-Community in Frameworks */,
 				AA35878A27CA1CFC00F51AEA /* FirebaseFirestore in Frameworks */,
 				AA35878E27CA1CFC00F51AEA /* FirebaseFirestoreSwift-Beta in Frameworks */,
+				AAEBB052294A0730008FC897 /* FirebaseFunctions in Frameworks */,
 				AA35878827CA1CFC00F51AEA /* FirebaseAuthCombine-Community in Frameworks */,
 				AA35879027CA1CFC00F51AEA /* FirebaseMessaging in Frameworks */,
 				AA658FA427C1F5EF001D4E17 /* GoogleSignIn in Frameworks */,
@@ -302,6 +306,7 @@
 				AA26A69B27AF9424003D1F17 /* Tests iOS */,
 				AA26A6A727AF9424003D1F17 /* Tests macOS */,
 				AA26A68C27AF9424003D1F17 /* Products */,
+				AAEBB050294A0730008FC897 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -363,6 +368,7 @@
 		AA35877D27C3D95E00F51AEA /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				AA658F9327C13D69001D4E17 /* Authentication.swift */,
 				AA35879327CA4DDD00F51AEA /* ProfileStore.swift */,
 				AA35879527CA5CCB00F51AEA /* NotificationTokenStore.swift */,
 				AAF864B727DBB22100AFA0E6 /* AvatarImageStore.swift */,
@@ -518,7 +524,6 @@
 				AA491F84288309EC0013DBA7 /* KokodayoMessage.swift */,
 				AAADEFDB27B7907000D81A52 /* Profile.swift */,
 				AAADEFDF27B7B28700D81A52 /* PinItem.swift */,
-				AA658F9327C13D69001D4E17 /* Authentication.swift */,
 				AA35879127CA49F800F51AEA /* NotificationToken.swift */,
 				AA35879B27CBC33500F51AEA /* AppDelegate.swift */,
 				AAF864B927DBB34500AFA0E6 /* AvatarImage.swift */,
@@ -540,6 +545,13 @@
 				AAAF476C28DF4E850038A143 /* LaunchScreenRouter.swift */,
 			);
 			path = LaunchScreen;
+			sourceTree = "<group>";
+		};
+		AAEBB050294A0730008FC897 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		AAF8649B27D6471800AFA0E6 /* MyQrCode */ = {
@@ -592,6 +604,8 @@
 				AA35878D27CA1CFC00F51AEA /* FirebaseFirestoreSwift-Beta */,
 				AA35878F27CA1CFC00F51AEA /* FirebaseMessaging */,
 				AAE0832127F5F4D50069A978 /* PopupView */,
+				AAEBB051294A0730008FC897 /* FirebaseFunctions */,
+				AAEBB053294A0730008FC897 /* FirebaseFunctionsCombine-Community */,
 			);
 			productName = "ImaDoko (iOS)";
 			productReference = AA26A68B27AF9424003D1F17 /* ImaDoko.app */;
@@ -1364,6 +1378,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = AAE0832027F5F4D50069A978 /* XCRemoteSwiftPackageReference "PopupView" */;
 			productName = PopupView;
+		};
+		AAEBB051294A0730008FC897 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA35878027CA1CFC00F51AEA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		AAEBB053294A0730008FC897 /* FirebaseFunctionsCombine-Community */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = AA35878027CA1CFC00F51AEA /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = "FirebaseFunctionsCombine-Community";
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
