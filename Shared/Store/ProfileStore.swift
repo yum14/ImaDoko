@@ -151,6 +151,7 @@ final class ProfileStore {
         let profile = Profile(id: dic["id"] as! String,
                               name: dic["name"] as! String,
                               friends: dic["friends"] as! [String],
+                              appleRefreshToken: dic["apple_refresh_token"] as? String ?? nil,
                               createdAt: dic["created_at"] as? Timestamp ?? nil,
                               updatedAt: dic["updated_at"] as? Timestamp ?? nil)
         

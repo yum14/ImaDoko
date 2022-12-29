@@ -182,11 +182,23 @@ extension AppleSignInViewController: ASAuthorizationControllerDelegate {
                 return
             }
             
+            guard let authorizationCode = appleIDCredential.authorizationCode else {
+                print("Unable to fetch authorizationCode")
+                self.signedIn?(nil)
+                return
+            }
+            guard let authorizationCode = String(data: authorizationCode, encoding: .utf8) else {
+                print("Unable to serialize authorizationCode string from data: \(authorizationCode.debugDescription)")
+                self.signedIn?(nil)
+                return
+            }
             // Appleの認証情報を元にFirebase Authenticationの認証情報を作成
+            // リフレッシュトークン取得（サーバ側）のためのauthorizationCodeはaccessTokennに持たせておく
             let credential = OAuthProvider.credential(
                 withProviderID: "apple.com",
                 idToken: idTokenString,
-                rawNonce: nonce
+                rawNonce: nonce,
+                accessToken: authorizationCode
             )
             
             // TODO: ユーザ名取れるようなのだが・・何もはいっていない。保留。
