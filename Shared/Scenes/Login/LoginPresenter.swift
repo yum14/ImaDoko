@@ -34,7 +34,12 @@ extension LoginPresenter {
     }
     
     func cancelAccountCreation(auth: Authenticatable) {
-        auth.signOut()
+        // profileは作成されていないが、firebase上のユーザは作成されているため、削除する
+        auth.deleteFirebaseUser() { error in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+        }
     }
     
     func agreeAccountCreationFailed(auth: Authenticatable) {

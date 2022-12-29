@@ -2,6 +2,9 @@ import * as functions from "firebase-functions";
 import * as admin from "firebase-admin";
 import { firestore, messaging } from "firebase-admin";
 import * as nodemailer from 'nodemailer';
+import * as jwt from 'jsonwebtoken';
+import axios from 'axios';
+import * as qs from 'qs';
 
 admin.initializeApp();
 
@@ -238,3 +241,99 @@ exports.sendMail = functions.region('asia-northeast1').https.onCall(async (data,
     throw new functions.https.HttpsError('internal', 'send failed');
   }
 });
+
+
+
+
+
+
+exports.getRefreshToken = functions.region('asia-northeast1').https.onCall(async (request, response) => {
+
+    const code = request.code;
+    const clientId = functions.config().apple.clientid;
+    const client_secret = makeJWT();
+
+    let data = {
+        'code': code,
+        'client_id': clientId,
+        'client_secret': client_secret,
+        'grant_type': 'authorization_code'
+    }
+
+    functions.logger.info(`request parameter: ${qs.stringify(data)}`);
+    
+    try {
+        const result = await axios.post(`https://appleid.apple.com/auth/token`, qs.stringify(data), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+            },
+        })    
+        const refreshToken = result.data.refresh_token;
+
+        functions.logger.info(`refresh token: ${refreshToken}`);
+
+        return refreshToken
+    } catch (e) {
+        functions.logger.warn(`refresh token error. ${e}`);
+        throw new functions.https.HttpsError('internal', 'refresh token error.');
+    }
+});
+
+
+
+
+exports.revokeToken = functions.region('asia-northeast1').https.onCall(async (request, response) => {
+
+    const refresh_token = request.refresh_token;
+    const clientId = functions.config().apple.clientid;
+    const client_secret = makeJWT();
+
+    let data = {
+        'token': refresh_token,
+        'client_id': clientId,
+        'client_secret': client_secret,
+        'token_type_hint': 'refresh_token'
+    };
+  
+    try {
+        await axios.post(`https://appleid.apple.com/auth/revoke`, qs.stringify(data), {
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded'
+            },
+        })
+    } catch (e) {
+        functions.logger.warn(`revoke token error. ${e}`);
+        throw new functions.https.HttpsError('internal', 'revoke token error.');
+    }
+});
+  
+
+
+
+function makeJWT(): string {
+
+    // Path to download key file from developer.apple.com/account/resources/authkeys/list
+    // let privateKey = fs.readFileSync('AuthKey_XXXXXXXXXX.p8');
+
+    const teamId = functions.config().apple.teamid;
+    const clientId = functions.config().apple.clientid;
+    const keyid = functions.config().apple.keyid;
+    const privateKey = functions.config().apple.privatekey;
+  
+    //Sign with your team ID and key ID information.
+    let token = jwt.sign({ 
+    iss: teamId,
+    iat: Math.floor(Date.now() / 1000),
+    exp: Math.floor(Date.now() / 1000) + 120,
+    aud: 'https://appleid.apple.com',
+    sub: clientId
+    
+    }, privateKey, { 
+    algorithm: 'ES256',
+    header: {
+    alg: 'ES256',
+    kid: keyid,
+    } });
+    
+    return token;
+  }
